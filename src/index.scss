@@ -1,0 +1,19 @@
+@import 'carbon-components/scss/globals/scss/styles.scss';
+
+@import './scss/normalize.scss';
+
+//components styles
+@import './components/atoms/FButton/style.scss';
+@import './components/organisms/FHeader/style.scss';
+
+//datavizcomps styles
+@import './datavizcomps/FPieChart/style.scss';
+
+//content styles
+@import './content/Home/style.scss';
+@import './content/Expenditure/style.scss';
+@import './content/Receipts/style.scss';
+
+$feature-flags: (
+  ui-shell: true,
+);
