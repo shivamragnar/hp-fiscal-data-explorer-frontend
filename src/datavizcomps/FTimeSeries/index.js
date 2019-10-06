@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -7,7 +7,7 @@ const tickLabelStyle = {
   }
 
 
-class FBarChart extends Component {
+class FTimeSeries extends Component {
 
   static defaultProps = {
       //yLabelFormat mnust be an array of 3. each value representing  'prefix', 'suffix' and multiplier
@@ -43,11 +43,12 @@ class FBarChart extends Component {
           offset={7}
           style={{ data: { width: 5 } }}
         >
+
         {
           this.props.dataPoints && //if multiple datapoints is specified via the datapoints prop,
             this.props.dataPoints.map((dataToY, i) =>{
               return(
-                <VictoryBar
+                <VictoryLine
                   colorScale={"blue"}
                   data={this.props.data}
                   x={this.props.dataToX}
@@ -56,6 +57,7 @@ class FBarChart extends Component {
               )
             })
         }
+
         </VictoryGroup>
 
       </VictoryChart>
@@ -64,4 +66,4 @@ class FBarChart extends Component {
   }
 }
 
-export default FBarChart;
+export default FTimeSeries;
