@@ -26,8 +26,8 @@ class FTimeSeries extends Component {
             style={tickLabelStyle}
           />
         }
-        tickFormat={this.props.xLabelTxt}
-        tickValues={this.props.xLabelPos}
+        tickFormat={this.props.xLabelFormat}
+        tickValues={this.props.xLabelValues}
       />
       <VictoryAxis
         dependentAxis
@@ -40,7 +40,7 @@ class FTimeSeries extends Component {
         tickFormat={(x) => (this.props.yLabelFormat[0]+x*this.props.yLabelFormat[2]+this.props.yLabelFormat[1])}
       />
         <VictoryGroup
-          offset={7}
+
           style={{ data: { width: 5 } }}
         >
 
@@ -56,6 +56,7 @@ class FTimeSeries extends Component {
                 />
               )
             })
+
         }
 
         </VictoryGroup>

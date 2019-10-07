@@ -25,7 +25,6 @@ function App() {
   return (<div>
     <FHeader1/>
     <FHeader2/>
-    <Content>
       <Switch>
         <Route exact="exact" path="/" component={Home}/>
         <Route exact="exact" path="/aboutus" component={ContactUs}/>
@@ -34,7 +33,6 @@ function App() {
         <Route exact="exact" path="/expenditure/details" component={ExpDetails}/>
         <Route exact="exact" path="/expenditure/tracker" component={ExpTracker}/>
       </Switch>
-    </Content>
   </div>);
 }
 

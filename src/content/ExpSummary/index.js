@@ -1,6 +1,7 @@
 import React, {
   Component
 } from "react";
+import {Content} from 'carbon-components-react/lib/components/UIShell';
 import FPieChart from '../../datavizcomps/FPieChart';
 import FBarChart from '../../datavizcomps/FBarChart';
 
@@ -70,82 +71,84 @@ class ExpSummary extends Component {
 
     return (
       <div>
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="left-col bx--col-lg-4">
-              <h3>Some title text</h3>
-              <p>
-                Carbon is IBM’s open-source design system for digital
-                products and experiences. With the IBM Design Language
-                as its foundation, the system consists of working code,
-                design tools and resources, human interface guidelines,
-                and a vibrant community of contributors.
-              </p>
+        <Content>
+          <div className="bx--grid">
+            <div className="bx--row">
+              <div className="left-col bx--col-lg-4">
+                <h3>Some title text</h3>
+                <p>
+                  Carbon is IBM’s open-source design system for digital
+                  products and experiences. With the IBM Design Language
+                  as its foundation, the system consists of working code,
+                  design tools and resources, human interface guidelines,
+                  and a vibrant community of contributors.
+                </p>
+              </div>
+              <div className="right-col bx--col-lg-8">
+
+              </div>
             </div>
-            <div className="right-col bx--col-lg-8">
-
-            </div>
-          </div>
-          <div className="bx--row">
-            <DataTable
-              rows={rows}
-              headers={headers}
-              render={({ rows, headers, getHeaderProps, onInputChange }) => (
-                <TableContainer title="DataTable with Toolbar">
-                  <TableToolbar>
+            <div className="bx--row">
+              <DataTable
+                rows={rows}
+                headers={headers}
+                render={({ rows, headers, getHeaderProps, onInputChange }) => (
+                  <TableContainer title="DataTable with Toolbar">
+                    <TableToolbar>
 
 
-                      <TableToolbarContent>
-                        <TableToolbarSearch  onChange={onInputChange} />
-                        <TableToolbarMenu />
-                        {
-                        // <TableToolbarAction
-                        //   icon={iconDownload}
-                        //   iconDescription="Download"
-                        //   onClick={action('TableToolbarAction - Download')}
-                        // />
-                        // <TableToolbarAction
-                        //   icon={iconEdit}
-                        //   iconDescription="Edit"
-                        //   onClick={action('TableToolbarAction - Edit')}
-                        // />
-                        // <TableToolbarAction
-                        //   icon={iconSettings}
-                        //   iconDescription="Settings"
-                        //   onClick={action('TableToolbarAction - Settings')}
-                        // />
+                        <TableToolbarContent>
+                          <TableToolbarSearch  onChange={onInputChange} />
+                          <TableToolbarMenu />
+                          {
+                          // <TableToolbarAction
+                          //   icon={iconDownload}
+                          //   iconDescription="Download"
+                          //   onClick={action('TableToolbarAction - Download')}
+                          // />
+                          // <TableToolbarAction
+                          //   icon={iconEdit}
+                          //   iconDescription="Edit"
+                          //   onClick={action('TableToolbarAction - Edit')}
+                          // />
+                          // <TableToolbarAction
+                          //   icon={iconSettings}
+                          //   iconDescription="Settings"
+                          //   onClick={action('TableToolbarAction - Settings')}
+                          // />
 
-                        }
-                        <Button onClick={"yo"} small kind="primary">
-                          Add new
-                        </Button>
-                      </TableToolbarContent>
-                    </TableToolbar>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        {headers.map(header => (
-                          <TableHeader {...getHeaderProps({ header })}>
-                            {header.header}
-                          </TableHeader>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map(row => (
-                        <TableRow key={row.id}>
-                          {row.cells.map(cell => (
-                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                          }
+                          <Button onClick={"yo"} small kind="primary">
+                            Add new
+                          </Button>
+                        </TableToolbarContent>
+                      </TableToolbar>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          {headers.map(header => (
+                            <TableHeader {...getHeaderProps({ header })}>
+                              {header.header}
+                            </TableHeader>
                           ))}
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            />
+                      </TableHead>
+                      <TableBody>
+                        {rows.map(row => (
+                          <TableRow key={row.id}>
+                            {row.cells.map(cell => (
+                              <TableCell key={cell.id}>{cell.value}</TableCell>
+                            ))}
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                )}
+              />
+            </div>
           </div>
-        </div>
+        </Content>
       </div>
     )
   }

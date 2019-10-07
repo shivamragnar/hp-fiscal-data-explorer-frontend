@@ -30,7 +30,7 @@ const FHeader2 = () => ( <HeaderContainer render={( { isSideNavExpanded, onClick
                 <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
                   <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
                   <HeaderMenuItem element={Link} to="/expenditure/details">Expenditure Details</HeaderMenuItem>
-                  <HeaderMenuItem element={Link} to="/contactus">Expenditure Tracker</HeaderMenuItem>
+                  <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Tracker</HeaderMenuItem>
                 </HeaderMenu>
                 <HeaderMenuItem element={Link} to="/contactus">
                   Receipts

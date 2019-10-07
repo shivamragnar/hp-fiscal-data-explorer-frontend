@@ -1,7 +1,9 @@
 import React, {
   Component
 } from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
+//from carbon's components
+import {Content} from 'carbon-components-react/lib/components/UIShell';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel, VictoryLine } from 'victory';
 import FBarChart from '../../datavizcomps/FBarChart';
 import FTimeSeries from '../../datavizcomps/FTimeSeries';
 
@@ -22,67 +24,67 @@ const sampleDataBar = [
 
 const sampleDataTime = [
   {
-    day: "1",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 1,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "2",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 2,
+    sanction: 4.5,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "3",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 3,
+    sanction: 4.7,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "4",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 4,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "5",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 5,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "6",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 6,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "7",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 7,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "8",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 8,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
   {
-    day: "9",
-    sanction: getRandomInt(1000,3000),
-    addition: getRandomInt(1000,3000),
-    saving: getRandomInt(1000,3000),
-    revised: getRandomInt(1000,3000),
+    x: 9,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
   },
 ]
 
@@ -102,12 +104,9 @@ class ExpDetails extends Component {
 
     return (
       <div>
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="left-col bx--col-lg-2">
-              <h3>Filter col</h3>
-            </div>
-            <div className="right-col bx--col-lg-10">
+        <Content>
+          <div className="viz_body">
+            <div>
               <FBarChart
                 data={sampleDataBar}
                 dataToX={'month'}
@@ -115,14 +114,19 @@ class ExpDetails extends Component {
                 yLabelFormat={[""," L INR",1/1000]}
               />
             </div>
+            <div>
+              <FTimeSeries
+                data={sampleDataTime}
+                dataToX={'x'}
+                dataPoints={['sanction','revised', 'addition', 'saving']}
+                xLabelValues={[1,2,3,4,5,6,7,8,9]}
+                xLabelFormat={(t) => t}
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <FTimeSeries
-            data={sampleDataTime}
-            dataToX={'day'}
-            dataPoints={['sanction','revised', 'addition', 'saving']}
-          />
+        </Content>
+        <div className="filter_panel">
+          <h3>Filter col</h3>
         </div>
       </div>
     )
