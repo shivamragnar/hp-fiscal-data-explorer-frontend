@@ -1,6 +1,9 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
+import MediaQuery from 'react-responsive'
+
+
 //from carbon's components
 import {Content} from 'carbon-components-react/lib/components/UIShell';
 
@@ -19,12 +22,17 @@ import ExpSummary from './content/ExpSummary';
 import ExpDetails from './content/ExpDetails';
 import ExpTracker from './content/ExpTracker';
 
+
+
 import './App.scss';
 
 function App() {
   return (<div>
     <FHeader1/>
-    <FHeader2/>
+    <MediaQuery query="(min-device-width: 768px)">
+      <FHeader2/>
+    </MediaQuery>
+
     <Content>
       <Switch>
         <Route exact="exact" path="/" component={Home}/>

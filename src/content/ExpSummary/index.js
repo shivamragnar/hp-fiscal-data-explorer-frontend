@@ -5,8 +5,9 @@ import {Content} from 'carbon-components-react/lib/components/UIShell';
 import FPieChart from '../../datavizcomps/FPieChart';
 import FBarChart from '../../datavizcomps/FBarChart';
 import FTable from '../../datavizcomps/FTable';
+
+
 import FSlope from '../../datavizcomps/FSlope';
-import FSlope2 from '../../datavizcomps/FSlope2';
 import FTimeSeries from '../../datavizcomps/FTimeSeries';
 
 import { DataTable } from 'carbon-components-react';
@@ -15,6 +16,8 @@ import { Button } from 'carbon-components-react';
 // De-structure `DataTable` directly to get local references
 import Download16 from '@carbon/icons-react/lib/download/16';
 
+//data
+var exp_summary_data = require('../../data/exp-summary.json');
 
 const {
   TableContainer,
@@ -35,26 +38,77 @@ const {
   TableSelectRow
 } = DataTable;
 
+const currentYear = "2019";
+const prevYear = "2018";
 
-const sampleDataTime = [
-  {
-    x: 1,
-    sanction: 4,
-    addition: 5,
-    saving: 6,
-    revised: 7,
-  },
-  {
-    x: 2,
-    sanction: 4.5,
-    addition: 8,
-    saving: 5.7,
-    revised: 9,
-  }
+
+var slopeData = [
+
+];
+
+var tableData = {
+  headers: [
+
+  ],
+  rows: [
+
+  ]
+}
+
+var tableHeaderDisplay = [
+  'Demand ID',
+  'Demand Name',
+  'Sanction This Year',
+  'Sanction Last Year',
+  'Rate Of Change'
 ]
 
+exp_summary_data.map((d, i) =>{
+  i === 0 && tableData.headers.push(
+    { key: 'demandid', header: tableHeaderDisplay[0] },
+    { key: 'demandname', header: tableHeaderDisplay[1] },
+    { key: 'sanctioncurrent', header: tableHeaderDisplay[2] },
+    { key: 'sanctionprevious', header: tableHeaderDisplay[3] },
+    { key: 'rateOfChange', header: tableHeaderDisplay[4] }
+  );
+  tableData.rows.push(
+    {
+      id: i,
+      'demandid': d.demandid,
+      'demandname': d.demandname,
+      'sanctioncurrent': d.sanctioncurrent,
+      'sanctionprevious': d.sanctionprevious,
+      'rateOfChange': d.rateOfChange
+    }
+  )
+  slopeData.push(
+    [
+      { year : prevYear, sanction : d.sanctionprevious},
+      { year : currentYear, sanction : d.sanctioncurrent, "label" : `${d.demandid}_${d.demandname}` }
+    ]
+  );
+})
 
-const rows = [
+
+
+
+const sampleSlopeData = [
+  [
+    {  year: "1", sanction: 0.1 },
+    {  year: "4", sanction: 0.5, label: "demand_1" }
+  ],
+  [
+    {  year: "1", sanction: 0.2 },
+    {  year: "4", sanction: 0.5, label: "B" }
+  ],
+  [
+    {  year: "1", sanction: 0.3 },
+    {  year: "4", sanction: 0.6, label: "C" }
+  ]
+]
+
+//table data
+const sampleRows = [
   {
     id: 'a',
     demand_code: '1',
@@ -76,7 +130,7 @@ const rows = [
 ];
 
 // We would have a headers array like the following
-const headers = [
+const sampleHeaders = [
   {
     // `key` is the name of the field on the row object itself for the header
     key: 'demand_code',
@@ -99,17 +153,19 @@ const sec1VizTypes = ["FSlope", "FTable"];
 const xLabelFormat = (t) => t;
 
 const props = {
-  FSlope2: {
-    data : sampleDataTime,
-    dataToX: 'x',
-    dataPoints: ['sanction','revised', 'addition', 'saving'],
-    xLabelValues: ["2017","2018"],
-    xLabelFormat: (t) => t
+  FSlope: {
+    data : slopeData,
+    x : "year",
+    y : "sanction",
+    height: 3000,
+    width: 300,
+    padding: {top: 20, left: 75, right: 75, bottom: 50},
+    tickFormatY: ["", " Cr", 1/10000000],
   },
 
   FTable: {
-    rows: rows,
-    headers: headers
+    rows: tableData.rows,
+    headers: tableData.headers
   }
 }
 
@@ -135,9 +191,12 @@ class ExpSummary extends Component {
 
   render() {
 
+
+
+
     var currentSec1VizComp;
     this.state.currentSec1VizType === sec1VizTypes[0] ?
-      currentSec1VizComp = <FSlope2 {...props.FSlope2} /> :
+      currentSec1VizComp = <FSlope {...props.FSlope} /> :
       currentSec1VizComp = <FTable {...props.FTable}  />;
 
     return (

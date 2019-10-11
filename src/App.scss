@@ -24,6 +24,10 @@
 .bx--content{
   padding-top: 8rem;
   transform: none;
+
+  @media screen and (max-width: 767px){
+    padding-top: 5rem;
+  }
 }
 
 .text-col{
