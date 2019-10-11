@@ -4,10 +4,18 @@ import React, {
 import {Content} from 'carbon-components-react/lib/components/UIShell';
 import FPieChart from '../../datavizcomps/FPieChart';
 import FBarChart from '../../datavizcomps/FBarChart';
+import FTable from '../../datavizcomps/FTable';
+import FSlope from '../../datavizcomps/FSlope';
+import FSlope2 from '../../datavizcomps/FSlope2';
+import FTimeSeries from '../../datavizcomps/FTimeSeries';
 
 import { DataTable } from 'carbon-components-react';
+import {ContentSwitcher, Switch} from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
 // De-structure `DataTable` directly to get local references
+import Download16 from '@carbon/icons-react/lib/download/16';
+
+
 const {
   TableContainer,
   Table,
@@ -20,27 +28,50 @@ const {
   TableToolbarSearch,
   TableToolbarMenu,
   TableToolbarAction,
-  TableToolbarContent
+  TableToolbarContent,
+  TableBatchActions,
+  TableBatchAction,
+  TableSelectAll,
+  TableSelectRow
 } = DataTable;
+
+
+const sampleDataTime = [
+  {
+    x: 1,
+    sanction: 4,
+    addition: 5,
+    saving: 6,
+    revised: 7,
+  },
+  {
+    x: 2,
+    sanction: 4.5,
+    addition: 8,
+    saving: 5.7,
+    revised: 9,
+  }
+]
+
 
 const rows = [
   {
     id: 'a',
-    foo: 'Foo a',
-    bar: 'Bar a',
-    baz: 'Baz a',
+    demand_code: '1',
+    sanction: '1000',
+    percent_change: '10%',
   },
   {
     id: 'b',
-    foo: 'Foo b',
-    bar: 'Bar b',
-    baz: 'Baz b',
+    demand_code: '2',
+    sanction: '800',
+    percent_change: '12%'
   },
   {
     id: 'c',
-    foo: 'Foo c',
-    bar: 'Bar c',
-    baz: 'Baz c',
+    demand_code: '3',
+    sanction: '1200',
+    percent_change: '6%'
   },
 ];
 
@@ -48,26 +79,66 @@ const rows = [
 const headers = [
   {
     // `key` is the name of the field on the row object itself for the header
-    key: 'foo',
+    key: 'demand_code',
     // `header` will be the name you want rendered in the Table Header
-    header: 'Foo',
+    header: 'Demand',
   },
   {
-    key: 'bar',
-    header: 'Bar',
+    key: 'sanction',
+    header: 'Sanction',
   },
   {
-    key: 'baz',
-    header: 'Baz',
+    key: 'percent_change',
+    header: 'Pecentage Change Since Last Year',
   },
 ];
 
+//Name of components to switch between
+const sec1VizTypes = ["FSlope", "FTable"];
+
+const xLabelFormat = (t) => t;
+
+const props = {
+  FSlope2: {
+    data : sampleDataTime,
+    dataToX: 'x',
+    dataPoints: ['sanction','revised', 'addition', 'saving'],
+    xLabelValues: ["2017","2018"],
+    xLabelFormat: (t) => t
+  },
+
+  FTable: {
+    rows: rows,
+    headers: headers
+  }
+}
+
+
 class ExpSummary extends Component {
 
+  constructor(props){
+    super(props);
+
+    this.state = {currentSec1VizType: sec1VizTypes[0]};
+
+    this.consoleFilteredRows = this.consoleFilteredRows.bind(this);
+    this.switchSec1VizType = this.switchSec1VizType.bind( this );
+  }
+
+  switchSec1VizType(e) {
+    this.setState({ currentSec1VizType: sec1VizTypes[e] })
+  }
+
+  consoleFilteredRows(rows){
+    console.log(rows);
+  }
 
   render() {
 
-
+    var currentSec1VizComp;
+    this.state.currentSec1VizType === sec1VizTypes[0] ?
+      currentSec1VizComp = <FSlope2 {...props.FSlope2} /> :
+      currentSec1VizComp = <FTable {...props.FTable} />;
 
     return (
       <div>
@@ -85,70 +156,19 @@ class ExpSummary extends Component {
                 </p>
               </div>
               <div className="right-col bx--col-lg-8">
-
+                <div style={{display: "flex"}}>
+                  <ContentSwitcher onChange={this.switchSec1VizType} >
+                    <Switch  text="Slope Chart" />
+                    <Switch  text="Table" />
+                  </ContentSwitcher>
+                </div>
+                {currentSec1VizComp}
               </div>
             </div>
-            <div className="bx--row">
-              <DataTable
-                rows={rows}
-                headers={headers}
-                render={({ rows, headers, getHeaderProps, onInputChange }) => (
-                  <TableContainer title="DataTable with Toolbar">
-                    <TableToolbar>
 
-
-                        <TableToolbarContent>
-                          <TableToolbarSearch  onChange={onInputChange} />
-                          <TableToolbarMenu />
-                          {
-                          // <TableToolbarAction
-                          //   icon={iconDownload}
-                          //   iconDescription="Download"
-                          //   onClick={action('TableToolbarAction - Download')}
-                          // />
-                          // <TableToolbarAction
-                          //   icon={iconEdit}
-                          //   iconDescription="Edit"
-                          //   onClick={action('TableToolbarAction - Edit')}
-                          // />
-                          // <TableToolbarAction
-                          //   icon={iconSettings}
-                          //   iconDescription="Settings"
-                          //   onClick={action('TableToolbarAction - Settings')}
-                          // />
-
-                          }
-                          <Button onClick={"yo"} small kind="primary">
-                            Add new
-                          </Button>
-                        </TableToolbarContent>
-                      </TableToolbar>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          {headers.map(header => (
-                            <TableHeader {...getHeaderProps({ header })}>
-                              {header.header}
-                            </TableHeader>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rows.map(row => (
-                          <TableRow key={row.id}>
-                            {row.cells.map(cell => (
-                              <TableCell key={cell.id}>{cell.value}</TableCell>
-                            ))}
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                )}
-              />
-            </div>
           </div>
         </Content>
+
       </div>
     )
   }

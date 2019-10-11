@@ -6,8 +6,6 @@ import {ContentSwitcher, Switch} from 'carbon-components-react';
 import FMap from '../../datavizcomps/FMap';
 import FBarChart from '../../datavizcomps/FBarChart';
 
-const sec1VizTypes = ["FMap", "FBarChart"];
-
 const sampleDataBar = [
   {month: "Jan", sanction: 3000, revised: 2500},
   {month: "Feb", sanction: 3000, revised: 2500},
@@ -23,35 +21,36 @@ const sampleDataBar = [
   {month: "Dec", sanction: 3000, revised: 2500}
 ]
 
+//Name of components to switch between
+const sec1VizTypes = ["FMap", "FBarChart"];
+
+const props = {
+  FMap: null,
+  FBarChart: {
+    data : sampleDataBar,
+    dataToX : 'month',
+    dataPoints : ['sanction','revised'],
+    yLabelFormat : [""," L INR",1/1000]
+  }
+}
 
 class ExpTracker extends Component {
 
   constructor( props ) {
     super( props )
-    this.state = {currentSec1VizType: "FMap"};
+    this.state = {currentSec1VizType: sec1VizTypes[0]};
     this.switchSec1VizType = this.switchSec1VizType.bind( this );
   }
 
   switchSec1VizType(e) {
-
-    this.setState( {
-        currentSec1VizType: sec1VizTypes[e]
-    } )
+    this.setState({ currentSec1VizType: sec1VizTypes[e] })
   }
 
   render() {
-
     var currentSec1VizComp;
-
     this.state.currentSec1VizType === "FMap" ?
-      currentSec1VizComp = <div id="mapid"><FMap /></div> :
-      currentSec1VizComp = <FBarChart
-                              data={sampleDataBar}
-                              dataToX={'month'}
-                              dataPoints={['sanction','revised']}
-                              yLabelFormat={[""," L INR",1/1000]}
-                            />;
-
+      currentSec1VizComp = <div id="mapid"><FMap {...props.FMap}/></div> :
+      currentSec1VizComp = <FBarChart {...props.FBarChart}/>;
 
     return (
       <div>

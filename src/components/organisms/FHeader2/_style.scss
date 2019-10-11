@@ -11,3 +11,13 @@
 .bx--header__nav.f_primarylinks_center::before{
   display: none;
 }
+
+@media screen and (min-width: 768px){
+    .f_primarylinks_center, .f_secondarylinks_right{
+      display: block;
+    }
+
+    .bx--header__menu-toggle{
+      display: none;
+    }
+}
