@@ -1,0 +1,24 @@
+@import 'carbon-components/scss/globals/scss/styles.scss';
+
+// @import './scss/normalize.scss';
+@import './scss/vars.scss';
+
+//components styles
+@import './components/atoms/FButton/style.scss';
+@import './components/organisms/FHeader1/style.scss';
+@import './components/organisms/FHeader2/style.scss';
+
+//datavizcomps styles
+@import './datavizcomps/FPieChart/style.scss';
+
+//content styles
+@import './content/Home/style.scss';
+@import './content/AboutUs/style.scss';
+@import './content/ContactUs/style.scss';
+@import './content/ExpSummary/style.scss';
+@import './content/ExpDetails/style.scss';
+@import './content/ExpTracker/style.scss';
+
+$feature-flags: (
+  ui-shell: true,
+);

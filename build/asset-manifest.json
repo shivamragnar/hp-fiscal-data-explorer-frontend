@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fiscal_pre_prod/static/css/main.3c7e18ef.chunk.css",
+    "main.js": "/fiscal_pre_prod/static/js/main.defb3065.chunk.js",
+    "main.js.map": "/fiscal_pre_prod/static/js/main.defb3065.chunk.js.map",
+    "runtime-main.js": "/fiscal_pre_prod/static/js/runtime-main.192db028.js",
+    "runtime-main.js.map": "/fiscal_pre_prod/static/js/runtime-main.192db028.js.map",
+    "static/js/2.75a70dc9.chunk.js": "/fiscal_pre_prod/static/js/2.75a70dc9.chunk.js",
+    "static/js/2.75a70dc9.chunk.js.map": "/fiscal_pre_prod/static/js/2.75a70dc9.chunk.js.map",
+    "index.html": "/fiscal_pre_prod/index.html",
+    "precache-manifest.950fd6934672fa8ee001e4d3e24673d0.js": "/fiscal_pre_prod/precache-manifest.950fd6934672fa8ee001e4d3e24673d0.js",
+    "service-worker.js": "/fiscal_pre_prod/service-worker.js",
+    "static/css/main.3c7e18ef.chunk.css.map": "/fiscal_pre_prod/static/css/main.3c7e18ef.chunk.css.map"
+  }
+}
