@@ -1,4 +1,61 @@
+@import './scss/vars.scss';
+
+// @import './scss/normalize.scss';
+@import './scss/vars.scss';
+
+//components styles
+@import './components/atoms/FButton/style.scss';
+@import './components/organisms/FHeader1/style.scss';
+@import './components/organisms/FHeader2/style.scss';
+
+//datavizcomps styles
+@import './datavizcomps/FPieChart/style.scss';
+@import './datavizcomps/FTable/style.scss';
+
+//content styles
+@import './content/Home/style.scss';
+@import './content/AboutUs/style.scss';
+@import './content/ContactUs/style.scss';
+@import './content/ExpSummary/style.scss';
+@import './content/ExpDetails/style.scss';
+@import './content/ExpTracker/style.scss';
+
 //carbon overrides
 .bx--content{
   padding-top: 8rem;
+  transform: none;
+}
+
+.text-col{
+  position: fixed;
+  width: 30rem;
+  left: 4rem;
+  top: 8rem;
+  background-color: $extra_light_grey;
+  padding: 2rem;
+
+  @media screen and (max-width: 1280px){
+    width: 26rem;
+  }
+
+  @media screen and (max-width: 992px){
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.data-viz-col{
+  width: 100%;
+  padding-left: 34rem;
+
+  @media screen and (max-width: 1280px){
+    padding-left: 30rem;
+  }
+
+  @media screen and (max-width: 992px){
+    padding-top: 2rem;
+    padding-left: 0;
+  }
 }

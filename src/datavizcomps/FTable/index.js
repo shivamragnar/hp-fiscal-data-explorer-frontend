@@ -63,6 +63,7 @@ class FTable extends Component {
 
                         </TableToolbarContent>
                       </TableToolbar>
+                      <div className="data-table-wrapper">
                     <Table>
                       <TableHead>
                         <TableRow>
@@ -83,6 +84,7 @@ class FTable extends Component {
                         ))}
                       </TableBody>
                     </Table>
+                    </div>
                   </TableContainer>
                 )}
               />

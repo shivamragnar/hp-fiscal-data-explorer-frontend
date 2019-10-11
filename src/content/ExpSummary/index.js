@@ -138,14 +138,14 @@ class ExpSummary extends Component {
     var currentSec1VizComp;
     this.state.currentSec1VizType === sec1VizTypes[0] ?
       currentSec1VizComp = <FSlope2 {...props.FSlope2} /> :
-      currentSec1VizComp = <FTable {...props.FTable} />;
+      currentSec1VizComp = <FTable {...props.FTable}  />;
 
     return (
-      <div>
-        <Content>
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="left-col bx--col-lg-4">
+      <div className="exp-summary-content">
+
+
+
+              <div className="text-col">
                 <h3>Some title text</h3>
                 <p>
                   Carbon is IBM’s open-source design system for digital
@@ -155,8 +155,8 @@ class ExpSummary extends Component {
                   and a vibrant community of contributors.
                 </p>
               </div>
-              <div className="right-col bx--col-lg-8">
-                <div style={{display: "flex"}}>
+              <div className="data-viz-col">
+                <div className="content-switcher-wrapper" style={{display: "flex"}}>
                   <ContentSwitcher onChange={this.switchSec1VizType} >
                     <Switch  text="Slope Chart" />
                     <Switch  text="Table" />
@@ -164,10 +164,9 @@ class ExpSummary extends Component {
                 </div>
                 {currentSec1VizComp}
               </div>
-            </div>
 
-          </div>
-        </Content>
+
+
 
       </div>
     )
