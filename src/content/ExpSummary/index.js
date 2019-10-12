@@ -38,60 +38,7 @@ const {
   TableSelectRow
 } = DataTable;
 
-const currentYear = "2019";
-const prevYear = "2018";
-
-
-var slopeData = [
-
-];
-
-var tableData = {
-  headers: [
-
-  ],
-  rows: [
-
-  ]
-}
-
-var tableHeaderDisplay = [
-  'Demand ID',
-  'Demand Name',
-  'Sanction This Year',
-  'Sanction Last Year',
-  'Rate Of Change'
-]
-
-exp_summary_data.map((d, i) =>{
-  i === 0 && tableData.headers.push(
-    { key: 'demandid', header: tableHeaderDisplay[0] },
-    { key: 'demandname', header: tableHeaderDisplay[1] },
-    { key: 'sanctioncurrent', header: tableHeaderDisplay[2] },
-    { key: 'sanctionprevious', header: tableHeaderDisplay[3] },
-    { key: 'rateOfChange', header: tableHeaderDisplay[4] }
-  );
-  tableData.rows.push(
-    {
-      id: i,
-      'demandid': d.demandid,
-      'demandname': d.demandname,
-      'sanctioncurrent': d.sanctioncurrent,
-      'sanctionprevious': d.sanctionprevious,
-      'rateOfChange': d.rateOfChange
-    }
-  )
-  slopeData.push(
-    [
-      { year : prevYear, sanction : d.sanctionprevious},
-      { year : currentYear, sanction : d.sanctioncurrent, "label" : `${d.demandid}_${d.demandname}` }
-    ]
-  );
-})
-
-
-
-
+//sample slope data
 const sampleSlopeData = [
   [
     {  year: "1", sanction: 0.1 },
@@ -106,8 +53,7 @@ const sampleSlopeData = [
     {  year: "4", sanction: 0.6, label: "C" }
   ]
 ]
-
-//table data
+//sample table data
 const sampleRows = [
   {
     id: 'a',
@@ -128,8 +74,6 @@ const sampleRows = [
     percent_change: '6%'
   },
 ];
-
-// We would have a headers array like the following
 const sampleHeaders = [
   {
     // `key` is the name of the field on the row object itself for the header
@@ -147,10 +91,46 @@ const sampleHeaders = [
   },
 ];
 
+const currentYear = "2019";
+const prevYear = "2018";
+
+var slopeData = [];
+
+var tableData = {
+  headers: [],
+  rows: []
+}
+
+exp_summary_data.map((d, i) =>{
+
+  i === 0 && tableData.headers.push(
+    { key: 'demandid', header: 'Demand ID' },
+    { key: 'demandname', header: 'Demand Name' },
+    { key: 'sanctioncurrent', header: 'Sanction This Year' },
+    { key: 'sanctionprevious', header: 'Sanction Last Year' },
+    { key: 'rateOfChange', header: 'Rate Of Change' }
+  );
+
+  tableData.rows.push(
+    {
+      id: i,
+      'demandid': d.demandid,
+      'demandname': d.demandname,
+      'sanctioncurrent': d.sanctioncurrent,
+      'sanctionprevious': d.sanctionprevious,
+      'rateOfChange': d.rateOfChange
+    }
+  )
+  slopeData.push(
+    [
+      { year : prevYear, sanction : d.sanctionprevious},
+      { year : currentYear, sanction : d.sanctioncurrent, "label" : `${d.demandid}_${d.demandname}` }
+    ]
+  );
+})
+
 //Name of components to switch between
 const sec1VizTypes = ["FSlope", "FTable"];
-
-const xLabelFormat = (t) => t;
 
 const props = {
   FSlope: {
@@ -176,8 +156,6 @@ class ExpSummary extends Component {
     super(props);
 
     this.state = {currentSec1VizType: sec1VizTypes[0]};
-
-    this.consoleFilteredRows = this.consoleFilteredRows.bind(this);
     this.switchSec1VizType = this.switchSec1VizType.bind( this );
   }
 
@@ -185,14 +163,7 @@ class ExpSummary extends Component {
     this.setState({ currentSec1VizType: sec1VizTypes[e] })
   }
 
-  consoleFilteredRows(rows){
-    console.log(rows);
-  }
-
   render() {
-
-
-
 
     var currentSec1VizComp;
     this.state.currentSec1VizType === sec1VizTypes[0] ?
@@ -201,32 +172,25 @@ class ExpSummary extends Component {
 
     return (
       <div className="exp-summary-content">
-
-
-
-              <div className="text-col">
-                <h3>Some title text</h3>
-                <p>
-                  Carbon is IBM’s open-source design system for digital
-                  products and experiences. With the IBM Design Language
-                  as its foundation, the system consists of working code,
-                  design tools and resources, human interface guidelines,
-                  and a vibrant community of contributors.
-                </p>
-              </div>
-              <div className="data-viz-col">
-                <div className="content-switcher-wrapper" style={{display: "flex"}}>
-                  <ContentSwitcher onChange={this.switchSec1VizType} >
-                    <Switch  text="Slope Chart" />
-                    <Switch  text="Table" />
-                  </ContentSwitcher>
-                </div>
-                {currentSec1VizComp}
-              </div>
-
-
-
-
+        <div className="text-col">
+          <h3>Some title text</h3>
+          <p>
+            Carbon is IBM’s open-source design system for digital
+            products and experiences. With the IBM Design Language
+            as its foundation, the system consists of working code,
+            design tools and resources, human interface guidelines,
+            and a vibrant community of contributors.
+          </p>
+        </div>
+        <div className="data-viz-col">
+          <div className="content-switcher-wrapper" style={{display: "flex"}}>
+            <ContentSwitcher onChange={this.switchSec1VizType} >
+              <Switch  text="Slope Chart" />
+              <Switch  text="Table" />
+            </ContentSwitcher>
+          </div>
+          {currentSec1VizComp}
+        </div>
       </div>
     )
   }
