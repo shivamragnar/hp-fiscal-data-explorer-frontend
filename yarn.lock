@@ -10251,6 +10251,11 @@ react-app-polyfill@^1.0.3:
     regenerator-runtime "0.13.3"
     whatwg-fetch "3.0.0"
 
+react-bubble-chart@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-bubble-chart/-/react-bubble-chart-0.4.0.tgz#0028b43aae1d26c7da27de9ddd7d4eb927fd5a10"
+  integrity sha1-ACi0Oq4dJsfaJ96d3X1OuSf9WhA=
+
 react-clientside-effect@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.2.tgz#6212fb0e07b204e714581dd51992603d1accc837"

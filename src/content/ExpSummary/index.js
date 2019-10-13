@@ -1,17 +1,18 @@
 import React, {
   Component
 } from "react";
-import {Content} from 'carbon-components-react/lib/components/UIShell';
+import { Content } from 'carbon-components-react/lib/components/UIShell';
 import FPieChart from '../../datavizcomps/FPieChart';
 import FBarChart from '../../datavizcomps/FBarChart';
 import FTable from '../../datavizcomps/FTable';
+
 
 
 import FSlope from '../../datavizcomps/FSlope';
 import FTimeSeries from '../../datavizcomps/FTimeSeries';
 
 import { DataTable } from 'carbon-components-react';
-import {ContentSwitcher, Switch} from 'carbon-components-react';
+import { ContentSwitcher, Switch } from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
 // De-structure `DataTable` directly to get local references
 import Download16 from '@carbon/icons-react/lib/download/16';
@@ -41,21 +42,20 @@ const {
 //sample slope data
 const sampleSlopeData = [
   [
-    {  year: "1", sanction: 0.1 },
-    {  year: "4", sanction: 0.5, label: "demand_1" }
+    { year: "1", sanction: 0.1 },
+    { year: "4", sanction: 0.5, label: "demand_1" }
   ],
   [
-    {  year: "1", sanction: 0.2 },
-    {  year: "4", sanction: 0.5, label: "B" }
+    { year: "1", sanction: 0.2 },
+    { year: "4", sanction: 0.5, label: "B" }
   ],
   [
-    {  year: "1", sanction: 0.3 },
-    {  year: "4", sanction: 0.6, label: "C" }
+    { year: "1", sanction: 0.3 },
+    { year: "4", sanction: 0.6, label: "C" }
   ]
 ]
 //sample table data
-const sampleRows = [
-  {
+const sampleRows = [{
     id: 'a',
     demand_code: '1',
     sanction: '1000',
@@ -74,8 +74,7 @@ const sampleRows = [
     percent_change: '6%'
   },
 ];
-const sampleHeaders = [
-  {
+const sampleHeaders = [{
     // `key` is the name of the field on the row object itself for the header
     key: 'demand_code',
     // `header` will be the name you want rendered in the Table Header
@@ -101,30 +100,22 @@ var tableData = {
   rows: []
 }
 
-exp_summary_data.map((d, i) =>{
+exp_summary_data.map((d, i) => {
 
-  i === 0 && tableData.headers.push(
-    { key: 'demandid', header: 'Demand ID' },
-    { key: 'demandname', header: 'Demand Name' },
-    { key: 'sanctioncurrent', header: 'Sanction This Year' },
-    { key: 'sanctionprevious', header: 'Sanction Last Year' },
-    { key: 'rateOfChange', header: 'Rate Of Change' }
-  );
+  i === 0 && tableData.headers.push({ key: 'demandid', header: 'Demand ID' }, { key: 'demandname', header: 'Demand Name' }, { key: 'sanctioncurrent', header: 'Sanction This Year' }, { key: 'sanctionprevious', header: 'Sanction Last Year' }, { key: 'rateOfChange', header: 'Rate Of Change' });
 
-  tableData.rows.push(
-    {
-      id: i,
-      'demandid': d.demandid,
-      'demandname': d.demandname,
-      'sanctioncurrent': d.sanctioncurrent,
-      'sanctionprevious': d.sanctionprevious,
-      'rateOfChange': d.rateOfChange
-    }
-  )
+  tableData.rows.push({
+    id: i,
+    'demandid': d.demandid,
+    'demandname': d.demandname,
+    'sanctioncurrent': d.sanctioncurrent,
+    'sanctionprevious': d.sanctionprevious,
+    'rateOfChange': d.rateOfChange
+  })
   slopeData.push(
     [
-      { year : prevYear, sanction : d.sanctionprevious},
-      { year : currentYear, sanction : d.sanctioncurrent, "label" : `${d.demandid}_${d.demandname}` }
+      { year: prevYear, sanction: d.sanctionprevious },
+      { year: currentYear, sanction: d.sanctioncurrent, "label": `${d.demandid}_${d.demandname}` }
     ]
   );
 })
@@ -134,13 +125,13 @@ const sec1VizTypes = ["FSlope", "FTable"];
 
 const props = {
   FSlope: {
-    data : slopeData,
-    x : "year",
-    y : "sanction",
+    data: slopeData,
+    x: "year",
+    y: "sanction",
     height: 3000,
     width: 300,
-    padding: {top: 20, left: 75, right: 75, bottom: 50},
-    tickFormatY: ["", " Cr", 1/10000000],
+    padding: { top: 20, left: 75, right: 75, bottom: 50 },
+    tickFormatY: ["", " Cr", 1 / 10000000],
   },
 
   FTable: {
@@ -152,11 +143,11 @@ const props = {
 
 class ExpSummary extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state = {currentSec1VizType: sec1VizTypes[0]};
-    this.switchSec1VizType = this.switchSec1VizType.bind( this );
+    this.state = { currentSec1VizType: sec1VizTypes[0] };
+    this.switchSec1VizType = this.switchSec1VizType.bind(this);
   }
 
   switchSec1VizType(e) {
@@ -190,6 +181,9 @@ class ExpSummary extends Component {
             </ContentSwitcher>
           </div>
           {currentSec1VizComp}
+        </div>
+        <div>
+
         </div>
       </div>
     )
