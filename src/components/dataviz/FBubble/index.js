@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { VictoryScatter, VictoryChart, VictoryTheme, VictoryAxis, VictoryLabel } from "victory";
 
-var exp_summary_data = require('../../data/exp-summary.json');
+var exp_summary_data = require('../../../data/exp-summary.json');
 
 const tickLabelStyle = {
   fontFamily: "IBM Plex Sans",

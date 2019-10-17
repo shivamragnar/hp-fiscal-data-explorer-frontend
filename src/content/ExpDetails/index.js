@@ -1,29 +1,28 @@
-import React, {
-  Component
-} from "react";
-//from carbon's components
-import {Content} from 'carbon-components-react/lib/components/UIShell';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel, VictoryLine } from 'victory';
-import FBarChart from '../../datavizcomps/FBarChart';
-import FTimeSeries from '../../datavizcomps/FTimeSeries';
+import React, { Component } from "react";
+
+//carbon components
+import { Content } from 'carbon-components-react/lib/components/UIShell';
+
+//custom components
+import FBarChart from '../../components/dataviz/FBarChart';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
 
 const sampleDataBar = [
-  {month: "Jan", sanction: 3000, revised: 2500},
-  {month: "Feb", sanction: 3000, revised: 2500},
-  {month: "Mar", sanction: 3000, revised: 2500},
-  {month: "Apr", sanction: 3000, revised: 2500},
-  {month: "May", sanction: 3000, revised: 2500},
-  {month: "Jun", sanction: 3000, revised: 2500},
-  {month: "Jul", sanction: 3000, revised: 2500},
-  {month: "Aug", sanction: 3000, revised: 2500},
-  {month: "Sep", sanction: 3000, revised: 2500},
-  {month: "Oct", sanction: 3000, revised: 2500},
-  {month: "Nov", sanction: 3000, revised: 2500},
-  {month: "Dec", sanction: 3000, revised: 2500}
+  { month: "Jan", sanction: 3000, revised: 2500 },
+  { month: "Feb", sanction: 3000, revised: 2500 },
+  { month: "Mar", sanction: 3000, revised: 2500 },
+  { month: "Apr", sanction: 3000, revised: 2500 },
+  { month: "May", sanction: 3000, revised: 2500 },
+  { month: "Jun", sanction: 3000, revised: 2500 },
+  { month: "Jul", sanction: 3000, revised: 2500 },
+  { month: "Aug", sanction: 3000, revised: 2500 },
+  { month: "Sep", sanction: 3000, revised: 2500 },
+  { month: "Oct", sanction: 3000, revised: 2500 },
+  { month: "Nov", sanction: 3000, revised: 2500 },
+  { month: "Dec", sanction: 3000, revised: 2500 }
 ]
 
-const sampleDataTime = [
-  {
+const sampleDataTime = [{
     x: 1,
     sanction: 4,
     addition: 5,

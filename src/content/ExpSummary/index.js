@@ -1,43 +1,20 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
+
+//carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
-import FPieChart from '../../datavizcomps/FPieChart';
-import FBarChart from '../../datavizcomps/FBarChart';
-import FTable from '../../datavizcomps/FTable';
-
-
-
-import FSlope from '../../datavizcomps/FSlope';
-import FTimeSeries from '../../datavizcomps/FTimeSeries';
-
-import { DataTable } from 'carbon-components-react';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
-// De-structure `DataTable` directly to get local references
 import Download16 from '@carbon/icons-react/lib/download/16';
 
-//data
+//custom components
+import FBarChart from '../../components/dataviz/FBarChart';
+import FTable from '../../components/dataviz/FTable';
+import FSlope from '../../components/dataviz/FSlope';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
+
+//sample data
 var exp_summary_data = require('../../data/exp-summary.json');
 
-const {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableToolbar,
-  TableToolbarSearch,
-  TableToolbarMenu,
-  TableToolbarAction,
-  TableToolbarContent,
-  TableBatchActions,
-  TableBatchAction,
-  TableSelectAll,
-  TableSelectRow
-} = DataTable;
 
 //sample slope data
 const sampleSlopeData = [
