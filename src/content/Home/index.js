@@ -5,22 +5,23 @@ import ReactDOM from 'react-dom';
 
 //custom components
 import FBubble from '../../components/dataviz/FBubble';
-// import FForce from '../../components/dataviz/FForce';
-// import FForce2 from '../../components/dataviz/FForce2';
 import * as d3 from "d3";
+
+//sample data
+var exp_summary_data = require('../../data/exp-summary.json');
 
 ///////////////////////////////////////////////////////////
 /////// Functions and variables
-
 const width = 1080;
-const height = 250;
+const height = 1000;
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 
 const enterNode = (selection) => {
   selection.select('circle')
-    .attr("r", 30)
-    .style("fill", function (d) { return color(d.name) })
+    .attr("r", d => { return Math.sqrt(d.sanctioncurrent / Math.PI) / 100 })
+    .style("fill", "#000000")
+    .style("opacity", ".7")
 
 
   selection.select('text')
@@ -28,7 +29,9 @@ const enterNode = (selection) => {
     .style("transform", "translateX(-50%,-50%")
 };
 
+
 const updateNode = (selection) => {
+
   selection.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")")
 
 };
@@ -54,6 +57,56 @@ const updateGraph = (selection) => {
     .call(updateLink);
 };
 
+const scale = (num, in_min, in_max, out_min, out_max) => {
+  return Math.round((num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+}
+
+
+//extract min and max val from data;
+var minVal;
+var maxVal;
+
+exp_summary_data.map((demandObj, index) => {
+
+  if(index === 0) {
+    minVal = demandObj.rateOfChange;
+    maxVal = demandObj.rateOfChange;
+  }
+  if(demandObj.rateOfChange < minVal) {
+    minVal = demandObj.rateOfChange;
+  }
+  if(demandObj.rateOfChange > maxVal) {
+    maxVal = demandObj.rateOfChange;
+  }
+
+})
+
+console.log("MIN VAL IS " + minVal);
+console.log("MAX VAL IS " + maxVal);
+console.log("og rateOfChange vals: ")
+
+var domain = [];
+var range = [];
+
+exp_summary_data.map(demandObj => {
+
+  domain.push(demandObj.rateOfChange);
+})
+console.log(domain);
+console.log("scaled rateOfChange vals: ")
+exp_summary_data.map((demandObj, index) => {
+  range.push(scale(demandObj.rateOfChange, minVal, maxVal, 20, 500));
+})
+console.log(range);
+
+
+var y = d3.scaleOrdinal()
+  .domain(domain)
+  .range(range)
+// .domain([-0.22, -0.04, 0.27, 0.28, 0.31])
+// .range([20, 183, 464, 473, 500])
+
+
 ////////////////////////////////////////////////////////////////////////////
 /////// App component. Hold graph data in state and renders Graph component.
 /////// Graph component in turn renders Link and Node components.
@@ -63,15 +116,16 @@ class Home extends Component {
     super(props)
     this.state = {
       data: {
-        "nodes": [
-          { "name": "fruit", "id": 1 },
-          { "name": "apple", "id": 2 },
-          { "name": "orange", "id": 3 },
-          { "name": "banana", "id": 4 }
-        ],
+        "nodes": exp_summary_data
+          /*[
+            { "sanctioncurrent": 100, "rateOfChange": 1 },
+            { "sanctioncurrent": 50, "rateOfChange": 2 },
+            { "sanctioncurrent": 70, "rateOfChange": 3 },
+            { "sanctioncurrent": 80, "rateOfChange": 4 },
+          ]*/
+          ,
         "links": [
-          { "source": 1, "target": 2 },
-          { "source": 1, "target": 3 }
+
         ]
       }
     }
@@ -100,15 +154,22 @@ class Graph extends React.Component {
     this.d3Graph = d3.select(ReactDOM.findDOMNode(this));
 
     var force = d3.forceSimulation(this.props.data.nodes)
-      .force("charge", d3.forceManyBody()
-        .strength(-50))
+      // .force("y", d3.forceY()
+      //   .strength(15)
+      //   .y(function (d) { return y(d.rateOfChange) }))
+      // .force("charge", d3.forceManyBody()
+      //   .strength(1)) // Nodes are attracted one each other of value is > 0
       .force("link", d3.forceLink(this.props.data.links)
         .distance(90))
       .force("center", d3.forceCenter()
         .x(width / 2)
-        .y(height / 2))
-      .force("collide", d3.forceCollide([5])
-        .iterations([5]))
+        .y(height / 2)) // Attraction to the center of the svg area
+
+      .force("collide", d3.forceCollide()
+        .strength(.1)
+        .radius(d => (Math.sqrt(d.sanctioncurrent / Math.PI) / 100))
+        .iterations(5)) // Force that avoids circle overlapping
+
 
     function dragStarted(d) {
       if(!d3.event.active) force.alphaTarget(0.3)
@@ -131,10 +192,11 @@ class Graph extends React.Component {
 
     const node = d3.selectAll('g.node')
       .call(d3.drag()
-        .on("start", dragStarted)
-        .on("drag", dragging)
-        .on("end", dragEnded)
+        .on("start", /*dragStarted*/ null)
+        .on("drag", /*dragging*/ null)
+        .on("end", /*dragEnded*/ null)
       );
+
 
     force.on('tick', () => {
       this.d3Graph.call(updateGraph)
@@ -142,11 +204,12 @@ class Graph extends React.Component {
   }
 
   render() {
-    var nodes = this.props.data.nodes.map((node) => {
+    var nodes = this.props.data.nodes.map((node, index) => {
       return (
         <Node
                 data={node}
                 name={node.name}
+                cy={range[index]}
                 key={node.id}
             />);
     });
@@ -216,8 +279,11 @@ class Node extends React.Component {
   render() {
     return (
       <g className='node'>
-                <circle ref="dragMe" onClick={this.handle.bind(this)}/>
-                <text>{this.props.data.name}</text>
+                <circle  ref="dragMe" onClick={this.handle.bind(this)}/>
+                {
+                  // <circle cy ={this.props.cy} ref="dragMe" onClick={this.handle.bind(this)}/>
+                  // <text>{this.props.data.name}</text>
+                }
             </g>
     );
   }
