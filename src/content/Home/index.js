@@ -13,13 +13,13 @@ var exp_summary_data = require('../../data/exp-summary.json');
 ///////////////////////////////////////////////////////////
 /////// Functions and variables
 const width = 1080;
-const height = 1000;
+const height = 600;
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 
 const enterNode = (selection) => {
   selection.select('circle')
-    .attr("r", d => { return Math.sqrt(d.sanctioncurrent / Math.PI) / 100 })
+    .attr("r", d => { return Math.sqrt(d.sanctioncurrent / Math.PI) / 200 })
     .style("fill", "#000000")
     .style("opacity", ".7")
 
@@ -32,7 +32,8 @@ const enterNode = (selection) => {
 
 const updateNode = (selection) => {
 
-  selection.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")")
+  // selection.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")")
+  selection.attr("transform", (d, i) => "translate(" + d.x + "," + (height - range[i]) + ")")
 
 };
 
@@ -157,17 +158,17 @@ class Graph extends React.Component {
       // .force("y", d3.forceY()
       //   .strength(15)
       //   .y(function (d) { return y(d.rateOfChange) }))
-      // .force("charge", d3.forceManyBody()
-      //   .strength(1)) // Nodes are attracted one each other of value is > 0
+      .force("charge", d3.forceManyBody()
+        .strength(2)) // Nodes are attracted one each other of value is > 0
       .force("link", d3.forceLink(this.props.data.links)
         .distance(90))
       .force("center", d3.forceCenter()
         .x(width / 2)
-        .y(height / 2)) // Attraction to the center of the svg area
+        .y(0)) // Attraction to the center of the svg area
 
       .force("collide", d3.forceCollide()
         .strength(.1)
-        .radius(d => (Math.sqrt(d.sanctioncurrent / Math.PI) / 100))
+        .radius(d => (Math.sqrt(d.sanctioncurrent / Math.PI) / 200))
         .iterations(5)) // Force that avoids circle overlapping
 
 
@@ -273,18 +274,18 @@ class Node extends React.Component {
   }
 
   handle(e) {
-    console.log(this.props.data.id + ' been clicked')
+    console.log(this.props.data.rateOfChange + ' been clicked')
   }
 
   render() {
     return (
       <g className='node'>
-                <circle  ref="dragMe" onClick={this.handle.bind(this)}/>
-                {
-                  // <circle cy ={this.props.cy} ref="dragMe" onClick={this.handle.bind(this)}/>
-                  // <text>{this.props.data.name}</text>
-                }
-            </g>
+        <circle  ref="dragMe" onClick={this.handle.bind(this)}/>
+        {
+          // <circle cy ={this.props.cy} ref="dragMe" onClick={this.handle.bind(this)}/>
+          // <text>{this.props.data.name}</text>
+        }
+      </g>
     );
   }
 }
