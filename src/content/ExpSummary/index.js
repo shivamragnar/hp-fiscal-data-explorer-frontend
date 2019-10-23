@@ -88,10 +88,10 @@ exp_summary_data.map((d, i) => {
 
 	i === 0 && tableData.headers.push(
     { key: 'demandid', header: 'Demand ID' },
-    { key: 'demandname', header: 'Demand <br> Name' },
+    { key: 'demandname', header: 'Demand Name' },
     { key: 'sanctioncurrent', header: 'Sanction This Year (INR)' },
     { key: 'sanctionprevious', header: 'Sanction Last Year (INR)' },
-    { key: 'rateOfChange', header: 'Rate Of Change (%)' }
+    { key: 'rateOfChange', header: '% Change' }
   );
 
 	tableData.rows.push({
