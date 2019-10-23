@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Axis, axisPropsFromTickScale, LEFT} from 'react-d3-axis';
-import {scaleLinear} from 'd3-scale';
-
 import * as d3 from 'd3';
 
 var exp_summary_data = require('../../../data/exp-summary.json');
@@ -17,84 +14,19 @@ const width = 800;
 const height = 600;
 const colorArray = ["#d73027","#fdae61","#abd9e9","#74add1","#1a6cd7"];
 
-
 const enterNode = (selection) => {
   selection.select('circle')
     .attr("r", d => { return Math.sqrt(d.sanctioncurrent / Math.PI) / 180 })
-    // .style("fill", "#000000")
-    // .style("opacity", ".7")
-
-  // selection.select('text')
-  //   .attr("dy", ".35em")
-  //   .attr("dx", 12)
-
-
 };
-
-
-// Resolve collisions between nodes.
-
- function collide() {
-
-   return function(node) {
-     var radius = Math.sqrt(node.sanctioncurrent / Math.PI) / 200;
-     var padding = 0;
-     var r = node.radius + 16,
-         nx1 = node.x - r,
-         nx2 = node.x + r,
-         ny1 = node.y - r,
-         ny2 = node.y + r;
-     return function(quad, x1, y1, x2, y2) {
-       if (quad.point && (quad.point !== node)) {
-         var x = node.x - quad.point.x,
-             y = node.y - quad.point.y,
-             l = Math.sqrt(x * x + y * y),
-             r = node.radius + quad.point.radius;
-         if (l < r) {
-           l = (l - r) / l * 0.5;
-           node.x -= x *= l;
-           node.y -= y *= l;
-           quad.point.x += x;
-           quad.point.y += y;
-         }
-       }
-       return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-     };
-   }
- }
-
-   function moveTowardDataPosition(alpha) {
-   return function(d, index) {
-     // console.log(y(d.rateOfChange));
-     // console.log(index + "  |  "+ y(d.rateOfChange));
-     d.y += (range[index] - d.y) * 0.1 * alpha;
-   };
- }
-
-
 
 const updateNode = (selection) => {
-  // selection.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")")
-  // selection.attr("transform", (d, i) => "translate(" + d.x + "," + "0)")
-  // console.log(force.alpha());
-  // selection.each(moveTowardDataPosition(force.alpha()));
-  // selection.each(collide());
   selection.select('circle')
               .attr("cx", d => d.x)
-              .attr("cy", d => d.y)
-              ;
-
-  // selection.select('text')
-  //             .attr("cx", d => d.x)
-  //             .attr("cy", d => d.y)
-  //             ;
+              .attr("cy", d => d.y);
 
   selection.select('g.tooltip')
-              .attr("transform", d => "translate(" + d.x + "," + d.y + ")")
-              ;
+              .attr("transform", d => "translate(" + d.x + "," + d.y + ")");
 };
-
-
 
 const updateGraph = (selection) => {
   selection.selectAll('.node')
@@ -138,14 +70,8 @@ exp_summary_data.map((demandObj, index) => {
 console.log(domain);
 console.log(range);
 
-var y = d3.scaleOrdinal()
-  .domain(domain)
-  .range(range)
-// .domain([-0.22, -0.04, 0.27, 0.28, 0.31])
-// .range([20, 183, 464, 473, 500])
 
 
-const scaleAxis = scaleLinear().domain([0, 100]).range([0, 500]);
 
 ///////////////////////////////////////////////////////////
 /////// Graph component. Holds Link and Node components
@@ -259,8 +185,7 @@ class FForce extends React.Component {
     });
 
     return (
-        <svg className="graph" width={width} height={height} style={{width: "100%"}}>
-          <Axis {...axisPropsFromTickScale(scaleAxis, 5)} style={{orient: LEFT}}/>
+        <svg className="graph" width={width} height={height} viewBox={"0,0,"+width+','+height} style={{width: "100%", height: "auto"}}>
           <g>
             {nodes}
           </g>
