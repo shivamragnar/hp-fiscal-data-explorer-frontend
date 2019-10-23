@@ -150,7 +150,7 @@ const scaleAxis = scaleLinear().domain([0, 100]).range([0, 500]);
 ///////////////////////////////////////////////////////////
 /////// Graph component. Holds Link and Node components
 
-class FForce extends React.Component {
+class FForce2 extends React.Component {
 
   constructor(props){
     super(props);
@@ -333,4 +333,4 @@ class Node extends React.Component {
   }
 }
 
-export default FForce;
+export default FForce2;
