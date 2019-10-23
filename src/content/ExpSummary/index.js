@@ -4,13 +4,12 @@ import React, { Component } from "react";
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
-import Download16 from '@carbon/icons-react/lib/download/16';
+
 
 //custom components
-import FBarChart from '../../components/dataviz/FBarChart';
 import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FForce from '../../components/dataviz/FForce';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
@@ -77,18 +76,31 @@ var tableData = {
 	rows: []
 }
 
+const thousands_separators = (num) =>
+  {
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+  }
+
 //
 exp_summary_data.map((d, i) => {
 
-	i === 0 && tableData.headers.push({ key: 'demandid', header: 'Demand ID' }, { key: 'demandname', header: 'Demand Name' }, { key: 'sanctioncurrent', header: 'Sanction This Year' }, { key: 'sanctionprevious', header: 'Sanction Last Year' }, { key: 'rateOfChange', header: 'Rate Of Change' });
+	i === 0 && tableData.headers.push(
+    { key: 'demandid', header: 'Demand ID' },
+    { key: 'demandname', header: 'Demand <br> Name' },
+    { key: 'sanctioncurrent', header: 'Sanction This Year (INR)' },
+    { key: 'sanctionprevious', header: 'Sanction Last Year (INR)' },
+    { key: 'rateOfChange', header: 'Rate Of Change (%)' }
+  );
 
 	tableData.rows.push({
 		id: i,
 		'demandid': d.demandid,
 		'demandname': d.demandname,
-		'sanctioncurrent': d.sanctioncurrent,
-		'sanctionprevious': d.sanctionprevious,
-		'rateOfChange': d.rateOfChange
+		'sanctioncurrent': Math.round(d.sanctioncurrent*100)/100,
+		'sanctionprevious': Math.round(d.sanctionprevious*100)/100,
+		'rateOfChange': Math.round((d.rateOfChange*100) * 100)/100
 	})
 	slopeData.push(
     [
@@ -99,7 +111,7 @@ exp_summary_data.map((d, i) => {
 })
 
 //Name of components to switch between
-const sec1VizTypes = ["FSlope", "FTable"];
+const sec1VizTypes = ["FForce", "FTable"];
 
 const props = {
 	FSlope: {
@@ -124,7 +136,21 @@ class ExpSummary extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { currentSec1VizType: sec1VizTypes[0] };
+		this.state = {
+      currentSec1VizType: sec1VizTypes[0],
+      data: {
+        "nodes": exp_summary_data
+          /*[
+            { "sanctioncurrent": 100, "rateOfChange": 1 },
+            { "sanctioncurrent": 50, "rateOfChange": 2 },
+            { "sanctioncurrent": 70, "rateOfChange": 3 },
+            { "sanctioncurrent": 80, "rateOfChange": 4 },
+          ]*/
+          ,
+        "links": [
+        ]
+      }
+    };
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
 
@@ -136,7 +162,7 @@ class ExpSummary extends Component {
 
 		var currentSec1VizComp;
 		this.state.currentSec1VizType === sec1VizTypes[0] ?
-			currentSec1VizComp = <FSlope {...props.FSlope} /> :
+			currentSec1VizComp = <FForce data={this.state.data} /> :
 			currentSec1VizComp = <FTable {...props.FTable}  />;
 
 		return (
@@ -151,10 +177,10 @@ class ExpSummary extends Component {
             and a vibrant community of contributors.
           </p>
         </div>
-        <div className="data-viz-col">
-          <div className="content-switcher-wrapper" style={{display: "flex"}}>
+        <div className="data-viz-col exp-summary">
+          <div className="content-switcher-wrapper">
             <ContentSwitcher onChange={this.switchSec1VizType} >
-              <Switch  text="Slope Chart" />
+              <Switch  text="Bubble Chart" />
               <Switch  text="Table" />
             </ContentSwitcher>
           </div>

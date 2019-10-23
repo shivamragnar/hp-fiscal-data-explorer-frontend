@@ -56,12 +56,12 @@ class ExpTracker extends Component {
     return (
       <div>
         <Content>
-          <div style={{display: "flex"}}>
-            <ContentSwitcher onChange={this.switchSec1VizType} >
-              <Switch  text="Map" />
-              <Switch  text="Bar Chart" />
-            </ContentSwitcher>
-          </div>
+            <div className="content-switcher-wrapper">
+              <ContentSwitcher onChange={this.switchSec1VizType} >
+                <Switch  text="Map" />
+                <Switch  text="Bar Chart" />
+              </ContentSwitcher>
+            </div>
           {currentSec1VizComp}
         </Content>
       </div>

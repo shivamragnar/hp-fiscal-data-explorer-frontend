@@ -6,19 +6,4 @@
     width: auto;
     height: 3rem;
   }
-
-  .bx--content-switcher{
-    width: 50%;
-
-    @media screen and (max-width: 540px){
-      width: 100%;
-    }
-  }
-
-  //not-override
-  .content-switcher-wrapper{
-    display: flex;
-    justify-content: center;
-  }
-
 }
