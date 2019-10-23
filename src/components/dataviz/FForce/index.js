@@ -15,14 +15,14 @@ var force;
 /////// Functions and variables
 const width = 800;
 const height = 600;
-const color = d3.scaleOrdinal(d3.schemeCategory10);
+const colorArray = ["#d73027","#fdae61","#abd9e9","#74add1","#1a6cd7"];
 
 
 const enterNode = (selection) => {
   selection.select('circle')
     .attr("r", d => { return Math.sqrt(d.sanctioncurrent / Math.PI) / 180 })
-    .style("fill", "#000000")
-    .style("opacity", ".7")
+    // .style("fill", "#000000")
+    // .style("opacity", ".7")
 
   // selection.select('text')
   //   .attr("dy", ".35em")
@@ -232,6 +232,19 @@ class FForce extends React.Component {
     const {display, translateX, translateY, sanctioncurrent, sanctionprevious, rateOfChange, demandDisplayName} = this.state;
 
     var nodes = this.props.data.nodes.map((node, index) => {
+      //set a color code to each node based on rateOfChange to give it the appropriate color
+      if(node.rateOfChange < 0){
+        node.colorCode = 0;
+      }else if(node.rateOfChange > 0 && node.rateOfChange < 0.25){
+        node.colorCode = 1;
+      }else if(node.rateOfChange > 0.25 && node.rateOfChange < 0.50){
+        node.colorCode = 2;
+      }else if(node.rateOfChange > 0.50 && node.rateOfChange < 0.75){
+        node.colorCode = 3;
+      }else if(node.rateOfChange > 0.75){
+        node.colorCode = 4;
+      }
+
       return (
         <Node
             index={index}
@@ -241,6 +254,7 @@ class FForce extends React.Component {
             display='none'
             showTooltip={this.showTooltip.bind(this)}
             hideTooltip={this.hideTooltip.bind(this)}
+            color={colorArray[node.colorCode]}
         />);
     });
 
@@ -304,41 +318,15 @@ class Node extends React.Component {
       .call(updateNode)
   }
 
-  showNodeTooltip(e) {
-    this.setState({display : 'block'});
-  }
 
-  hideNodeTooltip(e) {
-    this.setState({display : 'none'});
-  }
 
 
   render() {
     return (
       <g className='node'>
-          <circle   ref="dragMe" onMouseEnter={() => this.props.showTooltip(this.props.data)} onMouseLeave={this.props.hideTooltip}/>
-
-          <g className="tooltip" style={{display:this.state.display}} id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="Group">
-                  <rect id="Rectangle" stroke="#979797" fill="#fff" x="0.5" y="0.5" width="239" height="83"></rect>
-                  <text id="Line-1" font-size="12" fill="#4A4A4A">
-                      <tspan x="10" y="19">{this.props.data.demandid}. {this.props.data.demandname}</tspan>
-                  </text>
-                  <text id="Line-2" font-size="12" fill="#4A4A4A">
-                      <tspan x="10" y="37">Sanction This Year: {this.props.data.sanctioncurrent}</tspan>
-                  </text>
-                  <text id="Line-3"  font-size="12"  fill="#4A4A4A">
-                      <tspan x="10" y="55">Sanction Last Year: {this.props.data.sanctionprevious}</tspan>
-                  </text>
-                  <text id="Line-4"  font-size="12" font-weight="bold" fill="#4A4A4A">
-                      <tspan x="10" y="73">% Change: {this.props.data.rateOfChange}</tspan>
-                  </text>
-              </g>
-          </g>
+          <circle fill={this.props.color}  ref="dragMe" onMouseEnter={() => this.props.showTooltip(this.props.data)} onMouseLeave={this.props.hideTooltip}/>
         {
-
           // <circle className='node' cy ={this.props.cy} ref="dragMe" onClick={this.handle.bind(this)}/>
-
         }
       </g>
     );
