@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="84px" viewBox="0 0 240 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" stroke="#979797" fill="#D8D8D8" x="0.5" y="0.5" width="239" height="83"></rect>
+            <text id="Line-1" font-family="OpenSans-Bold, Open Sans" font-size="12" font-weight="bold" fill="#4A4A4A">
+                <tspan x="10" y="19">Line 1</tspan>
+            </text>
+            <text id="Line-2" font-family="OpenSans-Bold, Open Sans" font-size="12" font-weight="bold" fill="#4A4A4A">
+                <tspan x="10" y="37">Line 2</tspan>
+            </text>
+            <text id="Line-3" font-family="OpenSans-Bold, Open Sans" font-size="12" font-weight="bold" fill="#4A4A4A">
+                <tspan x="10" y="55">Line 3</tspan>
+            </text>
+            <text id="Line-4" font-family="OpenSans-Bold, Open Sans" font-size="12" font-weight="bold" fill="#4A4A4A">
+                <tspan x="10" y="73">Line 4</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

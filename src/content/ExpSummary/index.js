@@ -1,176 +1,195 @@
-import React, {
-  Component
-} from "react";
-import {Content} from 'carbon-components-react/lib/components/UIShell';
-import FPieChart from '../../datavizcomps/FPieChart';
-import FBarChart from '../../datavizcomps/FBarChart';
-import FTable from '../../datavizcomps/FTable';
-import FSlope from '../../datavizcomps/FSlope';
-import FSlope2 from '../../datavizcomps/FSlope2';
-import FTimeSeries from '../../datavizcomps/FTimeSeries';
+import React, { Component } from "react";
 
-import { DataTable } from 'carbon-components-react';
-import {ContentSwitcher, Switch} from 'carbon-components-react';
+//carbon components
+import { Content } from 'carbon-components-react/lib/components/UIShell';
+import { ContentSwitcher, Switch } from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
-// De-structure `DataTable` directly to get local references
-import Download16 from '@carbon/icons-react/lib/download/16';
 
 
-const {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableToolbar,
-  TableToolbarSearch,
-  TableToolbarMenu,
-  TableToolbarAction,
-  TableToolbarContent,
-  TableBatchActions,
-  TableBatchAction,
-  TableSelectAll,
-  TableSelectRow
-} = DataTable;
+//custom components
+import FTable from '../../components/dataviz/FTable';
+import FSlope from '../../components/dataviz/FSlope';
+import FForce from '../../components/dataviz/FForce';
+
+//sample data
+var exp_summary_data = require('../../data/exp-summary.json');
 
 
-const sampleDataTime = [
-  {
-    x: 1,
-    sanction: 4,
-    addition: 5,
-    saving: 6,
-    revised: 7,
-  },
-  {
-    x: 2,
-    sanction: 4.5,
-    addition: 8,
-    saving: 5.7,
-    revised: 9,
-  }
+//sample slope data
+const sampleSlopeData = [
+  [
+		{ year: "1", sanction: 0.1 },
+		{ year: "4", sanction: 0.5, label: "demand_1" }
+  ],
+  [
+		{ year: "1", sanction: 0.2 },
+		{ year: "4", sanction: 0.5, label: "B" }
+  ],
+  [
+		{ year: "1", sanction: 0.3 },
+		{ year: "4", sanction: 0.6, label: "C" }
+  ]
 ]
-
-
-const rows = [
-  {
-    id: 'a',
-    demand_code: '1',
-    sanction: '1000',
-    percent_change: '10%',
+//sample table data
+const sampleRows = [{
+		id: 'a',
+		demand_code: '1',
+		sanction: '1000',
+		percent_change: '10%',
   },
-  {
-    id: 'b',
-    demand_code: '2',
-    sanction: '800',
-    percent_change: '12%'
+	{
+		id: 'b',
+		demand_code: '2',
+		sanction: '800',
+		percent_change: '12%'
   },
-  {
-    id: 'c',
-    demand_code: '3',
-    sanction: '1200',
-    percent_change: '6%'
+	{
+		id: 'c',
+		demand_code: '3',
+		sanction: '1200',
+		percent_change: '6%'
+  },
+];
+const sampleHeaders = [
+  {	
+		key: 'demand_code', // `key` is the name of the field on the row object itself for the header
+		header: 'Demand', // `header` will be the name you want rendered in the Table Header
+  },
+	{
+		key: 'sanction',
+		header: 'Sanction',
+  },
+	{
+		key: 'percent_change',
+		header: 'Pecentage Change Since Last Year',
   },
 ];
 
-// We would have a headers array like the following
-const headers = [
+const currentYear = "2019";
+const prevYear = "2018";
+
+var slopeData = [];
+
+var tableData = {
+	headers: [],
+	rows: []
+}
+
+const thousands_separators = (num) =>
   {
-    // `key` is the name of the field on the row object itself for the header
-    key: 'demand_code',
-    // `header` will be the name you want rendered in the Table Header
-    header: 'Demand',
-  },
-  {
-    key: 'sanction',
-    header: 'Sanction',
-  },
-  {
-    key: 'percent_change',
-    header: 'Pecentage Change Since Last Year',
-  },
-];
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+  }
+
+//
+exp_summary_data.map((d, i) => {
+
+	i === 0 && tableData.headers.push(
+    { key: 'demandid', header: 'Demand ID' },
+    { key: 'demandname', header: 'Demand Name' },
+    { key: 'sanctioncurrent', header: 'Sanction This Year (INR)' },
+    { key: 'sanctionprevious', header: 'Sanction Last Year (INR)' },
+    { key: 'rateOfChange', header: '% Change' }
+  );
+
+	tableData.rows.push({
+		id: i,
+		'demandid': d.demandid,
+		'demandname': d.demandname,
+		'sanctioncurrent': Math.round(d.sanctioncurrent*100)/100,
+		'sanctionprevious': Math.round(d.sanctionprevious*100)/100,
+		'rateOfChange': Math.round((d.rateOfChange*100) * 100)/100
+	})
+	slopeData.push(
+    [
+			{ year: prevYear, sanction: d.sanctionprevious },
+			{ year: currentYear, sanction: d.sanctioncurrent, "label": `${d.demandid}_${d.demandname}` }
+    ]
+	);
+})
 
 //Name of components to switch between
-const sec1VizTypes = ["FSlope", "FTable"];
-
-const xLabelFormat = (t) => t;
+const sec1VizTypes = ["FForce", "FTable"];
 
 const props = {
-  FSlope2: {
-    data : sampleDataTime,
-    dataToX: 'x',
-    dataPoints: ['sanction','revised', 'addition', 'saving'],
-    xLabelValues: ["2017","2018"],
-    xLabelFormat: (t) => t
-  },
+	FSlope: {
+		data: slopeData,
+		x: "year",
+		y: "sanction",
+		height: 3000,
+		width: 300,
+		padding: { top: 20, left: 75, right: 75, bottom: 50 },
+		tickFormatY: ["", " Cr", 1 / 10000000],
+	},
 
-  FTable: {
-    rows: rows,
-    headers: headers
-  }
+	FTable: {
+		rows: tableData.rows,
+		headers: tableData.headers
+	}
 }
 
 
 class ExpSummary extends Component {
 
-  constructor(props){
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {currentSec1VizType: sec1VizTypes[0]};
+		this.state = {
+      currentSec1VizType: sec1VizTypes[0],
+      data: {
+        "nodes": exp_summary_data
+          /*[
+            { "sanctioncurrent": 100, "rateOfChange": 1 },
+            { "sanctioncurrent": 50, "rateOfChange": 2 },
+            { "sanctioncurrent": 70, "rateOfChange": 3 },
+            { "sanctioncurrent": 80, "rateOfChange": 4 },
+          ]*/
+          ,
+        "links": [
+        ]
+      }
+    };
+		this.switchSec1VizType = this.switchSec1VizType.bind(this);
+	}
 
-    this.consoleFilteredRows = this.consoleFilteredRows.bind(this);
-    this.switchSec1VizType = this.switchSec1VizType.bind( this );
-  }
+	switchSec1VizType(e) {
+		this.setState({ currentSec1VizType: sec1VizTypes[e] })
+	}
 
-  switchSec1VizType(e) {
-    this.setState({ currentSec1VizType: sec1VizTypes[e] })
-  }
+	render() {
 
-  consoleFilteredRows(rows){
-    console.log(rows);
-  }
+		var currentSec1VizComp;
+		this.state.currentSec1VizType === sec1VizTypes[0] ?
+			currentSec1VizComp = <FForce data={this.state.data} /> :
+			currentSec1VizComp = <FTable {...props.FTable}  />;
 
-  render() {
-
-    var currentSec1VizComp;
-    this.state.currentSec1VizType === sec1VizTypes[0] ?
-      currentSec1VizComp = <FSlope2 {...props.FSlope2} /> :
-      currentSec1VizComp = <FTable {...props.FTable} />;
-
-    return (
-      <div>
-        <Content>
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="left-col bx--col-lg-4">
-                <h3>Some title text</h3>
-                <p>
-                  Carbon is IBM’s open-source design system for digital
-                  products and experiences. With the IBM Design Language
-                  as its foundation, the system consists of working code,
-                  design tools and resources, human interface guidelines,
-                  and a vibrant community of contributors.
-                </p>
-              </div>
-              <div className="right-col bx--col-lg-8">
-                <div style={{display: "flex"}}>
-                  <ContentSwitcher onChange={this.switchSec1VizType} >
-                    <Switch  text="Slope Chart" />
-                    <Switch  text="Table" />
-                  </ContentSwitcher>
-                </div>
-                {currentSec1VizComp}
-              </div>
-            </div>
-
+		return (
+			<div className="exp-summary-content">
+        <div className="text-col">
+          <h3>Some title text</h3>
+          <p>
+            Carbon is IBM’s open-source design system for digital
+            products and experiences. With the IBM Design Language
+            as its foundation, the system consists of working code,
+            design tools and resources, human interface guidelines,
+            and a vibrant community of contributors.
+          </p>
+        </div>
+        <div className="data-viz-col exp-summary">
+          <div className="content-switcher-wrapper">
+            <ContentSwitcher onChange={this.switchSec1VizType} >
+              <Switch  text="Bubble Chart" />
+              <Switch  text="Table" />
+            </ContentSwitcher>
           </div>
-        </Content>
+          {currentSec1VizComp}
+        </div>
+        <div>
 
+        </div>
       </div>
-    )
-  }
+		)
+	}
 }
 export default ExpSummary;

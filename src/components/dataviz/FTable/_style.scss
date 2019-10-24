@@ -1,0 +1,18 @@
+//override
+.bx--overflow-menu-options__option{
+  width: auto;
+  height: 3rem;
+}
+
+.bx--data-table-container{
+    min-width: 0;
+}
+
+.bx--data-table{
+    min-width: 31.25rem;
+}
+
+//not-override
+.data-table-wrapper{
+  overflow-x: scroll;
+}

@@ -32,13 +32,13 @@ const FHeader2 = () => ( <HeaderContainer render={( { isSideNavExpanded, onClick
                   <HeaderMenuItem element={Link} to="/expenditure/details">Expenditure Details</HeaderMenuItem>
                   <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Tracker</HeaderMenuItem>
                 </HeaderMenu>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/receipts">
                   Receipts
                 </HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/sectors">
                   Sectors
                 </HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/schemes">
                   Schemes
                 </HeaderMenuItem>
               </HeaderNavigation>
