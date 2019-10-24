@@ -50,11 +50,10 @@ const sampleRows = [{
 		percent_change: '6%'
   },
 ];
-const sampleHeaders = [{
-		// `key` is the name of the field on the row object itself for the header
-		key: 'demand_code',
-		// `header` will be the name you want rendered in the Table Header
-		header: 'Demand',
+const sampleHeaders = [
+  {	
+		key: 'demand_code', // `key` is the name of the field on the row object itself for the header
+		header: 'Demand', // `header` will be the name you want rendered in the Table Header
   },
 	{
 		key: 'sanction',
