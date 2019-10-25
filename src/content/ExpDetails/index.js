@@ -5,12 +5,12 @@ import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
-import FBarChart from '../../components/dataviz/FBarChart';
+import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 
 
-const sampleDataBar = [
+const sampleDataSASR = [
 	{ month: "Jan", sanction: 3000, revised: 2500 },
 	{ month: "Feb", sanction: 3000, revised: 2500 },
 	{ month: "Mar", sanction: 3000, revised: 2500 },
@@ -127,7 +127,7 @@ const sampleHeaders = [{
 ];
 
 //Name of components to switch between
-const vizTypes = ["FBar", "FTable"];
+const vizTypes = ["FSASR", "FTable"];
 
 const props = {
 
@@ -137,8 +137,8 @@ const props = {
 		headers: sampleHeaders
 	},
 
-	FBarChart: {
-		data: sampleDataBar,
+	FSASRChart: {
+		data: sampleDataSASR,
 		dataToX: 'month',
 		dataPoints: ['sanction','revised'],
 		yLabelFormat: [""," L INR",1/1000]
@@ -164,7 +164,7 @@ class ExpDetails extends Component {
 
 		var currentVizComp;
 		this.state.currentVizType === vizTypes[0] ?
-			currentVizComp = <FBarChart {...props.FBarChart} /> :
+			currentVizComp = <FSASRChart {...props.FSASRChart} /> :
 			currentVizComp = <FTable {...props.FTable}  />;
 
 		return (
@@ -173,7 +173,7 @@ class ExpDetails extends Component {
           <div className="data-viz-col exp-details">
 						<div className="content-switcher-wrapper">
 	            <ContentSwitcher onChange={this.switchVizType} >
-	              <Switch  text="Bar Chart" />
+	              <Switch  text="SASR Chart" />
 	              <Switch  text="Table" />
 	            </ContentSwitcher>
 	          </div>
