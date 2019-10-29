@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from 'axios';
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
@@ -13,6 +13,8 @@ import FForce from '../../components/dataviz/FForce';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
+
+//make api call for exp-summary dataviz
 
 
 //sample slope data
@@ -51,7 +53,7 @@ const sampleRows = [{
   },
 ];
 const sampleHeaders = [
-  {	
+  {
 		key: 'demand_code', // `key` is the name of the field on the row object itself for the header
 		header: 'Demand', // `header` will be the name you want rendered in the Table Header
   },
@@ -146,16 +148,45 @@ class ExpSummary extends Component {
             { "sanctioncurrent": 80, "rateOfChange": 4 },
           ]*/
           ,
-        "links": [
-        ]
+        "links": [],
+        "apiData": {
+          data: null,
+          isLoading: true,
+          errors: null
+        }
       }
     };
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
 
+  async getData(apiUrl){
+    try{
+      const res = await axios.get(apiUrl);
+      console.log(res);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
 	switchSec1VizType(e) {
 		this.setState({ currentSec1VizType: sec1VizTypes[e] })
 	}
+
+  componentDidMount() {
+  this.getData('http://13.126.189.78/api/detail_exp?start=2019-4-01&end=2019-4-30');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2019-3-01&end=2019-3-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2019-2-01&end=2019-2-28');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2019-1-01&end=2019-1-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-9-01&end=2018-9-30');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-8-01&end=2018-8-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-7-01&end=2018-7-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-6-01&end=2018-6-30');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-5-01&end=2018-5-31');
+  this.getData('http://13.126.189.78/api/detail_exp?start=2018-4-01&end=2018-4-30');
+}
 
 	render() {
 

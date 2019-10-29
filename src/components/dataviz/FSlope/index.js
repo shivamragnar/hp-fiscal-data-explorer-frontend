@@ -1,14 +1,11 @@
-import React, {PropTypes, Component} from "react";
-import ReactDOM from "react-dom";
+import React, { Component} from "react";
+
 import {
   VictoryLine,
   VictoryChart,
   VictoryAxis,
-  VictoryTheme,
-  VictoryStack,
   VictoryGroup,
   VictoryLabel,
-  createContainer
 } from "victory";
 
 const tickLabelStyle = {

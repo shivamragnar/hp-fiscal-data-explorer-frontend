@@ -11,18 +11,18 @@ import FTable from '../../components/dataviz/FTable';
 
 
 const sampleDataSASR = [
-	{ month: "Jan", sanction: 3000, revised: 2500 },
-	{ month: "Feb", sanction: 3000, revised: 2500 },
-	{ month: "Mar", sanction: 3000, revised: 2500 },
-	{ month: "Apr", sanction: 3000, revised: 2500 },
-	{ month: "May", sanction: 3000, revised: 2500 },
-	{ month: "Jun", sanction: 3000, revised: 2500 },
-	{ month: "Jul", sanction: 3000, revised: 2500 },
-	{ month: "Aug", sanction: 3000, revised: 2500 },
-	{ month: "Sep", sanction: 3000, revised: 2500 },
-	{ month: "Oct", sanction: 3000, revised: 2500 },
-	{ month: "Nov", sanction: 3000, revised: 2500 },
-	{ month: "Dec", sanction: 3000, revised: 2500 }
+	{ month: "Jan", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Feb", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Mar", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Apr", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "May", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Jun", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Jul", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Aug", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Sep", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Oct", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Nov", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
+	{ month: "Dec", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 }
 ]
 
 const sampleDataTime = [{
