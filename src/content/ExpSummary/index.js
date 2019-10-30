@@ -173,19 +173,7 @@ class ExpSummary extends Component {
 	}
 
   componentDidMount() {
-  this.getData('http://13.126.189.78/api/detail_exp?start=2019-4-01&end=2019-4-30');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2019-3-01&end=2019-3-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2019-2-01&end=2019-2-28');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2019-1-01&end=2019-1-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-9-01&end=2018-9-30');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-8-01&end=2018-8-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-7-01&end=2018-7-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-6-01&end=2018-6-30');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-5-01&end=2018-5-31');
-  this.getData('http://13.126.189.78/api/detail_exp?start=2018-4-01&end=2018-4-30');
+
 }
 
 	render() {

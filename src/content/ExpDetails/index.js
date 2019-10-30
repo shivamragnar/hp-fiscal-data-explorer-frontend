@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
@@ -8,21 +9,23 @@ import { ContentSwitcher, Switch } from 'carbon-components-react';
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
+import FDropdown from '../../components/molecules/FDropdown';
+import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 
 const sampleDataSASR = [
-	{ month: "Jan", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Feb", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Mar", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Apr", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "May", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Jun", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Jul", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Aug", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Sep", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Oct", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Nov", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 },
-	{ month: "Dec", sanction: 3000, addition: 300, saving: 400, revision: 2900, mark: 20 }
+	{ date: "Jan", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Feb", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Mar", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Apr", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "May", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Jun", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Jul", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Aug", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Sep", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Oct", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Nov", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+	{ date: "Dec", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 }
 ]
 
 const sampleDataTime = [{
@@ -130,18 +133,14 @@ const sampleHeaders = [{
 const vizTypes = ["FSASR", "FTable"];
 
 const props = {
-
-
 	FTable: {
 		rows: sampleRows,
 		headers: sampleHeaders
 	},
 
 	FSASRChart: {
-		data: sampleDataSASR,
-		dataToX: 'month',
-		dataPoints: ['sanction','revised'],
-		yLabelFormat: [""," L INR",1/1000]
+		dataToX: 'date',
+		yLabelFormat: [""," L INR",1/100000]
 	}
 }
 
@@ -152,20 +151,82 @@ class ExpDetails extends Component {
 
 		this.state = {
       currentVizType: vizTypes[0],
+			sasr: {
+				dateRange: this.calcDateRange('20181001', '20181003'),
+				isLoading: true,
+				data: [],
+				errors: null
+			}
     };
 		this.switchVizType = this.switchVizType.bind(this);
+		this.calcDateRange = this.calcDateRange.bind(this);
+	}
+
+	async getData(apiUrl){
+    try{
+      const res = await axios.get(apiUrl);
+      console.log(res.data);
+
+			var data = [];
+			var pDate = "0";
+			var index = -1; //initiate to keep track of every new 'day object' that is pushed into the data array
+			var mark = 20000; //height of the 'black marker'. not elegantly written. will find a better way later.
+			res.data.records.map((d, i) => {
+				let {date, sanction, addition, revised, savings} = d;
+				if(date.trim() !== pDate.trim()){ //if a new day record is found...
+					data.push({i, date, sanction, addition, savings, revised, mark}); //initiate a 'day object' with properties date, sanction, addition, savings, revised
+					index++;
+				}else{
+					data[index].sanction += sanction;
+					data[index].addition += addition;
+					data[index].savings += savings;
+					data[index].revised += revised;
+				}
+				pDate = date;
+			})
+			let updatedSasrState = {...this.state.sasr} //temp variable to store the current sasr state
+			updatedSasrState.data = data; //update temp variable with this new data
+			updatedSasrState.isLoading = false; //update temp variable with this new data
+			this.setState({sasr: updatedSasrState});
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+	calcDateRange(rawDate1, rawDate2){
+		rawDate1 = rawDate1.slice(0, 4) + "-" + rawDate1.slice(4, 6) + "-" + rawDate1.slice(6, 8);
+		rawDate2 = rawDate2.slice(0, 4) + "-" + rawDate2.slice(4, 6) + "-" + rawDate2.slice(6, 8);
+		let date1 = new Date(rawDate1);
+		let date2 = new Date(rawDate2);
+		return Math.floor((date2 - date1)/(1000*60*60*24))+1;
 	}
 
 	switchVizType(e) {
 		this.setState({ currentVizType: vizTypes[e] })
 	}
 
-	render() {
+	componentDidMount() {
+		console.log(this.state.sasr.dateRange);
+		this.getData('http://13.126.189.78/api/detail_exp?start=2018-10-28&end=2018-11-03');
+	}
 
+	render() {
+		console.log("real: ");
+		console.log( this.state.sasr.data);
+		console.log("sample: ")
+		console.log(sampleDataSASR);
+		console.log(this.state.sasr.isLoading);
 		var currentVizComp;
-		this.state.currentVizType === vizTypes[0] ?
-			currentVizComp = <FSASRChart {...props.FSASRChart} /> :
+
+		if(this.state.currentVizType === vizTypes[0]){
+			if(this.state.sasr.isLoading === false){
+					currentVizComp = <FSASRChart data={this.state.sasr.data} {...props.FSASRChart} />;
+			}else{
+				currentVizComp = <h1>Loading...</h1>
+			}
+		}else{
 			currentVizComp = <FTable {...props.FTable}  />;
+		}
 
 		return (
 			<div>
@@ -180,20 +241,75 @@ class ExpDetails extends Component {
             <div>
               {currentVizComp}
             </div>
-            <div>
-              <FTimeSeries
-                data={sampleDataTime}
-                dataToX={'x'}
-                dataPoints={['sanction','revised', 'addition', 'saving']}
-                xLabelValues={[1,2,3,4,5,6,7,8,9]}
-                xLabelFormat={(t) => t}
-              />
-            </div>
+						{
+						// <div>
+						//   <FTimeSeries
+						//     data={sampleDataTime}
+						//     dataToX={'x'}
+						//     dataPoints={['sanction','revised', 'addition', 'saving']}
+						//     xLabelValues={[1,2,3,4,5,6,7,8,9]}
+						//     xLabelFormat={(t) => t}
+						//   />
+						// </div>
+						}
           </div>
-
-        <div className="filter_col">
-          <h3>Filter col</h3>
-        </div>
+				<div className="filter-col-wrapper">
+	        <div className="filter-col">
+	          <FDropdown
+							className = "filter-col--ops"
+							titleText = "Demand"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "Major"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "Sub Major"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "Minor"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "Sub Minor"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "Budget"
+							label = "All"
+						/>
+						<FDropdown
+							className = "filter-col--ops"
+							titleText = "SOE"
+							label = "All"
+						/>
+						<FRadioGroup
+							className = "filter-col--ops"
+							name = "plan_nonplan"
+							titleText = ""
+							radioButtons = {[
+								{id:"plan", labelText: "Plan", value: "default-selected"},
+						    {id:"non-plan", labelText: "Non Plan", value: "standard"}
+							]}
+						/>
+						<FRadioGroup
+							className = "filter-col--ops"
+							name = "voted_charged"
+							titleText = ""
+							radioButtons = {[
+								{id:"voted", labelText: "Voted", value: "default-selected"},
+								{id:"charged", labelText: "Charged", value: "standard"}
+							]}
+						/>
+	        </div>
+				</div>
       </div>
 		)
 	}
