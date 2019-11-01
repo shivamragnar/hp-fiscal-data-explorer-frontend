@@ -156,42 +156,134 @@ class ExpDetails extends Component {
 				isLoading: true,
 				data: [],
 				errors: null
+			},
+			mar: [],
+			apr: [],
+			may: [],
+			jun: [],
+			sasrmonthwise:{
+				data: [],
+				isLoading: false,
+				errors: null
 			}
+
+
     };
 		this.switchVizType = this.switchVizType.bind(this);
 		this.calcDateRange = this.calcDateRange.bind(this);
+		this.calcDaywiseData = this.calcDaywiseData.bind(this);
+		this.calcMonthwiseData = this.calcMonthwiseData.bind(this);
 	}
 
-	async getData(apiUrl){
+	async getDataTest1(apiUrl){
     try{
       const res = await axios.get(apiUrl);
       console.log(res.data);
+			this.calcDaywiseData(res.data);
 
-			var data = [];
-			var pDate = "0";
-			var index = -1; //initiate to keep track of every new 'day object' that is pushed into the data array
-			var mark = 20000; //height of the 'black marker'. not elegantly written. will find a better way later.
-			res.data.records.map((d, i) => {
-				let {date, sanction, addition, revised, savings} = d;
-				if(date.trim() !== pDate.trim()){ //if a new day record is found...
-					data.push({i, date, sanction, addition, savings, revised, mark}); //initiate a 'day object' with properties date, sanction, addition, savings, revised
-					index++;
-				}else{
-					data[index].sanction += sanction;
-					data[index].addition += addition;
-					data[index].savings += savings;
-					data[index].revised += revised;
-				}
-				pDate = date;
-			})
-			let updatedSasrState = {...this.state.sasr} //temp variable to store the current sasr state
-			updatedSasrState.data = data; //update temp variable with this new data
-			updatedSasrState.isLoading = false; //update temp variable with this new data
-			this.setState({sasr: updatedSasrState});
     }catch(err){
       console.log(err);
     }
   }
+
+	async getDataMonthwiseTest2(){
+    try{
+			// const res = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-03');
+			// console.log(res.data);
+			const jan = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-31');
+			// this.setState({mar: mar.data.records});
+			this.calcMonthwiseData(jan.data.records, "january");
+			// const feb = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-02-01&end=2018-02-28');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(feb.data.records, "february");
+			// const mar = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-03-01&end=2018-03-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(mar.data.records, "march");
+		  // const apr = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-04-01&end=2018-04-30');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(apr.data.records, "april");
+			// const may = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-05-01&end=2018-05-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(may.data.records, "may");
+			// const jun = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-06-01&end=2018-06-30');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(jun.data.records, "june");
+			// const jul = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-07-01&end=2018-07-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(jul.data.records, "july");
+			// const aug = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-08-01&end=2018-08-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(aug.data.records, "august");
+			// const sep = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-09-01&end=2018-09-30');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(sep.data.records, "september");
+			// const oct = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(oct.data.records, "october");
+			// const nov = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(nov.data.records, "november");
+			// const dec = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
+			// // this.setState({mar: mar.data.records});
+			// this.calcMonthwiseData(dec.data.records, "december");
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+	calcMonthwiseData(api_response, month){
+		var mark = 800000; //height of the 'black marker'. not elegantly written. will find a better way later.
+		var tot = {
+			date: month,
+			sanction: 0,
+			addition: 0,
+			savings: 0,
+			revised: 0,
+			mark: mark
+		}
+		api_response.map((d,i) =>{
+			let {date, sanction, addition, revised, savings} = d;
+			tot.sanction += sanction;
+			tot.addition += addition;
+			tot.revised += revised;
+			tot.savings += savings;
+		})
+		// console.log("tot is: ");
+		// console.log(tot);
+		let sasrmonthwise = {...this.state.sasrmonthwise};
+		sasrmonthwise.data.push(tot);
+		this.setState({sasrmonthwise});
+	}
+
+	calcDaywiseData(api_response){
+		var data = [];
+		var pDate = "0";
+		var index; //initiate to keep track of every new 'day object' that is pushed into the data array
+		var mark = 20000; //height of the 'black marker'. not elegantly written. will find a better way later.
+
+		api_response.records.map((d, i) => {
+			let {date, sanction, addition, revised, savings} = d;
+			if(date.trim() !== pDate.trim()){ //if a new day record is found...
+				console.log("dates are: "+date.trim()+ "| index: "+i);
+				index = data.push({ i, date, sanction, addition, savings, revised, mark}); //initiate a 'day object' with properties date, sanction, addition, savings, revised
+				console.log(data);
+				console.log(d.sanction + " | "+ i);
+				console.log(sanction + "	 | "+ i);
+			}else{
+
+				data[index-1].sanction += sanction;
+				data[index-1].addition += addition;
+				data[index-1].savings += savings;
+				data[index-1].revised += revised;
+			}
+			pDate = date;
+		})
+		let updatedSasrState = {...this.state.sasr} //temp variable to store the current sasr state
+		updatedSasrState.data = data; //update temp variable with this new data
+		updatedSasrState.isLoading = false; //update temp variable with this new data
+		this.setState({sasr: updatedSasrState});
+
+	}
 
 	calcDateRange(rawDate1, rawDate2){
 		rawDate1 = rawDate1.slice(0, 4) + "-" + rawDate1.slice(4, 6) + "-" + rawDate1.slice(6, 8);
@@ -206,21 +298,24 @@ class ExpDetails extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.state.sasr.dateRange);
-		this.getData('http://13.126.189.78/api/detail_exp?start=2018-10-28&end=2018-11-03');
+		// console.log(this.state.sasr.dateRange);
+		// this.getDataTest1('http://13.126.189.78/api/detail_exp?start=2018-03-28&end=2018-03-28');
+		this.getDataMonthwiseTest2();
 	}
 
 	render() {
-		console.log("real: ");
-		console.log( this.state.sasr.data);
-		console.log("sample: ")
-		console.log(sampleDataSASR);
-		console.log(this.state.sasr.isLoading);
+
+		console.log(this.state);
+		// console.log("real: ");
+		// console.log( this.state.sasr.data);
+		// console.log("sample: ")
+		// console.log(sampleDataSASR);
+		// console.log(this.state.sasr.isLoading);
 		var currentVizComp;
 
 		if(this.state.currentVizType === vizTypes[0]){
-			if(this.state.sasr.isLoading === false){
-					currentVizComp = <FSASRChart data={this.state.sasr.data} {...props.FSASRChart} />;
+			if(this.state.sasrmonthwise.isLoading === false){
+					currentVizComp = <FSASRChart data={this.state.sasrmonthwise.data} {...props.FSASRChart} />;
 			}else{
 				currentVizComp = <h1>Loading...</h1>
 			}
