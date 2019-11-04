@@ -173,7 +173,7 @@ class ExpSummary extends Component {
 	}
 
   componentDidMount() {
-
+    this.getData("http://13.126.189.78/api/exp_summary");
 }
 
 	render() {

@@ -23,7 +23,7 @@ const FHeader2 = () => ( <HeaderContainer render={( { isSideNavExpanded, onClick
             <SkipToContent/>
 
               <HeaderNavigation className="f_primarylinks_center" aria-label="Carbon Tutorial">
-                <HeaderMenuItem element={Link} to="/aboutus">
+                <HeaderMenuItem element={Link} to="/budget_highlights">
                   Budget Highlights
                 </HeaderMenuItem>
 

@@ -179,7 +179,7 @@ class ExpDetails extends Component {
     try{
       const res = await axios.get(apiUrl);
       console.log(res.data);
-			this.calcDaywiseData(res.data);
+			// this.calcDaywiseData(res.data);
 
     }catch(err){
       console.log(err);
@@ -191,41 +191,40 @@ class ExpDetails extends Component {
 			// const res = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-03');
 			// console.log(res.data);
 			const jan = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-31');
-			// this.setState({mar: mar.data.records});
 			this.calcMonthwiseData(jan.data.records, "january");
-			// const feb = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-02-01&end=2018-02-28');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(feb.data.records, "february");
-			// const mar = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-03-01&end=2018-03-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(mar.data.records, "march");
-		  // const apr = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-04-01&end=2018-04-30');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(apr.data.records, "april");
-			// const may = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-05-01&end=2018-05-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(may.data.records, "may");
-			// const jun = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-06-01&end=2018-06-30');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(jun.data.records, "june");
-			// const jul = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-07-01&end=2018-07-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(jul.data.records, "july");
-			// const aug = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-08-01&end=2018-08-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(aug.data.records, "august");
-			// const sep = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-09-01&end=2018-09-30');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(sep.data.records, "september");
-			// const oct = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(oct.data.records, "october");
-			// const nov = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(nov.data.records, "november");
-			// const dec = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
-			// // this.setState({mar: mar.data.records});
-			// this.calcMonthwiseData(dec.data.records, "december");
+
+			const feb = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-02-01&end=2018-02-28');
+			this.calcMonthwiseData(feb.data.records, "february");
+
+			const mar = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-03-01&end=2018-03-31');
+			this.calcMonthwiseData(mar.data.records, "march");
+
+			const apr = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-04-01&end=2018-04-30');
+			this.calcMonthwiseData(apr.data.records, "april");
+
+			const may = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-05-01&end=2018-05-31');
+			this.calcMonthwiseData(may.data.records, "may");
+
+			const jun = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-06-01&end=2018-06-30');
+			this.calcMonthwiseData(jun.data.records, "june");
+
+			const jul = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-07-01&end=2018-07-31');
+			this.calcMonthwiseData(jul.data.records, "july");
+
+			const aug = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-08-01&end=2018-08-31');
+			this.calcMonthwiseData(aug.data.records, "august");
+
+			const sep = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-09-01&end=2018-09-30');
+			this.calcMonthwiseData(sep.data.records, "september");
+
+			const oct = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
+			this.calcMonthwiseData(oct.data.records, "october");
+
+			const nov = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
+			this.calcMonthwiseData(nov.data.records, "november");
+
+			const dec = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
+			this.calcMonthwiseData(dec.data.records, "december");
 
     }catch(err){
       console.log(err);
@@ -300,17 +299,13 @@ class ExpDetails extends Component {
 	componentDidMount() {
 		// console.log(this.state.sasr.dateRange);
 		// this.getDataTest1('http://13.126.189.78/api/detail_exp?start=2018-03-28&end=2018-03-28');
-		this.getDataMonthwiseTest2();
+		// this.getDataMonthwiseTest2();
+		this.getDataTest1("http://13.126.189.78/api/detail_exp_test?start=2018-11-01&end=2018-11-02")
 	}
 
 	render() {
 
-		console.log(this.state);
-		// console.log("real: ");
-		// console.log( this.state.sasr.data);
-		// console.log("sample: ")
-		// console.log(sampleDataSASR);
-		// console.log(this.state.sasr.isLoading);
+
 		var currentVizComp;
 
 		if(this.state.currentVizType === vizTypes[0]){
@@ -336,17 +331,6 @@ class ExpDetails extends Component {
             <div>
               {currentVizComp}
             </div>
-						{
-						// <div>
-						//   <FTimeSeries
-						//     data={sampleDataTime}
-						//     dataToX={'x'}
-						//     dataPoints={['sanction','revised', 'addition', 'saving']}
-						//     xLabelValues={[1,2,3,4,5,6,7,8,9]}
-						//     xLabelFormat={(t) => t}
-						//   />
-						// </div>
-						}
           </div>
 				<div className="filter-col-wrapper">
 	        <div className="filter-col">

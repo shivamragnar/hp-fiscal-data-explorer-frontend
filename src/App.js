@@ -18,9 +18,14 @@ import Home from './content/Home';
 import AboutUs from './content/AboutUs';
 import ContactUs from './content/ContactUs';
 
+//test comp
+import Idb_test from './content/Idb_test';
+
 import ExpSummary from './content/ExpSummary';
 import ExpDetails from './content/ExpDetails';
 import ExpTracker from './content/ExpTracker';
+
+import BudgetHighlights from './content/BudgetHighlights';
 
 import './App.scss';
 
@@ -40,6 +45,8 @@ function App() {
         <Route exact path="/expenditure/summary" component={ExpSummary}/>
         <Route exact path="/expenditure/details" component={ExpDetails}/>
         <Route exact path="/expenditure/tracker" component={ExpTracker}/>
+        <Route exact path="/budget_highlights" component={BudgetHighlights}/>
+        <Route exact path="/idb_test" component={Idb_test}/>
       </Switch>
     </Content>
   </div>);

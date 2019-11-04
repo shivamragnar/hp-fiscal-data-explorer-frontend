@@ -1,0 +1,19 @@
+
+  {
+    "table_heads": [
+                    "demand",
+                    "major",
+                    "submajor",
+                    "minor",
+                    "subminor",
+                    "budget",
+                    "voted_charged",
+                    "plan_nonplan",
+                    "SOE",
+                    "date",
+                    "sanction",
+                    "addition",
+                    "savings",
+                    "revised"
+                   ]
+  }

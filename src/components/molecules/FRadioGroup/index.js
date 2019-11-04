@@ -19,6 +19,7 @@ const FRadioGroup = props => (
       {
         props.radioButtons.map((rbutton, i) =>(
           <RadioButton
+            key={i}
             id= {rbutton.id}
             labelText= {rbutton.labelText}
             value= {rbutton.value}
@@ -27,7 +28,7 @@ const FRadioGroup = props => (
         )
       }
       </RadioButtonGroup>
-    
+
   </div>
 );
 

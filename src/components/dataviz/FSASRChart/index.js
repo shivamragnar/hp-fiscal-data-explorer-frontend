@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel, Bar } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
