@@ -300,17 +300,19 @@ class ExpDetails extends Component {
 		// console.log(this.state.sasr.dateRange);
 		// this.getDataTest1('http://13.126.189.78/api/detail_exp?start=2018-03-28&end=2018-03-28');
 		// this.getDataMonthwiseTest2();
-		this.getDataTest1("http://13.126.189.78/api/detail_exp_test?start=2018-11-01&end=2018-11-02")
+		// this.getDataTest1("http://13.126.189.78/api/detail_exp_test?start=2018-11-01&end=2018-11-02")
 	}
 
 	render() {
 
+		console.log("master data: ");
+		console.log(this.props.expData);
 
 		var currentVizComp;
 
 		if(this.state.currentVizType === vizTypes[0]){
 			if(this.state.sasrmonthwise.isLoading === false){
-					currentVizComp = <FSASRChart data={this.state.sasrmonthwise.data} {...props.FSASRChart} />;
+					currentVizComp = <FSASRChart data={sampleDataSASR} {...props.FSASRChart} />;
 			}else{
 				currentVizComp = <h1>Loading...</h1>
 			}

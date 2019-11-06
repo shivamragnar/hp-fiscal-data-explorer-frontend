@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { openDB, deleteDB, wrap, unwrap } from "idb";
 import axios from "axios";
-import table_heads from "../../dictionary/table_heads.json";
+import exp_details_keys from "../../dictionary/exp_details_keys.json";
 
 const Idb_test = () => {
   var exp_data_json = [];
@@ -15,8 +15,8 @@ const Idb_test = () => {
       //jsonify data
       res.data.map((d, i) => {
         const entryObj = {};
-        d.map((entry, index) => {
-          entryObj[table_heads.table_heads[index]] = entry;
+        d.map((value, index) => {
+          entryObj[exp_details_keys.keys[index]] = value;
         });
         exp_data_json.push(entryObj);
       });
@@ -43,19 +43,12 @@ const Idb_test = () => {
     ];
 
     const dbName = "hp_fiscal_idb";
+    var objectStoreName = "exp_data" + db_suffix;
 
     var request = indexedDB.open(dbName, 2);
-
-    request.onerror = function(event) {
-      // Handle errors.
-    };
+    request.onerror = function(event) { /*Handle errors.*/ };
     request.onupgradeneeded = function(event) {
       var db = event.target.result;
-
-      // Create an objectStore to hold information about our customers. We're
-      // going to use "ssn" as our key path because it's guaranteed to be
-      // unique - or at least that's what I was told during the kickoff meeting.
-      var objectStoreName = "exp_data" + db_suffix;
 
       var objectStore = db.createObjectStore(objectStoreName, {
         keyPath: "id",
