@@ -40,40 +40,78 @@ function App() {
   //set app level state containing raw data.
   const [expData, setExpData] = useState([]);
 
-  const [apiDataLoading, setApiDataLoading] = useState(true);
+  //get exp_details_data
+  const getExpDataFromAPI = async (api_url_1, api_url_2, api_url_3) => {};
 
   const openIDB = async () => {
-    console.time("Axios Fetch");
-    console.log("Axios Fetch Started");
+    const dbName = "hp_fiscal_data";
+    const storeName = "exp_data";
+    const version = 1; //versions start at 1
+    let didUpgrade = false;
 
-    let expDataToJson = [];
-    try {
-      const res1 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-03-01&end=2018-03-01"
+    const db = await openDB(dbName, version, {
+      upgrade(db, oldVersion, newVersion, transaction) {
+        didUpgrade = true;
+        const store = db.createObjectStore(storeName);
+      }
+    });
+
+    //if did upgrade is false, then hydrate expData state var from IDB,
+    if (didUpgrade === false) {
+      console.log(
+        "your IDB looks up-to-date. So I'll just fetch data from it and populate your exp_data state var"
       );
-      const res2 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-04-01&end=2018-04-01"
-      );
-      const res3 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-05-01&end=2018-05-01"
-      );
-      let resMaster = res1.data.concat(res2.data, res3.data);
-      //jsonify data
-      resMaster.map((entryAry, i) => {
-        const entryObj = {};
-        entryAry.map((value, index) => {
-          entryObj[exp_details_keys.keys[index]] = value;
+      const expDataFromIDBStore = await db
+        .transaction(storeName)
+        .objectStore(storeName)
+        .getAll();
+      console.log("retrieved from IDB store: ");
+      console.log(expDataFromIDBStore);
+      setExpData(expDataFromIDBStore);
+    } else {
+      //else fetch data from api and put it in IDB, along with hydrating expData state var.
+      let expDataToJson = [];
+      try {
+        console.log(
+          "no idb / old version of IDB was detected. so I created / updated it"
+        );
+        console.log("getting data...");
+        const res1 = await axios.get(
+          "http://13.126.189.78/api/detail_exp_test?start=2018-04-01&end=2018-04-01"
+        );
+        const res2 = await axios.get(
+          "http://13.126.189.78/api/detail_exp_test?start=2018-05-01&end=2018-05-01"
+        );
+        const res3 = await axios.get(
+          "http://13.126.189.78/api/detail_exp_test?start=2018-09-01&end=2018-09-01"
+        );
+        let resMaster = res1.data.concat(res2.data, res3.data);
+        //jsonify data
+        resMaster.map((entryAry, i) => {
+          const entryObj = {};
+          entryAry.map((value, index) => {
+            entryObj[exp_details_keys.keys[index]] = value;
+          });
+          expDataToJson.push(entryObj);
         });
-        expDataToJson.push(entryObj);
+
+        setExpData(expDataToJson);
+        console.log("finished setting up the expData state variable");
+        // console.log(resMaster);
+      } catch (err) {
+        console.log(err);
+      }
+
+      const tx = db.transaction(storeName, "readwrite");
+      const store = tx.objectStore(storeName);
+
+      console.log("transaction starting...");
+      expDataToJson.map((expObj, i) => {
+        store.add(expObj, i);
       });
-
-      setExpData(expDataToJson);
-      setApiDataLoading(false);
-    } catch (err) {
-      console.log(err);
+      await tx.done;
+      console.log("transaction done");
     }
-
-    console.timeEnd("Axios Fetch");
   };
 
   useEffect(() => {
@@ -108,9 +146,7 @@ function App() {
           <Route
             exact
             path="/expenditure/details"
-            render={() => (
-              <ExpDetails expData={expData} apiDataLoading={apiDataLoading} />
-            )}
+            render={() => <ExpDetails expData={expData} />}
           />
           <Route exact path="/expenditure/tracker" component={ExpTracker} />
           <Route exact path="/budget_highlights" component={BudgetHighlights} />

@@ -12,6 +12,7 @@ import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 
+var SASRData;
 
 const sampleDataSASR = [
 	{ date: "Jan", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
@@ -26,71 +27,6 @@ const sampleDataSASR = [
 	{ date: "Oct", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
 	{ date: "Nov", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
 	{ date: "Dec", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 }
-]
-
-const sampleDataTime = [{
-		x: 1,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 2,
-		sanction: 4.5,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 3,
-		sanction: 4.7,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 4,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 5,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 6,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 7,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 8,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
-	{
-		x: 9,
-		sanction: 4,
-		addition: 5,
-		saving: 6,
-		revised: 7,
-  },
 ]
 
 //sample table data
@@ -133,15 +69,8 @@ const sampleHeaders = [{
 const vizTypes = ["FSASR", "FTable"];
 
 const props = {
-	FTable: {
-		rows: sampleRows,
-		headers: sampleHeaders
-	},
-
-	FSASRChart: {
-		dataToX: 'date',
-		yLabelFormat: [""," L INR",1/100000]
-	}
+	FTable: { rows: sampleRows, headers: sampleHeaders },
+	FSASRChart: { dataToX: 'date', yLabelFormat: [""," L INR",1/100000] }
 }
 
 class ExpDetails extends Component {
@@ -151,156 +80,68 @@ class ExpDetails extends Component {
 
 		this.state = {
       currentVizType: vizTypes[0],
-			sasr: {
-				dateRange: this.calcDateRange('20181001', '20181003'),
-				isLoading: true,
-				data: [],
-				errors: null
-			},
-			mar: [],
-			apr: [],
-			may: [],
-			jun: [],
-			sasrmonthwise:{
-				data: [],
-				isLoading: false,
-				errors: null
-			}
-
-
+			activeFilters: []
     };
+
 		this.switchVizType = this.switchVizType.bind(this);
-		this.calcDateRange = this.calcDateRange.bind(this);
-		this.calcDaywiseData = this.calcDaywiseData.bind(this);
 		this.calcMonthwiseData = this.calcMonthwiseData.bind(this);
+		this.onFilterChange = this.onFilterChange.bind(this);
 	}
 
-	async getDataTest1(apiUrl){
-    try{
-      const res = await axios.get(apiUrl);
-      console.log(res.data);
-			// this.calcDaywiseData(res.data);
-
-    }catch(err){
-      console.log(err);
-    }
-  }
-
-	async getDataMonthwiseTest2(){
-    try{
-			// const res = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-03');
-			// console.log(res.data);
-			const jan = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-01-01&end=2018-01-31');
-			this.calcMonthwiseData(jan.data.records, "january");
-
-			const feb = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-02-01&end=2018-02-28');
-			this.calcMonthwiseData(feb.data.records, "february");
-
-			const mar = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-03-01&end=2018-03-31');
-			this.calcMonthwiseData(mar.data.records, "march");
-
-			const apr = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-04-01&end=2018-04-30');
-			this.calcMonthwiseData(apr.data.records, "april");
-
-			const may = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-05-01&end=2018-05-31');
-			this.calcMonthwiseData(may.data.records, "may");
-
-			const jun = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-06-01&end=2018-06-30');
-			this.calcMonthwiseData(jun.data.records, "june");
-
-			const jul = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-07-01&end=2018-07-31');
-			this.calcMonthwiseData(jul.data.records, "july");
-
-			const aug = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-08-01&end=2018-08-31');
-			this.calcMonthwiseData(aug.data.records, "august");
-
-			const sep = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-09-01&end=2018-09-30');
-			this.calcMonthwiseData(sep.data.records, "september");
-
-			const oct = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-10-01&end=2018-10-31');
-			this.calcMonthwiseData(oct.data.records, "october");
-
-			const nov = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-11-01&end=2018-11-30');
-			this.calcMonthwiseData(nov.data.records, "november");
-
-			const dec = await axios.get('http://13.126.189.78/api/detail_exp?start=2018-12-01&end=2018-12-31');
-			this.calcMonthwiseData(dec.data.records, "december");
-
-    }catch(err){
-      console.log(err);
-    }
-  }
-	calcMonthwiseData(api_response, month){
+	calcMonthwiseData(api_response){
 		var mark = 800000; //height of the 'black marker'. not elegantly written. will find a better way later.
-		var tot = {
-			date: month,
+		var monthwiseObjRef = {
+			date: "0",
 			sanction: 0,
 			addition: 0,
 			savings: 0,
 			revised: 0,
 			mark: mark
 		}
+		var data = [];
 		api_response.map((d,i) =>{
 			let {date, sanction, addition, revised, savings} = d;
-			tot.sanction += sanction;
-			tot.addition += addition;
-			tot.revised += revised;
-			tot.savings += savings;
-		})
-		// console.log("tot is: ");
-		// console.log(tot);
-		let sasrmonthwise = {...this.state.sasrmonthwise};
-		sasrmonthwise.data.push(tot);
-		this.setState({sasrmonthwise});
-	}
+			date = date.substr(0,6);
 
-	calcDaywiseData(api_response){
-		var data = [];
-		var pDate = "0";
-		var index; //initiate to keep track of every new 'day object' that is pushed into the data array
-		var mark = 20000; //height of the 'black marker'. not elegantly written. will find a better way later.
-
-		api_response.records.map((d, i) => {
-			let {date, sanction, addition, revised, savings} = d;
-			if(date.trim() !== pDate.trim()){ //if a new day record is found...
-				console.log("dates are: "+date.trim()+ "| index: "+i);
-				index = data.push({ i, date, sanction, addition, savings, revised, mark}); //initiate a 'day object' with properties date, sanction, addition, savings, revised
-				console.log(data);
-				console.log(d.sanction + " | "+ i);
-				console.log(sanction + "	 | "+ i);
-			}else{
-
-				data[index-1].sanction += sanction;
-				data[index-1].addition += addition;
-				data[index-1].savings += savings;
-				data[index-1].revised += revised;
+			if(monthwiseObjRef.date !== date ){
+				monthwiseObjRef.date = date;
+				var cloneObj = Object.assign({}, monthwiseObjRef);
+				data.push(cloneObj);
 			}
-			pDate = date;
+			
+		  data[data.length-1].sanction += sanction;
+			data[data.length-1].addition += addition;
+			data[data.length-1].revised += revised;
+			data[data.length-1].savings += savings;
 		})
-		let updatedSasrState = {...this.state.sasr} //temp variable to store the current sasr state
-		updatedSasrState.data = data; //update temp variable with this new data
-		updatedSasrState.isLoading = false; //update temp variable with this new data
-		this.setState({sasr: updatedSasrState});
+		console.log("SASR data: ");
+		console.log(data);
+		SASRData = data;
 
-	}
-
-	calcDateRange(rawDate1, rawDate2){
-		rawDate1 = rawDate1.slice(0, 4) + "-" + rawDate1.slice(4, 6) + "-" + rawDate1.slice(6, 8);
-		rawDate2 = rawDate2.slice(0, 4) + "-" + rawDate2.slice(4, 6) + "-" + rawDate2.slice(6, 8);
-		let date1 = new Date(rawDate1);
-		let date2 = new Date(rawDate2);
-		return Math.floor((date2 - date1)/(1000*60*60*24))+1;
 	}
 
 	switchVizType(e) {
 		this.setState({ currentVizType: vizTypes[e] })
 	}
 
-	componentDidMount() {
-		// console.log(this.state.sasr.dateRange);
-		// this.getDataTest1('http://13.126.189.78/api/detail_exp?start=2018-03-28&end=2018-03-28');
-		// this.getDataMonthwiseTest2();
-		// this.getDataTest1("http://13.126.189.78/api/detail_exp_test?start=2018-11-01&end=2018-11-02")
+	onFilterChange(e){
+		let activeFiltersArray = this.state.activeFilters;
+		var found = false;
+		var foundIndex = -1;
+		activeFiltersArray.map((d,i) =>{
+			if(d.key === e.selectedItem.dd_name){
+				found = true;
+				foundIndex = i;
+			}
+		})
+		if(found === false){
+			activeFiltersArray.push({key: e.selectedItem.dd_name, value: e.selectedItem.id})
+		}else{
+			activeFiltersArray[foundIndex] = {key: e.selectedItem.dd_name, value: e.selectedItem.id};
+		}
+
+		this.setState({activeFilters : activeFiltersArray});
+		console.log(e.selectedItem.id)
 	}
 
 	render() {
@@ -308,13 +149,18 @@ class ExpDetails extends Component {
 		console.log("master data: ");
 		console.log(this.props.expData);
 
+		console.log("activefilters");
+		console.log(this.state.activeFilters);
+
+		this.calcMonthwiseData(this.props.expData);
+
 		var currentVizComp;
 
 		if(this.state.currentVizType === vizTypes[0]){
-			if(this.state.sasrmonthwise.isLoading === false){
-					currentVizComp = <FSASRChart data={sampleDataSASR} {...props.FSASRChart} />;
+			if(this.props.apiDataLoading === true){
+				currentVizComp = <div>Loading...</div>;
 			}else{
-				currentVizComp = <h1>Loading...</h1>
+				currentVizComp = <FSASRChart data={SASRData} {...props.FSASRChart} />;
 			}
 		}else{
 			currentVizComp = <FTable {...props.FTable}  />;
@@ -340,6 +186,19 @@ class ExpDetails extends Component {
 							className = "filter-col--ops"
 							titleText = "Demand"
 							label = "All"
+							onChange = {(e) => this.onFilterChange(e)}
+							items = {[
+								{ dd_name: "demand", id: "01", label: "01" },
+								{ dd_name: "demand", id: "02", label: "02" },
+								{ dd_name: "demand", id: "03", label: "03" },
+								{ dd_name: "demand", id: "04", label: "04" },
+								{ dd_name: "demand", id: "05", label: "05" },
+								{ dd_name: "demand", id: "06", label: "06" },
+								{ dd_name: "demand", id: "07", label: "07" },
+								{ dd_name: "demand", id: "08", label: "08" },
+								{ dd_name: "demand", id: "09", label: "09" },
+								{ dd_name: "demand", id: "10", label: "10" },
+							]}
 						/>
 						<FDropdown
 							className = "filter-col--ops"

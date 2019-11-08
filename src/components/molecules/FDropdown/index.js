@@ -13,7 +13,7 @@ const FDropdown = props => (
       items={props.items}
       label={props.label}
       light={false}
-      onChange={function noRefCheck() {}}
+      onChange={props.onChange}
       titleText={props.titleText}
       type="default"
     />
@@ -27,18 +27,22 @@ FDropdown.defaultProps = {
   label: "Dropdown Label",
   items: [
     {
+      dd_name: "name of dd", //should be the same as the key name in the raw fiscal data
       id: "option-1",
       label: "Option 1"
     },
     {
+      dd_name: "name of dd",
       id: "option-2",
       label: "Option 2"
     },
     {
+      dd_name: "name of dd",
       id: "option-3",
       label: "Option 3"
     },
     {
+      dd_name: "name of dd",
       id: "option-4",
       label: "Option 4"
     }

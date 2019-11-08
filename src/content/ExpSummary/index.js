@@ -140,14 +140,7 @@ class ExpSummary extends Component {
 		this.state = {
       currentSec1VizType: sec1VizTypes[0],
       data: {
-        "nodes": exp_summary_data
-          /*[
-            { "sanctioncurrent": 100, "rateOfChange": 1 },
-            { "sanctioncurrent": 50, "rateOfChange": 2 },
-            { "sanctioncurrent": 70, "rateOfChange": 3 },
-            { "sanctioncurrent": 80, "rateOfChange": 4 },
-          ]*/
-          ,
+        "nodes": exp_summary_data,
         "links": [],
         "apiData": {
           data: null,
