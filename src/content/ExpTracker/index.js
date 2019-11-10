@@ -50,7 +50,7 @@ class ExpTracker extends Component {
   render() {
     var currentSec1VizComp;
     this.state.currentSec1VizType === "FMap" ?
-      currentSec1VizComp = <div id="mapid"><FMap {...props.FMap}/></div> :
+      currentSec1VizComp = <div id="fmap"><FMap {...props.FMap}/></div> :
       currentSec1VizComp = <FBarChart {...props.FBarChart}/>;
 
     return (
