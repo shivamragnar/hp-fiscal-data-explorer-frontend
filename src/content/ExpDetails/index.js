@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from 'axios';
 
 //carbon components
@@ -65,6 +65,7 @@ const sampleHeaders = [{
   },
 ];
 
+
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
 
@@ -73,105 +74,84 @@ const props = {
 	FSASRChart: { dataToX: 'date', yLabelFormat: [""," L INR",1/100000] }
 }
 
-class ExpDetails extends Component {
+var expFilters = { "filters":{} };
 
-	constructor(props) {
-		super(props);
+const ExpDetails = (props) => {
 
-		this.state = {
-      currentVizType: vizTypes[0],
-			activeFilters: []
-    };
+	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 
-		this.switchVizType = this.switchVizType.bind(this);
-		this.calcMonthwiseData = this.calcMonthwiseData.bind(this);
-		this.onFilterChange = this.onFilterChange.bind(this);
+	const switchVizType = (e) => {
+		setCurrentVizType(vizTypes[e]);
 	}
 
-	calcMonthwiseData(api_response){
-		var mark = 800000; //height of the 'black marker'. not elegantly written. will find a better way later.
-		var monthwiseObjRef = {
-			date: "0",
-			sanction: 0,
-			addition: 0,
-			savings: 0,
-			revised: 0,
-			mark: mark
-		}
-		var data = [];
-		api_response.map((d,i) =>{
-			let {date, sanction, addition, revised, savings} = d;
-			date = date.substr(0,6);
+	const onFilterChange = (e) => {
+		expFilters.filters[e.selectedItem.dd_name] = e.selectedItem.id;
+		console.log("filterchange! current active filters: ");
+		console.log(expFilters.filters);
 
-			if(monthwiseObjRef.date !== date ){
-				monthwiseObjRef.date = date;
-				var cloneObj = Object.assign({}, monthwiseObjRef);
-				data.push(cloneObj);
-			}
-			
-		  data[data.length-1].sanction += sanction;
-			data[data.length-1].addition += addition;
-			data[data.length-1].revised += revised;
-			data[data.length-1].savings += savings;
-		})
-		console.log("SASR data: ");
-		console.log(data);
-		SASRData = data;
-
+		//update expData state
+		props.getData(expFilters);
 	}
 
-	switchVizType(e) {
-		this.setState({ currentVizType: vizTypes[e] })
-	}
+	const getFiltersData = async () => {
 
-	onFilterChange(e){
-		let activeFiltersArray = this.state.activeFilters;
-		var found = false;
-		var foundIndex = -1;
-		activeFiltersArray.map((d,i) =>{
-			if(d.key === e.selectedItem.dd_name){
-				found = true;
-				foundIndex = i;
-			}
-		})
-		if(found === false){
-			activeFiltersArray.push({key: e.selectedItem.dd_name, value: e.selectedItem.id})
+    console.time("Axios Fetching Filters");
+    console.log("Fetching Filters Started");
+
+    try {
+      const res = await axios.get(
+        "http://13.126.189.78/api/acc_heads"
+      );
+			console.log('filters!: ');
+			console.log(res);
+			var demandOps = [];
+			var majorOps = [];
+			res.data.records.map((filterOp, i) =>{
+		
+				if(demandOps.includes(filterOp[0]) === false){
+					demandOps.push(filterOp[0]);
+				}
+				if(majorOps.includes(filterOp[1]) === false){
+					majorOps.push(filterOp[1]);
+				}
+			})
+			console.log("demandOps are: ");
+			console.log(demandOps);
+			console.log("majorOps are: ");
+			console.log(majorOps);
+
+    } catch (err) { console.log(err); }
+
+    console.timeEnd("Axios Fetching Filters");
+  };
+
+	useEffect(() => {
+		//reset expFilters every time this component is loaded.
+		getFiltersData();
+		expFilters = { "filters":{} };
+		console.log("exp_filters");
+		console.log(expFilters);
+	}, []);
+
+	var currentVizComp;
+
+	if(currentVizType === vizTypes[0]){
+		if(props.expDataLoading === true){
+			currentVizComp = <div>Loading...</div>;
 		}else{
-			activeFiltersArray[foundIndex] = {key: e.selectedItem.dd_name, value: e.selectedItem.id};
+			// currentVizComp = <FSASRChart data={SASRData} {...props.FSASRChart} />;
+			currentVizComp = <div>Data Loaded!</div>
 		}
-
-		this.setState({activeFilters : activeFiltersArray});
-		console.log(e.selectedItem.id)
+	}else{
+		// currentVizComp = <FTable {...props.FTable}  />;
+		currentVizComp = <div>this is a data table</div>;
 	}
-
-	render() {
-
-		console.log("master data: ");
-		console.log(this.props.expData);
-
-		console.log("activefilters");
-		console.log(this.state.activeFilters);
-
-		this.calcMonthwiseData(this.props.expData);
-
-		var currentVizComp;
-
-		if(this.state.currentVizType === vizTypes[0]){
-			if(this.props.apiDataLoading === true){
-				currentVizComp = <div>Loading...</div>;
-			}else{
-				currentVizComp = <FSASRChart data={SASRData} {...props.FSASRChart} />;
-			}
-		}else{
-			currentVizComp = <FTable {...props.FTable}  />;
-		}
 
 		return (
 			<div>
-
           <div className="data-viz-col exp-details">
 						<div className="content-switcher-wrapper">
-	            <ContentSwitcher onChange={this.switchVizType} >
+	            <ContentSwitcher onChange={switchVizType} >
 	              <Switch  text="SASR Chart" />
 	              <Switch  text="Table" />
 	            </ContentSwitcher>
@@ -186,7 +166,7 @@ class ExpDetails extends Component {
 							className = "filter-col--ops"
 							titleText = "Demand"
 							label = "All"
-							onChange = {(e) => this.onFilterChange(e)}
+							onChange = {onFilterChange}
 							items = {[
 								{ dd_name: "demand", id: "01", label: "01" },
 								{ dd_name: "demand", id: "02", label: "02" },
@@ -204,6 +184,11 @@ class ExpDetails extends Component {
 							className = "filter-col--ops"
 							titleText = "Major"
 							label = "All"
+							onChange = {onFilterChange}
+							items = {[
+								{ dd_name: "major", id: "1011", label: "1011" },
+								{ dd_name: "major", id: "2216", label: "2216" }
+							]}
 						/>
 						<FDropdown
 							className = "filter-col--ops"
@@ -252,6 +237,6 @@ class ExpDetails extends Component {
 				</div>
       </div>
 		)
-	}
+
 }
 export default ExpDetails;

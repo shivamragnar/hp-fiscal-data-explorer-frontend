@@ -36,61 +36,38 @@ import BudgetHighlights from "./content/BudgetHighlights";
 
 import "./App.scss";
 
+//initialize all filters
+var initExpFilters = { "filters":{} };
+
+
 function App() {
   //set app level state containing raw data.
-  const [expData, setExpData] = useState([]);
+  const [expData, setExpData] = useState();
+  const [expDataLoading, setExpDataLoading] = useState(true);
 
-  const [apiDataLoading, setApiDataLoading] = useState(true);
+  const getData = async (payload) => {
 
-  const openIDB = async () => {
     console.time("Axios Fetch");
     console.log("Axios Fetch Started");
 
-    let expDataToJson = [];
     try {
-      const res1 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-03-01&end=2018-03-01"
+      const res = await axios.post(
+        "http://13.126.189.78/api/detail_exp_week?start=2018-04-01&end=2019-03-31", payload
       );
-      const res2 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-04-01&end=2018-04-01"
-      );
-      const res3 = await axios.get(
-        "http://13.126.189.78/api/detail_exp_test?start=2018-05-01&end=2018-05-01"
-      );
-      let resMaster = res1.data.concat(res2.data, res3.data);
-      //jsonify data
-      resMaster.map((entryAry, i) => {
-        const entryObj = {};
-        entryAry.map((value, index) => {
-          entryObj[exp_details_keys.keys[index]] = value;
-        });
-        expDataToJson.push(entryObj);
-      });
+      setExpDataLoading(false);
+      setExpData(res.data.records);
 
-      setExpData(expDataToJson);
-      setApiDataLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) { console.log(err); }
 
     console.timeEnd("Axios Fetch");
   };
 
   useEffect(() => {
-    // getData(
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-01-01&end=2018-04-30",
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-05-01&end=2018-08-31",
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-09-01&end=2018-12-31"
-    // );
-
-    // getExpData(
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-01-01&end=2018-01-01",
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-05-01&end=2018-05-01",
-    //   "http://13.126.189.78/api/detail_exp_test?start=2018-09-01&end=2018-09-01"
-    // );
-
-    openIDB();
+    getData(initExpFilters);
   }, []);
+
+  console.log("expData:");
+  console.log(expData);
 
   return (
     <div>
@@ -102,14 +79,18 @@ function App() {
       <Content>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/aboutus" component={ContactUs} />
-          <Route exact path="/contactus" component={AboutUs} />
+          <Route exact path="/aboutus" component={AboutUs} />
+          <Route exact path="/contactus" component={ContactUs} />
           <Route exact path="/expenditure/summary" component={ExpSummary} />
           <Route
             exact
             path="/expenditure/details"
             render={() => (
-              <ExpDetails expData={expData} apiDataLoading={apiDataLoading} />
+              <ExpDetails
+                expData={expData}
+                expDataLoading={expDataLoading}
+                getData={getData}
+              />
             )}
           />
           <Route exact path="/expenditure/tracker" component={ExpTracker} />
