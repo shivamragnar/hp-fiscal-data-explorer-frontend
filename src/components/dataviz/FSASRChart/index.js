@@ -21,10 +21,12 @@ class FSASRChart extends Component {
     return (
       <div>
       <VictoryChart
+        
         theme={VictoryTheme.material}
         domainPadding={{x: 30}}
         width= {600}
         height= {300}
+
       >
         <VictoryAxis
         tickLabelComponent={

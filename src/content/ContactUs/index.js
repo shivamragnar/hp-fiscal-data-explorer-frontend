@@ -22,7 +22,7 @@ class ContactUs extends React.Component {
     	}
     }
 
-    console.log(nodes);
+    // console.log(nodes);
 
     var svg = d3.select("body")
     	.append("svg")

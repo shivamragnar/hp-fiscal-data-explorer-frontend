@@ -12,7 +12,6 @@ import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 
-var SASRData;
 
 const sampleDataSASR = [
 	{ date: "Jan", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
@@ -74,51 +73,117 @@ const props = {
 	FSASRChart: { dataToX: 'date', yLabelFormat: [""," L INR",1/100000] }
 }
 
+var expFilterHierarchy = require("../../data/expFilterHierarchy.json");
+
+var rawFilterData;
+
+const filtersData = [
+	{
+		key: 'demand',
+		val: [
+			{ dd_name: "demand", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'major',
+		val: [
+			{ dd_name: "major", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'sub-major',
+		val: [
+			{ dd_name: "sub-major", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'minor',
+		val: [
+			{ dd_name: "minor", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'sub-minor',
+		val: [
+			{ dd_name: "sub-minor", id : 'all', label : 'All' },
+		]
+	}
+];
+
+
 var expFilters = { "filters":{} };
 
-const ExpDetails = (props) => {
 
+const ExpDetails = ( { expData, expDataLoading, getData } ) => {
+
+	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 
-	const switchVizType = (e) => {
-		setCurrentVizType(vizTypes[e]);
-	}
+	//1
+	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
+	//2
 	const onFilterChange = (e) => {
-		expFilters.filters[e.selectedItem.dd_name] = e.selectedItem.id;
-		console.log("filterchange! current active filters: ");
-		console.log(expFilters.filters);
-
-		//update expData state
-		props.getData(expFilters);
-	}
-
-	const getFiltersData = async () => {
-
-    console.time("Axios Fetching Filters");
-    console.log("Fetching Filters Started");
-
-    try {
-      const res = await axios.get(
-        "http://13.126.189.78/api/acc_heads"
-      );
-			console.log('filters!: ');
-			console.log(res);
-			var demandOps = [];
-			var majorOps = [];
-			res.data.records.map((filterOp, i) =>{
-		
-				if(demandOps.includes(filterOp[0]) === false){
-					demandOps.push(filterOp[0]);
-				}
-				if(majorOps.includes(filterOp[1]) === false){
-					majorOps.push(filterOp[1]);
+		if(e.selectedItem.id !== "all"){
+			expFilters.filters[e.selectedItem.dd_name] = e.selectedItem.id;
+		} else {
+			delete(expFilters.filters[e.selectedItem.dd_name]);
+		}
+		// ---get active filter,
+		//---get index of active filter from expFilterHierarchy json
+		//---wipe out all the val array of all the other filter objects in filterData EXCEPT the 'all'
+		//loop through raw filterdata,
+		//whichever child_arr has active filter at index of active filter
+		//repopulate all other filter objects by matching the index
+		if(expFilters.filters.demand){
+			const demandHierarchyIndex = expFilterHierarchy.indexOf("demand");
+			filtersData.map((filterObj, i) => {
+				if( i !== demandHierarchyIndex){
+					filterObj.val = [{ dd_name: filterObj.key, id : 'all', label : 'All' }];
 				}
 			})
-			console.log("demandOps are: ");
-			console.log(demandOps);
-			console.log("majorOps are: ");
-			console.log(majorOps);
+			rawFilterData.data.records.map(child_arr =>{
+				if(child_arr[demandHierarchyIndex] === expFilters.filters.demand){
+					filtersData.map((filterObj, i) => {
+						if( i !== demandHierarchyIndex){
+							if(filterObj.val.some(item => item.id === child_arr[i]) !== true ){
+								filterObj.val.push({ dd_name: filterObj.key, id : child_arr[i], label : child_arr[i] });
+							}
+						}
+					})
+				}
+			})
+			console.log("newfiltersData: "); console.log(filtersData);
+		}
+
+
+		console.log("filterchange! active filters: "); console.log(expFilters.filters);
+		getData(expFilters); //update expData state at App level
+	}
+
+	//3
+	const getFiltersData = async () => {
+    console.time("Axios Fetching Filters"); console.log("Fetching Filters Started");
+
+    try {
+			//fetch raw filter data
+			rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads");
+			console.log('filters!: '); console.log(rawFilterData);
+
+			//populate all dropdown filters' data from the raw response provided by API
+			filtersData.map((filter, i) => {
+				rawFilterData.data.records.map(child_arr => {
+					if(filter.val.some(item => item.id === child_arr[i]) !== true){
+						const filterOption = {
+							dd_name: filter.key,
+							id: child_arr[i],
+							label: child_arr[i]
+						}
+						filter.val.push(filterOption);
+					}
+				})
+			})
+			console.log("filtersData"); console.log(filtersData);
 
     } catch (err) { console.log(err); }
 
@@ -127,116 +192,106 @@ const ExpDetails = (props) => {
 
 	useEffect(() => {
 		//reset expFilters every time this component is loaded.
+		console.log(filtersData);
 		getFiltersData();
 		expFilters = { "filters":{} };
-		console.log("exp_filters");
-		console.log(expFilters);
 	}, []);
 
 	var currentVizComp;
-
 	if(currentVizType === vizTypes[0]){
-		if(props.expDataLoading === true){
+		if(expDataLoading === true){
 			currentVizComp = <div>Loading...</div>;
 		}else{
-			// currentVizComp = <FSASRChart data={SASRData} {...props.FSASRChart} />;
-			currentVizComp = <div>Data Loaded!</div>
+			console.log("loading is finished");
+			currentVizComp = <FSASRChart data={expData} {...props.FSASRChart} />;
 		}
 	}else{
 		// currentVizComp = <FTable {...props.FTable}  />;
 		currentVizComp = <div>this is a data table</div>;
 	}
 
-		return (
-			<div>
-          <div className="data-viz-col exp-details">
-						<div className="content-switcher-wrapper">
-	            <ContentSwitcher onChange={switchVizType} >
-	              <Switch  text="SASR Chart" />
-	              <Switch  text="Table" />
-	            </ContentSwitcher>
-	          </div>
-            <div>
-              {currentVizComp}
-            </div>
+	return (
+		<div>
+        <div className="data-viz-col exp-details">
+					<div className="content-switcher-wrapper">
+            <ContentSwitcher onChange={switchVizType} >
+              <Switch  text="SASR Chart" />
+              <Switch  text="Table" />
+            </ContentSwitcher>
           </div>
-				<div className="filter-col-wrapper">
-	        <div className="filter-col">
-	          <FDropdown
-							className = "filter-col--ops"
-							titleText = "Demand"
-							label = "All"
-							onChange = {onFilterChange}
-							items = {[
-								{ dd_name: "demand", id: "01", label: "01" },
-								{ dd_name: "demand", id: "02", label: "02" },
-								{ dd_name: "demand", id: "03", label: "03" },
-								{ dd_name: "demand", id: "04", label: "04" },
-								{ dd_name: "demand", id: "05", label: "05" },
-								{ dd_name: "demand", id: "06", label: "06" },
-								{ dd_name: "demand", id: "07", label: "07" },
-								{ dd_name: "demand", id: "08", label: "08" },
-								{ dd_name: "demand", id: "09", label: "09" },
-								{ dd_name: "demand", id: "10", label: "10" },
-							]}
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "Major"
-							label = "All"
-							onChange = {onFilterChange}
-							items = {[
-								{ dd_name: "major", id: "1011", label: "1011" },
-								{ dd_name: "major", id: "2216", label: "2216" }
-							]}
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "Sub Major"
-							label = "All"
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "Minor"
-							label = "All"
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "Sub Minor"
-							label = "All"
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "Budget"
-							label = "All"
-						/>
-						<FDropdown
-							className = "filter-col--ops"
-							titleText = "SOE"
-							label = "All"
-						/>
-						<FRadioGroup
-							className = "filter-col--ops"
-							name = "plan_nonplan"
-							titleText = ""
-							radioButtons = {[
-								{id:"plan", labelText: "Plan", value: "default-selected"},
-						    {id:"non-plan", labelText: "Non Plan", value: "standard"}
-							]}
-						/>
-						<FRadioGroup
-							className = "filter-col--ops"
-							name = "voted_charged"
-							titleText = ""
-							radioButtons = {[
-								{id:"voted", labelText: "Voted", value: "default-selected"},
-								{id:"charged", labelText: "Charged", value: "standard"}
-							]}
-						/>
-	        </div>
-				</div>
-      </div>
-		)
+          <div>
+            {currentVizComp}
+          </div>
+        </div>
+			<div className="filter-col-wrapper">
+        <div className="filter-col">
+          <FDropdown
+						className = "filter-col--ops"
+						titleText = "Demand"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[0].val}
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Major"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[1].val}
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Sub Major"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[2].val}
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Minor"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[3].val}
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Sub Minor"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[4].val}
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Budget"
+						label = "All"
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "SOE"
+						label = "All"
+					/>
+					<FRadioGroup
+						className = "filter-col--ops"
+						name = "plan_nonplan"
+						titleText = ""
+						radioButtons = {[
+							{id:"plan", labelText: "Plan", value: "default-selected"},
+					    {id:"non-plan", labelText: "Non Plan", value: "standard"}
+						]}
+					/>
+					<FRadioGroup
+						className = "filter-col--ops"
+						name = "voted_charged"
+						titleText = ""
+						radioButtons = {[
+							{id:"voted", labelText: "Voted", value: "default-selected"},
+							{id:"charged", labelText: "Charged", value: "standard"}
+						]}
+					/>
+        </div>
+			</div>
+    </div>
+	)
 
 }
 export default ExpDetails;

@@ -36,8 +36,10 @@ import BudgetHighlights from "./content/BudgetHighlights";
 
 import "./App.scss";
 
+var monthsOfTheYr = require("./data/monthsOfTheYr.json");
+
 //initialize all filters
-var initExpFilters = { "filters":{} };
+const initExpFilters = { "filters":{} };
 
 
 function App() {
@@ -52,10 +54,34 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://13.126.189.78/api/detail_exp_week?start=2018-04-01&end=2019-03-31", payload
+        "http://13.126.189.78/api/detail_exp_month?start=2018-04-01&end=2019-03-31", payload
       );
+
+      console.log(res.data.records);
+      var tempExpData = [];
+      var highestRecord = 0;
+      res.data.records.map((record, i) => {
+        var dataObj = {};
+        if(i === 0){
+
+          res.data.records.map((record, i) => {
+            if(record[0] > highestRecord){
+              highestRecord = record[0];
+            }
+          })
+        }
+        dataObj.date = monthsOfTheYr[(i+3)%12];
+        dataObj.sanction = Math.round(record[0]*100)/100;
+        dataObj.addition = Math.round(record[1]*100)/100;
+        dataObj.savings = Math.round(record[2]*100)/100;
+        dataObj.revised = Math.round(record[3]*100)/100;
+        dataObj.mark = Math.round(highestRecord/250);
+        tempExpData.push(dataObj);
+      })
+
+
+      setExpData(tempExpData);
       setExpDataLoading(false);
-      setExpData(res.data.records);
 
     } catch (err) { console.log(err); }
 

@@ -38,8 +38,8 @@ class Home extends Component {
 	}
 
   render() {
-    console.log("nodes");
-    console.log(this.state.data.nodes);
+    // console.log("nodes");
+    // console.log(this.state.data.nodes);
     return (
       <div>
       <div style={{width:"50%"}}>

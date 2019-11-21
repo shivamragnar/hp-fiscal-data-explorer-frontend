@@ -56,7 +56,7 @@ class FForce_col extends React.Component {
   componentDidMount() {
     this.d3Graph = d3.select(ReactDOM.findDOMNode(this));
 
-    console.log(this.props.data.nodes);
+    // console.log(this.props.data.nodes);
 
     var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody().strength(1))
