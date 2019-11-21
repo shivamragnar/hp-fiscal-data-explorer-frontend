@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from 'axios';
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
@@ -13,6 +13,8 @@ import FForce from '../../components/dataviz/FForce';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
+
+//make api call for exp-summary dataviz
 
 
 //sample slope data
@@ -51,7 +53,7 @@ const sampleRows = [{
   },
 ];
 const sampleHeaders = [
-  {	
+  {
 		key: 'demand_code', // `key` is the name of the field on the row object itself for the header
 		header: 'Demand', // `header` will be the name you want rendered in the Table Header
   },
@@ -138,24 +140,34 @@ class ExpSummary extends Component {
 		this.state = {
       currentSec1VizType: sec1VizTypes[0],
       data: {
-        "nodes": exp_summary_data
-          /*[
-            { "sanctioncurrent": 100, "rateOfChange": 1 },
-            { "sanctioncurrent": 50, "rateOfChange": 2 },
-            { "sanctioncurrent": 70, "rateOfChange": 3 },
-            { "sanctioncurrent": 80, "rateOfChange": 4 },
-          ]*/
-          ,
-        "links": [
-        ]
+        "nodes": exp_summary_data,
+        "links": [],
+        "apiData": {
+          data: null,
+          isLoading: true,
+          errors: null
+        }
       }
     };
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
 
+  async getData(apiUrl){
+    try{
+      const res = await axios.get(apiUrl);
+      console.log(res);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
 	switchSec1VizType(e) {
 		this.setState({ currentSec1VizType: sec1VizTypes[e] })
 	}
+
+  componentDidMount() {
+    this.getData("http://13.126.189.78/api/exp_summary");
+}
 
 	render() {
 

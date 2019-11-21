@@ -1,5 +1,70 @@
-import React, {PropTypes, Component} from "react";
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
+import React, { Component} from "react";
+import { VictoryLine, VictoryChart, VictoryAxis,  VictoryGroup, VictoryLabel } from 'victory';
+
+const sampleDataTime = [{
+		x: 1,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 2,
+		sanction: 4.5,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 3,
+		sanction: 4.7,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 4,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 5,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 6,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 7,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 8,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+	{
+		x: 9,
+		sanction: 4,
+		addition: 5,
+		saving: 6,
+		revised: 7,
+  },
+]
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -49,6 +114,7 @@ class FTimeSeries extends Component {
             this.props.dataPoints.map((dataToY, i) =>{
               return(
                 <VictoryLine
+                  key={i}
                   colorScale={"blue"}
                   data={this.props.data}
                   x={this.props.dataToX}

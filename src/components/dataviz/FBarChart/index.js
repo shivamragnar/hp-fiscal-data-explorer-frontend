@@ -1,10 +1,23 @@
-import React, {PropTypes, Component} from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryGroup, VictoryLabel } from 'victory';
+//HOW TO USE:
+
+//1 import FBarChart into which ever component you wanna use this in.
+//2 data should be of the format:
+// [
+//  { someKeyForX: "value", someKeyForY1: "value", someKeyForY2, someKeyForYn },
+//  { someKeyForX: "value", someKeyForY1: "value", someKeyForY2, someKeyForYn },
+//  ...
+// ]
+//3 following props required: data, dataToX (string), dataPoints: [Array of Y1 to Yn keys as strings], yLabelFormat: [Array od prefix, suffix and multiplier]
+
+
+import React, { Component} from "react";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup, VictoryLabel } from 'victory';
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
   fontSize: '7px'
   }
+
 
 
 class FBarChart extends Component {
@@ -26,8 +39,6 @@ class FBarChart extends Component {
             style={tickLabelStyle}
           />
         }
-        tickFormat={this.props.xLabelTxt}
-        tickValues={this.props.xLabelPos}
       />
       <VictoryAxis
         dependentAxis

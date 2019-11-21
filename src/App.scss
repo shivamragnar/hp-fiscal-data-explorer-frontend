@@ -11,6 +11,8 @@
 //datavizcomps styles
 
 @import './components/dataviz/FTable/style.scss';
+@import './components/dataviz/FSASRChart/style.scss';
+@import './components/dataviz/FBarChart/style.scss';
 
 //content styles
 @import './content/Home/style.scss';
@@ -50,14 +52,24 @@
   }
 }
 
-.filter_col{
+.filter-col-wrapper{
   height: 100vh;
   position: fixed;
   width: 16rem;
   left: 2rem;
-  top: 8rem;
-  background-color: $extra_light_grey;
-  padding: 2rem;
+  top: 0rem;
+  padding: 8rem 0 2rem 0;
+
+  .filter-col{
+    background-color: $extra_light_grey;
+    padding: 2rem;
+    height: 100%;
+    overflow: scroll;
+
+    .filter-col--ops{
+      padding-bottom: 2rem;
+    }
+  }
 }
 
 .data-viz-col{

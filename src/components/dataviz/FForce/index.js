@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import * as d3 from 'd3';
@@ -107,7 +107,7 @@ class FForce extends React.Component {
         <Node
             index={index}
             data={node}
-            key={node.id}
+            key={index}
             display='none'
             showTooltip={this.showTooltip.bind(this)}
             hideTooltip={this.hideTooltip.bind(this)}
@@ -129,20 +129,20 @@ class FForce extends React.Component {
                display:display,
                transform: 'translate('+translateX+'px,'+translateY+'px)'
              }}
-             stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+             stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"
            >
             <g id="Group">
                 <rect id="Rectangle" stroke="#979797" fill="#fff" x="0.5" y="0.5" width="239" height="83"></rect>
-                <text id="Line-1" font-size="12" fill="#4A4A4A">
+                <text id="Line-1" fontSize="12" fill="#4A4A4A">
                     <tspan x="10" y="19">{demandDisplayName}</tspan>
                 </text>
-                <text id="Line-2" font-size="12" fill="#4A4A4A">
+                <text id="Line-2" fontSize="12" fill="#4A4A4A">
                     <tspan x="10" y="37">Sanction This Year: {sanctioncurrent}</tspan>
                 </text>
-                <text id="Line-3"  font-size="12"  fill="#4A4A4A">
+                <text id="Line-3"  fontSize="12"  fill="#4A4A4A">
                     <tspan x="10" y="55">Sanction Last Year: {sanctionprevious}</tspan>
                 </text>
-                <text id="Line-4"  font-size="12" font-weight="bold" fill="#4A4A4A">
+                <text id="Line-4"  fontSize="12" fontWeight="bold" fill="#4A4A4A">
                     <tspan x="10" y="73">% Change: {rateOfChange}</tspan>
                 </text>
             </g>
