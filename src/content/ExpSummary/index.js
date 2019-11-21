@@ -103,28 +103,12 @@ exp_summary_data.map((d, i) => {
 		'sanctionprevious': Math.round(d.sanctionprevious*100)/100,
 		'rateOfChange': Math.round((d.rateOfChange*100) * 100)/100
 	})
-	slopeData.push(
-    [
-			{ year: prevYear, sanction: d.sanctionprevious },
-			{ year: currentYear, sanction: d.sanctioncurrent, "label": `${d.demandid}_${d.demandname}` }
-    ]
-	);
 })
 
 //Name of components to switch between
 const sec1VizTypes = ["FForce", "FTable"];
 
 const props = {
-	FSlope: {
-		data: slopeData,
-		x: "year",
-		y: "sanction",
-		height: 3000,
-		width: 300,
-		padding: { top: 20, left: 75, right: 75, bottom: 50 },
-		tickFormatY: ["", " Cr", 1 / 10000000],
-	},
-
 	FTable: {
 		rows: tableData.rows,
 		headers: tableData.headers
@@ -141,7 +125,6 @@ class ExpSummary extends Component {
       currentSec1VizType: sec1VizTypes[0],
       data: {
         "nodes": exp_summary_data,
-        "links": [],
         "apiData": {
           data: null,
           isLoading: true,
