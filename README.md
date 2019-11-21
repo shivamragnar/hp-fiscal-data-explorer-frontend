@@ -19,3 +19,12 @@ $ yarn
 $ yarn start
 
 #Go to `http://localhost:3000/` 
+
+```
+
+## Contributing
+- Fork and submit pull requests (standard GitHub OSS house rules)
+  
+## Contributors
+- [Abrar Burk](https://github.com/silvergravel)
+- [Shreya Agrawal](https://github.com/shreyaagrawal0809)
