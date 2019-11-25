@@ -53,8 +53,13 @@ function App() {
     console.log("Axios Fetch Started");
 
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
       const res = await axios.post(
-        "http://13.126.189.78/api/detail_exp_month?start=2018-04-01&end=2019-03-31", payload
+        "http://13.126.189.78/api/detail_exp_week?start=2018-04-01&end=2019-06-30", payload, config
       );
 
       console.log(res.data.records);

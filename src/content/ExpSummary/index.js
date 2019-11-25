@@ -10,6 +10,7 @@ import { Button } from 'carbon-components-react';
 import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
 import FForce from '../../components/dataviz/FForce';
+import FForce_Y from '../../components/dataviz/FForce_Y';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
@@ -112,7 +113,10 @@ const props = {
 	FTable: {
 		rows: tableData.rows,
 		headers: tableData.headers
-	}
+	},
+  FForce_Y: {
+    nodes: []
+  }
 }
 
 
@@ -123,13 +127,9 @@ class ExpSummary extends Component {
 
 		this.state = {
       currentSec1VizType: sec1VizTypes[0],
+      dataLoading: true,
       data: {
-        "nodes": exp_summary_data,
-        "apiData": {
-          data: null,
-          isLoading: true,
-          errors: null
-        }
+        nodes: exp_summary_data
       }
     };
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
@@ -138,7 +138,10 @@ class ExpSummary extends Component {
   async getData(apiUrl){
     try{
       const res = await axios.get(apiUrl);
+      props.FForce_Y.nodes = res.data.records;
       console.log(res);
+
+      this.setState({dataLoading : false});
     }catch(err){
       console.log(err);
     }
@@ -153,11 +156,23 @@ class ExpSummary extends Component {
 }
 
 	render() {
-
+    console.log("state is");
+    console.log(this.state);
 		var currentSec1VizComp;
-		this.state.currentSec1VizType === sec1VizTypes[0] ?
-			currentSec1VizComp = <FForce data={this.state.data} /> :
-			currentSec1VizComp = <FTable {...props.FTable}  />;
+		if(this.state.currentSec1VizType === sec1VizTypes[0]){
+      if(this.state.dataLoading === false){
+        // currentSec1VizComp = <FForce data={this.state.data} />
+        currentSec1VizComp = <FForce_Y nodes={props.FForce_Y.nodes} />
+      }else{
+        currentSec1VizComp = <div>Loading...</div>
+      }
+
+    }else{
+      currentSec1VizComp = <FTable {...props.FTable}  />;
+    }
+
+
+
 
 		return (
 			<div className="exp-summary-content">
@@ -178,7 +193,9 @@ class ExpSummary extends Component {
               <Switch  text="Table" />
             </ContentSwitcher>
           </div>
+          <div className="data-viz-wrapper">
           {currentSec1VizComp}
+          </div>
         </div>
         <div>
 

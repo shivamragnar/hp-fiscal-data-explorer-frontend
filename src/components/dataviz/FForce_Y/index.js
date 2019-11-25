@@ -1,10 +1,19 @@
-import React from "react";
-import * as d3 from "d3";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-class ContactUs extends React.Component {
+import * as d3 from 'd3';
 
-  componentDidMount(){
+
+class FForce_Y extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+
+  componentDidMount() {
     this.drawChart();
+    console.log("propnodes");
+    console.log(this.props.nodes);
   }
 
   componentWillUnmount(){
@@ -12,12 +21,11 @@ class ContactUs extends React.Component {
     d3.selectAll("svg").remove();
   }
 
-
-
   drawChart(){
     var n = 10,
     	width = 800,
-    	padding = 50,
+      height = 1300,
+    	padding = 100,
     	nodes = [
 
       ];
@@ -25,47 +33,45 @@ class ContactUs extends React.Component {
     for (var y = 0; y < n; y++) {
     	for (var x = 0; x < n; ++x) {
     		nodes.push({
-    			x: x,
+    			x: 0,
     			y: y,
     		})
     	}
     }
+    console.log("this.props.nodes");
+    console.log(this.props.nodes);
 
-    console.log(nodes);
-
-    var svg = d3.select("body")
+    var svg = d3.select(".data-viz-wrapper")
     	.append("svg")
     	.attr("width", width)
-    	.attr("height", width)
+    	.attr("height", height)
       .append("g");
       // .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")");
 
     var scale = d3.scaleLinear()
-    	.domain([0, 9])
-    	.range([padding, width - padding]);
+    	.domain([-30, 150])
+    	.range([padding, height - padding]);
 
     var simulation = d3.forceSimulation()
-    	.force("charge", d3.forceManyBody().strength(-1))
+    	.force("charge", d3.forceManyBody().strength(1))
     	.force("xPos", d3.forceX(width/2).strength(1))
-    	.force("yPos", d3.forceY(d => scale(d.y)).strength(1))
-    	.force("collide", d3.forceCollide(d => d.radius * 1.2).strength(1))
+    	.force("yPos", d3.forceY(d => scale(d.pct_change)).strength(1))
+    	.force("collide", d3.forceCollide(d => d.radius + 5).strength(1))
       ;
 
     var circles = svg.selectAll("foo")
-    	.data(nodes)
+    	.data(this.props.nodes)
     	.enter()
     	.append("circle")
     	.attr("fill", "darkslateblue")
-    	.attr("r", d => {
-    		d.radius = 6  ;
-    		return d.radius
-    	})
+    	// .attr("r", d => {d.radius = d.sanction_current/10000000; return d.radius} )
+      .attr("r", d => {d.radius = Math.sqrt(d.sanction_current / Math.PI) / 240; return d.radius} )
     	.call(d3.drag()
     		.on("start", dragstarted)
     		.on("drag", dragged)
     		.on("end", dragended));
 
-    simulation.nodes(nodes)
+    simulation.nodes(this.props.nodes)
     	.on("tick", ticked);
 
     function ticked() {
@@ -90,9 +96,11 @@ class ContactUs extends React.Component {
     }
   }
 
-  render(){
-      return <div>Contact Us</div>;
+  render() {
+    return (
+      <div className=""></div>
+    )
   }
+}
 
-};
-export default ContactUs;
+export default FForce_Y;
