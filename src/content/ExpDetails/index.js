@@ -5,11 +5,13 @@ import axios from 'axios';
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
+
 //custom components
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
+import FDatePicker from '../../components/molecules/FDatePicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 
@@ -110,11 +112,13 @@ const filtersData = [
 	}
 ];
 
+//initialize filters at component level
+var expFilters;
+var dateFrom;
+var dateTo;
 
-var expFilters = { "filters":{} };
 
-
-const ExpDetails = ( { expData, expDataLoading, getData } ) => {
+const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDateFrom, initDateTo } ) => {
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
@@ -158,7 +162,7 @@ const ExpDetails = ( { expData, expDataLoading, getData } ) => {
 
 
 		console.log("filterchange! active filters: "); console.log(expFilters.filters);
-		getData(expFilters); //update expData state at App level
+		getData(expFilters, dateFrom, dateTo); //update expData state at App level
 	}
 
 	//3
@@ -191,10 +195,12 @@ const ExpDetails = ( { expData, expDataLoading, getData } ) => {
   };
 
 	useEffect(() => {
-		//reset expFilters every time this component is loaded.
+		//reset all filters every time this component is loaded.
 		console.log(filtersData);
 		getFiltersData();
-		expFilters = { "filters":{} };
+		expFilters = initExpFilters;
+		dateFrom = initDateFrom;
+		dateTo = initDateTo;
 	}, []);
 
 	var currentVizComp;
@@ -225,6 +231,7 @@ const ExpDetails = ( { expData, expDataLoading, getData } ) => {
         </div>
 			<div className="filter-col-wrapper">
         <div className="filter-col">
+					<FDatePicker/>
           <FDropdown
 						className = "filter-col--ops"
 						titleText = "Demand"

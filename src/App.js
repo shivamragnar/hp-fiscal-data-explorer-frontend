@@ -38,8 +38,10 @@ import "./App.scss";
 
 var monthsOfTheYr = require("./data/monthsOfTheYr.json");
 
-//initialize all filters
+//initialize all filters with init value
 const initExpFilters = { "filters":{} };
+const initDateFrom = "2018-01-01";
+const initDateTo = "2018-12-31";
 
 
 function App() {
@@ -47,19 +49,26 @@ function App() {
   const [expData, setExpData] = useState();
   const [expDataLoading, setExpDataLoading] = useState(true);
 
-  const getData = async (payload) => {
+  const getData = async (payload, dateFrom, dateTo) => {
 
     console.time("Axios Fetch");
     console.log("Axios Fetch Started");
 
+    //calc actual number of days between 2 dates
+    var dateFromTime = new Date(dateFrom).getTime();
+    var dateToTime = new Date(dateTo).getTime();
+    var daysDiff = ((dateToTime - dateFromTime) / (1000 * 3600 * 24)) + 2; //this calcs every day BETWEEN the given 2 dates. So add '2' to correct this
+    console.log("daysDiff: " + daysDiff);
+
+    const month_week = daysDiff > 125 ? "month" : "week"; //give month-wise breakdown if range > 125 days
+    const fromMonthIndex = parseInt(initDateFrom.split('-')[1])-1;
+    console.log("first month:" + fromMonthIndex);
+
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
+      const config = { headers: { "content-type": "application/json" } };
       const res = await axios.post(
-        "http://13.126.189.78/api/detail_exp_week?start=2018-04-01&end=2019-06-30", payload, config
+        `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, payload, config
+
       );
 
       console.log(res.data.records);
@@ -67,15 +76,14 @@ function App() {
       var highestRecord = 0;
       res.data.records.map((record, i) => {
         var dataObj = {};
-        if(i === 0){
-
+        if(i === 0){ //first we identify highest record to define the 'height of mark' appropriately
           res.data.records.map((record, i) => {
             if(record[0] > highestRecord){
               highestRecord = record[0];
             }
           })
         }
-        dataObj.date = monthsOfTheYr[(i+3)%12];
+        dataObj.date = month_week === "month" ? monthsOfTheYr[(i+fromMonthIndex)%12]+"_"+i : "w_"+i;
         dataObj.sanction = Math.round(record[0]*100)/100;
         dataObj.addition = Math.round(record[1]*100)/100;
         dataObj.savings = Math.round(record[2]*100)/100;
@@ -94,7 +102,7 @@ function App() {
   };
 
   useEffect(() => {
-    getData(initExpFilters);
+    getData(initExpFilters, initDateFrom, initDateTo );
   }, []);
 
   console.log("expData:");
@@ -121,6 +129,9 @@ function App() {
                 expData={expData}
                 expDataLoading={expDataLoading}
                 getData={getData}
+                initExpFilters={initExpFilters}
+                initDateFrom={initDateFrom}
+                initDateTo={initDateTo}
               />
             )}
           />
