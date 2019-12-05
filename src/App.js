@@ -41,7 +41,7 @@ var monthsOfTheYr = require("./data/monthsOfTheYr.json");
 //initialize all filters with init value
 const initExpFilters = { "filters":{} };
 const initDateFrom = "2018-01-01";
-const initDateTo = "2018-12-31";
+const initDateTo = "2018-03-31";
 
 
 function App() {

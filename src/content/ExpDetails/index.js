@@ -11,7 +11,6 @@ import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
-import FDatePicker from '../../components/molecules/FDatePicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 
@@ -231,7 +230,7 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
         </div>
 			<div className="filter-col-wrapper">
         <div className="filter-col">
-					<FDatePicker/>
+				
           <FDropdown
 						className = "filter-col--ops"
 						titleText = "Demand"

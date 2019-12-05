@@ -44,13 +44,31 @@ class FForce_Y extends React.Component {
     var svg = d3.select(".data-viz-wrapper")
     	.append("svg")
     	.attr("width", width)
-    	.attr("height", height)
-      .append("g");
+    	.attr("height", height);
+
+
+    var circlesGroup = svg.append("g")
+       .attr("class","circles-group");
       // .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")");
 
     var scale = d3.scaleLinear()
-    	.domain([-30, 150])
-    	.range([padding, height - padding]);
+    	.domain([70, -40])
+    	.range([padding, height - padding ]);
+
+    // Add scales to axis
+    var x_axis = d3.axisLeft()
+                   .scale(scale);
+
+    //Append group and insert axis
+    var axisContainer = svg.append("g")
+       .style("transform","translateX(180px)");
+    axisContainer.call(x_axis)
+
+    // Define the div for the tooltip
+    var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
 
     var simulation = d3.forceSimulation()
     	.force("charge", d3.forceManyBody().strength(1))
@@ -59,17 +77,54 @@ class FForce_Y extends React.Component {
     	.force("collide", d3.forceCollide(d => d.radius + 5).strength(1))
       ;
 
-    var circles = svg.selectAll("foo")
+    var circles = circlesGroup.selectAll("foo")
     	.data(this.props.nodes)
     	.enter()
     	.append("circle")
-    	.attr("fill", "darkslateblue")
+    	.attr("fill", "#000000")
     	// .attr("r", d => {d.radius = d.sanction_current/10000000; return d.radius} )
       .attr("r", d => {d.radius = Math.sqrt(d.sanction_current / Math.PI) / 240; return d.radius} )
+      .on("mouseover", handleTooltipMouseover)
+      .on("mouseout", handleTooltipMouseout)
     	.call(d3.drag()
     		.on("start", dragstarted)
     		.on("drag", dragged)
     		.on("end", dragended));
+
+    function handleTooltipMouseover(d, i) {
+
+      //populate tooltip with appropriate content
+      tooltip.transition()
+             .duration(200)
+             .style("opacity", .9);
+      tooltip.html("<strong><p>" + d.demand + "_" + d.demand_description + "</p></strong>" +
+                   "<br><p> Current Sanction: " + d.sanction_current + "</p>" +
+                   "<br><p> Change Since Last Year (%): " + d.pct_change + "</p>")
+          .style("left", (d3.event.pageX + 50) + "px")
+          .style("top", (d3.event.pageY) + "px");
+
+      //stroke the current mouseover-ed circle
+      d3.select(this)
+        .transition()
+        .duration(500)
+        .attr("stroke","rgb(255, 97, 0)")
+        .attr("stroke-width","3");
+    }
+
+    function handleTooltipMouseout(d, i){
+
+      //hide tooltip
+      tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+
+      //de-stroke the current mouseout-ed circle
+      d3.select(this)
+        .transition()
+        .duration(500)
+        .attr("stroke-width","0");
+    }
+
 
     simulation.nodes(this.props.nodes)
     	.on("tick", ticked);
