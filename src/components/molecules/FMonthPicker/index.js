@@ -3,30 +3,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-// import DocReady from 'es6-docready'
-// import Dom from 'es6-dom'
 import Picker from 'react-month-picker'
 
+var yymmdd_ref = require("../../../data/yymmdd_ref.json");
 
     class MonthBox extends Component {
         constructor(props, context) {
             super(props, context)
-
-            this.state = {
-                value: this.props.value || 'N/A',
-            }
-
+            this.state = { value: this.props.value || 'N/A', }
             this._handleClick = this._handleClick.bind(this)
         }
 
         componentWillReceiveProps(nextProps){
-            this.setState({
-                value: nextProps.value || 'N/A',
-            })
+            this.setState({ value: nextProps.value || 'N/A', })
         }
 
         render() {
-
+          console.log(yymmdd_ref.months);
             return (
                 <div className="f-month-picker--month-box" onClick={this._handleClick}>
                     <span>{this.state.value}</span>
@@ -51,10 +44,7 @@ import Picker from 'react-month-picker'
             super(props, context)
 
             this.state = {
-                // mvalue: {year: 2014, month: 11},
-                // mvalue2: {year: 2016, month: 7},
-                // mrange: {from: {year: 2014, month: 8}, to: {year: 2015, month: 5}},
-                mrange2: {from: {year: 2018, month: 4}, to: {year: 2019, month: 3}}, //default setting
+                mrange2: {from: {year: parseInt(yymmdd_ref.years[0]), month: 4}, to: {year: parseInt(yymmdd_ref.years[1]), month: 3}}, //default setting
             }
 
             this.handleClickMonthBox = this.handleClickMonthBox.bind(this)
@@ -83,7 +73,7 @@ import Picker from 'react-month-picker'
         render() {
 
             const pickerLang = {
-                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                months: yymmdd_ref.months, //drawing monthData from global month reference json (data/month_ref.json)
                 from: 'From', to: 'To',
             }
             const mvalue = this.state.mvalue
@@ -98,64 +88,12 @@ import Picker from 'react-month-picker'
 
             return (
                 <ul>
-                    {
-                    //*****PICK A MONTH****
-                    //   <li>
-                    //     <label><b>Pick A Month</b><span>(Available years: 2008, 2011, 2012, 2014, 2016)</span></label>
-                    //     <div className="edit">
-                    //         <Picker
-                    //             ref="pickAMonth"
-                    //             years={[2008, 2011, 2012, 2014, 2016]}
-                    //             value={mvalue}
-                    //             lang={pickerLang.months}
-                    //             onChange={this.handleAMonthChange}
-                    //             onDismiss={this.handleAMonthDissmis}
-                    //         >
-                    //             <MonthBox value={makeText(mvalue)} onClick={this.handleClickMonthBox} />
-                    //         </Picker>
-                    //     </div>
-                    // </li>
-                    //*****PICK A MONTH****
-                    // <li>
-                    //     <label><b>Pick A Month</b><span>(Available months from Feb.2016 to Sep.2016)</span></label>
-                    //     <div className="edit">
-                    //         <Picker
-                    //             ref="pickAMonth2"
-                    //             years={{min: {year: 2016, month: 2}, max: {year: 2016, month: 9}}}
-                    //             value={mvalue2}
-                    //             lang={pickerLang.months}
-                    //             theme="dark"
-                    //             onChange={this.handleAMonthChange2}
-                    //             onDismiss={this.handleAMonthDissmis2}
-                    //         >
-                    //             <MonthBox value={makeText(mvalue2)} onClick={this.handleClickMonthBox2} />
-                    //         </Picker>
-                    //     </div>
-                    // </li>
-                    //*****PICK A SPAN OF MONTHS****
-                    // <li>
-                    //     <label><b>Pick A Span of Months</b><span>(Available years from 2013 to this year)</span></label>
-                    //     <div className="edit">
-                    //         <Picker
-                    //             ref="pickRange"
-                    //             years={{min: 2013}}
-                    //             range={mrange}
-                    //             lang={pickerLang}
-                    //             theme="light"
-                    //             onChange={this.handleRangeChange}
-                    //             onDismiss={this.handleRangeDissmis}
-                    //         >
-                    //             <MonthBox value={makeText(mrange.from) + ' ~ ' + makeText(mrange.to)} onClick={this._handleClickRangeBox} />
-                    //         </Picker>
-                    //     </div>
-                    // </li>
-                    }
                     <li>
                         <label className="bx--label"><b>Pick A Span of Months</b></label>
                         <div className="edit">
                             <Picker
                                 ref="pickRange2"
-                                years={{min: {year: 2018, month: 1}, max: {year: 2019, month: 3}}}
+                                years={{min: {year: parseInt(yymmdd_ref.years[0]), month: 1}, max: {year: parseInt(yymmdd_ref.years[1]), month: 3}}}
                                 range={mrange2}
                                 lang={pickerLang}
                                 theme="dark"
@@ -221,36 +159,25 @@ import Picker from 'react-month-picker'
         constructor(props, context) {
             super(props, context)
 
-            this.state = {
-                value: this.props.value
-            }
+            this.state = { value: this.props.value }
         }
 
         componentWillReceiveProps(nextProps){
-            this.setState({
-                value: nextProps.value
-            })
+            this.setState({ value: nextProps.value })
         }
 
         render() {
-
             return (
                 <div className="list-area">
                     <List onDateRangeSet={this.props.onDateRangeSet} />
                 </div>
-
             )
         }
     }
-
 
     FMonthPicker.propTypes = {
         value: PropTypes.string,
         onClick: PropTypes.func,
     }
-
-
-
-
 
 export default FMonthPicker;

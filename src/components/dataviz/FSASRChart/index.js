@@ -17,11 +17,15 @@ class FSASRChart extends Component {
   render() {
 
     const { data } = this.props;
+    //sample data structure = [
+    //	{ date: "Jan", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+    //	{ date: "Feb", sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 }
+    //]
 
     return (
       <div>
       <VictoryChart
-        
+
         theme={VictoryTheme.material}
         domainPadding={{x: 30}}
         width= {600}

@@ -128,9 +128,6 @@ class ExpSummary extends Component {
 		this.state = {
       currentSec1VizType: sec1VizTypes[0],
       dataLoading: true,
-      data: {
-        nodes: exp_summary_data
-      }
     };
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
@@ -140,7 +137,6 @@ class ExpSummary extends Component {
       const res = await axios.get(apiUrl);
       props.FForce_Y.nodes = res.data.records;
       console.log(res);
-
       this.setState({dataLoading : false});
     }catch(err){
       console.log(err);

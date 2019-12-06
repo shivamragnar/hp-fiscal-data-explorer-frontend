@@ -68,7 +68,6 @@ function App() {
       const config = { headers: { "content-type": "application/json" } };
       const res = await axios.post(
         `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, payload, config
-
       );
       console.log("raw data from API: ");
       console.log(res.data.records);
@@ -88,7 +87,7 @@ function App() {
         dataObj.addition = Math.round(record[1]*100)/100;
         dataObj.savings = Math.round(record[2]*100)/100;
         dataObj.revised = Math.round(record[3]*100)/100;
-        dataObj.mark = Math.round(highestRecord/250);
+        dataObj.mark = Math.round((1/100)*highestRecord);
         tempExpData.push(dataObj);
       })
 
