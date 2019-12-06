@@ -40,8 +40,8 @@ var monthsOfTheYr = require("./data/monthsOfTheYr.json");
 
 //initialize all filters with init value
 const initExpFilters = { "filters":{} };
-const initDateFrom = "2018-01-01";
-const initDateTo = "2018-03-31";
+const initDateFrom = "2018-04-01";
+const initDateTo = "2019-03-31";
 
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
     console.log("daysDiff: " + daysDiff);
 
     const month_week = daysDiff > 125 ? "month" : "week"; //give month-wise breakdown if range > 125 days
-    const fromMonthIndex = parseInt(initDateFrom.split('-')[1])-1;
+    const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
     console.log("first month:" + fromMonthIndex);
 
     try {
@@ -70,7 +70,7 @@ function App() {
         `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, payload, config
 
       );
-
+      console.log("raw data from API: ");
       console.log(res.data.records);
       var tempExpData = [];
       var highestRecord = 0;

@@ -11,6 +11,7 @@ import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
+import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 
@@ -164,6 +165,15 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
 		getData(expFilters, dateFrom, dateTo); //update expData state at App level
 	}
 
+	//2.5
+	const onDateRangeSet = (newDateRange) => {
+		dateFrom = newDateRange.from.year.toString()+"-"+ (newDateRange.from.month < 10 ? "0" : "") + newDateRange.from.month.toString() + "-01" ;
+		dateTo = newDateRange.to.year.toString()+"-"+ (newDateRange.to.month < 10 ? "0" : "") + newDateRange.to.month.toString() + "-30" ;
+		console.log("newFromMth " + dateFrom);
+		console.log("newToMth " + dateTo);
+		getData(expFilters, dateFrom, dateTo); //update expData state at App level
+	}
+
 	//3
 	const getFiltersData = async () => {
     console.time("Axios Fetching Filters"); console.log("Fetching Filters Started");
@@ -218,6 +228,7 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
 	return (
 		<div>
         <div className="data-viz-col exp-details">
+					<FMonthPicker onDateRangeSet={onDateRangeSet} />
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} >
               <Switch  text="SASR Chart" />
@@ -230,7 +241,7 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
         </div>
 			<div className="filter-col-wrapper">
         <div className="filter-col">
-				
+
           <FDropdown
 						className = "filter-col--ops"
 						titleText = "Demand"

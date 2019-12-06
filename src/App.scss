@@ -5,6 +5,7 @@
 
 //components styles
 @import './components/atoms/FButton/style.scss';
+@import './components/molecules/FMonthPicker/style.scss';
 @import './components/organisms/FHeader1/style.scss';
 @import './components/organisms/FHeader2/style.scss';
 
@@ -22,6 +23,8 @@
 @import './content/ExpSummary/style.scss';
 @import './content/ExpDetails/style.scss';
 @import './content/ExpTracker/style.scss';
+
+
 
 //carbon overrides
 .bx--content{
