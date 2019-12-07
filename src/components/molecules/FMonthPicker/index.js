@@ -43,8 +43,10 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
         constructor(props, context) {
             super(props, context)
 
+            const { years, months }= this.props.defaultSelect;
+
             this.state = {
-                mrange2: {from: {year: parseInt(yymmdd_ref.years[0]), month: 4}, to: {year: parseInt(yymmdd_ref.years[1]), month: 3}}, //default setting
+                mrange2: {from: {year: years[0], month: months[0]}, to: {year: years[1], month: months[1]}}, //default setting
             }
 
             this.handleClickMonthBox = this.handleClickMonthBox.bind(this)
@@ -86,6 +88,8 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
                 return '?'
             }
 
+            const { years, months } = this.props.dateRange
+
             return (
                 <ul>
                     <li>
@@ -93,7 +97,7 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
                         <div className="edit">
                             <Picker
                                 ref="pickRange2"
-                                years={{min: {year: parseInt(yymmdd_ref.years[0]), month: 1}, max: {year: parseInt(yymmdd_ref.years[1]), month: 3}}}
+                                years={{min: {year: years[0], month: months[0]}, max: {year: years[1], month: months[1]}}}
                                 range={mrange2}
                                 lang={pickerLang}
                                 theme="dark"
@@ -169,7 +173,11 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
         render() {
             return (
                 <div className="list-area">
-                    <List onDateRangeSet={this.props.onDateRangeSet} />
+                    <List
+                      onDateRangeSet={this.props.onDateRangeSet}
+                      defaultSelect={this.props.defaultSelect}
+                      dateRange={this.props.dateRange}
+                    />
                 </div>
             )
         }

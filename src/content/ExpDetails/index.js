@@ -59,7 +59,7 @@ const vizTypes = ["FSASR", "FTable"];
 
 const props = {
 	FTable: { rows: sampleRows, headers: sampleHeaders },
-	FSASRChart: { dataToX: 'date', yLabelFormat: [""," L INR",1/100000] }
+	FSASRChart: { yLabelFormat: [""," L INR",1/100000] }
 }
 
 var expFilterHierarchy = require("../../data/expFilterHierarchy.json");
@@ -106,8 +106,7 @@ var dateFrom;
 var dateTo;
 
 
-const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDateFrom, initDateTo } ) => {
-
+const ExpDetails = ( { expData : { data, yLabelFormat, scsrOffset } , expDataLoading, getData, initExpFilters,  initDateFrom, initDateTo } ) => {
 
 
 
@@ -252,7 +251,11 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
 			currentVizComp = <div>Loading...</div>;
 		}else{
 			console.log("loading is finished");
-			currentVizComp = <FSASRChart data={expData} {...props.FSASRChart} />;
+			currentVizComp = <FSASRChart
+													data={data}
+													yLabelFormat={yLabelFormat}
+													scsrOffset={scsrOffset}
+													/>;
 		}
 	}else{
 		// currentVizComp = <FTable {...props.FTable}  />;
@@ -262,7 +265,11 @@ const ExpDetails = ( { expData, expDataLoading, getData, initExpFilters,  initDa
 	return (
 		<div>
         <div className="data-viz-col exp-details">
-					<FMonthPicker onDateRangeSet={onDateRangeSet} />
+					<FMonthPicker
+						defaultSelect = {{years:[2018, 2019], months:[4, 3]}}
+						dateRange = {{years:[2018, 2019], months:[1, 3]}}
+						onDateRangeSet={onDateRangeSet}
+					/>
 
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} >

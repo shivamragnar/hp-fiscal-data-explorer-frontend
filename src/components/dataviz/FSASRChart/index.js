@@ -3,7 +3,8 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, Vict
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
-  fontSize: '7px'
+  fontSize: '7px',
+  textAnchor: 'end'
   }
 
 class FSASRChart extends Component {
@@ -23,7 +24,7 @@ class FSASRChart extends Component {
     //]
 
     return (
-      <div>
+      <div className="sasr">
       <VictoryChart
 
         theme={VictoryTheme.material}
@@ -35,11 +36,12 @@ class FSASRChart extends Component {
         <VictoryAxis
         tickLabelComponent={
           <VictoryLabel
-            dy={-5}
+            dy={0}
             style={tickLabelStyle}
+            angle={-45}
           />
         }
-        tickFormat={this.props.xLabelTxt}
+        tickFormat={this.props.xLabelFormat}
         tickValues={this.props.xLabelPos}
       />
       <VictoryAxis
@@ -50,12 +52,12 @@ class FSASRChart extends Component {
             style={tickLabelStyle}
           />
         }
-        tickFormat={(x) => (this.props.yLabelFormat[0]+Math.floor(x*this.props.yLabelFormat[2])+this.props.yLabelFormat[1])}
+        tickFormat={(x) => (this.props.yLabelFormat[0]+(Math.round(x*this.props.yLabelFormat[2]* 100) / 100)+this.props.yLabelFormat[1])}
       />
-
         <VictoryGroup
           offset={this.props.barWidth}
-          style={{ data: { width: this.props.barWidth, transform: "translateX(0px)" } }}
+          style={{ data: { width: this.props.barWidth} }}
+          groupComponent={<g transform={`translate(${this.props.scsrOffset}, 0)`} />}
         >
         <VictoryStack >
           <VictoryBar key={0} style={{ data: { fill:  "#fff", opacity: "0" } }} data={data} x="date" y="sanction"/>

@@ -35,8 +35,8 @@ import ExpTracker from "./content/ExpTracker";
 import BudgetHighlights from "./content/BudgetHighlights";
 
 import "./App.scss";
-
-var monthsOfTheYr = require("./data/monthsOfTheYr.json");
+var yymmdd_ref = require("./data/yymmdd_ref.json");
+var scsr_offset = require("./data/scsr_offset.json");
 
 //initialize all filters with init value
 const initExpFilters = { "filters":{} };
@@ -46,10 +46,12 @@ const initDateTo = "2019-03-31";
 
 function App() {
   //set app level state containing raw data.
-  const [expData, setExpData] = useState();
+  const [expData, setExpData] = useState({ data : null , yLabelFormat : null });
   const [expDataLoading, setExpDataLoading] = useState(true);
 
   const getData = async (payload, dateFrom, dateTo) => {
+
+    const { months , years, years_short } = yymmdd_ref;
 
     console.time("Axios Fetch");
     console.log("Axios Fetch Started");
@@ -60,9 +62,13 @@ function App() {
     var daysDiff = ((dateToTime - dateFromTime) / (1000 * 3600 * 24)) + 2; //this calcs every day BETWEEN the given 2 dates. So add '2' to correct this
     console.log("daysDiff: " + daysDiff);
 
+
+
     const month_week = daysDiff > 125 ? "month" : "week"; //give month-wise breakdown if range > 125 days
     const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
+    const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
     console.log("first month:" + fromMonthIndex);
+    console.log("first year:" + fromYearIndex);
 
     try {
       const config = { headers: { "content-type": "application/json" } };
@@ -82,7 +88,10 @@ function App() {
             }
           })
         }
-        dataObj.date = month_week === "month" ? monthsOfTheYr[(i+fromMonthIndex)%12]+"_"+i : "w_"+i;
+
+        dataObj.date = month_week === "month" ?
+                       months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
+                       "w_"+(i+1)*7;
         dataObj.sanction = Math.round(record[0]*100)/100;
         dataObj.addition = Math.round(record[1]*100)/100;
         dataObj.savings = Math.round(record[2]*100)/100;
@@ -91,8 +100,44 @@ function App() {
         tempExpData.push(dataObj);
       })
 
+      const calcScsrOffset = (tempExpData) => {
+        const noOfDataRecords = tempExpData.length;
+        return scsr_offset.xOffset[noOfDataRecords - 1];
 
-      setExpData(tempExpData);
+      }
+
+      // console.log(calcScsrOffset(tempExpData));
+
+      const getYLabelFormatVals = (highestRecord) => {
+
+        const highestRecordLength = Math.floor(highestRecord).toString().length;
+
+        if( highestRecordLength > 5 ){
+          return [ 100000 , " L "]
+        }else if( highestRecordLength < 5 && highestRecordLength > 3 ){
+          return [ 100 , " K "]
+        }else{
+          return [ 1 , " "]
+        }
+
+        // let minDigitsToShow = 4
+        // let noOfZeroes = Math.floor(highestRecord).toString().length - minDigitsToShow
+        // const yLabelMultiplerAry = ["1"];
+        // for(var i = 0 ; i < noOfZeroes ; i++ ){
+        //   yLabelMultiplerAry.push("0");
+        // }
+        // return yLabelMultiplerAry.join("");
+      }
+      console.log("highestRecord: " + highestRecord);
+      console.log(getYLabelFormatVals(highestRecord)[0]);
+
+      setExpData(
+        {
+          yLabelFormat:["", getYLabelFormatVals(highestRecord)[1]+"INR",1/getYLabelFormatVals(highestRecord)[0]],
+          data:tempExpData,
+          scsrOffset: calcScsrOffset(tempExpData)
+        }
+      );
       setExpDataLoading(false);
 
     } catch (err) { console.log(err); }
