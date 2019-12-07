@@ -46,7 +46,17 @@ const initDateTo = "2019-03-31";
 
 function App() {
   //set app level state containing raw data.
-  const [expData, setExpData] = useState({ data : null , yLabelFormat : null });
+  const [expData, setExpData] = useState({
+                                  vizData : {
+                                    data : null ,
+                                    yLabelFormat : null,
+                                    scsrOffset : null
+                                  },
+                                  tableData : {
+                                  	headers: [],
+                                  	rows: []
+                                  }
+                                });
   const [expDataLoading, setExpDataLoading] = useState(true);
 
   const getData = async (payload, dateFrom, dateTo) => {
@@ -78,6 +88,10 @@ function App() {
       console.log("raw data from API: ");
       console.log(res.data.records);
       var tempExpData = [];
+      var tempTableData = {
+        headers : [],
+        rows : []
+      };
       var highestRecord = 0;
       res.data.records.map((record, i) => {
         var dataObj = {};
@@ -106,39 +120,48 @@ function App() {
 
       }
 
-      // console.log(calcScsrOffset(tempExpData));
-
       const getYLabelFormatVals = (highestRecord) => {
-
         const highestRecordLength = Math.floor(highestRecord).toString().length;
-
-        if( highestRecordLength > 5 ){
-          return [ 100000 , " L "]
-        }else if( highestRecordLength < 5 && highestRecordLength > 3 ){
-          return [ 100 , " K "]
-        }else{
-          return [ 1 , " "]
-        }
-
-        // let minDigitsToShow = 4
-        // let noOfZeroes = Math.floor(highestRecord).toString().length - minDigitsToShow
-        // const yLabelMultiplerAry = ["1"];
-        // for(var i = 0 ; i < noOfZeroes ; i++ ){
-        //   yLabelMultiplerAry.push("0");
-        // }
-        // return yLabelMultiplerAry.join("");
+        if( highestRecordLength > 5 ){ return [ 100000 , " L "] }
+        else if( highestRecordLength < 5 && highestRecordLength > 3 ){ return [ 100 , " K "] }
+        else{ return [ 1 , " "] }
       }
+
+      //setup exp details table data
+      tempExpData.map((d, i) => {
+
+      	i === 0 && tempTableData.headers.push(
+          { key: 'date', header: 'Date' },
+          { key: 'sanction', header: 'Sanction' },
+          { key: 'addition', header: 'Addition' },
+          { key: 'savings', header: 'Savings' },
+          { key: 'revised', header: 'Revised' }
+        );
+
+      	tempTableData.rows.push({
+      		id: i,
+      		'date': d.date,
+      		'sanction': Math.round(d.sanction*100)/100,
+      		'addition': Math.round(d.addition*100)/100,
+      		'savings': Math.round(d.savings*100)/100,
+      		'revised': Math.round(d.revised*100)/100
+      	})
+      })
+
       console.log("highestRecord: " + highestRecord);
       console.log(getYLabelFormatVals(highestRecord)[0]);
 
-      setExpData(
-        {
+      setExpData({
+        vizData : {
           yLabelFormat:["", getYLabelFormatVals(highestRecord)[1]+"INR",1/getYLabelFormatVals(highestRecord)[0]],
           data:tempExpData,
           scsrOffset: calcScsrOffset(tempExpData)
-        }
-      );
+        },
+        tableData : tempTableData
+      });
       setExpDataLoading(false);
+      console.log("tableData");
+      console.log(tempTableData);
 
     } catch (err) { console.log(err); }
 

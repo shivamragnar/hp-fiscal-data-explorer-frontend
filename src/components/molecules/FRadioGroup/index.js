@@ -12,16 +12,16 @@ const FRadioGroup = props => (
         labelPosition="right"
         legend="Group Legend"
         name={props.name}
-        onChange={function noRefCheck(){}}
+        onChange={props.onChange}
         orientation="horizontal"
-        valueSelected="default-selected"
+        valueSelected={props.valueSelected}
       >
       {
-        props.radioButtons.map((rbutton, i) =>(
+        props.items.map((rbutton, i) =>(
           <RadioButton
             key={i}
             id= {rbutton.id}
-            labelText= {rbutton.labelText}
+            labelText= {rbutton.label}
             value= {rbutton.value}
           />
           )

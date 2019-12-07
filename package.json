@@ -16,6 +16,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-bubble-chart": "^0.4.0",
+    "react-csv": "^1.1.2",
     "react-d3-axis": "^0.1.2",
     "react-dom": "^16.10.1",
     "react-leaflet": "^2.4.0",

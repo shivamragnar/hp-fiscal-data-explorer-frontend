@@ -1,12 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
+//download files components
+import { CSVLink, CSVDownload } from "react-csv";
 
 //custom components
+import FButton from '../../components/atoms/FButton';
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
@@ -57,14 +61,16 @@ const sampleHeaders = [{
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
 
-const props = {
-	FTable: { rows: sampleRows, headers: sampleHeaders },
-	FSASRChart: { yLabelFormat: [""," L INR",1/100000] }
-}
+
 
 var expFilterHierarchy = require("../../data/expFilterHierarchy.json");
 
 var rawFilterData;
+
+
+
+
+
 
 //this will store all the possible options the various filters could have.
 const filtersData = [
@@ -97,24 +103,58 @@ const filtersData = [
 		val: [
 			{ dd_name: "sub_minor", id : 'all', label : 'All' },
 		]
+	},
+	{
+		key: 'budget',
+		val: [
+			{ dd_name: "budget", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'voted_charged',
+		val: [
+			{ dd_name: "voted_charged", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'plan_nonplan',
+		val: [
+			{ dd_name: "plan_nonplan", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'SOE',
+		val: [
+			{ dd_name: "SOE", id : 'all', label : 'All' },
+		]
 	}
+
 ];
 
 //initialize filters at component level
 var expFilters;
 var dateFrom;
 var dateTo;
+var monthPickerSelectedRange = {years:[2018, 2019], months:[4, 3]} //default selected range
 
 
-const ExpDetails = ( { expData : { data, yLabelFormat, scsrOffset } , expDataLoading, getData, initExpFilters,  initDateFrom, initDateTo } ) => {
+const ExpDetails = ( { expData : { vizData : { data, yLabelFormat, scsrOffset }, tableData : { headers, rows }  } , expDataLoading, getData, initExpFilters,  initDateFrom, initDateTo } ) => {
 
-
+  //download JSON
+	const convertDataToJson = (data) => {
+		const dataToJson = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+		return dataToJson;
+	}
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 
 	//1
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+
+	const onRadioChange = (value, name) => {
+		console.log(value + "," + name);
+	}
 
 	//2
 	const onFilterChange = (e) => {
@@ -194,6 +234,8 @@ const ExpDetails = ( { expData : { data, yLabelFormat, scsrOffset } , expDataLoa
 		const { year : fromYear, month : fromMonth } = newDateRange.from;
 		const { year : toYear, month : toMonth } = newDateRange.to;
 
+		monthPickerSelectedRange = {years:[fromYear, toYear], months:[fromMonth, toMonth]};
+
 		dateFrom = fromYear.toString()+ "-" + ( fromMonth < 10 ? "0" : "") + fromMonth.toString() + "-01" ;
 		dateTo = toYear.toString() + "-" + //YY
 						 ( toMonth < 10 ? "0" : "") + toMonth.toString() + "-" + //MM
@@ -246,40 +288,60 @@ const ExpDetails = ( { expData : { data, yLabelFormat, scsrOffset } , expDataLoa
 	}, []);
 
 	var currentVizComp;
-	if(currentVizType === vizTypes[0]){
-		if(expDataLoading === true){
-			currentVizComp = <div>Loading...</div>;
-		}else{
-			console.log("loading is finished");
-			currentVizComp = <FSASRChart
-													data={data}
-													yLabelFormat={yLabelFormat}
-													scsrOffset={scsrOffset}
-													/>;
-		}
+	if(expDataLoading === true){
+		currentVizComp = <div>Loading...</div>;
 	}else{
-		// currentVizComp = <FTable {...props.FTable}  />;
-		currentVizComp = <div>this is a data table</div>;
-	}
+		if(currentVizType === vizTypes[0]){
+				currentVizComp = <Fragment>
+													<div className="content-switcher-wrapper">
+														<ContentSwitcher onChange={switchVizType} >
+															<Switch  text="SASR Chart" />
+															<Switch  text="Table" />
+														</ContentSwitcher>
+													</div>
+													<div>
+														<FSASRChart
+															data={data}
+															yLabelFormat={yLabelFormat}
+															scsrOffset={scsrOffset}
+															/>
+													</div>
+											   </Fragment>;
 
+		}else{
+			currentVizComp = <Fragment>
+												<div className="content-switcher-wrapper">
+													<ContentSwitcher onChange={switchVizType} >
+														<Switch  text="SASR Chart" />
+														<Switch  text="Table" />
+													</ContentSwitcher>
+												</div>
+												<div>
+
+													<CSVLink data={rows}><FButton>DOWNLOAD CSV</FButton></CSVLink>
+													<a href={`data:${convertDataToJson(rows)}`} download="exp_details_data.json"><FButton>DOWNLOAD JSON</FButton></a>
+
+													<FTable
+														rows={rows}
+														headers={headers}
+														onClickDownloadBtn={(e) => { console.log(e)}}
+													  />
+												</div>
+											 </Fragment>;
+
+		}
+	}
 	return (
 		<div>
         <div className="data-viz-col exp-details">
 					<FMonthPicker
-						defaultSelect = {{years:[2018, 2019], months:[4, 3]}}
+						defaultSelect = {monthPickerSelectedRange}
 						dateRange = {{years:[2018, 2019], months:[1, 3]}}
 						onDateRangeSet={onDateRangeSet}
 					/>
 
-					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchVizType} >
-              <Switch  text="SASR Chart" />
-              <Switch  text="Table" />
-            </ContentSwitcher>
-          </div>
-          <div>
             {currentVizComp}
-          </div>
+
         </div>
 			<div className="filter-col-wrapper">
         <div className="filter-col">
@@ -328,30 +390,42 @@ const ExpDetails = ( { expData : { data, yLabelFormat, scsrOffset } , expDataLoa
 						className = "filter-col--ops"
 						titleText = "Budget"
 						label = "All"
-					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "SOE"
-						label = "All"
+						onChange = {onFilterChange}
+						items = {filtersData[5].val}
+						selectedItem = { expFilters && expFilters.filters.budget ? expFilters.filters.budget : "All" }
 					/>
 					<FRadioGroup
 						className = "filter-col--ops"
 						name = "plan_nonplan"
 						titleText = ""
-						radioButtons = {[
-							{id:"plan", labelText: "Plan", value: "default-selected"},
-					    {id:"non-plan", labelText: "Non Plan", value: "standard"}
+						onChange = {(value, name) => onRadioChange(value, name)}
+						items = {[
+							{ id:"p_np_all", label: "All", value: "all"},
+							{ id:"plan", label: "Plan", value: "plan"},
+							{ id:"nonplan", label: "Non Plan", value: "nonplan"}
 						]}
+						valueSelected = { expFilters && expFilters.filters.voted_charged ? expFilters.filters.voted_charged : "all" }
 					/>
 					<FRadioGroup
 						className = "filter-col--ops"
 						name = "voted_charged"
 						titleText = ""
-						radioButtons = {[
-							{id:"voted", labelText: "Voted", value: "default-selected"},
-							{id:"charged", labelText: "Charged", value: "standard"}
+						onChange = {(value, name) => onRadioChange(value, name)}
+						items = {[
+							{ id:"v_c_all", label: "All", value: "all"},
+							{ id:"voted", label: "Voted", value: "voted"},
+							{ id:"charged", label: "Charged", value: "charged"}
 						]}
-					/>
+						valueSelected = { expFilters && expFilters.filters.voted_charged ? expFilters.filters.voted_charged : "all" }
+					 />
+					 <FDropdown
+ 						className = "filter-col--ops"
+ 						titleText = "SOE"
+ 						label = "All"
+ 						onChange = {onFilterChange}
+ 						items = {filtersData[8].val}
+ 						selectedItem = { expFilters && expFilters.filters.SOE ? expFilters.filters.SOE : "All" }
+ 					/>
         </div>
 			</div>
     </div>

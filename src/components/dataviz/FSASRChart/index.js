@@ -70,7 +70,7 @@ class FSASRChart extends Component {
           groupComponent={<g transform={`translate(${this.props.scsrOffset}, 0)`} />}
           labelComponent={<VictoryTooltip
                             labelComponent={<CustomLabel/>}
-                            flyoutComponent={<CustomFlyout/>}
+                            flyoutComponent={<g></g>}
                             />}
 
         >
@@ -138,15 +138,13 @@ class CustomLabel extends React.Component {
   }
 }
 
-class CustomFlyout extends React.Component {
+class HideFlyout extends React.Component {
   render() {
     const {x, y, orientation} = this.props;
     const newY = orientation === "bottom" ? y - 35 : y + 35;
     return (
       <g>
-        <circle cx={x} cy={newY} r="20" stroke="tomato" fill="none"/>
-        <circle cx={x} cy={newY} r="25" stroke="orange" fill="none"/>
-        <circle cx={x} cy={newY} r="30" stroke="gold" fill="none"/>
+
       </g>
     );
   }

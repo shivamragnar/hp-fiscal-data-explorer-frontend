@@ -55,7 +55,7 @@ class FTable extends Component {
                     <TableToolbar>
                         <TableToolbarContent>
                           <TableToolbarSearch  onChange={onInputChange} />
-                          <TableToolbarAction> <Download16/> </TableToolbarAction>
+                          <TableToolbarAction onClick={this.props.onClickDownloadBtn}> <Download16/> </TableToolbarAction>
                           {
                             // <Button onClick={() => this.consoleFilteredRows(rows)} small kind="primary">
                             //   Add new
