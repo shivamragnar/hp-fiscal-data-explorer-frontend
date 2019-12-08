@@ -36,6 +36,77 @@ var { exp_demandwise : filterOrderRef } = require("../../data/filters_ref.json")
 const vizTypes = ["FSASR", "FTable"];
 
 
+
+var rawFilterData;
+
+
+
+
+
+
+//this will store all the possible options the various filters could have.
+const allFiltersData = [
+	{
+		key: 'demand',
+		val: [
+			{ filter_name: "demand", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'major',
+		val: [
+			{ filter_name: "major", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'sub_major',
+		val: [
+			{ filter_name: "sub_major", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'minor',
+		val: [
+			{ filter_name: "minor", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'sub_minor',
+		val: [
+			{ filter_name: "sub_minor", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'budget',
+		val: [
+			{ filter_name: "budget", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'voted_charged',
+		val: [
+			{ filter_name: "voted_charged", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'plan_nonplan',
+		val: [
+			{ filter_name: "plan_nonplan", id : 'all', label : 'All' },
+		]
+	},
+	{
+		key: 'SOE',
+		val: [
+			{ filter_name: "SOE", id : 'all', label : 'All' },
+		]
+	}
+
+];
+
+//initialize filters at component level
+// var activeFilters;
+// var dateFrom;
+// var dateTo;
 var monthPickerSelectedRange = {years:[2018, 2019], months:[4, 3]} //default selected range
 
 
@@ -48,12 +119,9 @@ const ExpDetails = ( { exp_demandwise : {
 												  activeFilters,
 												  dateRange
 											 },
-											 exp_demandwise_filters : { allFiltersData, rawFilterData },
 											 getExpDemandwiseData } ) => {
 
 
-	console.log("ALL FILTERS DATA");
-	console.log(allFiltersData);
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
@@ -144,9 +212,37 @@ const ExpDetails = ( { exp_demandwise : {
 		getExpDemandwiseData(activeFilters, [dateFrom, dateTo]); //update expData state at App level
 	}
 
+	//3 --- ACTION : POPULATE FILTERS WITH OPTIONS
+	const getFiltersData = async () => {
+    console.time("Axios Fetching Filters"); console.log("Fetching Filters Started");
+
+    try {
+			//fetch raw filter data
+			rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads");
+			console.log('filters!: '); console.log(rawFilterData);
+
+			//populate all dropdown filters' data from the raw response provided by API
+			allFiltersData.map((filter, i) => {
+				rawFilterData.data.records.map(child_arr => {
+					if(filter.val.some(item => item.id === child_arr[i]) !== true){
+						const filterOption = {
+							filter_name: filter.key,
+							id: child_arr[i],
+							label: child_arr[i]
+						}
+						filter.val.push(filterOption);
+					}
+				})
+			})
+			console.log("allfiltersData"); console.log(allFiltersData);
+
+    } catch (err) { console.log(err); }
+
+    console.timeEnd("Axios Fetching Filters");
+  };
 
 	useEffect(() => {
-		// getFiltersData();
+		getFiltersData();
 	}, []);
 
 
@@ -201,7 +297,7 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Demand"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[0] && allFiltersData[0].val}
+						items = {allFiltersData[0].val}
 						selectedItem = { activeFilters && activeFilters.filters.demand ? activeFilters.filters.demand : "All" }
 					/>
 					<FDropdown
@@ -209,7 +305,7 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Major"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[1] && allFiltersData[1].val}
+						items = {allFiltersData[1].val}
 						selectedItem = { activeFilters && activeFilters.filters.major ? activeFilters.filters.major : "All" }
 					/>
 					<FDropdown
@@ -217,7 +313,7 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Sub Major"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[2] && allFiltersData[2].val}
+						items = {allFiltersData[2].val}
 						selectedItem = { activeFilters && activeFilters.filters.sub_major ? activeFilters.filters.sub_major : "All" }
 					/>
 					<FDropdown
@@ -225,7 +321,7 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Minor"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[3] && allFiltersData[3].val}
+						items = {allFiltersData[3].val}
 						selectedItem = { activeFilters && activeFilters.filters.minor ? activeFilters.filters.minor : "All" }
 					/>
 					<FDropdown
@@ -233,7 +329,7 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Sub Minor"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[4] && allFiltersData[4].val}
+						items = {allFiltersData[4].val}
 						selectedItem = { activeFilters && activeFilters.filters.sub_minor ? activeFilters.filters.sub_minor : "All" }
 					/>
 					<FDropdown
@@ -241,15 +337,15 @@ const ExpDetails = ( { exp_demandwise : {
 						titleText = "Budget"
 						label = "All"
 						onChange = {onFilterChange}
-						items = {allFiltersData[5] && allFiltersData[5].val}
+						items = {allFiltersData[5].val}
 						selectedItem = { activeFilters && activeFilters.filters.budget ? activeFilters.filters.budget : "All" }
 					/>
 					<FRadioGroup
 						className = "filter-col--ops"
-						name = "voted_charged"
+						name = "plan_nonplan"
 						titleText = ""
 						onChange = {(value, name) => onRadioChange(value, name)}
-						items = {allFiltersData[6] && allFiltersData[6].val}
+						items = {allFiltersData[6].val}
 						valueSelected = { activeFilters && activeFilters.filters.voted_charged ? activeFilters.filters.voted_charged : "all" }
 					/>
 					<FRadioGroup
@@ -269,7 +365,7 @@ const ExpDetails = ( { exp_demandwise : {
  						titleText = "SOE"
  						label = "All"
  						onChange = {onFilterChange}
- 						items = {allFiltersData[8] && allFiltersData[8].val}
+ 						items = {allFiltersData[8].val}
  						selectedItem = { activeFilters && activeFilters.filters.SOE ? activeFilters.filters.SOE : "All" }
  					/>
         </div>
@@ -280,13 +376,11 @@ const ExpDetails = ( { exp_demandwise : {
 
 ExpDetails.propTypes = {
 	exp_demandwise : PropTypes.object.isRequired,
-	exp_demandwise_filters : PropTypes.object.isRequired,
 	getExpDemandwiseData : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-	exp_demandwise : state.exp_demandwise,
-	exp_demandwise_filters : state.exp_demandwise_filters
+	exp_demandwise : state.exp_demandwise
 })
 
 export default connect(mapStateToProps, { getExpDemandwiseData })(ExpDetails);
