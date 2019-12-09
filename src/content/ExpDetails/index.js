@@ -257,13 +257,9 @@ const ExpDetails = ( { exp_demandwise : {
 						name = "plan_nonplan"
 						titleText = ""
 						onChange = {(value, name) => onRadioChange(value, name)}
-						items = {[
-							{ filter_name:"plan_nonplan", label: "All", id: "all"},
-							{ filter_name:"plan_nonplan", label: "Plan", id: "plan"},
-							{ filter_name:"plan_nonplan", label: "Nonplan", id: "nonplan"}
-						]}
+						items = {allFiltersData[7] && allFiltersData[7].val}
 						valueSelected = { activeFilters && activeFilters.filters.plan_nonplan ? activeFilters.filters.plan_nonplan : "all" }
-					 />
+					/>
 					 <FDropdown
  						className = "filter-col--ops"
  						titleText = "SOE"
