@@ -30,9 +30,6 @@ import Home from "./content/Home";
 import AboutUs from "./content/AboutUs";
 import ContactUs from "./content/ContactUs";
 
-//test comp
-import Idb_test from "./content/Idb_test";
-
 //dictionary to convert exp_details data to objects
 import exp_details_keys from "./dictionary/exp_details_keys.json";
 
@@ -75,7 +72,6 @@ const App = ({ getExpDemandwiseData, getExpDemandwiseFiltersData }) => {
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpTracker} />
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
-            <Route exact path="/idb_test" component={Idb_test} />
           </Switch>
         </Content>
       </div>

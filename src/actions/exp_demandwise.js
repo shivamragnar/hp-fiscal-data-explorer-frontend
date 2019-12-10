@@ -6,6 +6,10 @@ import {
   GET_EXP_DEMANDWISE_FILTERS_DATA
 } from "./types";
 
+import { getWeekwiseDates } from '../utils/functions';
+
+
+
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var scsr_offset = require("../data/scsr_offset.json");
@@ -35,7 +39,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     const month_week = daysDiff > 125 ? "month" : "week"; //give month-wise breakdown if range > 125 days
     const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
     const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-
+    const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
 
       const config = { headers: { "content-type": "application/json" } };
       const res = await axios.post(
@@ -48,7 +52,9 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
         headers : [],
         rows : []
       };
+
       var highestRecord = 0;
+      tempExpData.push({"date":(month_week === "month" ? " " : 0), "sanction": 0, "addition": 0, "savings": 0, "revised": 0, "mark": 0});
       res.data.records.map((record, i) => {
         var dataObj = {};
         if(i === 0){ //first we identify highest record to define the 'height of mark' appropriately
@@ -58,10 +64,17 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
             }
           })
         }
+        // console.log("FromMOnthINdex")
+        // console.log(fromMonthIndex);
+        // console.log(toMonthIndex);
+        // getWeekwiseDates(fromMonthIndex, toMonthIndex);
+
 
         dataObj.date = month_week === "month" ?
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                       "w_"+(i+1)*7;
+                       // "w_"+(i+1)*7
+                       getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis[i];
+                       ;
         dataObj.sanction = Math.round(record[0]*100)/100;
         dataObj.addition = Math.round(record[1]*100)/100;
         dataObj.savings = Math.round(record[2]*100)/100;
@@ -69,6 +82,8 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
         dataObj.mark = Math.round((1/100)*highestRecord);
         tempExpData.push(dataObj);
       })
+
+      console.log(tempExpData);
 
       const calcScsrOffset = (tempExpData) => {
         const noOfDataRecords = tempExpData.length;
@@ -114,6 +129,8 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
         data: {
           vizData: {
             yLabelFormat:["", getYLabelFormatVals(highestRecord)[1]+"INR",1/getYLabelFormatVals(highestRecord)[0]],
+            xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
+            xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
             data:tempExpData,
             scsrOffset: calcScsrOffset(tempExpData)
           },

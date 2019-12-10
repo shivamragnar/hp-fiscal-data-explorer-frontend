@@ -80,16 +80,16 @@ class ExpSummary extends Component {
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
 
-  async getData(apiUrl){
-    try{
-      const res = await axios.get(apiUrl);
-      props.FForce_Y.nodes = res.data.records;
-      console.log(res);
-      this.setState({dataLoading : false});
-    }catch(err){
-      console.log(err);
-    }
-  }
+  // async getData(apiUrl){
+  //   try{
+  //     const res = await axios.get(apiUrl);
+  //     props.FForce_Y.nodes = res.data.records;
+  //     console.log(res);
+  //     this.setState({dataLoading : false});
+  //   }catch(err){
+  //     console.log(err);
+  //   }
+  // }
 
 	switchSec1VizType(e) {
 		this.setState({ currentSec1VizType: sec1VizTypes[e] })
@@ -115,8 +115,6 @@ class ExpSummary extends Component {
     }else{
       currentSec1VizComp = <FTable {...props.FTable}  />;
     }
-
-
 
 
     return (

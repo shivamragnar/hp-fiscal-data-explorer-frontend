@@ -41,10 +41,9 @@ class FSASRChart extends Component {
       <VictoryChart
 
         theme={VictoryTheme.material}
-        domainPadding={{x: 30}}
+        domainPadding={{x: 0}}
         width= {600}
         height= {300}
-
 
       >
         <VictoryAxis
@@ -56,7 +55,7 @@ class FSASRChart extends Component {
           />
         }
         tickFormat={this.props.xLabelFormat}
-        tickValues={this.props.xLabelPos}
+        tickValues={this.props.xLabelVals}
       />
       <VictoryAxis
         dependentAxis
