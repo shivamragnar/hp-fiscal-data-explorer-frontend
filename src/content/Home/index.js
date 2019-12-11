@@ -6,6 +6,7 @@ import { getWeekwiseDates } from '../../utils/functions';
 //custom components
 
 import FSASRChart from '../../components/dataviz/FSASRChart';
+import FBarChart from '../../components/dataviz/FBarChart';
 import * as d3 from "d3";
 
 //sample data
@@ -18,6 +19,14 @@ var testData = [
   { date: 21, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
   { date: 28, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
   { date: 31, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
+]
+
+var barData = [
+
+  { date: "jan", receipt: 3000 },
+  { date: "feb", receipt: 4000  },
+  { date: "mar", receipt: 3000  }
+
 ]
 
 var yymmdd_ref = require("../../data/yymmdd_ref.json");
@@ -57,30 +66,7 @@ class Home extends Component {
     const toMonthIndex = parseInt(initDateTo.split("-")[1])-1;
 
     console.log(getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis[5])
-    //
-    // var totWeekWiseDays = [];
-    //
-    // for(var i = fromMonthIndex ; i <= toMonthIndex ; i++){
-    //     const jsDateFrom = new Date(`2018-0${i+1}-01`)
-    //     const dayFromIndex = jsDateFrom.getDay()
-    //     const totDaysCurrMonth = parseInt(yymmdd_ref.noOfDays[i]);
-    //     const firstWeekend = (7 - dayFromIndex);
-    //     const weekwiseDaysOfMonth = [firstWeekend]; //a week = SUN to SAT
-    //     let weekendCounter = firstWeekend ;
-    //     while((weekendCounter+7) <= totDaysCurrMonth){
-    //       weekendCounter += 7;
-    //       weekwiseDaysOfMonth.push(weekendCounter)
-    //     }
-    //     if(i === toMonthIndex){ //if this is the last month only then add the end of month date
-    //       weekwiseDaysOfMonth.push(totDaysCurrMonth);
-    //     }
-    //
-    //     totWeekWiseDays = totWeekWiseDays.concat(weekwiseDaysOfMonth);
-    // }
-
-
-
-
+  
     return (
       <div>
       <div style={{width:"100%"}}>
@@ -91,7 +77,13 @@ class Home extends Component {
           {
             // <FForce_col data={this.state.data} />
           }
+          <FBarChart
+            data={barData}
+            dataToX="date"
+            dataPoints={["receipt"]}
+            yLabelFormat={["","",1]}
 
+          />
       </div>
     </div>
     )

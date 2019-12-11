@@ -1,7 +1,7 @@
 import {
-  GET_EXP_DEMANDWISE_DATA,
-  SET_DATA_LOADING_EXP,
-  EXP_DEMANDWISE_DATA_ERROR } from "../actions/types";
+  GET_RECEIPTS_DATA,
+  SET_DATA_LOADING_RECEIPTS,
+  RECEIPTS_DATA_ERROR } from "../actions/types";
 
 const initialState = {
   data: { vizData:{}, tableData:{}},
@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_EXP_DEMANDWISE_DATA:
+    case GET_RECEIPTS_DATA:
       return {
         ...state,
         data: payload.data,
@@ -23,12 +23,12 @@ export default function(state = initialState, action) {
         activeFilters: payload.activeFilters,
         loading: false
       };
-    case SET_DATA_LOADING_EXP:
+    case SET_DATA_LOADING_RECEIPTS:
       return {
         ...state,
         loading: true
       };
-    case EXP_DEMANDWISE_DATA_ERROR:
+    case RECEIPTS_DATA_ERROR:
       return {
         ...state,
         error: payload,

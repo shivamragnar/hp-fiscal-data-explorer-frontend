@@ -2,11 +2,15 @@ import axios from "axios";
 import {
   GET_EXP_DEMANDWISE_FILTERS_DATA,
   UPDATE_EXP_DEMANDWISE_ON_FILTER_CHANGE,
+  UPDATE_EXP_DEMANDWISE_ON_DATERANGE_CHANGE,
   EXP_DEMANDWISE_FILTERS_DATA_ERROR
 } from "./types";
 import { getExpDemandwiseData } from "./exp_demandwise";
 
+import { onDateRangeChange } from "../utils/functions";
+
 var { exp_demandwise : filterOrderRef } = require("../data/filters_ref.json");
+var yymmdd_ref = require("../data/yymmdd_ref.json");
 
 export const getExpDemandwiseFiltersData = () => async dispatch => {
   try {
@@ -106,4 +110,8 @@ export const updateExpDemandwiseOnFilterChange = (e, activeFilters, allFiltersDa
   })
 
   dispatch(getExpDemandwiseData(activeFilters, dateRange)); //update expData state at App level
+}
+
+export const updateExpDemandwiseOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => { 
+  dispatch(getExpDemandwiseData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
 }

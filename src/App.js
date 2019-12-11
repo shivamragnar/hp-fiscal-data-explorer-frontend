@@ -36,6 +36,7 @@ import exp_details_keys from "./dictionary/exp_details_keys.json";
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
 import ExpTracker from "./content/ExpTracker";
+import Receipts from "./content/Receipts";
 
 import BudgetHighlights from "./content/BudgetHighlights";
 
@@ -45,14 +46,18 @@ import "./App.scss";
 
 
 
-const App = ({ getExpDemandwiseData, getExpDemandwiseFiltersData }) => {
+const App = ({ exp_demandwise : {
+								  activeFilters : initExpFilters,
+								  dateRange : initDateRange
+							 }, getExpDemandwiseData,
+               getExpDemandwiseFiltersData }) => {
 
- const initExpFilters = { "filters":{} };
- const initDateFrom = "2018-04-01";
- const initDateTo = "2019-03-31";
+ // const initExpFilters = { "filters":{} };
+ // const initDateFrom = "2018-04-01";
+ // const initDateTo = "2019-03-31";
 
  useEffect(() => {
-   getExpDemandwiseData(initExpFilters, [initDateFrom, initDateTo]);
+   getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
    getExpDemandwiseFiltersData();
  }, []);
 
@@ -71,6 +76,7 @@ const App = ({ getExpDemandwiseData, getExpDemandwiseFiltersData }) => {
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpTracker} />
+            <Route exact path="/receipts" component={Receipts} />
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>
         </Content>
@@ -79,11 +85,13 @@ const App = ({ getExpDemandwiseData, getExpDemandwiseFiltersData }) => {
 }
 
 App.propTypes = {
-  exp_demandwise: PropTypes.array.isRequired,
+  exp_demandwise : PropTypes.object.isRequired,
   getExpDemandwiseData : PropTypes.func.isRequired,
   getExpDemandwiseFiltersData : PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({ })
+const mapStateToProps = state => ({
+  exp_demandwise : state.exp_demandwise
+})
 
 export default connect(mapStateToProps, { getExpDemandwiseData, getExpDemandwiseFiltersData })(App);

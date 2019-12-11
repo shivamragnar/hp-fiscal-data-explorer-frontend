@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 //actions
 import { getExpDemandwiseData } from '../../actions/exp_demandwise';
 import { updateExpDemandwiseOnFilterChange } from '../../actions/exp_demandwise_filters';
+import { updateExpDemandwiseOnDateRangeChange } from '../../actions/exp_demandwise_filters';
 
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
@@ -36,10 +37,6 @@ var { exp_demandwise : filterOrderRef } = require("../../data/filters_ref.json")
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
 
-
-var monthPickerSelectedRange = {years:[2018, 2019], months:[4, 3]} //default selected range
-
-
 const ExpDetails = ( { exp_demandwise : {
 													data : {
 														vizData : { data, yLabelFormat, xLabelVals, xLabelFormat, scsrOffset } ,
@@ -51,52 +48,28 @@ const ExpDetails = ( { exp_demandwise : {
 											 },
 											 exp_demandwise_filters : { allFiltersData, rawFilterData },
 											 getExpDemandwiseData,
-											 updateExpDemandwiseOnFilterChange
+											 updateExpDemandwiseOnFilterChange,
+											 updateExpDemandwiseOnDateRangeChange
 										  	} ) => {
 
 	console.log("allFiltersData"); console.log(allFiltersData);
+
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-
-	//1
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
 	const onRadioChange = (value, name) => {
 		console.log(value + "," + name);
 		onFilterChange({selectedItem:{filter_name:name,id:value}});
-	}
+  }
 
 	const onFilterChange = (e) => {
 		updateExpDemandwiseOnFilterChange(e, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
-
-	//2 ---- ACTION : DATE RANGE FILTER
-	const onDateRangeSet = (newDateRange) => { //the month number-range is coming in as 1 - 12
-
-		const { year : fromYear, month : fromMonth } = newDateRange.from;
-		const { year : toYear, month : toMonth } = newDateRange.to;
-
-		monthPickerSelectedRange = {years:[fromYear, toYear], months:[fromMonth, toMonth]};
-
-		const dateFrom = fromYear.toString()+ "-" + ( fromMonth < 10 ? "0" : "") + fromMonth.toString() + "-01" ;
-		const dateTo = toYear.toString() + "-" + //YY
-						 ( toMonth < 10 ? "0" : "") + toMonth.toString() + "-" + //MM
-						 ( toMonth !== 2 ? //dealing with day count of feb and leap year
-							 yymmdd_ref.noOfDays[toMonth-1] :
-							 yymmdd_ref.noOfDays[toMonth-1].split('_')[ (toYear%4 === 0 ? 1 : 0)] ) ; //DD
-
-		console.log("newFromMth " + dateFrom);
-		console.log("newToMth " + dateTo);
-
-		getExpDemandwiseData(activeFilters, [dateFrom, dateTo]); //update expData state at App level
+	const onDateRangeSet = (newDateRange) => {
+		updateExpDemandwiseOnDateRangeChange(newDateRange, activeFilters);
 	}
-
-
-	useEffect(() => {
-		// getFiltersData();
-	}, []);
-
 
 	const createDataUIComponent = () => {
 		if(loading === true){
@@ -137,8 +110,10 @@ const ExpDetails = ( { exp_demandwise : {
 		<div>
         <div className="data-viz-col exp-details">
 					<FMonthPicker
-						defaultSelect = {monthPickerSelectedRange}
-						dateRange = {{years:[2018, 2019], months:[1, 3]}}
+						defaultSelect = {{
+							years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+							months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+						dateRange = {{years:[2018, 2019], months:[4, 3]}}
 						onDateRangeSet={onDateRangeSet}
 					/>
 					{createDataUIComponent()}
@@ -228,7 +203,8 @@ ExpDetails.propTypes = {
 	exp_demandwise : PropTypes.object.isRequired,
 	exp_demandwise_filters : PropTypes.object.isRequired,
 	getExpDemandwiseData : PropTypes.func.isRequired,
-	updateExpDemandwiseOnFilterChange : PropTypes.func.isRequired
+	updateExpDemandwiseOnFilterChange : PropTypes.func.isRequired,
+	updateExpDemandwiseOnDateRangeChange : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -236,4 +212,4 @@ const mapStateToProps = state => ({
 	exp_demandwise_filters : state.exp_demandwise_filters
 })
 
-export default connect(mapStateToProps, { getExpDemandwiseData, updateExpDemandwiseOnFilterChange })(ExpDetails);
+export default connect(mapStateToProps, { getExpDemandwiseData, updateExpDemandwiseOnFilterChange, updateExpDemandwiseOnDateRangeChange })(ExpDetails);

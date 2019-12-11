@@ -7,11 +7,12 @@
 //  { someKeyForX: "value", someKeyForY1: "value", someKeyForY2, someKeyForYn },
 //  ...
 // ]
-//3 following props required: data, dataToX (string), dataPoints: [Array of Y1 to Yn keys as strings], yLabelFormat: [Array od prefix, suffix and multiplier]
+//3 following props required: data, dataToX (string), dataPoints: [Array of Y1 to Yn keys as strings], yLabelFormat: [Array of prefix, suffix and multiplier],
+//xLabelVals: [Array of actual numbers that plot the bars], xLabelFormat: [Array of actual stuff you want to show]
 
 
 import React, { Component} from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup, VictoryLabel } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup, VictoryLabel, VictoryTheme } from 'victory';
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -30,7 +31,9 @@ class FBarChart extends Component {
   render() {
     return (
       <VictoryChart
-        animate={{ duration: 1000, easing: "expOut" }}
+        theme={VictoryTheme.material}
+        width= {600}
+        height= {300}
       >
       <VictoryAxis
         tickLabelComponent={
@@ -39,6 +42,8 @@ class FBarChart extends Component {
             style={tickLabelStyle}
           />
         }
+        tickFormat={this.props.xLabelFormat}
+        tickValues={this.props.xLabelVals}
       />
       <VictoryAxis
         dependentAxis

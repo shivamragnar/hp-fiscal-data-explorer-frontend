@@ -1,24 +1,22 @@
 import axios from "axios";
-
-//redux dispatchers
 import {
-  GET_EXP_DEMANDWISE_DATA,
-  SET_DATA_LOADING_EXP,
-  EXP_DEMANDWISE_DATA_ERROR
+  GET_RECEIPTS_DATA,
+  SET_DATA_LOADING_RECEIPTS,
+  RECEIPTS_DATA_ERROR,
 } from "./types";
 
-//functions
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  calcScsrOffset,
   getDynamicYLabelFormatVals
 } from '../utils/functions';
+
+
 
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 
-export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch => {
+export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
   try {
 
     const [ dateFrom , dateTo ] = dateRange;
@@ -32,37 +30,32 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     const tempTableData = { headers : [], rows : [] };
 
     //0 SET LOADING TO TRUE
-    dispatch({ type: SET_DATA_LOADING_EXP, payload: {} });
+    dispatch({ type: SET_DATA_LOADING_RECEIPTS, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    console.time("Axios Fetch"); console.log("Axios Fetch Started");
+    console.time("Axios Fetch Receipts"); console.log("Axios Receipts Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
-    const res = await axios.post(
-      `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, activeFilters, config
+		const res = await axios.post(
+      `http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, activeFilters, config
     );
-    console.log("raw data from API: "); console.log(res.data.records);
+		console.log("receipts raw data"); console.log(res.data.records);
 
     //2 PREP DATA FOR VISUALIZATION
     var highestRecord = 0;
-    tempVizData.push({"date":(month_week === "month" ? " " : 0), "sanction": 0, "addition": 0, "savings": 0, "revised": 0, "mark": 0});
+    res.data.records.map((record, i) => {
+      if(record[0] > highestRecord){
+        highestRecord = record[0];
+      }
+    })
+
+    tempVizData.push({"date":(month_week === "month" ? " " : 0), "receipt": 0 });
     res.data.records.map((record, i) => {
       var dataObj = {};
-      if(i === 0){ //first we identify highest record to define the 'height of mark' appropriately
-        res.data.records.map((record, i) => {
-          if(record[0]+record[1] > highestRecord){
-            highestRecord = record[0]+record[1];
-          }
-        })
-      }
 
       dataObj.date = month_week === "month" ?
                      months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                      getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis[i];
-      dataObj.sanction = Math.round(record[0]*100)/100;
-      dataObj.addition = Math.round(record[1]*100)/100;
-      dataObj.savings = Math.round(record[2]*100)/100;
-      dataObj.revised = Math.round(record[3]*100)/100;
-      dataObj.mark = Math.round((1/100)*highestRecord);
+      dataObj.receipt = Math.round(record[0]*100)/100;
       tempVizData.push(dataObj);
     })
 
@@ -71,24 +64,18 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
 
     	i === 0 && tempTableData.headers.push(
         { key: 'date', header: 'Date' },
-        { key: 'sanction', header: 'Sanction' },
-        { key: 'addition', header: 'Addition' },
-        { key: 'savings', header: 'Savings' },
-        { key: 'revised', header: 'Revised' }
+        { key: 'receipt', header: 'Receipt' }
       );
 
     	tempTableData.rows.push({
     		id: i,
     		'date': d.date,
-    		'sanction': Math.round(d.sanction*100)/100,
-    		'addition': Math.round(d.addition*100)/100,
-    		'savings': Math.round(d.savings*100)/100,
-    		'revised': Math.round(d.revised*100)/100
+    		'receipt': Math.round(d.receipt*100)/100,
     	})
     })
 
     dispatch({
-      type: GET_EXP_DEMANDWISE_DATA,
+      type: GET_RECEIPTS_DATA,
       payload: {
         data: {
           vizData: {
@@ -96,7 +83,6 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
             xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
             xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
             data:tempVizData,
-            scsrOffset: calcScsrOffset(tempVizData)
           },
           tableData: tempTableData
         },
@@ -104,9 +90,10 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
         activeFilters: activeFilters
       }
     });
+
   } catch (err) {
     dispatch({
-      type: EXP_DEMANDWISE_DATA_ERROR,
+      type: RECEIPTS_DATA_ERROR,
       payload: {
         status: err.response.status
       }
