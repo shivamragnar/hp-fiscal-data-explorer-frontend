@@ -42,7 +42,7 @@ class FSASRChart extends Component {
 
         theme={VictoryTheme.material}
         domainPadding={{x: 0}}
-        width= {600}
+        width= {700}
         height= {300}
 
       >
@@ -140,7 +140,7 @@ class CustomTooltip extends React.Component {
 
     return (
       <g fontSize={7}>
-        <rect x={x} y={y} width={width} height={height} stroke="#dfdfdf" fill="#fff" opacity="0.8" />
+        <rect x={x} y={y} width={width} height={height} stroke="#dfdfdf" fill="#fff" opacity="0.9" />
         <g fontWeight={500}>
           <text x={x+dx_1} y={y+dy_1} letter-spacing="0.5" text-anchor="end"> SANCTION  : </text>
           <text x={x+dx_2} y={y+dy_1} text-anchor="start">{datum.sanction}</text>

@@ -32,7 +32,7 @@ class FBarChart extends Component {
     return (
       <VictoryChart
         theme={VictoryTheme.material}
-        width= {600}
+        width= {700}
         height= {300}
       >
       <VictoryAxis
