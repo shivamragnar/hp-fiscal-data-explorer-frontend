@@ -77,3 +77,42 @@ export const onDateRangeChange = ( newDateRange ) => { //the month number-range 
 
    return [dateFrom, dateTo];
 }
+
+//7
+export const recursFilterFetch = (allFiltersData, obj, idx) => {
+  Object.keys(obj).map(obj_key => {
+    if(obj[obj_key]){
+      if(allFiltersData[idx].val.some(item => item.id === obj_key) !== true){
+        const filterOption = {
+          filter_name: allFiltersData[idx].key,
+          id: obj_key,
+          label: obj_key
+        }
+        allFiltersData[idx].val.push(filterOption);
+      }
+      recursFilterFetch(allFiltersData, obj[obj_key], idx+1);
+    }
+  });
+}
+
+export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activeFilters) => {
+
+  Object.keys(obj).map(obj_key => {
+    if(obj[obj_key]){
+      if(obj_key === query){
+        results.push(obj[query]);
+        console.log("obj[query]");
+        console.log(obj[query]);
+      }
+
+      if(activeFilters.filters.hasOwnProperty(filterOrderRef[idx]) === true ){
+        if(activeFilters.filters[filterOrderRef[idx]] === obj_key.split("-")[0]){
+          recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters);
+        }
+      }else{
+        recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters);
+      }
+
+    }
+  });
+}

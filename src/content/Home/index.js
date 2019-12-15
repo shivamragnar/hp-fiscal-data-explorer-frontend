@@ -37,102 +37,39 @@ const Home = (props) =>  {
 
     const getFilterTest = async () => {
       try{
-        const res = await axios.get("http://13.126.189.78/api/acc_heads_test");
+        const res = await axios.get("http://13.126.189.78/api/acc_heads_desc");
         console.log("getFilterTest");
         console.log(res);
-        filChildFilters("01", res);
-
-
+        console.log(res.data.records["01-VIDHAN SABHA"]["2216-HOUSING"]);
+        filChildFilters(res, res.data.records["01-VIDHAN SABHA"]["2216-HOUSING"]);
       }catch(err){
         console.log(err);
       }
     }
 
-    const filChildFilters = (head, res) => {
-      console.log(res.data.records[head]);
+    const filChildFilters = (res, head = "all" ) => {
 
-      console.log("major");
-      console.log(Object.keys(res.data.records[head]));
+      var array_test = [
+        [],[],[],[],[],[],[],[],[],[],[],[],[],[]
+      ]
 
-      var array_0 = []
-      var sub_major = [];
-      var minor = [];
-      var sub_minor = [];
-      var budget = [];
-      var voted_charged = [];
-      var plan_nonplan = [];
-      var SOE = [];
-      //maybe passing count through is the answer.
-      const recurs = (obj) => {
-
+      const recurs = (obj, num) => {
         Object.keys(obj).map(key => {
           if(obj[key]){
-            console.log(Object.keys(obj[key]));
-            recurs(obj[key])
+            if(array_test[num].some(item => item === key) !== true){
+              array_test[num].push(key);
+            }
+            recurs(obj[key], num+1);
           }
         });
       }
 
+      head === "all" ? recurs(res.data.records,0) : recurs(head,0);
 
-
-
-
-      Object.keys(res.data.records[head]).map(key1 => {
-        sub_major = sub_major.concat(Object.keys(res.data.records[head][key1]));
-
-        Object.keys(res.data.records[head][key1]).map(key2 => {
-          minor = minor.concat(Object.keys(res.data.records[head][key1][key2]));
-
-          Object.keys(res.data.records[head][key1][key2]).map(key3 => {
-            sub_minor = sub_minor.concat(Object.keys(res.data.records[head][key1][key2][key3]));
-
-            Object.keys(res.data.records[head][key1][key2][key3]).map(key4 => {
-              budget = budget.concat(Object.keys(res.data.records[head][key1][key2][key3][key4]));
-
-              Object.keys(res.data.records[head][key1][key2][key3][key4]).map(key5 => {
-                voted_charged = voted_charged.concat(Object.keys(res.data.records[head][key1][key2][key3][key4][key5]));
-
-                Object.keys(res.data.records[head][key1][key2][key3][key4][key5]).map(key6 => {
-                  plan_nonplan = plan_nonplan.concat(Object.keys(res.data.records[head][key1][key2][key3][key4][key5][key6]));
-
-                  Object.keys(res.data.records[head][key1][key2][key3][key4][key5][key6]).map(key7 => {
-                    SOE = SOE.concat(Object.keys(res.data.records[head][key1][key2][key3][key4][key5][key6][key7]));
-                  })
-
-                })
-              })
-            })
-          })
-        })
-      })
-
-      console.log("sub-major");
-      console.log(sub_major);
-
-      console.log("minor");
-      console.log(minor);
-
-      console.log("sub_minor");
-      console.log(sub_minor);
-
-      console.log("budget");
-      console.log(budget);
-
-      console.log("voted_charged");
-      console.log(voted_charged);
-
-      console.log("plan_nonplan");
-      console.log(plan_nonplan);
-
-      console.log("SOE");
-      console.log(SOE);
 
       console.log("---------------------------")
-      recurs(res.data.records[head]);
+      console.log(array_test);
       console.log("---------------------------")
-
-
-
     }
 
     getFilterTest();
