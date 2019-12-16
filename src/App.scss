@@ -5,7 +5,10 @@
 
 //components styles
 @import './components/atoms/FButton/style.scss';
+@import './components/atoms/FLoading/style.scss';
 @import './components/molecules/FMonthPicker/style.scss';
+@import './components/molecules/FDropdown/style.scss';
+@import './components/molecules/FDownloadActionTooltip/style.scss';
 @import './components/organisms/FHeader1/style.scss';
 @import './components/organisms/FHeader2/style.scss';
 
@@ -40,7 +43,7 @@
   position: fixed;
   width: 30rem;
   left: 2rem;
-  top: 8rem;
+  top: 11rem;
   background-color: $extra_light_grey;
   padding: 2rem;
 
@@ -56,13 +59,25 @@
   }
 }
 
+//custom
+
+.f-light-grey{
+  color: $grey;
+}
+
+.f-page-title{
+  border-bottom: 1px solid $light_grey;
+  height: 3rem;
+  display: flex;
+}
+
 .filter-col-wrapper{
   height: 100vh;
   position: fixed;
   width: 16rem;
   left: 2rem;
   top: 0rem;
-  padding: 8rem 0 2rem 0;
+  padding: 11rem 0 2rem 0;
 
   .filter-col{
     background-color: $extra_light_grey;
@@ -79,8 +94,10 @@
 .data-viz-col{
   width: 100%;
   padding-left: 32rem;
+  padding-top: 2rem;
 
-  &.exp-details{
+  &.exp-details, &.receipts{
+
     padding-left: 18rem;
   }
 
@@ -89,7 +106,6 @@
   }
 
   @media screen and (max-width: 992px){
-    padding-top: 2rem;
     padding-left: 0;
   }
 }

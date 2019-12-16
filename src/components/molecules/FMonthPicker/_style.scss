@@ -1,13 +1,39 @@
+.f-month-picker {
+
+  padding-left: 1rem;
+
+  &> ul > li {
+  display: flex;
+  align-items: baseline;
+  }
+
+  .bx--label{
+    padding-right: 0.5rem;
+
+    &.bx--label--inline-dates{
+      padding-left: 0.5rem;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
 .f-month-picker--month-box {
   display: inline-flex;
   align-items: center;
   height: 40px;
-  border-bottom: 1px solid #000;
+  background-color: $extra_light_grey;
   cursor: pointer;
   padding: 0 1rem;
 
   &:hover{
-    background-color: #F3F3F3;
+    background-color: $light_grey;
+  }
+
+  .chevron-down{
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
   }
 }
 

@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import { getWeekwiseDates } from '../../utils/functions';
 //custom components
 
+
+
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FBarChart from '../../components/dataviz/FBarChart';
 import * as d3 from "d3";
@@ -86,6 +88,7 @@ const Home = (props) =>  {
     return (
       <div>
       <div style={{width:"100%"}}>
+    
         <FSASRChart
           data={testData}
           xLabelFormat={(t) => `${t} month`}

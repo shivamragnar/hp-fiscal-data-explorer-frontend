@@ -5,24 +5,34 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import Picker from 'react-month-picker'
 
+import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+
 var yymmdd_ref = require("../../../data/yymmdd_ref.json");
 
     class MonthBox extends Component {
         constructor(props, context) {
             super(props, context)
-            this.state = { value: this.props.value || 'N/A', }
+            this.state = {
+              value1: this.props.value1 || 'N/A',
+              value2: this.props.value2 || 'N/A'
+            }
             this._handleClick = this._handleClick.bind(this)
         }
 
         componentWillReceiveProps(nextProps){
-            this.setState({ value: nextProps.value || 'N/A', })
+            this.setState(
+              { value1: nextProps.value1 || 'N/A',
+                value2: nextProps.value2 || 'N/A'
+              }
+          )
         }
 
         render() {
           console.log(yymmdd_ref.months);
             return (
                 <div className="f-month-picker--month-box" onClick={this._handleClick}>
-                    <span>{this.state.value}</span>
+                    <span>{this.state.value1}</span><span className="bx--label bx--label--inline-dates">to</span><span>{this.state.value2}</span>
+                    <span className="chevron-down"><ChevronDown16 /></span>
                 </div>
             )
         }
@@ -94,7 +104,7 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
             return (
                 <ul>
                     <li>
-                        <label className="bx--label"><b>Pick A Span of Months</b></label>
+                        <label className="bx--label"><b>From</b></label>
                         <div className="edit">
                             <Picker
                                 ref="pickRange2"
@@ -105,7 +115,7 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
                                 onChange={this.handleRangeChange2}
                                 onDismiss={this.handleRangeDissmis2}
                             >
-                                <MonthBox value={makeText(mrange2.from) + ' ~ ' + makeText(mrange2.to)} onClick={this._handleClickRangeBox2} />
+                                <MonthBox value1={makeText(mrange2.from)} value2={makeText(mrange2.to)} onClick={this._handleClickRangeBox2} />
                             </Picker>
                         </div>
                     </li>
@@ -173,7 +183,7 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
 
         render() {
             return (
-                <div className="list-area">
+                <div className="list-area f-month-picker">
                     <List
                       onDateRangeSet={this.props.onDateRangeSet}
                       defaultSelect={this.props.defaultSelect}

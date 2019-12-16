@@ -15,11 +15,9 @@ import { updateExpDemandwiseOnDateRangeChange } from '../../actions/exp_demandwi
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
-//download files components
-import { CSVLink, CSVDownload } from "react-csv";
-
 //custom components
 import FButton from '../../components/atoms/FButton';
+import FLoading from '../../components/atoms/FLoading';
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
@@ -73,7 +71,7 @@ const ExpDetails = ( { exp_demandwise : {
 
 	const createDataUIComponent = () => {
 		if(loading === true){
-			return <div>Loading...</div>;
+			return <FLoading />;
 		}else{
 			return (
 				<Fragment>
@@ -92,8 +90,6 @@ const ExpDetails = ( { exp_demandwise : {
 								scsrOffset={scsrOffset}
 								/> :
 						 <Fragment>
-								<CSVLink data={rows}><FButton>DOWNLOAD CSV</FButton></CSVLink>
-								<a href={`data:${convertDataToJson(rows)}`} download="exp_details_data.json"><FButton>DOWNLOAD JSON</FButton></a>
 								<FTable
 									rows={rows}
 									headers={headers}
@@ -108,19 +104,22 @@ const ExpDetails = ( { exp_demandwise : {
 
 	return (
 		<div>
+			<div className="f-page-title">
+			<h3>Demand-wise Expenditure Details</h3>
+			<FMonthPicker
+				defaultSelect = {{
+					years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+					months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+				dateRange = {{years:[2018, 2019], months:[4, 3]}}
+				onDateRangeSet={onDateRangeSet}
+			/>
+			</div>
         <div className="data-viz-col exp-details">
-					<FMonthPicker
-						defaultSelect = {{
-							years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
-							months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
-						dateRange = {{years:[2018, 2019], months:[4, 3]}}
-						onDateRangeSet={onDateRangeSet}
-					/>
 					{createDataUIComponent()}
         </div>
+
 			<div className="filter-col-wrapper">
         <div className="filter-col">
-
           <FDropdown
 						className = "filter-col--ops"
 						titleText = "Demand"

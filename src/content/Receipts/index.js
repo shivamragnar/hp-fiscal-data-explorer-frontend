@@ -15,11 +15,9 @@ import { updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters'
 import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
-//download files components
-import { CSVLink, CSVDownload } from "react-csv";
-
 //custom components
 import FButton from '../../components/atoms/FButton';
+import FLoading from '../../components/atoms/FLoading';
 import FBarChart from '../../components/dataviz/FBarChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
@@ -76,7 +74,7 @@ const Receipts = ( { receipts : {
 
 	const createDataUIComponent = () => {
 		if(loading === true){
-			return <div>Loading...</div>;
+			return <FLoading />;
 		}else{
 			return (
 				<Fragment>
@@ -96,8 +94,6 @@ const Receipts = ( { receipts : {
 								xLabelFormat={xLabelFormat}
 								/> :
 						 <Fragment>
-							 <CSVLink data={rows}><FButton>DOWNLOAD CSV</FButton></CSVLink>
-							 <a href={`data:${convertDataToJson(rows)}`} download="receipts_data.json"><FButton>DOWNLOAD JSON</FButton></a>
 							 <FTable
 								 rows={rows}
 								 headers={headers}
@@ -112,16 +108,19 @@ const Receipts = ( { receipts : {
 
 	return (
 		<div>
-        <div className="data-viz-col exp-details">
-					<FMonthPicker
-						defaultSelect = {{
-							years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
-							months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
-						dateRange = {{years:[2018, 2019], months:[4, 3]}}
-						onDateRangeSet={onDateRangeSet}
-					/>
-					{createDataUIComponent()}
-        </div>
+			<div className="f-page-title">
+				<h3>Receipts</h3>
+				<FMonthPicker
+					defaultSelect = {{
+						years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+						months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+					dateRange = {{years:[2018, 2019], months:[4, 3]}}
+					onDateRangeSet={onDateRangeSet}
+				/>
+			</div>
+      <div className="data-viz-col receipts">
+				{createDataUIComponent()}
+      </div>
 			<div className="filter-col-wrapper">
         <div className="filter-col">
 					<FDropdown

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "carbon-components-react/lib/components/Dropdown";
+import TooltipDefinition from "carbon-components-react/lib/components/TooltipDefinition";
 
 class FDropdown extends Component{
 
@@ -37,23 +38,8 @@ FDropdown.defaultProps = {
   items: [
     {
       dd_name: "name of dd", //should be the same as the key name in the raw fiscal data
-      id: "option-1",
-      label: "Option 1"
-    },
-    {
-      dd_name: "name of dd",
-      id: "option-2",
-      label: "Option 2"
-    },
-    {
-      dd_name: "name of dd",
-      id: "option-3",
-      label: "Option 3"
-    },
-    {
-      dd_name: "name of dd",
-      id: "option-4",
-      label: "Option 4"
+      id: "loading...",
+      label: "Loading..."
     }
   ]
 };
