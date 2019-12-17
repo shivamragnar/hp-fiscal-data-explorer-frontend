@@ -67,7 +67,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
         { key: 'receipt', header: 'Receipt' }
       );
 
-    	tempTableData.rows.push({
+    	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
     		'receipt': Math.round(d.receipt*100)/100,

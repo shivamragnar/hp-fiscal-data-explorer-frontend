@@ -7,13 +7,20 @@ import {
   HeaderNavigation,
   HeaderMenuItem,
   HeaderMenuButton,
-  HeaderGlobalBar,  
+  HeaderGlobalBar,
   SkipToContent,
   SideNav,
   SideNavItems,
   HeaderSideNavItems,
-  HeaderMenu
+  HeaderMenu,
+  HeaderGlobalAction
 } from "carbon-components-react/lib/components/UIShell";
+
+import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+
+import MediaQuery from "react-responsive";
+
+import OverflowMenuVertical20 from '@carbon/icons-react/lib/overflow-menu--vertical/20';
 
 const FHeader1 = () => (
   <HeaderContainer
@@ -29,16 +36,38 @@ const FHeader1 = () => (
           <HeaderName element={Link} to="/" prefix="">
             Fiscal Data Explorer
           </HeaderName>
+          <HeaderNavigation className="f_primarylinks_center" aria-label="Carbon Tutorial">
+            <HeaderMenuItem element={Link} to="/budget_highlights">
+              Budget Highlights
+            </HeaderMenuItem>
+
+            <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
+              <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/details">Expenditure Details</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Tracker</HeaderMenuItem>
+            </HeaderMenu>
+            <HeaderMenuItem element={Link} to="/receipts">
+              Receipts
+            </HeaderMenuItem>
+            <HeaderMenuItem element={Link} to="/sectors">
+              Sectors
+            </HeaderMenuItem>
+            <HeaderMenuItem element={Link} to="/schemes">
+              Schemes
+            </HeaderMenuItem>
+          </HeaderNavigation>
           <HeaderNavigation
             className="f_secondarylinks_right"
             aria-label="Carbon Tutorial"
           >
+          <MediaQuery query="(min-device-width: 1080px)">
             <HeaderMenuItem element={Link} to="/aboutus">
               About Us
             </HeaderMenuItem>
             <HeaderMenuItem element={Link} to="/contactus">
               Contact Us
             </HeaderMenuItem>
+          </MediaQuery>
           </HeaderNavigation>
           <SideNav
             aria-label="Side navigation"
@@ -88,6 +117,15 @@ const FHeader1 = () => (
             </SideNavItems>
           </SideNav>
           <HeaderGlobalBar />
+          <MediaQuery query="(max-device-width: 1080px)">
+            <OverflowMenu
+                flipped="true"
+                renderIcon = {() => <OverflowMenuVertical20 style={{ fill: "white"}} />}
+                >
+              <OverflowMenuItem itemText="About Us" primaryFocus />
+              <OverflowMenuItem itemText="Contact Us" />
+            </OverflowMenu>
+          </MediaQuery >
         </Header>
       </div>
     )}

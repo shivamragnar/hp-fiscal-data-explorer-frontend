@@ -10,5 +10,11 @@
      "voted_charged",
      "plan_nonplan",
      "SOE"
+     ],
+  "receipts" :
+   [ "major",
+     "sub_major",
+     "minor",
+     "sub_minor"
      ]
 }

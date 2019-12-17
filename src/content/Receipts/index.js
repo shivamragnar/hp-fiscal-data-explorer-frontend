@@ -9,7 +9,10 @@ import { connect } from 'react-redux';
 //actions
 import { getReceiptsData } from '../../actions/receipts';
 
-import { updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters';
+import {
+	getReceiptsFiltersData,
+	updateReceiptsOnFilterChange,
+	updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters';
 
 //carbon components
 import { Content } from 'carbon-components-react/lib/components/UIShell';
@@ -44,8 +47,11 @@ const Receipts = ( { receipts : {
 											 activeFilters,
 											 dateRange
 									 },
+									 receipts_filters : { allFiltersData, rawFilterData },
 									 getReceiptsData,
-									 updateReceiptsOnDateRangeChange
+									 updateReceiptsOnFilterChange,
+									 updateReceiptsOnDateRangeChange,
+									 getReceiptsFiltersData
 								   } ) => {
 
 	//initialize useState hook
@@ -55,8 +61,8 @@ const Receipts = ( { receipts : {
 	console.log(yLabelFormat);
 
 	useEffect(() => {
-
 		getReceiptsData(activeFilters, dateRange);
+		getReceiptsFiltersData();
   }, []);
 
 	const onRadioChange = (value, name) => {
@@ -65,7 +71,7 @@ const Receipts = ( { receipts : {
   }
 
 	const onFilterChange = (e) => {
-		// updateExpDemandwiseOnFilterChange(e, activeFilters, allFiltersData, rawFilterData, dateRange);
+		updateReceiptsOnFilterChange(e, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
 	const onDateRangeSet = (newDateRange) => {
@@ -128,13 +134,16 @@ const Receipts = ( { receipts : {
 						titleText = "Major"
 						label = "All"
 						onChange = {onFilterChange}
-
+						items = {allFiltersData[0] && allFiltersData[0].val}
+						selectedItem = { activeFilters && activeFilters.filters.major ? activeFilters.filters.major : "All" }
 					/>
 					<FDropdown
 						className = "filter-col--ops"
 						titleText = "Sub Major"
 						label = "All"
 						onChange = {onFilterChange}
+						items = {allFiltersData[1] && allFiltersData[1].val}
+						selectedItem = { activeFilters && activeFilters.filters.sub_major ? activeFilters.filters.sub_major : "All" }
 
 					/>
 					<FDropdown
@@ -142,14 +151,16 @@ const Receipts = ( { receipts : {
 						titleText = "Minor"
 						label = "All"
 						onChange = {onFilterChange}
-
+						items = {allFiltersData[2] && allFiltersData[2].val}
+						selectedItem = { activeFilters && activeFilters.filters.minor ? activeFilters.filters.minor : "All" }
 					/>
 					<FDropdown
 						className = "filter-col--ops"
 						titleText = "Sub Minor"
 						label = "All"
 						onChange = {onFilterChange}
-
+						items = {allFiltersData[3] && allFiltersData[3].val}
+						selectedItem = { activeFilters && activeFilters.filters.sub_minor ? activeFilters.filters.sub_minor : "All" }
 					/>
 
         </div>
@@ -160,12 +171,16 @@ const Receipts = ( { receipts : {
 
 Receipts.propTypes = {
 	receipts : PropTypes.object.isRequired,
+	receipts_filters : PropTypes.object.isRequired,
 	getReceiptsData : PropTypes.func.isRequired,
-	updateReceiptsOnDateRangeChange : PropTypes.func.isRequired
+	updateReceiptsOnFilterChange : PropTypes.func.isRequired,
+	updateReceiptsOnDateRangeChange : PropTypes.func.isRequired,
+	getReceiptsFiltersData : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
 	receipts : state.receipts,
+	receipts_filters : state.receipts_filters
 })
 
-export default connect(mapStateToProps, { getReceiptsData, updateReceiptsOnDateRangeChange })(Receipts);
+export default connect(mapStateToProps, { getReceiptsData, getReceiptsFiltersData, updateReceiptsOnFilterChange, updateReceiptsOnDateRangeChange })(Receipts);

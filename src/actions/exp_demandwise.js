@@ -77,7 +77,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
         { key: 'revised', header: 'Revised' }
       );
 
-    	tempTableData.rows.push({
+    	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
     		'sanction': Math.round(d.sanction*100)/100,
@@ -108,7 +108,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     dispatch({
       type: EXP_DEMANDWISE_DATA_ERROR,
       payload: {
-        status: err.response.status
+        status: err
       }
     });
   }

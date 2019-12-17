@@ -1,8 +1,6 @@
 import axios from "axios";
 import {
   GET_EXP_DEMANDWISE_FILTERS_DATA,
-  UPDATE_EXP_DEMANDWISE_ON_FILTER_CHANGE,
-  UPDATE_EXP_DEMANDWISE_ON_DATERANGE_CHANGE,
   EXP_DEMANDWISE_FILTERS_DATA_ERROR
 } from "./types";
 import { getExpDemandwiseData } from "./exp_demandwise";

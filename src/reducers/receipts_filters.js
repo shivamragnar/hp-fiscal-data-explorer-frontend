@@ -1,6 +1,7 @@
 import {
-  GET_EXP_DEMANDWISE_FILTERS_DATA, 
-  EXP_DEMANDWISE_FILTERS_DATA_ERROR } from "../actions/types";
+  GET_RECEIPTS_FILTERS_DATA,
+  RECEIPTS_FILTERS_DATA_ERROR,
+ } from "../actions/types";
 
 const initialState = {
   allFiltersData: [],
@@ -13,14 +14,14 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_EXP_DEMANDWISE_FILTERS_DATA:
+    case GET_RECEIPTS_FILTERS_DATA:
       return {
         ...state,
         allFiltersData: payload.allFiltersData,
         rawFilterData: payload.rawFilterData,
         loading: false
       };
-    case EXP_DEMANDWISE_FILTERS_DATA_ERROR:
+    case RECEIPTS_FILTERS_DATA_ERROR:
       return {
         ...state,
         error: payload,

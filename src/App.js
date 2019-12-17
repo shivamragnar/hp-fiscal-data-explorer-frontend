@@ -65,9 +65,11 @@ const App = ({ exp_demandwise : {
  return (
       <div>
         <FHeader1 />
-        <MediaQuery query="(min-device-width: 768px)">
-          <FHeader2 />
-        </MediaQuery>
+				{
+        // <MediaQuery query="(min-device-width: 768px)">
+						// <FHeader2 />
+        // </MediaQuery>
+				}
         <Content>
           <Switch>
             <Route exact path="/" component={Home} />
