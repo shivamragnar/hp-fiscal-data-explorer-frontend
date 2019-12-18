@@ -12,7 +12,19 @@
 
 
 import React, { Component} from "react";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup, VictoryLabel, VictoryTheme } from 'victory';
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryTheme,
+  VictoryGroup,
+  VictoryLabel,
+  VictoryTooltip } from 'victory';
+
+import FTooltipReceipts from '../../atoms/FTooltipReceipts';
+
+import sassVars from '../../../scss/_vars.scss'
+const { black } = sassVars;
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -58,22 +70,26 @@ class FBarChart extends Component {
         <VictoryGroup
           offset={7}
           style={{ data: { width: 5 } }}
+          labelComponent={<VictoryTooltip
+            labelComponent={<FTooltipReceipts />}
+            flyoutComponent={<g></g>}
+            />}
         >
         {
           this.props.dataPoints && //if multiple datapoints is specified via the datapoints prop,
             this.props.dataPoints.map((dataToY, i) =>{
               return(
                 <VictoryBar
-                  colorScale={"blue"}
+                  style={{ data: { fill: black} }}
                   data={this.props.data}
                   x={this.props.dataToX}
                   y={dataToY}
+                  labels={({ datum }) => `${datum.date}_${datum.receipt}`}
                 />
               )
             })
         }
         </VictoryGroup>
-
       </VictoryChart>
 
     )

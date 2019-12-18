@@ -59,7 +59,7 @@ export const calcScsrOffset = (tempVizData) => {
 export const getDynamicYLabelFormatVals = (highestRecord) => {
   const highestRecordLength = Math.floor(highestRecord).toString().length;
   if( highestRecordLength > 5 ){ return [ 100000 , " L "] }
-  else if( highestRecordLength < 5 && highestRecordLength > 3 ){ return [ 100 , " K "] }
+  else if( highestRecordLength < 5 && highestRecordLength > 3 ){ return [ 1000 , " K "] }
   else{ return [ 1 , " "] }
 }
 
@@ -101,8 +101,6 @@ export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activ
     if(obj[obj_key]){
       if(obj_key === query){
         results.push(obj[query]);
-        console.log("obj[query]");
-        console.log(obj[query]);
       }
 
       if(activeFilters.filters.hasOwnProperty(filterOrderRef[idx]) === true ){

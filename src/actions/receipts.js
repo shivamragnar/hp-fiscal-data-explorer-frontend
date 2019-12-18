@@ -47,6 +47,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
         highestRecord = record[0];
       }
     })
+    highestRecord = Math.round(highestRecord);
 
     tempVizData.push({"date":(month_week === "month" ? " " : 0), "receipt": 0 });
     res.data.records.map((record, i) => {
@@ -80,6 +81,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
         data: {
           vizData: {
             yLabelFormat:["", getDynamicYLabelFormatVals(highestRecord)[1]+"INR",1/getDynamicYLabelFormatVals(highestRecord)[0]],
+            // yLabelFormat:["", "0 L INR", 1/1000000],
             xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
             xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
             data:tempVizData,

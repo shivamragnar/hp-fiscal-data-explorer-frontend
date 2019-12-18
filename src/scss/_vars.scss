@@ -1,4 +1,5 @@
 $white: #ffffff;
+$black: #171717;
 $extra_light_grey: #f3f3f3;
 $light_grey: #e4e4e4;
 $grey: #c3c3c3;
@@ -9,4 +10,5 @@ $blue: rgb(0, 119, 255);
 :export {
   blue: $blue;
   orange: $orange;
+  black: $black;
 }
