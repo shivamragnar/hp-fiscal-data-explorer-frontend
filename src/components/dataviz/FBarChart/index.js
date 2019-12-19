@@ -23,6 +23,8 @@ import {
 
 import FTooltipReceipts from '../../atoms/FTooltipReceipts';
 
+import { getDynamicYLabelFormat } from '../../../utils/functions';
+
 import sassVars from '../../../scss/_vars.scss'
 const { black } = sassVars;
 
@@ -65,7 +67,7 @@ class FBarChart extends Component {
             style={tickLabelStyle}
           />
         }
-        tickFormat={(x) => (this.props.yLabelFormat[0]+x*this.props.yLabelFormat[2]+this.props.yLabelFormat[1])}
+        tickFormat={(y) => getDynamicYLabelFormat(y)}
       />
         <VictoryGroup
           offset={7}

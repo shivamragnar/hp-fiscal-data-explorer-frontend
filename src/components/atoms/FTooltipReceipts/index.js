@@ -8,7 +8,7 @@ const FTooltipReceipts = ( { x, y, datum} ) => {
   y = y-10;
 
   const width = 120;
-  const height = 25;
+  const height = 30;
 
   const dx_1 = 55;
   const dx_2 = 59;

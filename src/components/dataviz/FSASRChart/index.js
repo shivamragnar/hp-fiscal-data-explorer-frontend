@@ -12,6 +12,8 @@ import {
 
 import FTooltipSASR from '../../atoms/FTooltipSASR';
 
+import { getDynamicYLabelFormat } from '../../../utils/functions';
+
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
   fontSize: '7px',
@@ -21,8 +23,6 @@ const tickLabelStyle = {
 class FSASRChart extends Component {
 
   static defaultProps = {
-      //yLabelFormat mnust be an array of 3. each value representing  'prefix', 'suffix' and multiplier
-      yLabelFormat: ["","",1],
       barWidth: 3
    };
 
@@ -37,12 +37,10 @@ class FSASRChart extends Component {
     return (
       <div className="sasr">
       <VictoryChart
-
         theme={VictoryTheme.material}
         domainPadding={{x: 0}}
         width= {700}
         height= {300}
-
       >
         <VictoryAxis
         tickLabelComponent={
@@ -63,7 +61,7 @@ class FSASRChart extends Component {
             style={tickLabelStyle}
           />
         }
-        tickFormat={(x) => (this.props.yLabelFormat[0]+(Math.round(x*this.props.yLabelFormat[2]* 100) / 100)+this.props.yLabelFormat[1])}
+        tickFormat={(y) => getDynamicYLabelFormat(y)}
       />
         <VictoryGroup
           offset={this.props.barWidth}

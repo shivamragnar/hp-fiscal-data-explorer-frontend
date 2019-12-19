@@ -16,6 +16,7 @@ import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
 import FForce from '../../components/dataviz/FForce';
 import FForce_Y from '../../components/dataviz/FForce_Y';
+import FForce_X from '../../components/dataviz/FForce_X';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
@@ -80,23 +81,11 @@ class ExpSummary extends Component {
 		this.switchSec1VizType = this.switchSec1VizType.bind(this);
 	}
 
-  // async getData(apiUrl){
-  //   try{
-  //     const res = await axios.get(apiUrl);
-  //     props.FForce_Y.nodes = res.data.records;
-  //     console.log(res);
-  //     this.setState({dataLoading : false});
-  //   }catch(err){
-  //     console.log(err);
-  //   }
-  // }
-
 	switchSec1VizType(e) {
 		this.setState({ currentSec1VizType: sec1VizTypes[e] })
 	}
 
   componentDidMount() {
-    // this.getData("http://13.126.189.78/api/exp_summary");
     this.props.getExpSummaryData();
 }
 
@@ -106,8 +95,8 @@ class ExpSummary extends Component {
     var currentSec1VizComp;
     if(this.state.currentSec1VizType === sec1VizTypes[0]){
       if(this.props.exp_summary.loading === false){
-        // currentSec1VizComp = <FForce data={this.state.data} />
-        currentSec1VizComp = <FForce_Y nodes={this.props.exp_summary.data} />
+        // currentSec1VizComp = <FForce_Y nodes={this.props.exp_summary.data} />
+				currentSec1VizComp = <FForce_X nodes={this.props.exp_summary.data} />
       }else{
         currentSec1VizComp = <div>Loading...</div>
       }
@@ -118,19 +107,19 @@ class ExpSummary extends Component {
 
 
     return (
-      <div className="exp-summary-content">
-				<div className="f-page-title">
-					<h3>Expenditure Summary  <span className="f-light-grey">| FY: 2018-19</span></h3>
+      <div className="f-content exp-summary-content">
+				<div className="f-page-title f-page-title_summary">
+					<div className="f-page-title-content-wrapper">
+						<h3 className="f-page-title--heading">Expenditure Summary  <span className="f-light-grey">| FY: 2018-19</span></h3>
+						<p className="f-page-title--description">
+							Carbon is IBM’s open-source design system for digital
+							products and experiences. With the IBM Design Language
+							as its foundation, the system consists of working code,
+							design tools and resources, human interface guidelines,
+							and a vibrant community of contributors.
+						</p>
+					</div>
 				</div>
-        <div className="text-col">
-          <p>
-            Carbon is IBM’s open-source design system for digital
-            products and experiences. With the IBM Design Language
-            as its foundation, the system consists of working code,
-            design tools and resources, human interface guidelines,
-            and a vibrant community of contributors.
-          </p>
-        </div>
         <div className="data-viz-col exp-summary">
           <div className="content-switcher-wrapper">
             <ContentSwitcher onChange={this.switchSec1VizType} >
@@ -143,7 +132,6 @@ class ExpSummary extends Component {
           </div>
         </div>
         <div>
-
         </div>
       </div>
     )

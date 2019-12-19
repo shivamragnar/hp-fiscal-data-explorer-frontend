@@ -37,7 +37,7 @@ const vizTypes = ["FSASR", "FTable"];
 
 const ExpDetails = ( { exp_demandwise : {
 													data : {
-														vizData : { data, yLabelFormat, xLabelVals, xLabelFormat, scsrOffset } ,
+														vizData : { data, xLabelVals, xLabelFormat, scsrOffset } ,
 												    tableData : { headers, rows }
 													},
 												  loading,
@@ -84,7 +84,6 @@ const ExpDetails = ( { exp_demandwise : {
 					{ currentVizType === vizTypes[0] ?
 							<FSASRChart
 								data={data}
-								yLabelFormat={yLabelFormat}
 								xLabelVals={xLabelVals}
 								xLabelFormat={xLabelFormat}
 								scsrOffset={scsrOffset}
@@ -103,7 +102,7 @@ const ExpDetails = ( { exp_demandwise : {
 	}
 
 	return (
-		<div>
+		<div className="f-content">
 			<div className="f-page-title">
 			<h3>Demand-wise Expenditure Details</h3>
 			<FMonthPicker

@@ -52,11 +52,15 @@ const App = ({ exp_demandwise : {
 							 }, getExpDemandwiseData,
                getExpDemandwiseFiltersData }) => {
 
- // const initExpFilters = { "filters":{} };
- // const initDateFrom = "2018-04-01";
- // const initDateTo = "2019-03-31";
+// making api calls one after the other rather than all together
+// const apiDataFetchBegin = async () => {
+// 	await getExpDemandwiseFiltersData();
+// 	await getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
+// }
+
 
  useEffect(() => {
+	 // apiDataFetchBegin();
    getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
    getExpDemandwiseFiltersData();
  }, []);
@@ -70,7 +74,7 @@ const App = ({ exp_demandwise : {
 						// <FHeader2 />
         // </MediaQuery>
 				}
-        <Content>
+
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
@@ -81,7 +85,7 @@ const App = ({ exp_demandwise : {
             <Route exact path="/receipts" component={Receipts} />
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>
-        </Content>
+        
       </div>
   );
 }

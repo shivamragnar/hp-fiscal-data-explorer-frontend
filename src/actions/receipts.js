@@ -7,8 +7,7 @@ import {
 
 import {
   getWeekwiseDates,
-  calcMonthOrWeek,
-  getDynamicYLabelFormatVals
+  calcMonthOrWeek
 } from '../utils/functions';
 
 
@@ -80,8 +79,6 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
       payload: {
         data: {
           vizData: {
-            yLabelFormat:["", getDynamicYLabelFormatVals(highestRecord)[1]+"INR",1/getDynamicYLabelFormatVals(highestRecord)[0]],
-            // yLabelFormat:["", "0 L INR", 1/1000000],
             xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
             xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
             data:tempVizData,

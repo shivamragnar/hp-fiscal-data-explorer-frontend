@@ -40,7 +40,7 @@ const vizTypes = ["FSASR", "FTable"];
 
 const Receipts = ( { receipts : {
 											 data : {
-												 vizData : { data, yLabelFormat, xLabelVals, xLabelFormat } ,
+												 vizData : { data, xLabelVals, xLabelFormat } ,
 												 tableData : { headers, rows }
 											 },
 											 loading,
@@ -58,7 +58,7 @@ const Receipts = ( { receipts : {
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
-	console.log(yLabelFormat);
+
 
 	useEffect(() => {
 		getReceiptsData(activeFilters, dateRange);
@@ -95,7 +95,6 @@ const Receipts = ( { receipts : {
 								data={data}
 								dataToX="date"
 								dataPoints={["receipt"]}
-								yLabelFormat={yLabelFormat}
 								xLabelVals={xLabelVals}
 								xLabelFormat={xLabelFormat}
 								/> :
@@ -113,7 +112,7 @@ const Receipts = ( { receipts : {
 	}
 
 	return (
-		<div>
+		<div className="f-content">
 			<div className="f-page-title">
 				<h3>Receipts</h3>
 				<FMonthPicker

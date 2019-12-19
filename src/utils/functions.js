@@ -56,12 +56,13 @@ export const calcScsrOffset = (tempVizData) => {
 }
 
 //5
-export const getDynamicYLabelFormatVals = (highestRecord) => {
-  const highestRecordLength = Math.floor(highestRecord).toString().length;
-  if( highestRecordLength > 5 ){ return [ 100000 , " L "] }
-  else if( highestRecordLength < 5 && highestRecordLength > 3 ){ return [ 1000 , " K "] }
-  else{ return [ 1 , " "] }
-}
+export const getDynamicYLabelFormat = (y) => (
+  y > 99999 ?
+  (y/100000) + " L INR" :
+  (y > 999 && y < 99999) ?
+  (y/1000) + " K INR" :
+  y + " INR"
+)
 
 //6
 export const onDateRangeChange = ( newDateRange ) => { //the month number-range is coming in as 1 - 12

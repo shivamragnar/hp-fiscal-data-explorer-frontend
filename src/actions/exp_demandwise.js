@@ -11,8 +11,7 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  calcScsrOffset,
-  getDynamicYLabelFormatVals
+  calcScsrOffset
 } from '../utils/functions';
 
 //data-refs
@@ -92,7 +91,6 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
       payload: {
         data: {
           vizData: {
-            yLabelFormat:["", getDynamicYLabelFormatVals(highestRecord)[1]+"INR",1/getDynamicYLabelFormatVals(highestRecord)[0]],
             xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
             xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
             data:tempVizData,
