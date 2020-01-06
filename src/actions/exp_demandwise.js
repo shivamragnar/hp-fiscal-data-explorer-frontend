@@ -56,7 +56,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
 
       dataObj.date = month_week === "month" ?
                      months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                     getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis[i];
+                     getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
       dataObj.sanction = Math.round(record[0]*100)/100;
       dataObj.addition = Math.round(record[1]*100)/100;
       dataObj.savings = Math.round(record[2]*100)/100;
@@ -64,6 +64,9 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
       dataObj.mark = Math.round((1/100)*highestRecord);
       tempVizData.push(dataObj);
     })
+
+    console.log("tempVizData")
+    console.log(tempVizData)
 
     //3 PREP DATA FOR TABLE
     tempVizData.map((d, i) => {
@@ -91,8 +94,8 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
       payload: {
         data: {
           vizData: {
-            xLabelVals:getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_x_axis,
-            xLabelFormat: month_week === "week" ? getWeekwiseDates(fromMonthIndex, toMonthIndex).date_for_tick : null,
+            xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
+            xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
             data:tempVizData,
             scsrOffset: calcScsrOffset(tempVizData)
           },

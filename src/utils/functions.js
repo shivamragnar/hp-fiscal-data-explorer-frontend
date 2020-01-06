@@ -8,16 +8,23 @@ export const convertDataToJson = (data) => {
 }
 
 //2
-export const getWeekwiseDates = (fromMonthIndex, toMonthIndex, idx) => {
-
+export const getWeekwiseDates = ( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex) => {
+  
+  //dealing with the case where toMonthIndex falls in the next year
+  const toMonthIndexAddOn = toMonthIndex < fromMonthIndex ? 12 : 0;
   var allWeekWiseDays = []; //for the actual tick on x axis and the
   var totWeekWiseDayNums = []; //for mapping x axis
   var pMonthTotDays = 0;
+  const { months , years, years_short } = yymmdd_ref;
 
-  for(var i = fromMonthIndex ; i <= toMonthIndex ; i++){
-      const jsDateFrom = new Date(`2018-0${i+1}-01`)
-      const dayFromIndex = jsDateFrom.getDay()
-      const totDaysCurrMonth = parseInt(yymmdd_ref.noOfDays[i]);
+
+
+  for(var i = fromMonthIndex ; i <= toMonthIndex + toMonthIndexAddOn ; i++){
+
+      const iMod = i%12;
+      const jsDateFrom = new Date(years[Math.floor(((i%fromMonthIndex)+fromMonthIndex)/12) + fromYearIndex]+`-0${iMod+1}-`+dateFrom.split('-')[2]);
+      const dayFromIndex = jsDateFrom.getDay();
+      const totDaysCurrMonth = parseInt(yymmdd_ref.noOfDays[iMod]);
       const firstWeekend = (7 - dayFromIndex);
       const weekwiseDaysOfMonth = [firstWeekend]; //a week = SUN to SAT
       let weekendCounter = firstWeekend ;
@@ -25,7 +32,7 @@ export const getWeekwiseDates = (fromMonthIndex, toMonthIndex, idx) => {
         weekendCounter += 7;
         weekwiseDaysOfMonth.push(weekendCounter)
       }
-      if(i === toMonthIndex){ //if this is the last month only then add the end of month date
+      if(iMod === toMonthIndex){ //if this is the last month only then add the end of month date
         weekwiseDaysOfMonth.push(totDaysCurrMonth);
       }
 
@@ -33,10 +40,13 @@ export const getWeekwiseDates = (fromMonthIndex, toMonthIndex, idx) => {
         totWeekWiseDayNums.push(date+pMonthTotDays);
       })
 
-      allWeekWiseDays = allWeekWiseDays.concat(weekwiseDaysOfMonth);
+      const weekwiseDatesOfMonth = weekwiseDaysOfMonth.map(day => {
+        return day + " " + months[((i%fromMonthIndex)+fromMonthIndex)%12] + " " + years_short[Math.floor(((i%fromMonthIndex)+fromMonthIndex)/12) + fromYearIndex];
+      })
+
+      allWeekWiseDays = allWeekWiseDays.concat(weekwiseDatesOfMonth);
       pMonthTotDays += totDaysCurrMonth;
   }
-
     return { "date_for_tick" : allWeekWiseDays, "date_for_x_axis" : totWeekWiseDayNums };
 }
 

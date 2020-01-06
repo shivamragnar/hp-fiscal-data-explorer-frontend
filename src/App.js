@@ -85,7 +85,7 @@ const App = ({ exp_demandwise : {
             <Route exact path="/receipts" component={Receipts} />
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>
-        
+
       </div>
   );
 }

@@ -52,8 +52,10 @@ class FBarChart extends Component {
       <VictoryAxis
         tickLabelComponent={
           <VictoryLabel
-            dy={-5}
+            dx={-10}
+            dy={0}
             style={tickLabelStyle}
+            angle={-45}
           />
         }
         tickFormat={this.props.xLabelFormat}

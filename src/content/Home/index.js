@@ -9,7 +9,7 @@ import { getWeekwiseDates } from '../../utils/functions';
 
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FBarChart from '../../components/dataviz/FBarChart';
-import FBarChart_2 from '../../components/dataviz/FBarChart_2';
+
 import * as d3 from "d3";
 
 //sample data
@@ -104,7 +104,7 @@ const Home = (props) =>  {
             yLabelFormat={["","",1]}
 
           />
-        <FBarChart_2 />
+
       </div>
     </div>
     )
