@@ -9,7 +9,7 @@ export const convertDataToJson = (data) => {
 
 //2
 export const getWeekwiseDates = ( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex) => {
-  
+
   //dealing with the case where toMonthIndex falls in the next year
   const toMonthIndexAddOn = toMonthIndex < fromMonthIndex ? 12 : 0;
   var allWeekWiseDays = []; //for the actual tick on x axis and the
@@ -90,9 +90,46 @@ export const onDateRangeChange = ( newDateRange ) => { //the month number-range 
 }
 
 //7
+export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activeFilters, filterChangedIdx) => {
+
+
+  if(query === "all"){
+    if(filterChangedIdx === idx){
+      Object.keys(obj).map(obj_key => {
+        results.push(obj[obj_key]);
+      })
+      return;
+    }
+  }
+
+  Object.keys(obj).map(obj_key => {
+    if(obj[obj_key]){
+      if(obj_key === query ){
+        results.push(obj[query]);
+      }
+
+      if(activeFilters.filters.hasOwnProperty(filterOrderRef[idx]) === true ){
+        if(activeFilters.filters[filterOrderRef[idx]] === obj_key.split("-")[0]){
+          recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+        }else if (activeFilters.filters[filterOrderRef[idx]] === "all") {
+          recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+        }
+      }else{
+        recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+      }
+
+      // recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+
+    }
+  });
+}
+
+//8
 export const recursFilterFetch = (allFiltersData, obj, idx) => {
   Object.keys(obj).map(obj_key => {
     if(obj[obj_key]){
+      // console.log("idx" + idx);
+      // console.log(allFiltersData[idx]);
       if(allFiltersData[idx].val.some(item => item.id === obj_key) !== true){
         const filterOption = {
           filter_name: allFiltersData[idx].key,
@@ -106,22 +143,7 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
   });
 }
 
-export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activeFilters) => {
-
-  Object.keys(obj).map(obj_key => {
-    if(obj[obj_key]){
-      if(obj_key === query){
-        results.push(obj[query]);
-      }
-
-      if(activeFilters.filters.hasOwnProperty(filterOrderRef[idx]) === true ){
-        if(activeFilters.filters[filterOrderRef[idx]] === obj_key.split("-")[0]){
-          recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters);
-        }
-      }else{
-        recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters);
-      }
-
-    }
-  });
+//9
+export const filterCompGenData = () => {
+  console.log("lol");
 }

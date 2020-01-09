@@ -61,8 +61,8 @@ const App = ({ exp_demandwise : {
 
  useEffect(() => {
 	 // apiDataFetchBegin();
-   getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
-   getExpDemandwiseFiltersData();
+   // getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
+   // getExpDemandwiseFiltersData();
  }, []);
 
 

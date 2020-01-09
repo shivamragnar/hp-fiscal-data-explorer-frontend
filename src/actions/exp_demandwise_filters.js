@@ -57,7 +57,9 @@ export const updateExpDemandwiseOnFilterChange = (e, activeFilters, allFiltersDa
   })
 
   const results = [];
-  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters );
+  const filterChangedIdx = filterOrderRef.indexOf(e.selectedItem.filter_name);
+
+  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters, filterChangedIdx );
   console.log(results);
   results.map(result => {
     recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1);

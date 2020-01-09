@@ -54,10 +54,19 @@ export const updateReceiptsOnFilterChange = (e, activeFilters, allFiltersData, r
   })
 
   const results = [];
-  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters );
+  // console.log("query");
+  // console.log(e.selectedItem.id);
+  // console.log("allFiltersData");
+  // console.log(allFiltersData);
+  const filterChangedIdx = filterOrderRef.indexOf(e.selectedItem.filter_name);
+
+  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters, filterChangedIdx );
   results.map(result => {
-    recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1);
+    recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1); //+1 cuz we wanna populate filterData only from first child of currFilter onwards
   })
+
+  // console.log("results");
+  // console.log(results);
 
   //2 Remove all child filters from activeFilters
   filterOrderRef.map((filterName,i) => {

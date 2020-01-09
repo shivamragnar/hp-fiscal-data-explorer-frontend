@@ -24,13 +24,11 @@ import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
+import FLegend from '../../components/molecules/FLegend';
+import FPageTitle from '../../components/organisms/FPageTitle';
 
 //import helpers
 import { convertDataToJson } from '../../utils/functions';
-
-//data-refs
-var yymmdd_ref = require("../../data/yymmdd_ref.json");
-var { exp_demandwise : filterOrderRef } = require("../../data/filters_ref.json");
 
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
@@ -103,19 +101,23 @@ const ExpDetails = ( { exp_demandwise : {
 
 	return (
 		<div className="f-content">
-			<div className="f-page-title">
-			<h3>Demand-wise Expenditure Details</h3>
-			<FMonthPicker
-				defaultSelect = {{
-					years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
-					months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
-				dateRange = {{years:[2018, 2019], months:[4, 3]}}
-				onDateRangeSet={onDateRangeSet}
-			/>
-			</div>
-        <div className="data-viz-col exp-details">
-					{createDataUIComponent()}
-        </div>
+			<FPageTitle
+				pageTitle="Demand-wise Expenditure Details"
+				showLegend={true}
+				monthPicker={
+					<FMonthPicker
+						defaultSelect = {{
+							years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+							months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+						dateRange = {{years:[2018, 2019], months:[4, 3]}}
+						onDateRangeSet={onDateRangeSet}
+						/>
+					}
+				/>
+
+      <div className="data-viz-col exp-details">
+				{createDataUIComponent()}
+      </div>
 
 			<div className="filter-col-wrapper">
         <div className="filter-col">

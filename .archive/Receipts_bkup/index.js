@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 //redux
@@ -7,21 +8,26 @@ import { connect } from 'react-redux';
 
 //actions
 import { getReceiptsData } from '../../actions/receipts';
+
 import {
 	getReceiptsFiltersData,
 	updateReceiptsOnFilterChange,
 	updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters';
 
 //carbon components
+import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
+import FButton from '../../components/atoms/FButton';
 import FLoading from '../../components/atoms/FLoading';
 import FBarChart from '../../components/dataviz/FBarChart';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
+import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
+import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FPageTitle from '../../components/organisms/FPageTitle';
-import FFilterColumn from '../../components/organisms/FFilterColumn';
 
 //import helpers
 import { convertDataToJson } from '../../utils/functions';
@@ -48,9 +54,14 @@ const Receipts = ( { receipts : {
 									 getReceiptsFiltersData
 								   } ) => {
 
+	//declare the components that need to be dynamically generated
+	const Components = { FDropdown };
+
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+
+
 
 	useEffect(() => {
 		getReceiptsData(activeFilters, dateRange);
@@ -122,13 +133,45 @@ const Receipts = ( { receipts : {
 				{createDataUIComponent()}
       </div>
 			<div className="filter-col-wrapper">
-				<FFilterColumn
-					onChange={onFilterChange}
-					allFiltersData={allFiltersData}
-					activeFilters={activeFilters}
-					receiptsFilterCompData={receipts_filter_comp}
-					filterOrderRef={filterOrderRef}
+        <div className="filter-col">
+
+
+						<FDropdown
+						className = "filter-col--ops"
+						titleText = "Major"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {allFiltersData[0] && allFiltersData[0].val}
+						selectedItem = { activeFilters && activeFilters.filters.major ? activeFilters.filters.major : "All" }
 					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Sub Major"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {allFiltersData[1] && allFiltersData[1].val}
+						selectedItem = { activeFilters && activeFilters.filters.sub_major ? activeFilters.filters.sub_major : "All" }
+
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Minor"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {allFiltersData[2] && allFiltersData[2].val}
+						selectedItem = { activeFilters && activeFilters.filters.minor ? activeFilters.filters.minor : "All" }
+					/>
+					<FDropdown
+						className = "filter-col--ops"
+						titleText = "Sub Minor"
+						label = "All"
+						onChange = {onFilterChange}
+						items = {allFiltersData[3] && allFiltersData[3].val}
+						selectedItem = { activeFilters && activeFilters.filters.sub_minor ? activeFilters.filters.sub_minor : "All" }
+					/>
+
+
+        </div>
 			</div>
     </div>
 	)
@@ -148,11 +191,4 @@ const mapStateToProps = state => ({
 	receipts_filters : state.receipts_filters
 })
 
-export default connect(
-	mapStateToProps,
-	{ getReceiptsData,
-		getReceiptsFiltersData,
-		updateReceiptsOnFilterChange,
-		updateReceiptsOnDateRangeChange
-	}
-)(Receipts);
+export default connect(mapStateToProps, { getReceiptsData, getReceiptsFiltersData, updateReceiptsOnFilterChange, updateReceiptsOnDateRangeChange })(Receipts);

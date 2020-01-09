@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { getWeekwiseDates } from '../../utils/functions';
 //custom components
 
-
+import FTooltipSASR from '../../components/atoms/FTooltipSASR';
 
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FBarChart from '../../components/dataviz/FBarChart';
@@ -88,6 +88,7 @@ const Home = (props) =>  {
 
     return (
       <div>
+
       <div style={{width:"100%"}}>
 
         <FSASRChart
@@ -104,6 +105,20 @@ const Home = (props) =>  {
             yLabelFormat={["","",1]}
 
           />
+        <svg width="400" height="100" viewBox="0, 0, 100, 100">
+          <FTooltipSASR
+            x = {0}
+            y = {0}
+            datum = {
+              {
+                date : "DDMMYYY",
+                sanction: 100,
+              savings: 100,
+              addition: 100,
+              revised: 100}
+            }
+            />
+        </svg>
 
       </div>
     </div>

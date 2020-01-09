@@ -1,0 +1,20 @@
+.f-page-title{
+  border-bottom: 1px solid #e4e4e4;
+  display: flex;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  z-index: 100;
+  align-items: center;
+  justify-content: space-between;
+
+  .f-page-title__left-aligned-content{
+    display: flex;
+  }
+
+  .f-page-title__description{
+    padding-top: 0.5rem;
+    width: 70%;
+  }
+
+}

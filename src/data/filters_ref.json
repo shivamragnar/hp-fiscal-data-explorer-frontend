@@ -16,5 +16,13 @@
      "sub_major",
      "minor",
      "sub_minor"
-     ]
+     ],
+   "receipts_filter_comp" :
+   [
+     { "comp" : "FDropdown", "titleText" : "Major"},
+     { "comp" : "FDropdown", "titleText" : "Sub Major"},
+     { "comp" : "FDropdown", "titleText" : "Minor"},
+     { "comp" : "FDropdown", "titleText" : "Sub Minor"}     
+   ]
+
 }

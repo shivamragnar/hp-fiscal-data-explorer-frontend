@@ -17,6 +17,7 @@ import FSlope from '../../components/dataviz/FSlope';
 import FForce from '../../components/dataviz/FForce';
 import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
+import FPageTitle from '../../components/organisms/FPageTitle';
 
 //sample data
 var exp_summary_data = require('../../data/exp-summary.json');
@@ -90,8 +91,7 @@ class ExpSummary extends Component {
 }
 
 	render() {
-    console.log("state is");
-    console.log(this.state);
+
     var currentSec1VizComp;
     if(this.state.currentSec1VizType === sec1VizTypes[0]){
       if(this.props.exp_summary.loading === false){
@@ -108,18 +108,15 @@ class ExpSummary extends Component {
 
     return (
       <div className="f-content exp-summary-content">
-				<div className="f-page-title f-page-title_summary">
-					<div className="f-page-title-content-wrapper">
-						<h3 className="f-page-title--heading">Expenditure Summary  <span className="f-light-grey">| FY: 2018-19</span></h3>
-						<p className="f-page-title--description">
-							Carbon is IBM’s open-source design system for digital
-							products and experiences. With the IBM Design Language
-							as its foundation, the system consists of working code,
-							design tools and resources, human interface guidelines,
-							and a vibrant community of contributors.
-						</p>
-					</div>
-				</div>
+				<FPageTitle
+					pageTitle={ <span>Expenditure Summary  <span className="f-light-grey">| FY: 2018-19</span></span> }
+					pageDescription= "Carbon is IBM’s open-source design system for digital
+					 			products and experiences. With the IBM Design Language
+					 			as its foundation, the system consists of working code,
+					 			design tools and resources, human interface guidelines,
+					 			and a vibrant community of contributors."
+					showLegend={ true }
+					/>
         <div className="data-viz-col exp-summary">
           <div className="content-switcher-wrapper">
             <ContentSwitcher onChange={this.switchSec1VizType} >
