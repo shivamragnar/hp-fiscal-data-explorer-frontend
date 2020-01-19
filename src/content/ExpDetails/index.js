@@ -24,7 +24,6 @@ import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
-import FLegend from '../../components/molecules/FLegend';
 import FPageTitle from '../../components/organisms/FPageTitle';
 
 //import helpers

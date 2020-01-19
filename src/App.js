@@ -22,7 +22,6 @@ import { Content } from "carbon-components-react/lib/components/UIShell";
 //from our components
 
 import FHeader1 from "./components/organisms/FHeader1";
-import FHeader2 from "./components/organisms/FHeader2";
 
 //from our content
 import Home from "./content/Home";
@@ -35,7 +34,7 @@ import exp_details_keys from "./dictionary/exp_details_keys.json";
 
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
-import ExpTracker from "./content/ExpTracker";
+import ExpDistrictwise from "./content/ExpDistrictwise";
 import Receipts from "./content/Receipts";
 
 import BudgetHighlights from "./content/BudgetHighlights";
@@ -81,7 +80,7 @@ const App = ({ exp_demandwise : {
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
-            <Route exact path="/expenditure/tracker" component={ExpTracker} />
+            <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
             <Route exact path="/receipts" component={Receipts} />
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>

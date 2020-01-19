@@ -12,7 +12,7 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 
 export const getExpDemandwiseFiltersData = () => async dispatch => {
   try {
-    console.time("Axios Fetching Filters"); console.log("Fetching Filters Started");
+    console.log("Fetching Filters Started");
 
 			//fetch raw filter data
 			const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_desc");
@@ -42,21 +42,24 @@ export const getExpDemandwiseFiltersData = () => async dispatch => {
       payload: err
     });
   }
-  console.timeEnd("Axios Fetching Filters");
 }
 
 export const updateExpDemandwiseOnFilterChange = (e, activeFilters, allFiltersData, rawFilterData, dateRange) => async dispatch => {
 
   const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItem.filter_name);
 
-  //1 repopulate allFiltersData
+  //1 empty allFiltersData, leave only the 'All' option
   allFiltersData.map((filterObj, i) => {
     if( i > currFilterOrderIndex){
       filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
     }
   })
 
+
+  //2 repopulate allFiltersData with new filter data.
   const results = [];
+
+  //this line is prob unnecessary. currFilterOrderIndex above does the same.
   const filterChangedIdx = filterOrderRef.indexOf(e.selectedItem.filter_name);
 
   recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters, filterChangedIdx );
@@ -67,14 +70,14 @@ export const updateExpDemandwiseOnFilterChange = (e, activeFilters, allFiltersDa
 
   console.log(allFiltersData);
 
-  //2 Remove all child filters from activeFilters
+  //3 Remove all child filters from activeFilters
   filterOrderRef.map((filterName,i) => {
     if(i > currFilterOrderIndex && activeFilters.filters[filterName] ){
       delete(activeFilters.filters[filterName]);
     }
   })
 
-  //3 add selected filter to the activeFilters array
+  //4 add selected filter to the activeFilters array
   if(e.selectedItem.id !== "all"){
     activeFilters.filters[e.selectedItem.filter_name] = e.selectedItem.id.split("-")[0];
   } else {

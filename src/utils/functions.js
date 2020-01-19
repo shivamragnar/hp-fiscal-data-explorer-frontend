@@ -1,5 +1,6 @@
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var scsr_offset = require("../data/scsr_offset.json");
+var { exp_districtwise : expDistrictwiseFilterOrderRef } = require("../data/filters_ref.json");
 
 //1
 export const convertDataToJson = (data) => {
@@ -67,6 +68,8 @@ export const calcScsrOffset = (tempVizData) => {
 
 //5
 export const getDynamicYLabelFormat = (y) => (
+  y > 9999999 ?
+  (y/10000000) + " C INR" :
   y > 99999 ?
   (y/100000) + " L INR" :
   (y > 999 && y < 99999) ?
@@ -90,6 +93,7 @@ export const onDateRangeChange = ( newDateRange ) => { //the month number-range 
 }
 
 //7
+//find all the places where the selected filter exists.
 export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activeFilters, filterChangedIdx) => {
 
 
@@ -146,4 +150,61 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
 //9
 export const filterCompGenData = () => {
   console.log("lol");
+}
+
+
+//10
+//find all the places where the selected filter exists.
+export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, activeFilters, filterChangedIdx) => {
+
+
+  // if(query === "all"){
+  //   if(filterChangedIdx === idx){
+  //     Object.keys(obj).map(obj_key => {
+  //       results.push(obj[obj_key]);
+  //     })
+  //     return;
+  //   }
+  // }
+
+  // console.log("query")
+  // console.log(query)
+
+  Object.keys(obj).map(obj_key => {
+    if(obj[obj_key]){
+      // console.log("obj[obj_key]");
+      // console.log(obj[obj_key]);
+      query.map(query_item => {
+        if(obj_key === query_item.id ){
+          results.push(obj[query_item.id]);
+        }
+      })
+
+      if(activeFilters.hasOwnProperty(filterOrderRef[idx]) === true ){
+        if(activeFilters[filterOrderRef[idx]].includes(obj_key)){
+          recursFilterFind2(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+        }
+        // else if (activeFilters.filters[filterOrderRef[idx]] === "all") {
+        //   recursFilterFind(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+        // }
+      }else{
+        recursFilterFind2(obj[obj_key], query, results, idx+1, filterOrderRef, activeFilters, filterChangedIdx);
+      }
+    }
+  });
+}
+
+export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads) => {
+  const allFiltersData = [];
+  expDistrictwiseFilterOrderRef.map((filter_name,i) => {
+    allFiltersData.push({
+      key: filter_name,
+      val: [ { filter_name, id : 'all', label : 'All'} ]
+    })
+    rawFilterDataAllHeads.data[filter_name].map(d => {
+      allFiltersData[i].val.push({ filter_name, id : d, label: d })
+    })
+  })
+
+  return allFiltersData;
 }

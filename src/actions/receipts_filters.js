@@ -7,11 +7,10 @@ import { getReceiptsData } from "./receipts";
 import { onDateRangeChange, recursFilterFetch, recursFilterFind } from "../utils/functions";
 
 var { receipts : filterOrderRef } = require("../data/filters_ref.json");
-var yymmdd_ref = require("../data/yymmdd_ref.json");
 
 export const getReceiptsFiltersData = () => async dispatch => {
   try {
-    console.time("Axios Fetching Receipts Filters"); console.log("Fetching Receipts Filters Started");
+    console.log("Fetching Receipts Filters Started");
 
 		//fetch raw filter data
 		const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_receipts");
@@ -39,7 +38,7 @@ export const getReceiptsFiltersData = () => async dispatch => {
       payload: err
     });
   }
-  console.timeEnd("Axios Fetching Receipts Filters");
+  
 }
 
 export const updateReceiptsOnFilterChange = (e, activeFilters, allFiltersData, rawFilterData, dateRange) => async dispatch => {

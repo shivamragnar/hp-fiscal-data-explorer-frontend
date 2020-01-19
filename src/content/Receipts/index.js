@@ -22,6 +22,7 @@ import FTable from '../../components/dataviz/FTable';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn from '../../components/organisms/FFilterColumn';
+import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 
 //import helpers
 import { convertDataToJson } from '../../utils/functions';
@@ -89,6 +90,7 @@ const Receipts = ( { receipts : {
 								dataPoints={["receipt"]}
 								xLabelVals={xLabelVals}
 								xLabelFormat={xLabelFormat}
+								tooltip={<FTooltipReceipts/>}
 								/> :
 						 <Fragment>
 							 <FTable

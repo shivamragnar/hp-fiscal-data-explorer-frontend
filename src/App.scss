@@ -4,7 +4,6 @@
 @import './scss/vars.scss';
 
 //components styles
-@import './components/atoms/FButton/style.scss';
 @import './components/atoms/FLoading/style.scss';
 @import './components/molecules/FMonthPicker/style.scss';
 @import './components/molecules/FDropdown/style.scss';
@@ -26,7 +25,7 @@
 @import './content/ContactUs/style.scss';
 @import './content/ExpSummary/style.scss';
 @import './content/ExpDetails/style.scss';
-@import './content/ExpTracker/style.scss';
+@import './content/ExpDistrictwise/style.scss';
 
 
 
@@ -81,7 +80,7 @@
   padding-top: 2rem;
   z-index: 10;
 
-  &.exp-details, &.receipts{
+  &.exp-details, &.receipts, &.exp-districtwise{
     padding-left: 20rem;
   }
 

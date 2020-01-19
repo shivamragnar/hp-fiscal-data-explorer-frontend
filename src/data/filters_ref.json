@@ -1,7 +1,7 @@
 {
 
-  "exp_demandwise" :
-   [ "demand",
+  "exp_demandwise" : [
+     "demand",
      "major",
      "sub_major",
      "minor",
@@ -10,19 +10,33 @@
      "voted_charged",
      "plan_nonplan",
      "SOE"
-     ],
-  "receipts" :
-   [ "major",
+  ],
+  "exp_districtwise" : [
+    "District",
+    "Treasury_Code",
+    "DDO_Code",
+    "demand",
+    "major",
+    "sub_major",
+    "minor",
+    "sub_minor",
+    "budget",
+    "voted_charged",
+    "plan_nonplan",
+    "SOE"
+  ],
+  "receipts" : [
+     "major",
      "sub_major",
      "minor",
      "sub_minor"
-     ],
-   "receipts_filter_comp" :
-   [
+  ],
+
+
+  "receipts_filter_comp" : [
      { "comp" : "FDropdown", "titleText" : "Major"},
      { "comp" : "FDropdown", "titleText" : "Sub Major"},
      { "comp" : "FDropdown", "titleText" : "Minor"},
-     { "comp" : "FDropdown", "titleText" : "Sub Minor"}     
-   ]
-
+     { "comp" : "FDropdown", "titleText" : "Sub Minor"}
+  ]
 }

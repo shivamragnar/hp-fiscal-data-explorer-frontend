@@ -3,7 +3,7 @@ import axios from "axios";
 //redux dispatchers
 import {
   GET_EXP_DEMANDWISE_DATA,
-  SET_DATA_LOADING_EXP,
+  SET_DATA_LOADING_EXP_DEMANDWISE,
   EXP_DEMANDWISE_DATA_ERROR
 } from "./types";
 
@@ -31,10 +31,10 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     const tempTableData = { headers : [], rows : [] };
 
     //0 SET LOADING TO TRUE
-    dispatch({ type: SET_DATA_LOADING_EXP, payload: {} });
+    dispatch({ type: SET_DATA_LOADING_EXP_DEMANDWISE, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    console.time("Axios Fetch"); console.log("Axios Fetch Started");
+    console.log("Axios Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
     const res = await axios.post(
       `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, activeFilters, config
@@ -113,5 +113,4 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
       }
     });
   }
-  console.timeEnd("Axios Fetch");
 };

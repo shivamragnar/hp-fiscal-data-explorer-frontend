@@ -28,7 +28,6 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
         }
 
         render() {
-          console.log(yymmdd_ref.months);
             return (
                 <div className="f-month-picker--month-box" onClick={this._handleClick}>
                     <span>{this.state.value1}</span><span className="bx--label bx--label--inline-dates">to</span><span>{this.state.value2}</span>
@@ -54,8 +53,8 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
             super(props, context)
 
             const { years, months }= this.props.defaultSelect;
-            console.log("defaultSelect");
-            console.log(this.props.defaultSelect);
+            // console.log("defaultSelect");
+            // console.log(this.props.defaultSelect);
             this.state = {
                 mrange2: {from: {year: years[0], month: months[0]}, to: {year: years[1], month: months[1]}}, //default setting
             }

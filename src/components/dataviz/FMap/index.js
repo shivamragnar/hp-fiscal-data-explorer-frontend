@@ -22,11 +22,23 @@ type State = {
 };
 
 export default class FMap extends Component<{}, State> {
+
+  constructor(props){
+    super(props);
+    this.highlightFeature = this.highlightFeature.bind(this);
+
+  }
   state = {
     lat: 31.1048,
     lng: 77.1734,
-    zoom: 7
+    zoom: 7,
+    value: "hi"
+
   };
+
+  highlightFeature(e, feature) {
+    console.log(feature);
+  }
 
   render() {
     const position = [this.state.lat, this.state.lng];
@@ -41,7 +53,11 @@ export default class FMap extends Component<{}, State> {
           mode="e"
           style={style}
           onEachFeature={(feature, layer) =>
-            layer.bindPopup(feature.properties.label)
+             layer.on({
+                 mouseover: (e, feature) => this.highlightFeature(e, feature),
+                 // mouseout: this.resetHighlight.bind(this),
+                 // click: this.clickToFeature.bind(this)
+             })
           }
         />
       </Map>

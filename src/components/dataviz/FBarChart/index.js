@@ -21,7 +21,7 @@ import {
   VictoryLabel,
   VictoryTooltip } from 'victory';
 
-import FTooltipReceipts from '../../atoms/FTooltipReceipts';
+
 
 import { getDynamicYLabelFormat } from '../../../utils/functions';
 
@@ -39,15 +39,17 @@ class FBarChart extends Component {
 
   static defaultProps = {
       //yLabelFormat mnust be an array of 3. each value representing  'prefix', 'suffix' and multiplier
-      yLabelFormat: ["","",1]
+      yLabelFormat: ["","",1],
+      chartWidth: 700,
+      chartHeight: 300
    };
 
   render() {
     return (
       <VictoryChart
         theme={VictoryTheme.material}
-        width= {700}
-        height= {300}
+        width= {this.props.chartWidth}
+        height= {this.props.chartHeight}
       >
       <VictoryAxis
         tickLabelComponent={
@@ -75,7 +77,7 @@ class FBarChart extends Component {
           offset={7}
           style={{ data: { width: 5 } }}
           labelComponent={<VictoryTooltip
-            labelComponent={<FTooltipReceipts />}
+            labelComponent={this.props.tooltip}
             flyoutComponent={<g></g>}
             />}
         >
@@ -88,7 +90,7 @@ class FBarChart extends Component {
                   data={this.props.data}
                   x={this.props.dataToX}
                   y={dataToY}
-                  labels={({ datum }) => `${datum.date}_${datum.receipt}`}
+                  labels={({ datum }) => datum}
                 />
               )
             })
