@@ -1,4 +1,5 @@
 import {
+  DISTRICTWISE_SWITCH_ACTIVE_VIZ_IDX,
   GET_EXP_DISTRICTWISE_DATA,
   SET_DATA_LOADING_EXP_DISTRICTWISE,
   EXP_DISTRICTWISE_DATA_ERROR } from "../actions/types";
@@ -8,6 +9,7 @@ const initialState = {
   dateRange: ["2018-04-01","2019-03-31"],
   activeFilters: {},
   loading: true,
+  activeVizIdx: 0,
   error: {}
 };
 
@@ -33,6 +35,11 @@ export default function(state = initialState, action) {
         ...state,
         error: payload,
         loading: false
+      };
+    case DISTRICTWISE_SWITCH_ACTIVE_VIZ_IDX:
+      return {
+        ...state,
+        activeVizIdx: payload
       };
     default:
       return state;

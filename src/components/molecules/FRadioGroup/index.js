@@ -14,7 +14,7 @@ const FRadioGroup = props => {
           defaultSelected={props.valueSelected}
           labelPosition="right"
           legend="Group Legend"
-          name={props.items && props.items[0].filter_name}
+          name={props.items && props.items[0].filter_name || props.name}
           onChange={props.onChange}
           orientation="horizontal"
           valueSelected={props.valueSelected}

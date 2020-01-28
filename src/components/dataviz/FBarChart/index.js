@@ -30,8 +30,20 @@ const { black } = sassVars;
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
-  fontSize: '7px'
+  fontSize: '7px',
+  fontWeight: 600
   }
+
+const axisLabelStyle ={
+  padding: 50,
+  fontFamily: 'IBM Plex Sans',
+  fontSize: '7px',
+  fill: "rgb(37, 37, 37)",
+  fontWeight: 400,
+  textTransform: "uppercase",
+  wordSpacing: "0.2em",
+  letterSpacing: "0.08em"
+}
 
 
 
@@ -50,8 +62,11 @@ class FBarChart extends Component {
         theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
+        padding={{ left: 60, right: 60, top: 60, bottom: 60 }}
       >
       <VictoryAxis
+        label={this.props.xAxisLabel}
+        style={{ axisLabel: axisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
             dx={-10}
@@ -65,9 +80,12 @@ class FBarChart extends Component {
       />
       <VictoryAxis
         dependentAxis
+        label={this.props.yAxisLabel}
+        style={{ axisLabel: axisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
-            dx={5}
+            dx={0}
+            angle={-45}
             style={tickLabelStyle}
           />
         }
@@ -86,11 +104,14 @@ class FBarChart extends Component {
             this.props.dataPoints.map((dataToY, i) =>{
               return(
                 <VictoryBar
+                  key={i}
                   style={{ data: { fill: black} }}
                   data={this.props.data}
                   x={this.props.dataToX}
                   y={dataToY}
                   labels={({ datum }) => datum}
+                  name="bar"
+                  events={this.props.events}
                 />
               )
             })

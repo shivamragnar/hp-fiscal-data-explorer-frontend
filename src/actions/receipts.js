@@ -66,14 +66,14 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     tempVizData.map((d, i) => {
 
     	i === 0 && tempTableData.headers.push(
-        { key: 'date', header: 'Date' },
-        { key: 'receipt', header: 'Receipt' }
+        { key: 'date', header: month_week === "week" ? "WEEKWISE DATES" : "MONTHS" },
+        { key: 'receipt', header: 'TOTAL AMOUNT IN RUPEES' }
       );
 
     	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
-    		'receipt': Math.round(d.receipt*100)/100,
+    		'receipt': (Math.round(d.receipt*100)/100).toLocaleString('en-IN'),
     	})
     })
 

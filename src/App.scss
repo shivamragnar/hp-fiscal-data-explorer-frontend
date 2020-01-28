@@ -61,6 +61,7 @@
 }
 
 .f-page-title{
+  position: sticky;
   left: 0;
   top: 3rem;
 }
@@ -96,6 +97,10 @@
   @media screen and (max-width: 992px){
     padding-left: 0;
   }
+}
+
+.viz-view-toggle{
+  padding-top: 2rem;
 }
 
 //content switcher component

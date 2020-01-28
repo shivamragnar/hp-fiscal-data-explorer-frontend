@@ -14,12 +14,19 @@ import FMonthPicker from '../../components/molecules/FMonthPicker';
 
 import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FTable from '../../components/dataviz/FTable';
+
+import FRadioGroup from '../../components/molecules/FRadioGroup';
+
+import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
+
 
 //actions
-import { getExpDistrictwiseData }  from '../../actions/exp_districtwise';
-import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters }  from '../../actions/exp_districtwise_filters';
+import { getExpDistrictwiseData, setActiveVizIdx }  from '../../actions/exp_districtwise';
+import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDistrictwiseOnDateRangeChange }  from '../../actions/exp_districtwise_filters';
 
-var { exp_districtwise : filterOrderRef } = require("../../data/filters_ref.json");
+var { exp_districtwise : filterOrderRef, districtwise_filter_comp } = require("../../data/filters_ref.json");
 
 const sampleDataBar = [
   { month: "Jan", sanction: 3000, revised: 2500 },
@@ -40,7 +47,6 @@ const sampleDataBar = [
 const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
 const props = {
-  FMap: null,
   FBarChart: {
     data: sampleDataBar,
     dataToX: 'month',
@@ -52,22 +58,31 @@ const props = {
 const ExpDistrictwise = ({
   exp_districtwise : {
     data : {
-      barChrtData : { data: barChrtData , xLabelVals, xLabelFormat },
-      lineChrtData : { data: lineChrtData },
+      mapData,
+      barChrtData : { data: barChrtData },
+      lineChrtData : { data: lineChrtData, xLabelVals, xLabelFormat },
       tableData : { headers, rows }
     },
     loading,
+    activeVizIdx,
     activeFilters,
     dateRange
   },
   exp_districtwise_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
   getExpDistrictwiseData,
+  setActiveVizIdx,
   getExpDistrictwiseFiltersData,
+  updateDistrictwiseOnDateRangeChange,
   updateExpDistrictwiseFilters }) => {
 
+  const activeViz = vizTypes[activeVizIdx];
+  console.log("MAPDATA!");
+  console.log(mapData);
 
-  const [activeViz, setActiveViz] = useState(vizTypes[0]);
-  const switchActiveViz = (e) => { setActiveViz(vizTypes[e]) };
+  const switchActiveViz = (e) => { setActiveVizIdx(e) };
+  // const [activeViz, setActiveViz] = useState(vizTypes[0]);
+  const [activeVizView, setActiveVizView] = useState("gross");
+
 
 
   useEffect(() => {
@@ -82,8 +97,11 @@ const ExpDistrictwise = ({
       .forEach(e => e.click());
   }
 
-  const onFilterChange = (e, key) => {
+  const onViewChange = (value, name) => {
+    setActiveVizView(value);
+  }
 
+  const onFilterChange = (e, key) => {
     //if at least 1 option is selected,
     if(e.selectedItems.length > 0){
       activeFilters[key] = e.selectedItems.map(selectedItem => {
@@ -99,18 +117,27 @@ const ExpDistrictwise = ({
       }
     })
 
-
-
     console.log("activeFilters");
     console.log(activeFilters);
     getExpDistrictwiseData(activeFilters, dateRange);
     updateExpDistrictwiseFilters(e, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
+
+  const onDateRangeSet = (newDateRange) => {
+		updateDistrictwiseOnDateRangeChange(newDateRange, activeFilters);
+	}
+
+
+
   const renderSwitch = () => {
     switch (activeViz) {
       case 'FMap':
-      return <div id="fmap"><FMap {...props.FMap}/></div>;
+      return <div id="fmap">
+              <FMap
+                data={mapData}
+                />
+             </div>;
 
       case 'FBarChart':
       return <FBarChart
@@ -118,14 +145,38 @@ const ExpDistrictwise = ({
               dataToX="districtName"
               dataPoints={["gross", "netPayment"]}
               xLabelVals={xLabelVals}
-              xLabelFormat={xLabelFormat}
+
               />;
 
       case 'FTimeSeries':
-      return <div>this is the timeseries graph</div>
+      return  <Fragment>
+                <FRadioGroup
+                  className = "viz-view-toggle"
+                  name = "gross_netPayment"
+                  titleText = "View:"
+                  onChange = {(value, name) => onViewChange(value, name)}
+                  items = {[
+                    { label : "Gross", id : "gross" },
+                    { label : "Net Payment", id : "netPayment" }
+                  ]}
+                  valueSelected = "gross"
+                />
+                <FTimeSeries
+                  dataToX="date"
+                  dataToY={activeVizView}
+                  data={lineChrtData}
+                  dataAryName="datewiseExp"
+                  xLabelVals={xLabelVals}
+  								xLabelFormat={xLabelFormat}
+                />
+              </Fragment>
 
       case 'FTable':
-      return <div>this is the table</div>
+      return <FTable
+              rows={rows}
+              headers={headers}
+              onClickDownloadBtn={(e) => { console.log(e)}}
+              />
 
       default:
       return <div>nothing to display</div>;
@@ -139,7 +190,7 @@ const ExpDistrictwise = ({
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchActiveViz} >
+            <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
               <Switch  text="Map" />
               <Switch  text="Bar Chart" />
               <Switch  text="Time Series" />
@@ -163,6 +214,7 @@ const ExpDistrictwise = ({
               years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
               months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
             dateRange = {{years:[2018, 2019], months:[4, 3]}}
+            onDateRangeSet={onDateRangeSet}
           />
         }
         />
@@ -170,6 +222,13 @@ const ExpDistrictwise = ({
         {createDataUIComponent()}
       </div>
       <div className="filter-col-wrapper">
+        <FFilterColumn2
+          allFiltersData = {allFiltersData && allFiltersData}
+          filterCompData = {districtwise_filter_comp}
+          filtersLoading = {filtersLoading}
+          activeFilters = {activeFilters}
+          onChange = {(e, key) => onFilterChange(e, key)}
+          />
         <div className="filter-col">
           <div className="filter-col--ops">
             <MultiSelect
@@ -180,48 +239,8 @@ const ExpDistrictwise = ({
               label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[0].key] ? activeFilters[allFiltersData[0].key].join(", ") : "All"}
               invalid={false}
               invalidText="Invalid Selection"
-              onChange={(e) => onFilterChange(e, allFiltersData[0] && allFiltersData[0].key  )}
+               onChange={(e) => onFilterChange(e, allFiltersData[0] && allFiltersData[0].key  )}
               items={allFiltersData[0] && allFiltersData[0].val}
-              />
-          </div>
-
-          <div className="filter-col--ops">
-            <MultiSelect
-              className={`f-${allFiltersData[1] && allFiltersData[1].key}-multiselect`}
-              titleText = "Treasury Code"
-              disabled = {filtersLoading}
-              useTitleInItem={false}
-              label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[1].key] ? activeFilters[allFiltersData[1].key].join(", ") : "All"}
-              invalid={false}
-              invalidText="Invalid Selection"
-              onChange={(e) => onFilterChange(e, allFiltersData[1] && allFiltersData[1].key  )}
-              items={allFiltersData[1] && allFiltersData[1].val}
-              />
-          </div>
-          <div className="filter-col--ops">
-            <MultiSelect
-              className={`f-${allFiltersData[2] && allFiltersData[2].key}-multiselect`}
-              titleText = "DDO Code"
-              disabled = {filtersLoading}
-              useTitleInItem={false}
-              label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[2].key] ? activeFilters[allFiltersData[2].key].join(", ") : "All"}
-              invalid={false}
-              invalidText="Invalid Selection"
-              onChange={(e) => onFilterChange(e, allFiltersData[2] && allFiltersData[2].key  )}
-              items={allFiltersData[2] && allFiltersData[2].val}
-              />
-          </div>
-          <div className="filter-col--ops">
-            <MultiSelect
-              className={`f-${allFiltersData[3] && allFiltersData[3].key}-multiselect`}
-              titleText = "Demand"
-              disabled = {filtersLoading}
-              useTitleInItem={false}
-              label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[3].key] ? activeFilters[allFiltersData[3].key].join(", ") : "All"}
-              invalid={false}
-              invalidText="Invalid Selection"
-              onChange={(e) => onFilterChange(e, allFiltersData[3] && allFiltersData[3].key  )}
-              items={allFiltersData[3] && allFiltersData[3].val}
               />
           </div>
         </div>
@@ -235,6 +254,7 @@ ExpDistrictwise.propTypes ={
   exp_districtwise : PropTypes.object.isRequired,
   exp_districtwise_filters : PropTypes.object.isRequired,
   getExpDistrictwiseData : PropTypes.func.isRequired,
+  setActiveVizIdx : PropTypes.func.isRequired,
   getExpDistrictwiseFiltersData : PropTypes.func.isRequired,
   updateExpDistrictwiseFilters : PropTypes.func.isRequired
 }
@@ -247,7 +267,9 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getExpDistrictwiseData,
+    setActiveVizIdx,
     getExpDistrictwiseFiltersData,
+    updateDistrictwiseOnDateRangeChange,
     updateExpDistrictwiseFilters
   }
 )(ExpDistrictwise);

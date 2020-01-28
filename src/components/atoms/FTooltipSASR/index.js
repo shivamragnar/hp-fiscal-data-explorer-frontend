@@ -1,7 +1,7 @@
 import React from "react";
 import sassVars from '../../../scss/_vars.scss'
 import tooltipBubble from '../../../imgs/tooltipBubble.svg'
-const { orange, blue, lightGrey, extraLightGrey, grey } = sassVars;
+const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey } = sassVars;
 
 const FTooltipSASR = ( { x, y, datum : { date, sanction, revised, addition, savings}} ) => {
 

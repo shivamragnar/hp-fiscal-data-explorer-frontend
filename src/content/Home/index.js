@@ -9,6 +9,7 @@ import FTooltipSASR from '../../components/atoms/FTooltipSASR';
 
 import FSASRChart from '../../components/dataviz/FSASRChart';
 import FBarChart from '../../components/dataviz/FBarChart';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
 
 import * as d3 from "d3";
 
@@ -23,14 +24,27 @@ var testData = [
   { date: 28, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
   { date: 31, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20 },
 ]
-
-var barData = [
-
-  { date: "jan", receipt: 3000 },
-  { date: "feb", receipt: 4000  },
-  { date: "mar", receipt: 3000  }
-
+var myData = [
+  {
+    name : "name1",
+    ary : [
+      { date: "jan", receipt: 3000 },
+      { date: "feb", receipt: 4000  },
+      { date: "mar", receipt: 3000  }
+    ]
+  },
+  {
+    name : "name2",
+    ary : [
+      { date: "jan", receipt: 2000 },
+      { date: "feb", receipt: 2000  },
+      { date: "mar", receipt: 1000  }
+    ]
+  }
 ]
+
+
+
 
 var yymmdd_ref = require("../../data/yymmdd_ref.json");
 
@@ -90,35 +104,17 @@ const Home = (props) =>  {
       <div>
 
       <div style={{width:"100%"}}>
-
-        <FSASRChart
-          data={testData}
-          xLabelFormat={(t) => `${t} month`}
-          />
           {
-            // <FForce_col data={this.state.data} />
-          }
-          <FBarChart
-            data={barData}
-            dataToX="date"
-            dataPoints={["receipt"]}
-            yLabelFormat={["","",1]}
+          //   <FTimeSeries
+          //   dataToX="date"
+          //   dataToY="receipt"
+          //   dataObj={myData}
+          //   dataAryName="ary"
+          // />
+      }
 
-          />
-        <svg width="400" height="100" viewBox="0, 0, 100, 100">
-          <FTooltipSASR
-            x = {0}
-            y = {0}
-            datum = {
-              {
-                date : "DDMMYYY",
-                sanction: 100,
-              savings: 100,
-              addition: 100,
-              revised: 100}
-            }
-            />
-        </svg>
+
+
 
       </div>
     </div>

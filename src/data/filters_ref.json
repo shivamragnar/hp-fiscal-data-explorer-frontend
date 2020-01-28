@@ -38,5 +38,12 @@
      { "comp" : "FDropdown", "titleText" : "Sub Major"},
      { "comp" : "FDropdown", "titleText" : "Minor"},
      { "comp" : "FDropdown", "titleText" : "Sub Minor"}
+  ],
+
+  "districtwise_filter_comp" : [
+     { "comp" : "MultiSelect", "titleText" : "District"},
+     { "comp" : "MultiSelect", "titleText" : "Treasury Code"},
+     { "comp" : "MultiSelect", "titleText" : "DDO Code"},
+     { "comp" : "MultiSelect", "titleText" : "Demand"}
   ]
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  DISTRICTWISE_SWITCH_ACTIVE_VIZ_IDX,
   GET_EXP_DISTRICTWISE_DATA,
   SET_DATA_LOADING_EXP_DISTRICTWISE,
   EXP_DISTRICTWISE_DATA_ERROR
@@ -12,6 +13,7 @@ import {
 
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
+var hp_geojson = require("../data/hp_geojson.json");
 
 export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispatch => {
   try {
@@ -23,8 +25,9 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
     const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
     const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
 
-    const tempVizData = [];
+    const tempLineChrtData = [];
     const tempBarChrtData = [];
+    const tempMapData = hp_geojson;
     const tempTableData = { headers : [], rows : [] };
 
     const activeFilterKeys = Object.keys(activeFilters);
@@ -74,38 +77,47 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
         totalExp.AGDED += expArray[2]
         totalExp.netPayment += expArray[3]
       })
-      tempVizData.push({
+      tempLineChrtData.push({
         districtName,
         datewiseExp,
         totalExp
       })
       tempBarChrtData.push(totalExp);
+      tempMapData.features.map((feature,i) =>{
+        const { properties : { NAME_2 : districtName_inJson }} = feature; //the district name as in the geojson
+        if(districtName_inJson.toUpperCase() === districtName ){
+          feature.properties.gross = totalExp.gross;
+          feature.properties.BTDED = totalExp.BTDED;
+          feature.properties.AGDED = totalExp.AGDED;
+          feature.properties.netPayment = totalExp.netPayment;
+        }
+      })
     })
 
-    console.log("tempVizData");
-    console.log(tempVizData);
+    console.log("tempLineChrtData");
+    console.log(tempLineChrtData);
 
     console.log("tempBarChrtData");
     console.log(tempBarChrtData);
 
     //3 PREP DATA FOR TABLE
-    tempVizData.map((d, i) => {
+    tempTableData.headers.push(
+      { key: 'districtName', header: 'District' },
+      { key: 'gross', header: 'Gross (INR)' },
+      { key: 'BTDED', header: 'BTDED (INR)' },
+      { key: 'AGDED', header: 'AGDED (INR)' },
+      { key: 'netPayment', header: 'Net Payment (INR)' }
+    )
 
-    	i === 0 && tempTableData.headers.push(
-        { key: 'districtName', header: 'District' },
-        { key: 'gross', header: 'Gross' },
-        { key: 'BTDED', header: 'BTDED' },
-        { key: 'AGDED', header: 'AGDED' },
-        { key: 'netPayment', header: 'netPayment' }
-      );
 
-    	i !== 0 && tempTableData.rows.push({
+    tempBarChrtData.map((d, i) => {
+    	tempTableData.rows.push({
     		id: i,
     		'districtName': d.districtName,
-    		'gross': d.totalExp.gross,
-    		'BTDED': d.totalExp.BTDED,
-    		'AGDED': d.totalExp.AGDED,
-    		'netPayment': d.totalExp.netPayment
+    		'gross': d.gross.toLocaleString('en-IN'),
+    		'BTDED': d.BTDED.toLocaleString('en-IN'),
+    		'AGDED': d.AGDED.toLocaleString('en-IN'),
+    		'netPayment': d.netPayment.toLocaleString('en-IN')
     	})
     })
     console.log("tempTableData");
@@ -115,13 +127,14 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
       type: GET_EXP_DISTRICTWISE_DATA,
       payload: {
         data: {
+          mapData: tempMapData,
           barChrtData: {
-            xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
-            xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
             data:tempBarChrtData
           },
           lineChrtData: {
-            data:tempVizData
+            xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
+            xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
+            data:tempLineChrtData
           },
           tableData: tempTableData
         },
@@ -139,3 +152,14 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
     });
   }
 };
+
+export const setActiveVizIdx = (e) => async dispatch => {
+  try{
+    dispatch({
+      type: DISTRICTWISE_SWITCH_ACTIVE_VIZ_IDX,
+      payload: e
+    })
+  }catch(err){
+
+  }
+}

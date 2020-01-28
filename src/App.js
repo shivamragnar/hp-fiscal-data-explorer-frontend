@@ -75,13 +75,15 @@ const App = ({ exp_demandwise : {
 				}
 
           <Switch>
-            <Route exact path="/" component={Home} />
+
+						<Route exact path="/" component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
             <Route exact path="/receipts" component={Receipts} />
+
             <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>
 

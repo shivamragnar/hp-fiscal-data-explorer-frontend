@@ -69,12 +69,12 @@ export const calcScsrOffset = (tempVizData) => {
 //5
 export const getDynamicYLabelFormat = (y) => (
   y > 9999999 ?
-  (y/10000000) + " C INR" :
+  (y/10000000) + " C" :
   y > 99999 ?
-  (y/100000) + " L INR" :
+  (y/100000) + " L" :
   (y > 999 && y < 99999) ?
-  (y/1000) + " K INR" :
-  y + " INR"
+  (y/1000) + " K" :
+  y
 )
 
 //6

@@ -42,7 +42,7 @@ class FTable extends Component {
 
 
     return (
-      <div>
+      <div className="f-table-comp-wrapper">
               <DataTable
                 rows={this.props.rows}
                 headers={this.props.headers}

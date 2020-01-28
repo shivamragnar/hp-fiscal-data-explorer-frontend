@@ -78,7 +78,7 @@ const Receipts = ( { receipts : {
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-						<ContentSwitcher onChange={switchVizType} >
+						<ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
 							<Switch  text="Visual" />
 							<Switch  text="Table" />
 						</ContentSwitcher>
@@ -90,7 +90,43 @@ const Receipts = ( { receipts : {
 								dataPoints={["receipt"]}
 								xLabelVals={xLabelVals}
 								xLabelFormat={xLabelFormat}
+								xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}
+								yAxisLabel="Total Amount in Rupees"
 								tooltip={<FTooltipReceipts/>}
+								events={[{
+									// childName: "all",
+									target: "data",
+									eventHandlers: {
+										onMouseOver: () => {
+											return [
+												{
+													// childName: "bar",
+													target: "data",
+													mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 4 }) })
+												},
+												{
+													// childName: "bar",
+													target: "labels",
+													mutation: () => ({ active: true })
+												}
+											];
+										},
+										onMouseOut: () => {
+											return [
+												{
+													// childName: "bar",
+													target: "data",
+													mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 0 }) })
+												},
+												{
+													// childName: "bar",
+													target: "labels",
+													mutation: () => ({ active: false })
+												}
+											];
+										}
+									}
+								}]}
 								/> :
 						 <Fragment>
 							 <FTable

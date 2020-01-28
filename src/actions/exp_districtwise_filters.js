@@ -108,3 +108,7 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
     console.log("error > updateExpDistrictwiseFilters");
   }
 }
+
+export const updateDistrictwiseOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
+  dispatch(getExpDistrictwiseData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
+}
