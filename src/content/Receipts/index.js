@@ -88,6 +88,7 @@ const Receipts = ( { receipts : {
 								data={data}
 								dataToX="date"
 								dataPoints={["receipt"]}
+								barColors={["black"]}
 								xLabelVals={xLabelVals}
 								xLabelFormat={xLabelFormat}
 								xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}

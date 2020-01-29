@@ -4,16 +4,15 @@ import { Map, TileLayer } from "react-leaflet";
 import Choropleth from "react-leaflet-choropleth";
 import * as d3 from 'd3';
 import { blue, darkGrey, white, orange } from '../../../scss/_vars.scss';
-import FTooltipDistrict from '../../atoms/FTooltipDistrict';
 var hp_geojson = require("../../../data/hp_geojson.json");
 console.log(hp_geojson);
 
 
 const style = {
     fillColor: '#FFFFFF',
-    weight: 0,
+    weight: 2,
     opacity: 1,
-    color: orange,
+    color: '#fff',
     fillOpacity: 0.8
 }
 
@@ -53,7 +52,8 @@ export default class FMap extends Component<{}, State> {
 
     this.setState({ tooltipDisplay : "block"})
     this.setState({ tooltipData: {
-      gross: e.target.options.data.properties.gross
+      dataPointToMap: e.target.options.data.properties[this.props.dataPointToMap],
+      districtName: e.target.options.data.properties.NAME_2
     }})
 
   }
@@ -61,7 +61,7 @@ export default class FMap extends Component<{}, State> {
   resetHighlight(e) {
     var layer = e.target;
     layer.setStyle({
-      weight: 0
+      weight: 2
     });
 
     this.setState({ tooltipDisplay : "none"})
@@ -74,16 +74,38 @@ export default class FMap extends Component<{}, State> {
     return (
       <div style={{position: "relative"}}>
         <div style={{position: "absolute", top: 10, right: 10, width: "150px" ,height: "100px", backgroundColor: "#000", zIndex:100000}}>
-          <p style={{display: this.state.tooltipDisplay, color: "#fff"}}>
-            {this.state.tooltipData.gross && this.state.tooltipData.gross.toLocaleString('en-IN')}
+          <p style={{
+              position: "absolute",
+              color: "#fff",
+              zIndex: 100
+            }}>
+            hover over a district to see info
           </p>
+          <div
+            className="tooptip-content-wrapper"
+            style={{
+              display : this.state.tooltipDisplay,
+              backgroundColor: "#000fff",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              zIndex: 100000
+            }}>
+            <p style={{ color: "#fff"}}>
+              {this.state.tooltipData.districtName && this.state.tooltipData.districtName}
+            </p>
+            <hr />
+            <p style={{ color: "#fff"}}>
+              {this.state.tooltipData.dataPointToMap && this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')}
+            </p>
+          </div>
         </div>
       <Map center={position} zoom={this.state.zoom}>
       <TileLayer url="https://api.mapbox.com/styles/v1/abrarburk/ck5wgtnm04osr1inyi2ng4wo5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJyYXJidXJrIiwiYSI6ImNqM284MjlrbTAwMTMyd3BuemplOTVoMmYifQ.TX_JBU6Ff8EwHVx8dJfRPg" />
       <Choropleth
           data={this.props.data}
-          valueProperty={feature => feature.properties.gross}
-          scale={["hsl(177,100%,50%)", "hsl(177,100%,0%)"]}
+          valueProperty={feature => feature.properties[this.props.dataPointToMap]}
+          scale={["hsl(177,100%,0%)", "hsl(177,100%,70%)"]}
           style={style}
           steps={7}
           mode="e"

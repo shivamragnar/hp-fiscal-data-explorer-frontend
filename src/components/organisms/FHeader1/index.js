@@ -43,8 +43,9 @@ const FHeader1 = () => (
 
             <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
               <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/expenditure/details">Expenditure Details</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Tracker</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/tracker">District Comparison</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/district_details">District Details</HeaderMenuItem>
             </HeaderMenu>
             <HeaderMenuItem element={Link} to="/receipts">
               Receipts
@@ -89,14 +90,21 @@ const FHeader1 = () => (
                     to="/expenditure/details"
                     onClick={onClickSideNavExpand}
                   >
-                    Expenditure Details
+                    Demand Details
                   </HeaderMenuItem>
                   <HeaderMenuItem
                     element={Link}
                     to="/expenditure/tracker"
                     onClick={onClickSideNavExpand}
                   >
-                    Expenditure Tracker
+                    District Comparison
+                  </HeaderMenuItem>
+                  <HeaderMenuItem
+                    element={Link}
+                    to="/expenditure/district_details"
+                    onClick={onClickSideNavExpand}
+                  >
+                    District Details
                   </HeaderMenuItem>
                 </HeaderMenu>
                 <HeaderMenuItem

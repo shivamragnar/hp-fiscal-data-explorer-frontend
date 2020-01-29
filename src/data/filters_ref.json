@@ -44,6 +44,11 @@
      { "comp" : "MultiSelect", "titleText" : "District"},
      { "comp" : "MultiSelect", "titleText" : "Treasury Code"},
      { "comp" : "MultiSelect", "titleText" : "DDO Code"},
-     { "comp" : "MultiSelect", "titleText" : "Demand"}
+     { "comp" : "MultiSelect", "titleText" : "Demand"},
+     { "comp" : "MultiSelect", "titleText" : "Major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor"},
+     { "comp" : "MultiSelect", "titleText" : "Budget"}
   ]
 }

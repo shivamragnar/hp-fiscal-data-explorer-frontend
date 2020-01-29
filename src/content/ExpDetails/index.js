@@ -101,7 +101,7 @@ const ExpDetails = ( { exp_demandwise : {
 	return (
 		<div className="f-content">
 			<FPageTitle
-				pageTitle="Demand-wise Expenditure Details"
+				pageTitle="Expenditure | Demand Details"
 				showLegend={true}
 				monthPicker={
 					<FMonthPicker

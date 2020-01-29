@@ -109,7 +109,7 @@ class ExpSummary extends Component {
     return (
       <div className="f-content exp-summary-content">
 				<FPageTitle
-					pageTitle={ <span>Expenditure Summary  <span className="f-light-grey">| FY: 2018-19</span></span> }
+					pageTitle={ <span>Expenditure | Summary  <span className="f-light-grey">| FY: 2018-19</span></span> }
 					pageDescription= "Carbon is IBM’s open-source design system for digital
 					 			products and experiences. With the IBM Design Language
 					 			as its foundation, the system consists of working code,

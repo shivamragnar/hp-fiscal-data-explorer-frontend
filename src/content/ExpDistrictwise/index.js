@@ -21,6 +21,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
+import FTooltipDistricts from '../../components/atoms/FTooltipDistricts';
 
 //actions
 import { getExpDistrictwiseData, setActiveVizIdx }  from '../../actions/exp_districtwise';
@@ -112,7 +113,7 @@ const ExpDistrictwise = ({
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
       if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete(activeFilters[filterName]);
+        delete activeFilters[filterName];
         clearAllChildFilters(filterName);
       }
     })
@@ -136,6 +137,7 @@ const ExpDistrictwise = ({
       return <div id="fmap">
               <FMap
                 data={mapData}
+                dataPointToMap={activeVizView}
                 />
              </div>;
 
@@ -144,23 +146,15 @@ const ExpDistrictwise = ({
               data={barChrtData}
               dataToX="districtName"
               dataPoints={["gross", "netPayment"]}
+              barColors={["black", "darkGrey"]}
               xLabelVals={xLabelVals}
-
+              yAxisLabel="total amount in rupees"
+              xAxisLabel="districts"
+              tooltip={<FTooltipDistricts activeDataPoint={["gross", "netPayment"]}/>}
               />;
 
       case 'FTimeSeries':
       return  <Fragment>
-                <FRadioGroup
-                  className = "viz-view-toggle"
-                  name = "gross_netPayment"
-                  titleText = "View:"
-                  onChange = {(value, name) => onViewChange(value, name)}
-                  items = {[
-                    { label : "Gross", id : "gross" },
-                    { label : "Net Payment", id : "netPayment" }
-                  ]}
-                  valueSelected = "gross"
-                />
                 <FTimeSeries
                   dataToX="date"
                   dataToY={activeVizView}
@@ -168,6 +162,7 @@ const ExpDistrictwise = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  tooltip={<FTooltipDistricts vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]}/>}
                 />
               </Fragment>
 
@@ -197,6 +192,19 @@ const ExpDistrictwise = ({
               <Switch  text="Table" />
             </ContentSwitcher>
 					</div>
+          { (activeViz === 'FTimeSeries' || activeViz === 'FMap') &&
+            <FRadioGroup
+              className = "viz-view-toggle"
+              name = "gross_netPayment"
+              titleText = "View:"
+              onChange = {(value, name) => onViewChange(value, name)}
+              items = {[
+                { label : "Gross", id : "gross" },
+                { label : "Net Payment", id : "netPayment" }
+              ]}
+              valueSelected = "gross"
+            />
+          }
 					{ renderSwitch() }
 				</Fragment>
 			)
@@ -206,7 +214,7 @@ const ExpDistrictwise = ({
   return (
     <div className="f-content">
       <FPageTitle
-        pageTitle="District-wise Expenditure Details"
+        pageTitle="Expenditure | District Comparison"
         showLegend={false}
         monthPicker={
           <FMonthPicker
@@ -229,21 +237,6 @@ const ExpDistrictwise = ({
           activeFilters = {activeFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
           />
-        <div className="filter-col">
-          <div className="filter-col--ops">
-            <MultiSelect
-              className={`f-${allFiltersData[0] && allFiltersData[0].key}-multiselect`}
-              titleText = "District"
-              disabled = {filtersLoading}
-              useTitleInItem={false}
-              label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[0].key] ? activeFilters[allFiltersData[0].key].join(", ") : "All"}
-              invalid={false}
-              invalidText="Invalid Selection"
-               onChange={(e) => onFilterChange(e, allFiltersData[0] && allFiltersData[0].key  )}
-              items={allFiltersData[0] && allFiltersData[0].val}
-              />
-          </div>
-        </div>
       </div>
     </div>
   )

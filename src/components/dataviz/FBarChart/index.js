@@ -26,7 +26,6 @@ import {
 import { getDynamicYLabelFormat } from '../../../utils/functions';
 
 import sassVars from '../../../scss/_vars.scss'
-const { black } = sassVars;
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -105,7 +104,7 @@ class FBarChart extends Component {
               return(
                 <VictoryBar
                   key={i}
-                  style={{ data: { fill: black} }}
+                  style={{ data: { fill: sassVars[this.props.barColors[i]]} }}
                   data={this.props.data}
                   x={this.props.dataToX}
                   y={dataToY}

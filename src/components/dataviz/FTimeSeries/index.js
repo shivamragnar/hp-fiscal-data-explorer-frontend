@@ -39,7 +39,9 @@ import {
 	VictoryAxis,
 	VictoryGroup,
 	VictoryLabel,
-	VictoryTheme
+	VictoryTheme,
+	VictoryTooltip,
+	VictoryVoronoiContainer
 } from 'victory';
 
 import { getDynamicYLabelFormat } from '../../../utils/functions';
@@ -67,6 +69,12 @@ class FTimeSeries extends Component {
 				theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
+				containerComponent={
+		      <VictoryVoronoiContainer
+		        labels={datum => datum}
+						labelComponent={this.props.tooltip}
+		      />
+		    }
       >
       <VictoryAxis
         tickLabelComponent={
@@ -90,6 +98,7 @@ class FTimeSeries extends Component {
       />
         <VictoryGroup
           style={{ data: { width: 5 } }}
+
         >
 
         {
@@ -102,7 +111,6 @@ class FTimeSeries extends Component {
                   data={d[this.props.dataAryName]}
                   x={this.props.dataToX}
                   y={this.props.dataToY}
-									labels={({ datum }) => ""}
                 />
               )
             })

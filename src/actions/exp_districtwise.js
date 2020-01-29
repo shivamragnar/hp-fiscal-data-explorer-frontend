@@ -13,7 +13,7 @@ import {
 
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
-var hp_geojson = require("../data/hp_geojson.json");
+var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
 
 export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispatch => {
   try {
@@ -27,7 +27,11 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
 
     const tempLineChrtData = [];
     const tempBarChrtData = [];
-    const tempMapData = hp_geojson;
+    const tempMapData = JSON.parse(hp_geojson);
+    console.log("og object");
+    console.log(hp_geojson);
+    console.log("temp map data obj");
+    console.log(tempMapData);
     const tempTableData = { headers : [], rows : [] };
 
     const activeFilterKeys = Object.keys(activeFilters);
@@ -90,6 +94,7 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
           feature.properties.BTDED = totalExp.BTDED;
           feature.properties.AGDED = totalExp.AGDED;
           feature.properties.netPayment = totalExp.netPayment;
+        }else{
         }
       })
     })
@@ -99,6 +104,9 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
 
     console.log("tempBarChrtData");
     console.log(tempBarChrtData);
+
+    console.log("tempMapData");
+    console.log(tempMapData);
 
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
