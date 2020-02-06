@@ -43,7 +43,6 @@ export default class FMap extends Component<{}, State> {
 
 
   highlightFeature(e) {
-    console.log(e.target);
     var layer = e.target;
 
     layer.setStyle({
@@ -69,7 +68,6 @@ export default class FMap extends Component<{}, State> {
 
 // style={feature => feature.properties.gross ? showStyle : hideStyle}
   render() {
-    console.log("re-render");
     const position = [this.state.lat, this.state.lng];
     return (
       <div style={{position: "relative"}}>

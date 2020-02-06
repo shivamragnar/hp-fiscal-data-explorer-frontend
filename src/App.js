@@ -35,6 +35,7 @@ import exp_details_keys from "./dictionary/exp_details_keys.json";
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
 import ExpDistrictwise from "./content/ExpDistrictwise";
+import ExpSchemes from "./content/ExpSchemes";
 import Receipts from "./content/Receipts";
 
 import BudgetHighlights from "./content/BudgetHighlights";
@@ -60,8 +61,8 @@ const App = ({ exp_demandwise : {
 
  useEffect(() => {
 	 // apiDataFetchBegin();
-   getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
-   getExpDemandwiseFiltersData();
+   // getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
+   // getExpDemandwiseFiltersData();
  }, []);
 
 
@@ -82,6 +83,7 @@ const App = ({ exp_demandwise : {
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
+						<Route exact path="/schemes" component={ExpSchemes} />
             <Route exact path="/receipts" component={Receipts} />
 
             <Route exact path="/budget_highlights" component={BudgetHighlights} />

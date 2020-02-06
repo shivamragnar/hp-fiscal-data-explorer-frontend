@@ -1,26 +1,27 @@
 import axios from "axios";
 import {
-  GET_EXP_DISTRICTWISE_FILTERS_DATA,
-  EXP_DISTRICTWISE_FILTERS_DATA_ERROR,
-  SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS,
-  UPDATE_EXP_DISTRICTWISE_FILTERS_DATA
+  GET_EXP_SCHEMES_FILTERS_DATA,
+  EXP_SCHEMES_FILTERS_DATA_ERROR,
+  SET_DATA_LOADING_EXP_SCHEMES_FILTERS,
+  UPDATE_EXP_SCHEMES_FILTERS_DATA
 } from "./types";
-import { getExpDistrictwiseData } from "./exp_districtwise";
+import { getExpSchemesData } from "./exp_schemes";
 
 
 import { onDateRangeChange, recursFilterFetch, recursFilterFind2, resetFiltersToAllFilterHeads } from "../utils/functions";
 
-var { exp_districtwise : filterOrderRef } = require("../data/filters_ref.json");
+var { exp_schemes : filterOrderRef } = require("../data/filters_ref.json");
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 
-export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHeads) => async dispatch => {
+export const getExpSchemesFiltersData = (allFiltersData, rawFilterDataAllHeads) => async dispatch => {
   try {
 
-      dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
+      dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES_FILTERS, payload: {} });
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         console.log("need to fetch raw district filter data");
-        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury");
+        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_schemes");
+
       }else{
         console.log("already have raw distrcit filter data");
       }
@@ -31,28 +32,23 @@ export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHe
       allFiltersData = resetFiltersToAllFilterHeads( rawFilterDataAllHeads, filterOrderRef);
 
       dispatch({
-        type: GET_EXP_DISTRICTWISE_FILTERS_DATA,
+        type: GET_EXP_SCHEMES_FILTERS_DATA,
         payload: { allFiltersData, rawFilterDataAllHeads }
       });
 
   }catch(err){
     dispatch({
-      type: EXP_DISTRICTWISE_FILTERS_DATA_ERROR,
+      type: EXP_SCHEMES_FILTERS_DATA_ERROR,
       payload: err
     });
   }
 }
 
 
-export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
+export const updateExpSchemesFilters = (e, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
   try {
-
-
-
-
-    dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
-
-
+    console.log("got here");
+    dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES_FILTERS, payload: {} });
 
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
     if( Object.keys(activeFilters).length > 0){
@@ -63,6 +59,7 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
           filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
         }
       })
+      console.log("got here");
 
       //2 fetch raw filter data
       const activeFilterKeys = Object.keys(activeFilters);
@@ -76,7 +73,9 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
             stringForApi += '&';
           }
       })
-      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury?${stringForApi}`);
+      console.log("THIS WILLBE THE UPDATE FILTER QUERY :");
+      console.log(`http://13.126.189.78/api/acc_heads_schemes?${stringForApi}`);
+      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_schemes?${stringForApi}`);
       console.log('raw_dynamic_filter_data: ');
       console.log(rawFilterData);
 
@@ -99,16 +98,16 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
     }
 
     dispatch({
-      type: UPDATE_EXP_DISTRICTWISE_FILTERS_DATA,
+      type: UPDATE_EXP_SCHEMES_FILTERS_DATA,
       payload: { allFiltersData }
     });
 
 
   }catch(err){
-    console.log("error > updateExpDistrictwiseFilters");
+    console.log("error > updateExpSchemesFilters");
   }
 }
 
-export const updateDistrictwiseOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
-  dispatch(getExpDistrictwiseData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
+export const updateSchemesOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
+  dispatch(getExpSchemesData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
 }

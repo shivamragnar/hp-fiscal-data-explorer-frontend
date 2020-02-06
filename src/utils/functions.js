@@ -1,6 +1,5 @@
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var scsr_offset = require("../data/scsr_offset.json");
-var { exp_districtwise : expDistrictwiseFilterOrderRef } = require("../data/filters_ref.json");
 
 //1
 export const convertDataToJson = (data) => {
@@ -194,9 +193,9 @@ export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, acti
   });
 }
 
-export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads) => {
+export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderRef) => {
   const allFiltersData = [];
-  expDistrictwiseFilterOrderRef.map((filter_name,i) => {
+  filterOrderRef.map((filter_name,i) => {
     allFiltersData.push({
       key: filter_name,
       val: [ { filter_name, id : 'all', label : 'All'} ]
