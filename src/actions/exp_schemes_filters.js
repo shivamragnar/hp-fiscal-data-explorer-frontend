@@ -53,10 +53,10 @@ export const updateExpSchemesFilters = (e, activeFilters, allFiltersData, rawFil
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
     if( Object.keys(activeFilters).length > 0){
       const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItems[0].filter_name);
-      //1 empty allFiltersData, leave only the 'All' option
+
       allFiltersData.map((filterObj, i) => {
         if( i > currFilterOrderIndex){
-          filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
+          filterObj.val = [];
         }
       })
       console.log("got here");

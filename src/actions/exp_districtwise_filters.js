@@ -46,21 +46,14 @@ export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHe
 
 export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
   try {
-
-
-
-
     dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
-
-
-
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
     if( Object.keys(activeFilters).length > 0){
       const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItems[0].filter_name);
-      //1 empty allFiltersData, leave only the 'All' option
+      
       allFiltersData.map((filterObj, i) => {
         if( i > currFilterOrderIndex){
-          filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
+          filterObj.val = [];
         }
       })
 
@@ -105,7 +98,10 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
 
 
   }catch(err){
-    console.log("error > updateExpDistrictwiseFilters");
+    dispatch({
+      type: EXP_DISTRICTWISE_FILTERS_DATA_ERROR,
+      payload: err
+    });
   }
 }
 

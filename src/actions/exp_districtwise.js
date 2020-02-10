@@ -8,7 +8,8 @@ import {
 
 import {
   getWeekwiseDates,
-  calcMonthOrWeek
+  calcMonthOrWeek,
+  createBudgetCodeString
 } from '../utils/functions';
 
 //data-refs
@@ -36,6 +37,7 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
 
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
+    console.log(activeFilterVals);
     var objForPayload = {};
     activeFilterVals.map((val, i) => {
         let tempVal = val.map(item => { return item.split('-')[0]});
@@ -111,17 +113,40 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
       { key: 'districtName', header: 'District' },
+      { key: 'budgetCode', header: 'Budget Code' },
       { key: 'gross', header: 'Gross (INR)' },
       { key: 'BTDED', header: 'BTDED (INR)' },
       { key: 'AGDED', header: 'AGDED (INR)' },
       { key: 'netPayment', header: 'Net Payment (INR)' }
     )
 
+    // const createBudgetCodeString = () => {
+    //     const budgetCodeStringArray = activeFilterVals.map((valArray, i) => {
+    //       if(activeFilterKeys[i] !== "District"){
+    //         valArray = valArray.map(val => {
+    //           return val.split('-')[0];
+    //         })
+    //         valArray = valArray.join(", ");
+    //         const keyValString = activeFilterKeys[i] + " : " + valArray;
+    //         return keyValString;
+    //       }
+    //     })
+    //     const budgetCodeStringArray_clean = budgetCodeStringArray.filter(elem => elem !== undefined);
+    //     if(budgetCodeStringArray_clean.length > 0 ){
+    //       const budgetCodeString = budgetCodeStringArray_clean.join(" | ");
+    //       return budgetCodeString;
+    //     }else{
+    //       return "All";
+    //     }
+    // }
+
+    // createBudgetCodeString();
 
     tempBarChrtData.map((d, i) => {
     	tempTableData.rows.push({
     		id: i,
     		'districtName': d.districtName,
+        'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys),
     		'gross': d.gross.toLocaleString('en-IN'),
     		'BTDED': d.BTDED.toLocaleString('en-IN'),
     		'AGDED': d.AGDED.toLocaleString('en-IN'),

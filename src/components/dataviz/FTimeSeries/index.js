@@ -60,7 +60,7 @@ class FTimeSeries extends Component {
 
   static defaultProps = {
 			chartWidth: 700,
-      chartHeight: 300
+      chartHeight: 700
    };
 
   render() {
@@ -69,6 +69,7 @@ class FTimeSeries extends Component {
 				theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
+				padding={{ top: 50, bottom: 400, left: 50, right: 50 }}
 				containerComponent={
 		      <VictoryVoronoiContainer
 		        labels={datum => datum}

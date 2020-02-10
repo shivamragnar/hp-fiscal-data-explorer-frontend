@@ -193,12 +193,13 @@ export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, acti
   });
 }
 
+//11
 export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderRef) => {
   const allFiltersData = [];
   filterOrderRef.map((filter_name,i) => {
     allFiltersData.push({
       key: filter_name,
-      val: [ { filter_name, id : 'all', label : 'All'} ]
+      val: []
     })
     rawFilterDataAllHeads.data[filter_name].map(d => {
       allFiltersData[i].val.push({ filter_name, id : d, label: d })
@@ -206,4 +207,26 @@ export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderR
   })
 
   return allFiltersData;
+}
+
+//12
+
+export const createBudgetCodeString = (activeFilterVals, activeFilterKeys) => {
+  const budgetCodeStringArray = activeFilterVals.map((valArray, i) => {
+    if(activeFilterKeys[i] !== "District"){
+      valArray = valArray.map(val => {
+        return val.split('-')[0];
+      })
+      valArray = valArray.join(", ");
+      const keyValString = activeFilterKeys[i] + " : " + valArray;
+      return keyValString;
+    }
+  })
+  const budgetCodeStringArray_clean = budgetCodeStringArray.filter(elem => elem !== undefined);
+  if(budgetCodeStringArray_clean.length > 0 ){
+    const budgetCodeString = budgetCodeStringArray_clean.join(" | ");
+    return budgetCodeString;
+  }else{
+    return "All";
+  }
 }
