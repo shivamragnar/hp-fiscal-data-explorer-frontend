@@ -24,7 +24,7 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipDistricts from '../../components/atoms/FTooltipDistricts';
 
 //actions
-import { getExpDistrictwiseData, setActiveVizIdx }  from '../../actions/exp_districtwise';
+import { getExpDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/exp_districtwise';
 import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDistrictwiseOnDateRangeChange }  from '../../actions/exp_districtwise_filters';
 
 var { exp_districtwise : filterOrderRef, districtwise_filter_comp } = require("../../data/filters_ref.json");
@@ -35,6 +35,7 @@ const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
 const ExpDistrictwise = ({
   exp_districtwise : {
+    initData,
     data : {
       mapData,
       barChrtData : { data: barChrtData },
@@ -50,12 +51,11 @@ const ExpDistrictwise = ({
   getExpDistrictwiseData,
   setActiveVizIdx,
   getExpDistrictwiseFiltersData,
+  resetActiveFiltersAndDateRange,
   updateDistrictwiseOnDateRangeChange,
   updateExpDistrictwiseFilters }) => {
 
   const activeViz = vizTypes[activeVizIdx];
-  console.log("MAPDATA!");
-  console.log(mapData);
 
   const switchActiveViz = (e) => { setActiveVizIdx(e) };
   // const [activeViz, setActiveViz] = useState(vizTypes[0]);
@@ -67,8 +67,12 @@ const ExpDistrictwise = ({
   console.log(activeVizView.FTimeSeriesVizView);
 
   useEffect(() => {
-    getExpDistrictwiseData(activeFilters, dateRange);
+    getExpDistrictwiseData(initData, activeFilters, dateRange);
     getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
+
+    return () => {
+      resetActiveFiltersAndDateRange();
+    };
 
   }, []);
 
@@ -103,13 +107,13 @@ const ExpDistrictwise = ({
 
     console.log("activeFilters");
     console.log(activeFilters);
-    getExpDistrictwiseData(activeFilters, dateRange);
+    getExpDistrictwiseData(initData, activeFilters, dateRange);
     updateExpDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateDistrictwiseOnDateRangeChange(newDateRange, activeFilters);
+		updateDistrictwiseOnDateRangeChange(initData, newDateRange, activeFilters);
 	}
 
 
@@ -248,6 +252,7 @@ ExpDistrictwise.propTypes ={
   getExpDistrictwiseData : PropTypes.func.isRequired,
   setActiveVizIdx : PropTypes.func.isRequired,
   getExpDistrictwiseFiltersData : PropTypes.func.isRequired,
+  resetActiveFiltersAndDateRange : PropTypes.func.isRequired,
   updateExpDistrictwiseFilters : PropTypes.func.isRequired
 }
 
@@ -261,6 +266,7 @@ export default connect(
   { getExpDistrictwiseData,
     setActiveVizIdx,
     getExpDistrictwiseFiltersData,
+    resetActiveFiltersAndDateRange,
     updateDistrictwiseOnDateRangeChange,
     updateExpDistrictwiseFilters
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { Map, TileLayer } from "react-leaflet";
 import Choropleth from "react-leaflet-choropleth";
@@ -63,7 +63,13 @@ export default class FMap extends Component<{}, State> {
       weight: 2
     });
 
-    this.setState({ tooltipDisplay : "none"})
+    this.setState({
+      tooltipDisplay : "none"
+    })
+
+    this.setState({
+      tooltipDisplay : "none"
+    })
   }
 
 // style={feature => feature.properties.gross ? showStyle : hideStyle}
@@ -71,31 +77,26 @@ export default class FMap extends Component<{}, State> {
     const position = [this.state.lat, this.state.lng];
     return (
       <div style={{position: "relative"}}>
-        <div style={{position: "absolute", top: 10, right: 10, width: "150px" ,height: "100px", backgroundColor: "#000", zIndex:100000}}>
-          <p style={{
-              position: "absolute",
-              color: "#fff",
-              zIndex: 100
-            }}>
-            hover over a district to see info
-          </p>
+        <div className="f-map-tooltip-wrapper">
           <div
             className="tooptip-content-wrapper"
-            style={{
-              display : this.state.tooltipDisplay,
-              backgroundColor: "#000fff",
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              zIndex: 100000
-            }}>
-            <p style={{ color: "#fff"}}>
-              {this.state.tooltipData.districtName && this.state.tooltipData.districtName}
-            </p>
-            <hr />
-            <p style={{ color: "#fff"}}>
-              {this.state.tooltipData.dataPointToMap && this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')}
-            </p>
+            >
+            {
+              this.state.tooltipDisplay === "block" ?
+              <div style={{ display : this.state.tooltipDisplay }}>
+                <p style={{ color: "#fff"}}>
+                  {this.state.tooltipData.districtName && this.state.tooltipData.districtName}
+                </p>
+                <hr />
+                <p style={{ color: "#fff"}}>
+                  {this.state.tooltipData.dataPointToMap && this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')}
+                </p>
+              </div>
+                :
+              <p style={{ color: "#fff"}}>
+                hover over a district to see info
+              </p>
+            }
           </div>
         </div>
       <Map center={position} zoom={this.state.zoom}>

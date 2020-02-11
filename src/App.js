@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types"
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import axios from "axios";
 
 //redux
@@ -9,6 +9,9 @@ import { connect } from "react-redux";
 //actions
 import { getExpDemandwiseData } from "./actions/exp_demandwise.js"
 import { getExpDemandwiseFiltersData } from './actions/exp_demandwise_filters';
+
+import { getReceiptsData } from "./actions/receipts.js"
+import { getReceiptsFiltersData } from './actions/receipts_filters';
 
 import MediaQuery from "react-responsive";
 
@@ -42,27 +45,46 @@ import BudgetHighlights from "./content/BudgetHighlights";
 
 import "./App.scss";
 
+const App = ({
+		exp_demandwise : {
+			activeFilters : initExpFilters,
+			dateRange : initExpDateRange
+		},
+		receipts : {
+			activeFilters : initReceiptsFilters,
+			dateRange : initReceiptsDateRange
+		},
+		getExpDemandwiseData,
+	  getExpDemandwiseFiltersData,
+		getReceiptsData,
+	  getReceiptsFiltersData,
+		location : { pathname }
+	}
+) => {
 
+const apiCallQueue = [
+	// { apiFunc: () => getExpDemandwiseData(initExpFilters, [initExpDateRange[0], initExpDateRange[1]]) },
+	{ apiFunc: () => getExpDemandwiseFiltersData() }
 
+]
 
-
-const App = ({ exp_demandwise : {
-								  activeFilters : initExpFilters,
-								  dateRange : initDateRange
-							 }, getExpDemandwiseData,
-               getExpDemandwiseFiltersData }) => {
-
-// making api calls one after the other rather than all together
-// const apiDataFetchBegin = async () => {
-// 	await getExpDemandwiseFiltersData();
-// 	await getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
-// }
+const fetchApisInQueue = async (idx) => {
+		await apiCallQueue[idx].apiFunc();
+		if(idx+1 !== apiCallQueue.length){
+			fetchApisInQueue(idx+1);
+		}
+}
 
 
  useEffect(() => {
-	 // apiDataFetchBegin();
-   // getExpDemandwiseData(initExpFilters, [initDateRange[0], initDateRange[1]]);
-   // getExpDemandwiseFiltersData();
+	 if(pathname.includes("receipts") === true){
+		 apiCallQueue.unshift(
+			 { apiFunc: () => getReceiptsData(initReceiptsFilters, initReceiptsDateRange) },
+		 	 { apiFunc: () => getReceiptsFiltersData() }
+		 )
+	 }
+	 fetchApisInQueue(0);
+
  }, []);
 
 
@@ -95,12 +117,16 @@ const App = ({ exp_demandwise : {
 
 App.propTypes = {
   exp_demandwise : PropTypes.object.isRequired,
+	receipts : PropTypes.object.isRequired,
   getExpDemandwiseData : PropTypes.func.isRequired,
-  getExpDemandwiseFiltersData : PropTypes.func.isRequired
+  getExpDemandwiseFiltersData : PropTypes.func.isRequired,
+	getReceiptsData : PropTypes.func.isRequired,
+  getReceiptsFiltersData : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  exp_demandwise : state.exp_demandwise
+  exp_demandwise : state.exp_demandwise,
+	receipts : state.receipts
 })
 
-export default connect(mapStateToProps, { getExpDemandwiseData, getExpDemandwiseFiltersData })(App);
+export default withRouter(connect(mapStateToProps, { getExpDemandwiseData, getExpDemandwiseFiltersData, getReceiptsData, getReceiptsFiltersData })(App));

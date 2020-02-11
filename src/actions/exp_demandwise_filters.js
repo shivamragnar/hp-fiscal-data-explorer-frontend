@@ -1,7 +1,8 @@
 import axios from "axios";
 import {
   GET_EXP_DEMANDWISE_FILTERS_DATA,
-  EXP_DEMANDWISE_FILTERS_DATA_ERROR
+  EXP_DEMANDWISE_FILTERS_DATA_ERROR,
+  SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS
 } from "./types";
 import { getExpDemandwiseData } from "./exp_demandwise";
 
@@ -12,8 +13,10 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 
 export const getExpDemandwiseFiltersData = () => async dispatch => {
   try {
-    console.log("Fetching Filters Started");
-
+      dispatch({
+        type: SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS,
+        payload: ''
+      })
 			//fetch raw filter data
 			const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_desc");
 			console.log('raw_filter_data: '); console.log(rawFilterData);

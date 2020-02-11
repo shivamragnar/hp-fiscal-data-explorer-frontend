@@ -1,5 +1,6 @@
 import {
-  GET_EXP_DEMANDWISE_FILTERS_DATA, 
+  GET_EXP_DEMANDWISE_FILTERS_DATA,
+  SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS,
   EXP_DEMANDWISE_FILTERS_DATA_ERROR } from "../actions/types";
 
 const initialState = {
@@ -26,6 +27,10 @@ export default function(state = initialState, action) {
         error: payload,
         loading: false
       };
+    case SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS:
+      return {
+        loading: true
+      }
     default:
       return state;
   }

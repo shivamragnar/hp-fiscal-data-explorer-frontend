@@ -10,6 +10,11 @@ const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, n
   AGDED = AGDED.toLocaleString('en-IN');
   BTDED = BTDED.toLocaleString('en-IN');
 
+  if(vizType === "FTimeSeries"){
+    activeDataPoint = datum._y === datum.gross ? ["gross"] : ["netPayment"];
+  }
+
+
   // console.log(datum);
   // console.log(totalTicks);
   const firsthalf = () => {
@@ -76,10 +81,10 @@ const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, n
         opacity="1"/>
 
       <g fontWeight={500} transform="translate(0,19)" fill={white} >
-        <text x={paddingX} y={0} fill={darkGrey} letter-spacing="0.5" text-anchor="start"> {xAxisDimension} </text>
+        <text x={paddingX} y={0} fill={darkGrey} letterSpacing="0.5" textAnchor="start"> {xAxisDimension} </text>
         <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={22} letter-spacing="0.5" text-anchor="start"> Gross  : </text>
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} text-anchor="end">₹ {gross}</text>
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={22} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} textAnchor="end">₹ {gross}</text>
         <text x={paddingX} y={36} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
         <text x={width-paddingX} y={36} text-anchor="end">+ ₹ {AGDED} </text>
         <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start">BTDED  : </text>

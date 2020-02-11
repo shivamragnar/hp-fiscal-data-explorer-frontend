@@ -16,13 +16,11 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHeads) => async dispatch => {
   try {
 
-      dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
+
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
-        console.log("need to fetch raw district filter data");
+        dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
         rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury");
-      }else{
-        console.log("already have raw distrcit filter data");
       }
 
 			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
@@ -127,6 +125,6 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
   }
 }
 
-export const updateDistrictwiseOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
-  dispatch(getExpDistrictwiseData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
+export const updateDistrictwiseOnDateRangeChange = (initData, newDateRange, activeFilters) => async dispatch => {
+  dispatch(getExpDistrictwiseData(initData, activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
 }
