@@ -1,7 +1,6 @@
 import {
   SET_LOADING_RECEIPTS_FILTERS,
   GET_RECEIPTS_FILTERS_DATA,
-  UPDATE_RECEIPTS_FILTERS_DATA,
   RECEIPTS_FILTERS_DATA_ERROR,
  } from "../actions/types";
 
@@ -23,11 +22,6 @@ export default function(state = initialState, action) {
         rawFilterData: payload.rawFilterData,
         loading: false
       };
-    case UPDATE_RECEIPTS_FILTERS_DATA:
-      return {
-        ...state,
-        allFiltersData: payload
-      }
     case RECEIPTS_FILTERS_DATA_ERROR:
       return {
         ...state,

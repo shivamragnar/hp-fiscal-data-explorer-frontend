@@ -44,13 +44,15 @@ export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHe
 }
 
 
-export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
+export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
   try {
     dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
+
+
     if( Object.keys(activeFilters).length > 0){
-      const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItems[0].filter_name);
-      
+      const currFilterOrderIndex = filterOrderRef.indexOf(key);
+
       allFiltersData.map((filterObj, i) => {
         if( i > currFilterOrderIndex){
           filterObj.val = [];
@@ -70,15 +72,35 @@ export const updateExpDistrictwiseFilters = (e, activeFilters, allFiltersData, r
           }
       })
       const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury?${stringForApi}`);
-      console.log('raw_dynamic_filter_data: ');
-      console.log(rawFilterData);
+      // console.log('raw_dynamic_filter_data: ');
+      // console.log(rawFilterData);
 
       const results = [];
-      recursFilterFind2(rawFilterData.data.records, e.selectedItems, results, 0, filterOrderRef, activeFilters, currFilterOrderIndex );
+      var query;
+      var queryFilterIdx;
+
+      if(e.selectedItems.length === 0){
+        for(var i = currFilterOrderIndex ; i >= 0 ; i--){
+          if(activeFilters[filterOrderRef[i]]){
+
+            query = activeFilters[filterOrderRef[i]].map(filterVal => {
+              return { id : filterVal }
+            })
+            queryFilterIdx = i;
+            // console.log(query);
+            break;
+          }
+        }
+      }else{
+        query = e.selectedItems;
+        queryFilterIdx = currFilterOrderIndex;
+      }
+
+      recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
       console.log("district_results");
       console.log(results);
       results.map(result => {
-        recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1);
+        recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
       console.log(allFiltersData);
     }

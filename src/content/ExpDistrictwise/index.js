@@ -29,32 +29,9 @@ import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDist
 
 var { exp_districtwise : filterOrderRef, districtwise_filter_comp } = require("../../data/filters_ref.json");
 
-const sampleDataBar = [
-  { month: "Jan", sanction: 3000, revised: 2500 },
-  { month: "Feb", sanction: 3000, revised: 2500 },
-  { month: "Mar", sanction: 3000, revised: 2500 },
-  { month: "Apr", sanction: 3000, revised: 2500 },
-  { month: "May", sanction: 3000, revised: 2500 },
-  { month: "Jun", sanction: 3000, revised: 2500 },
-  { month: "Jul", sanction: 3000, revised: 2500 },
-  { month: "Aug", sanction: 3000, revised: 2500 },
-  { month: "Sep", sanction: 3000, revised: 2500 },
-  { month: "Oct", sanction: 3000, revised: 2500 },
-  { month: "Nov", sanction: 3000, revised: 2500 },
-  { month: "Dec", sanction: 3000, revised: 2500 }
-]
-
 //Name of components to switch between
 const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
-const props = {
-  FBarChart: {
-    data: sampleDataBar,
-    dataToX: 'month',
-    dataPoints: ['sanction', 'revised'],
-
-  }
-}
 
 const ExpDistrictwise = ({
   exp_districtwise : {
@@ -82,9 +59,12 @@ const ExpDistrictwise = ({
 
   const switchActiveViz = (e) => { setActiveVizIdx(e) };
   // const [activeViz, setActiveViz] = useState(vizTypes[0]);
-  const [activeVizView, setActiveVizView] = useState("gross");
+  const [activeVizView, setActiveVizView] = useState({
+    FTimeSeriesVizView : "gross",
+    FMapVizView : "gross"
+  });
 
-
+  console.log(activeVizView.FTimeSeriesVizView);
 
   useEffect(() => {
     getExpDistrictwiseData(activeFilters, dateRange);
@@ -92,14 +72,17 @@ const ExpDistrictwise = ({
 
   }, []);
 
-  const clearAllChildFilters = (filterName) => {
+  const clearAllSelectedOptions = (filterName) => {
     document
       .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
       .forEach(e => e.click());
   }
 
   const onViewChange = (value, name) => {
-    setActiveVizView(value);
+    setActiveVizView({
+      ...activeVizView,
+      [name] : value
+    });
   }
 
   const onFilterChange = (e, key) => {
@@ -114,14 +97,14 @@ const ExpDistrictwise = ({
     filterOrderRef.map((filterName,i) => {
       if(i > currFilterOrderIndex && activeFilters[filterName] ){
         delete activeFilters[filterName];
-        clearAllChildFilters(filterName);
+        clearAllSelectedOptions(filterName);
       }
     })
 
     console.log("activeFilters");
     console.log(activeFilters);
     getExpDistrictwiseData(activeFilters, dateRange);
-    updateExpDistrictwiseFilters(e, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    updateExpDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
@@ -137,7 +120,7 @@ const ExpDistrictwise = ({
       return <div id="fmap">
               <FMap
                 data={mapData}
-                dataPointToMap={activeVizView}
+                dataPointToMap={activeVizView.FMapVizView}
                 />
              </div>;
 
@@ -157,7 +140,7 @@ const ExpDistrictwise = ({
       return  <Fragment>
                 <FTimeSeries
                   dataToX="date"
-                  dataToY={activeVizView}
+                  dataToY={activeVizView.FTimeSeriesVizView}
                   data={lineChrtData}
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
@@ -192,17 +175,33 @@ const ExpDistrictwise = ({
               <Switch  text="Table" />
             </ContentSwitcher>
 					</div>
-          { (activeViz === 'FTimeSeries' || activeViz === 'FMap') &&
+          { activeViz === 'FTimeSeries' &&
             <FRadioGroup
               className = "viz-view-toggle"
-              name = "gross_netPayment"
+              name = "FTimeSeriesVizView"
               titleText = "View:"
               onChange = {(value, name) => onViewChange(value, name)}
               items = {[
                 { label : "Gross", id : "gross" },
-                { label : "Net Payment", id : "netPayment" }
+                { label : "Net Payment", id : "netPayment" },
+                { label : "Both", id : "gross,netPayment" }
+
               ]}
-              valueSelected = "gross"
+              valueSelected = {activeVizView.FTimeSeriesVizView}
+
+            />
+          }
+          { activeViz === 'FMap' &&
+            <FRadioGroup
+              className = "viz-view-toggle"
+              name = "FMapVizView"
+              titleText = "View:"
+              onChange = {(value, name) => onViewChange(value, name)}
+              items = {[
+                { label : "Gross", id : "gross" },
+                { label : "Net Payment", id : "netPayment" },
+              ]}
+              valueSelected = {activeVizView.FMapVizView}
             />
           }
 					{ renderSwitch() }

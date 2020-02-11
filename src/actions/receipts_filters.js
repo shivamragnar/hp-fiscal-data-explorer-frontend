@@ -1,17 +1,19 @@
 import axios from "axios";
 import {
   GET_RECEIPTS_FILTERS_DATA,
-  RECEIPTS_FILTERS_DATA_ERROR
+  UPDATE_RECEIPTS_FILTERS_DATA,
+  RECEIPTS_FILTERS_DATA_ERROR,
+  SET_LOADING_RECEIPTS_FILTERS
 } from "./types";
 import { getReceiptsData } from "./receipts";
-import { onDateRangeChange, recursFilterFetch, recursFilterFind } from "../utils/functions";
+import { onDateRangeChange, recursFilterFetch, recursFilterFind, recursFilterFind2 } from "../utils/functions";
 
 var { receipts : filterOrderRef } = require("../data/filters_ref.json");
 
 export const getReceiptsFiltersData = () => async dispatch => {
   try {
     console.log("Fetching Receipts Filters Started");
-
+    dispatch({ type: SET_LOADING_RECEIPTS_FILTERS, payload: "" });
 		//fetch raw filter data
 		const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_receipts");
 		console.log('raw_receipts_filter_data: '); console.log(rawFilterData);
@@ -20,7 +22,7 @@ export const getReceiptsFiltersData = () => async dispatch => {
     filterOrderRef.map(filter_name => {
       allFiltersData.push({
         key: filter_name,
-        val: [ { filter_name, id : 'all', label : 'All'} ]
+        val: []
       })
     })
 
@@ -38,49 +40,68 @@ export const getReceiptsFiltersData = () => async dispatch => {
       payload: err
     });
   }
-  
+
 }
 
-export const updateReceiptsOnFilterChange = (e, activeFilters, allFiltersData, rawFilterData, dateRange) => async dispatch => {
+export const updateReceiptsOnFilterChange = (e, key, activeFilters, allFiltersData, rawFilterData, dateRange) => async dispatch => {
 
-  const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItem.filter_name);
+  if( Object.keys(activeFilters).length > 0){
+  const currFilterOrderIndex = filterOrderRef.indexOf(key);
 
   //1 repopulate allFiltersData
   allFiltersData.map((filterObj, i) => {
     if( i > currFilterOrderIndex){
-      filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
+      filterObj.val = [];
     }
   })
 
   const results = [];
-  // console.log("query");
-  // console.log(e.selectedItem.id);
-  // console.log("allFiltersData");
-  // console.log(allFiltersData);
-  const filterChangedIdx = filterOrderRef.indexOf(e.selectedItem.filter_name);
+  var query;
+  var queryFilterIdx;
 
-  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters, filterChangedIdx );
+  if(e.selectedItems.length === 0){
+    for(var i = currFilterOrderIndex ; i >= 0 ; i--){
+      if(activeFilters[filterOrderRef[i]]){
+
+        query = activeFilters[filterOrderRef[i]].map(filterVal => {
+          return { id : filterVal }
+        })
+        queryFilterIdx = i;
+        // console.log(query);
+        break;
+      }
+    }
+  }else{
+    query = e.selectedItems;
+    queryFilterIdx = currFilterOrderIndex;
+  }
+
+  recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
+
   results.map(result => {
-    recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1); //+1 cuz we wanna populate filterData only from first child of currFilter onwards
+    recursFilterFetch( allFiltersData, result, queryFilterIdx+1); //+1 cuz we wanna populate filterData only from first child of currFilter onwards
   })
 
   // console.log("results");
   // console.log(results);
-
-  //2 Remove all child filters from activeFilters
-  filterOrderRef.map((filterName,i) => {
-    if(i > currFilterOrderIndex && activeFilters.filters[filterName] ){
-      delete(activeFilters.filters[filterName]);
-    }
+}else{
+  console.log("getAllFilterdsData Again ");
+  allFiltersData = [];
+  filterOrderRef.map(filter_name => {
+    allFiltersData.push({
+      key: filter_name,
+      val: []
+    })
   })
+  //populate all dropdown filters' data from the raw response provided by API
+  recursFilterFetch(allFiltersData, rawFilterData.data.records, 0);
 
-  //3 add selected filter to the activeFilters array
-  if(e.selectedItem.id !== "all"){
-    activeFilters.filters[e.selectedItem.filter_name] = e.selectedItem.id.split("-")[0];
-  } else {
-    delete(activeFilters.filters[e.selectedItem.filter_name]);
-  }
 
+}
+  dispatch({
+    type: UPDATE_RECEIPTS_FILTERS_DATA,
+    payload: allFiltersData
+  });
   dispatch(getReceiptsData(activeFilters, dateRange)); //update expData state at App level
 }
 

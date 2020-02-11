@@ -32,11 +32,12 @@
 //dataAryName = "dataAry" (string)
 
 
-import React, { Component} from "react";
+import React, { Component, Fragment} from "react";
 import {
 	VictoryLine,
 	VictoryChart,
 	VictoryAxis,
+	VictoryArea,
 	VictoryGroup,
 	VictoryLabel,
 	VictoryTheme,
@@ -48,7 +49,22 @@ import { getDynamicYLabelFormat } from '../../../utils/functions';
 
 import sassVars from '../../../scss/_vars.scss'
 
-
+const fColorScale = [
+	"hsl(360, 100%, 50%)",
+	"hsl(340, 100%, 50%)",
+	"hsl(320, 100%, 50%)",
+	"hsl(300, 100%, 50%)",
+	"hsl(280, 100%, 50%)",
+	"hsl(260, 100%, 50%)",
+	"hsl(240, 100%, 50%)",
+	"hsl(220, 100%, 50%)",
+	"hsl(200, 100%, 50%)",
+	"hsl(180, 100%, 50%)",
+	"hsl(160, 100%, 50%)",
+	"hsl(140, 100%, 50%)",
+	"hsl(120, 100%, 50%)",
+	"hsl(100, 100%, 50%)"
+]
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
@@ -69,7 +85,7 @@ class FTimeSeries extends Component {
 				theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
-				padding={{ top: 50, bottom: 400, left: 50, right: 50 }}
+				padding={{ top: 50, bottom: 450, left: 50, right: 50 }}
 				containerComponent={
 		      <VictoryVoronoiContainer
 		        labels={datum => datum}
@@ -101,21 +117,35 @@ class FTimeSeries extends Component {
           style={{ data: { width: 5 } }}
 
         >
-
         {
           this.props.data && //if multiple datapoints is specified via the datapoints prop,
             this.props.data.map((d, i) =>{
-              return(
-                <VictoryLine
-                  key={i}
-                  colorScale={"cool"}
-                  data={d[this.props.dataAryName]}
-                  x={this.props.dataToX}
-                  y={this.props.dataToY}
-                />
-              )
+								return(
+	                <VictoryLine
+	                  key={i}
+	                  colorScale={fColorScale}
+	                  data={d[this.props.dataAryName]}
+	                  x={this.props.dataToX}
+	                  y={this.props.dataToY.split(',')[0]}
+	                />
+	              )
             })
         }
+				{
+					(this.props.data && this.props.dataToY.split(',').length > 1) &&
+						 this.props.data.map((d,i) => {
+							 return (
+								 <VictoryLine
+									 key={i}
+									 colorScale={fColorScale}
+									 data={d[this.props.dataAryName]}
+									 style={{ data: { strokeWidth: 3} }}
+									 x={this.props.dataToX}
+									 y={this.props.dataToY.split(',')[1].trim()}
+								 />
+							 )
+						 })
+				}
         </VictoryGroup>
       </VictoryChart>
 

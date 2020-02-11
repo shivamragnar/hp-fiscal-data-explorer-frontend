@@ -5,7 +5,7 @@ import Choropleth from "react-leaflet-choropleth";
 import * as d3 from 'd3';
 import { blue, darkGrey, white, orange } from '../../../scss/_vars.scss';
 var hp_geojson = require("../../../data/hp_geojson.json");
-console.log(hp_geojson);
+// console.log(hp_geojson);
 
 
 const style = {

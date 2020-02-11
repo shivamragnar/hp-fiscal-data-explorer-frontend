@@ -28,7 +28,6 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 									invalidText="Invalid Selection"
 									onChange = {(e) => onChange(e, allFiltersData[i] && allFiltersData[i].key)}
 	                items = {allFiltersData[i] && allFiltersData[i].val}
-	                items={allFiltersData[i] && allFiltersData[i].val}
 	                />
 							</div>
             )

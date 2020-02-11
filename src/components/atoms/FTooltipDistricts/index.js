@@ -3,17 +3,17 @@ import sassVars from '../../../scss/_vars.scss'
 import tooltipBubble from '../../../imgs/tooltipBubble.svg'
 const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } = sassVars;
 
-const FTooltipDistricts = ( { x, y, datum, datum : { gross, AGDED, BTDED, netPayment}, activeDataPoint, vizType, totalTicks} ) => {
+const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, netPayment}, activeDataPoint, vizType, totalTicks} ) => {
 
   gross = gross.toLocaleString('en-IN');
   netPayment = netPayment.toLocaleString('en-IN');
   AGDED = AGDED.toLocaleString('en-IN');
   BTDED = BTDED.toLocaleString('en-IN');
 
-
-  console.log(totalTicks);
+  // console.log(datum);
+  // console.log(totalTicks);
   const firsthalf = () => {
-    if(datum._voronoiX > totalTicks/2){
+    if(datum.idx+1 > totalTicks/2){
       return false;
     }else{
       return true;

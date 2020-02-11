@@ -50,10 +50,10 @@
 
 
   "receipts_filter_comp" : [
-     { "comp" : "FDropdown", "titleText" : "Major"},
-     { "comp" : "FDropdown", "titleText" : "Sub Major"},
-     { "comp" : "FDropdown", "titleText" : "Minor"},
-     { "comp" : "FDropdown", "titleText" : "Sub Minor"}
+     { "comp" : "MultiSelect", "titleText" : "Major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor"}
   ],
 
   "districtwise_filter_comp" : [

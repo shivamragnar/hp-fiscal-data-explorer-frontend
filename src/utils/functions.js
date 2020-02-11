@@ -174,10 +174,13 @@ export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, acti
       // console.log("obj[obj_key]");
       // console.log(obj[obj_key]);
       query.map(query_item => {
+        // console.log("im reachin here");
         if(obj_key === query_item.id ){
           results.push(obj[query_item.id]);
         }
       })
+
+
 
       if(activeFilters.hasOwnProperty(filterOrderRef[idx]) === true ){
         if(activeFilters[filterOrderRef[idx]].includes(obj_key)){
@@ -229,4 +232,12 @@ export const createBudgetCodeString = (activeFilterVals, activeFilterKeys) => {
   }else{
     return "All";
   }
+}
+
+//13
+
+export const clearAllSelectedOptions = (filterName) => {
+  document
+    .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
+    .forEach(e => e.click());
 }

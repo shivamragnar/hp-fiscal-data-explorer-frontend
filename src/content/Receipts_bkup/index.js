@@ -21,11 +21,11 @@ import FBarChart from '../../components/dataviz/FBarChart';
 import FTable from '../../components/dataviz/FTable';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FPageTitle from '../../components/organisms/FPageTitle';
-import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
+import FFilterColumn from '../../components/organisms/FFilterColumn';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 
 //import helpers
-import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
+import { convertDataToJson } from '../../utils/functions';
 
 // data_ref
 const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/filters_ref.json');
@@ -42,14 +42,13 @@ const Receipts = ( { receipts : {
 											 activeFilters,
 											 dateRange
 									 },
-									 receipts_filters : { allFiltersData, rawFilterData, loading : filtersLoading },
+									 receipts_filters : { allFiltersData, rawFilterData },
 									 getReceiptsData,
 									 updateReceiptsOnFilterChange,
 									 updateReceiptsOnDateRangeChange,
 									 getReceiptsFiltersData
 								   } ) => {
 
-	console.log(filtersLoading);
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
@@ -64,27 +63,8 @@ const Receipts = ( { receipts : {
 		onFilterChange({selectedItem:{filter_name:name,id:value}});
   }
 
-	const onFilterChange = (e, key) => {
-		//if at least 1 option is selected,
-		console.log(e.selectedItems[0]);
-		console.log(key);
-    if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
-        return selectedItem.id;
-      })
-    }else{ delete activeFilters[key]; }
-    //remove all child filters from activeFiltersArray
-    const currFilterOrderIndex = filterOrderRef.indexOf(key);
-    filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
-        clearAllSelectedOptions(filterName);
-      }
-    })
-
-    console.log("activeFilters");
-    console.log(activeFilters);
-		updateReceiptsOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
+	const onFilterChange = (e) => {
+		updateReceiptsOnFilterChange(e, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
 	const onDateRangeSet = (newDateRange) => {
@@ -181,12 +161,12 @@ const Receipts = ( { receipts : {
 				{createDataUIComponent()}
       </div>
 			<div className="filter-col-wrapper">
-				<FFilterColumn2
-					filterCompData ={receipts_filter_comp}
-					allFiltersData={allFiltersData && allFiltersData}
+				<FFilterColumn
+					onChange={onFilterChange}
+					allFiltersData={allFiltersData}
 					activeFilters={activeFilters}
-					filtersLoading={filtersLoading}
-					onChange = {(e, key) => onFilterChange(e, key)}
+					receiptsFilterCompData={receipts_filter_comp}
+					filterOrderRef={filterOrderRef}
 					/>
 			</div>
     </div>

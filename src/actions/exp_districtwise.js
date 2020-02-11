@@ -37,7 +37,7 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
 
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
-    console.log(activeFilterVals);
+
     var objForPayload = {};
     activeFilterVals.map((val, i) => {
         let tempVal = val.map(item => { return item.split('-')[0]});
@@ -66,9 +66,10 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
     districtNames.map((districtName, i) => {
       let datewiseExp = [];
       let totalExp = { districtName, gross: 0, BTDED: 0, AGDED: 0, netPayment: 0};
-      datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
+      // datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
       districtwiseExpVals[i].map((expArray, i) => {
         let dataObj = {};
+        dataObj.idx = i;
         dataObj.date = month_week === "month" ?
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                        getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
@@ -119,28 +120,6 @@ export const getExpDistrictwiseData = (activeFilters, dateRange) => async dispat
       { key: 'AGDED', header: 'AGDED (INR)' },
       { key: 'netPayment', header: 'Net Payment (INR)' }
     )
-
-    // const createBudgetCodeString = () => {
-    //     const budgetCodeStringArray = activeFilterVals.map((valArray, i) => {
-    //       if(activeFilterKeys[i] !== "District"){
-    //         valArray = valArray.map(val => {
-    //           return val.split('-')[0];
-    //         })
-    //         valArray = valArray.join(", ");
-    //         const keyValString = activeFilterKeys[i] + " : " + valArray;
-    //         return keyValString;
-    //       }
-    //     })
-    //     const budgetCodeStringArray_clean = budgetCodeStringArray.filter(elem => elem !== undefined);
-    //     if(budgetCodeStringArray_clean.length > 0 ){
-    //       const budgetCodeString = budgetCodeStringArray_clean.join(" | ");
-    //       return budgetCodeString;
-    //     }else{
-    //       return "All";
-    //     }
-    // }
-
-    // createBudgetCodeString();
 
     tempBarChrtData.map((d, i) => {
     	tempTableData.rows.push({

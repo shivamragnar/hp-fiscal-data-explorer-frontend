@@ -28,18 +28,6 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     const tempVizData = [];
     const tempTableData = { headers : [], rows : [] };
 
-    const activeFilterKeys = Object.keys(activeFilters);
-    const activeFilterVals = Object.values(activeFilters);
-
-    var objForPayload = {};
-    activeFilterVals.map((val, i) => {
-        let tempVal = val.map(item => { return item.split('-')[0]});
-        tempVal = tempVal.join('","');
-        objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-    })
-    console.log("objForPayload");
-    console.log(objForPayload);
-
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_RECEIPTS, payload: {} });
 
@@ -47,7 +35,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     console.log("Axios Receipts Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
 		const res = await axios.post(
-      `http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
+      `http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, activeFilters, config
     );
 		console.log("receipts raw data"); console.log(res.data.records);
 
