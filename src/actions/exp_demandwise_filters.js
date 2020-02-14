@@ -1,15 +1,17 @@
 import axios from "axios";
 import {
   GET_EXP_DEMANDWISE_FILTERS_DATA,
+  UPDATE_EXP_DEMANDWISE_FILTERS_DATA,
   EXP_DEMANDWISE_FILTERS_DATA_ERROR,
   SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS
 } from "./types";
-import { getExpDemandwiseData } from "./exp_demandwise";
 
-import { onDateRangeChange, recursFilterFetch, recursFilterFind } from "../utils/functions";
+import { getExpDemandwiseData } from "./exp_demandwise";
+import { onDateRangeChange, recursFilterFetch, recursFilterFind2 } from "../utils/functions";
 
 var { exp_demandwise : filterOrderRef } = require("../data/filters_ref.json");
 var yymmdd_ref = require("../data/yymmdd_ref.json");
+
 
 export const getExpDemandwiseFiltersData = () => async dispatch => {
   try {
@@ -31,8 +33,6 @@ export const getExpDemandwiseFiltersData = () => async dispatch => {
 
       //populate all dropdown filters' data from the raw response provided by API
       recursFilterFetch(allFiltersData, rawFilterData.data.records, 0);
-      console.log("recurs filter find");
-
 
       dispatch({
         type: GET_EXP_DEMANDWISE_FILTERS_DATA,
@@ -47,48 +47,74 @@ export const getExpDemandwiseFiltersData = () => async dispatch => {
   }
 }
 
-export const updateExpDemandwiseOnFilterChange = (e, activeFilters, allFiltersData, rawFilterData, dateRange) => async dispatch => {
+export const updateExpDemandwiseOnFilterChange = (
+  e,
+  key,
+  activeFilters,
+  allFiltersData,
+  rawFilterData,
+  dateRange
+) => async dispatch => {
 
-  const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItem.filter_name);
+  if(Object.keys(activeFilters).length > 0){
+    const currFilterOrderIndex = filterOrderRef.indexOf(key);
 
-  //1 empty allFiltersData, leave only the 'All' option
-  allFiltersData.map((filterObj, i) => {
-    if( i > currFilterOrderIndex){
-      filterObj.val = [{ filter_name: filterObj.key, id : 'all', label : 'All' }];
+    //1 repopulate allFiltersData
+    allFiltersData.map((filterObj, i) => {
+      if( i > currFilterOrderIndex){
+        filterObj.val = [];
+      }
+    })
+
+    //2 repopulate allFiltersData with new filter data.
+    const results = [];
+    var query;
+    var queryFilterIdx;
+
+    if(e.selectedItems.length === 0){
+      for(var i = currFilterOrderIndex ; i >= 0 ; i--){
+
+        if(activeFilters[filterOrderRef[i]]){
+
+          query = activeFilters[filterOrderRef[i]].map(filterVal => {
+            return { id : filterVal }
+          })
+          queryFilterIdx = i;
+          // console.log(query);
+          break;
+        }
+      }
+    }else{
+      query = e.selectedItems;
+      queryFilterIdx = currFilterOrderIndex;
     }
-  })
 
+    recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
 
-  //2 repopulate allFiltersData with new filter data.
-  const results = [];
+    results.map(result => {
+      recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
+    })
 
-  //this line is prob unnecessary. currFilterOrderIndex above does the same.
-  const filterChangedIdx = filterOrderRef.indexOf(e.selectedItem.filter_name);
-
-  recursFilterFind(rawFilterData.data.records, e.selectedItem.id, results, 0, filterOrderRef, activeFilters, filterChangedIdx );
-  console.log(results);
-  results.map(result => {
-    recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1);
-  })
-
-  console.log(allFiltersData);
-
-  //3 Remove all child filters from activeFilters
-  filterOrderRef.map((filterName,i) => {
-    if(i > currFilterOrderIndex && activeFilters.filters[filterName] ){
-      delete(activeFilters.filters[filterName]);
-    }
-  })
-
-  //4 add selected filter to the activeFilters array
-  if(e.selectedItem.id !== "all"){
-    activeFilters.filters[e.selectedItem.filter_name] = e.selectedItem.id.split("-")[0];
-  } else {
-    delete(activeFilters.filters[e.selectedItem.filter_name]);
+  }else{
+    console.log("get All Filters Data Again");
+    allFiltersData = [];
+    filterOrderRef.map(filter_name => {
+      allFiltersData.push({
+        key: filter_name,
+        val: []
+      })
+    })
+    //populate all dropdown filters' data from the raw filter data
+    recursFilterFetch(allFiltersData, rawFilterData.data.records, 0);
   }
 
+  dispatch({
+    type: UPDATE_EXP_DEMANDWISE_FILTERS_DATA,
+    payload: allFiltersData
+  });
   dispatch(getExpDemandwiseData(activeFilters, dateRange)); //update expData state at App level
 }
+
 
 export const updateExpDemandwiseOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
   dispatch(getExpDemandwiseData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level

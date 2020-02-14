@@ -62,10 +62,10 @@ const App = ({
 	}
 ) => {
 
-const apiCallQueue = [
-	// { apiFunc: () => getExpDemandwiseData(initExpFilters, [initExpDateRange[0], initExpDateRange[1]]) },
-	{ apiFunc: () => getExpDemandwiseFiltersData() }
 
+const apiCallQueue = [
+	{ apiFunc: () => getExpDemandwiseFiltersData() },
+	{ apiFunc: () => getExpDemandwiseData(initExpFilters, [initExpDateRange[0], initExpDateRange[1]]) },
 ]
 
 const fetchApisInQueue = async (idx) => {
@@ -86,6 +86,17 @@ const fetchApisInQueue = async (idx) => {
 	 fetchApisInQueue(0);
 
  }, []);
+
+ useEffect(() => {
+	 console.log("CURPathname")
+	 console.log(pathname);
+
+	 return () => {
+		 console.log("pPathname")
+		 console.log(pathname);
+	 };
+
+ },[pathname])
 
 
  return (

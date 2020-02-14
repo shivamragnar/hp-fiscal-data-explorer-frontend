@@ -6,7 +6,7 @@ import {
 const initialState = {
   data: { vizData:{}, tableData:{}},
   dateRange: ["2018-04-01","2019-03-31"],
-  activeFilters: { filters: {}},
+  activeFilters: {},
   loading: true,
   error: {}
 };

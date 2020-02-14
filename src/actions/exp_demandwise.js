@@ -19,7 +19,6 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 
 export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch => {
   try {
-
     const [ dateFrom , dateTo ] = dateRange;
     const { months , years, years_short } = yymmdd_ref;
     const month_week = calcMonthOrWeek(dateFrom, dateTo);
@@ -29,6 +28,23 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
 
     const tempVizData = [];
     const tempTableData = { headers : [], rows : [] };
+    const activeFilterKeys = Object.keys(activeFilters);
+    const activeFilterVals = Object.values(activeFilters);
+
+    var objForPayload = {};
+
+
+    activeFilterVals.map((val, i) => {
+        let tempVal = val.map(item => { return item.split('-')[0]});
+        console.log("got here");
+        tempVal = tempVal.join('","');
+        // tempVal = tempVal.join(',');
+        objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
+        // objForPayload[activeFilterKeys[i]] =  tempVal;
+    })
+
+
+    console.log("objForPayload"); console.log(objForPayload);
 
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_EXP_DEMANDWISE, payload: {} });
@@ -37,9 +53,9 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     console.log("Axios Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
     const res = await axios.post(
-      `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, activeFilters, config
+      `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
-    console.log("raw data from API: "); console.log(res.data.records);
+    console.log("demand details raw data "); console.log(res.data.records);
 
     //2 PREP DATA FOR VISUALIZATION
     var highestRecord = 0;

@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from 'axios';
 
@@ -46,10 +47,11 @@ const Receipts = ( { receipts : {
 									 getReceiptsData,
 									 updateReceiptsOnFilterChange,
 									 updateReceiptsOnDateRangeChange,
-									 getReceiptsFiltersData
+									 getReceiptsFiltersData,
+									 location
 								   } ) => {
 
-	console.log(filtersLoading);
+
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
@@ -59,15 +61,8 @@ const Receipts = ( { receipts : {
 		getReceiptsFiltersData();
   }, []);
 
-	const onRadioChange = (value, name) => {
-		console.log(value + "," + name);
-		onFilterChange({selectedItem:{filter_name:name,id:value}});
-  }
-
 	const onFilterChange = (e, key) => {
 		//if at least 1 option is selected,
-		console.log(e.selectedItems[0]);
-		console.log(key);
     if(e.selectedItems.length > 0){
       activeFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
@@ -82,8 +77,6 @@ const Receipts = ( { receipts : {
       }
     })
 
-    console.log("activeFilters");
-    console.log(activeFilters);
 		updateReceiptsOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
@@ -207,11 +200,11 @@ const mapStateToProps = state => ({
 	receipts_filters : state.receipts_filters
 })
 
-export default connect(
+export default withRouter(connect(
 	mapStateToProps,
 	{ getReceiptsData,
 		getReceiptsFiltersData,
 		updateReceiptsOnFilterChange,
 		updateReceiptsOnDateRangeChange
 	}
-)(Receipts);
+)(Receipts));

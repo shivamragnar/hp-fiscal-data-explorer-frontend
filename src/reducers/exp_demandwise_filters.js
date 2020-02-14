@@ -1,5 +1,6 @@
 import {
   GET_EXP_DEMANDWISE_FILTERS_DATA,
+  UPDATE_EXP_DEMANDWISE_FILTERS_DATA,
   SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS,
   EXP_DEMANDWISE_FILTERS_DATA_ERROR } from "../actions/types";
 
@@ -21,6 +22,11 @@ export default function(state = initialState, action) {
         rawFilterData: payload.rawFilterData,
         loading: false
       };
+    case UPDATE_EXP_DEMANDWISE_FILTERS_DATA:
+      return {
+        ...state,
+        allFiltersData: payload
+      }
     case EXP_DEMANDWISE_FILTERS_DATA_ERROR:
       return {
         ...state,
@@ -29,6 +35,7 @@ export default function(state = initialState, action) {
       };
     case SET_DATA_LOADING_EXP_DEMANDWISE_FILTERS:
       return {
+        ...state,
         loading: true
       }
     default:

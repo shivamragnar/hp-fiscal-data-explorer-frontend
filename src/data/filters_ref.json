@@ -48,6 +48,17 @@
      "sub_minor"
   ],
 
+  "demandwise_filter_comp" : [
+     { "comp" : "MultiSelect", "titleText" : "Demand"},
+     { "comp" : "MultiSelect", "titleText" : "Major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor"},
+     { "comp" : "MultiSelect", "titleText" : "Budget"},
+     { "comp" : "MultiSelect", "titleText" : "Voted / Charged"},
+     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan"},
+     { "comp" : "MultiSelect", "titleText" : "SOE"}
+  ],
 
   "receipts_filter_comp" : [
      { "comp" : "MultiSelect", "titleText" : "Major"},

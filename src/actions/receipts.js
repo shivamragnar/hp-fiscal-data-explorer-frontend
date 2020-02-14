@@ -37,8 +37,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
         tempVal = tempVal.join('","');
         objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
     })
-    console.log("objForPayload");
-    console.log(objForPayload);
+    console.log("objForPayload"); console.log(objForPayload);
 
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_RECEIPTS, payload: {} });

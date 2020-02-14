@@ -8,11 +8,12 @@ import { connect } from 'react-redux';
 
 //actions
 import { getExpDemandwiseData } from '../../actions/exp_demandwise';
-import { updateExpDemandwiseOnFilterChange } from '../../actions/exp_demandwise_filters';
-import { updateExpDemandwiseOnDateRangeChange } from '../../actions/exp_demandwise_filters';
+import {
+	updateExpDemandwiseOnFilterChange,
+	updateExpDemandwiseOnDateRangeChange
+} from '../../actions/exp_demandwise_filters';
 
 //carbon components
-import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
@@ -25,9 +26,13 @@ import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FPageTitle from '../../components/organisms/FPageTitle';
+import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 //import helpers
-import { convertDataToJson } from '../../utils/functions';
+import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
+
+// data_ref
+const { exp_demandwise: filterOrderRef, demandwise_filter_comp } = require('../../data/filters_ref.json');
 
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
@@ -41,25 +46,35 @@ const ExpDetails = ( { exp_demandwise : {
 												  activeFilters,
 												  dateRange
 											 },
-											 exp_demandwise_filters : { allFiltersData, rawFilterData },
+											 exp_demandwise_filters : { allFiltersData, rawFilterData, loading : filtersLoading },
 											 getExpDemandwiseData,
 											 updateExpDemandwiseOnFilterChange,
 											 updateExpDemandwiseOnDateRangeChange
 										  	} ) => {
 
-	console.log("allFiltersData"); console.log(allFiltersData);
-
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
-	const onRadioChange = (value, name) => {
-		console.log(value + "," + name);
-		onFilterChange({selectedItem:{filter_name:name,id:value}});
-  }
+	const onFilterChange = (e, key) => {
+		//if at least 1 option is selected,
+		console.log(e.selectedItems[0]);
+		console.log(key);
+    if(e.selectedItems.length > 0){
+      activeFilters[key] = e.selectedItems.map(selectedItem => {
+        return selectedItem.id;
+      })
+    }else{ delete activeFilters[key]; }
+    //remove all child filters from activeFiltersArray
+    const currFilterOrderIndex = filterOrderRef.indexOf(key);
+    filterOrderRef.map((filterName,i) => {
+      if(i > currFilterOrderIndex && activeFilters[filterName] ){
+        delete activeFilters[filterName];
+        clearAllSelectedOptions(filterName);
+      }
+    })
 
-	const onFilterChange = (e) => {
-		updateExpDemandwiseOnFilterChange(e, activeFilters, allFiltersData, rawFilterData, dateRange);
+		updateExpDemandwiseOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
 	const onDateRangeSet = (newDateRange) => {
@@ -73,7 +88,7 @@ const ExpDetails = ( { exp_demandwise : {
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-						<ContentSwitcher onChange={switchVizType} >
+						<ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)}>
 							<Switch  text="Visual" />
 							<Switch  text="Table" />
 						</ContentSwitcher>
@@ -119,80 +134,13 @@ const ExpDetails = ( { exp_demandwise : {
       </div>
 
 			<div className="filter-col-wrapper">
-        <div className="filter-col">
-          <FDropdown
-						className = "filter-col--ops"
-						titleText = "Demand"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[0] && allFiltersData[0].val}
-						selectedItem = { activeFilters && activeFilters.filters.demand ? activeFilters.filters.demand : "All" }
+				<FFilterColumn2
+					filterCompData ={demandwise_filter_comp}
+					allFiltersData={allFiltersData && allFiltersData}
+					activeFilters={activeFilters}
+					filtersLoading={filtersLoading}
+					onChange = {(e, key) => onFilterChange(e, key)}
 					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "Major"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[1] && allFiltersData[1].val}
-						selectedItem = { activeFilters && activeFilters.filters.major ? activeFilters.filters.major : "All" }
-					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "Sub Major"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[2] && allFiltersData[2].val}
-						selectedItem = { activeFilters && activeFilters.filters.sub_major ? activeFilters.filters.sub_major : "All" }
-					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "Minor"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[3] && allFiltersData[3].val}
-						selectedItem = { activeFilters && activeFilters.filters.minor ? activeFilters.filters.minor : "All" }
-					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "Sub Minor"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[4] && allFiltersData[4].val}
-						selectedItem = { activeFilters && activeFilters.filters.sub_minor ? activeFilters.filters.sub_minor : "All" }
-					/>
-					<FDropdown
-						className = "filter-col--ops"
-						titleText = "Budget"
-						label = "All"
-						onChange = {onFilterChange}
-						items = {allFiltersData[5] && allFiltersData[5].val}
-						selectedItem = { activeFilters && activeFilters.filters.budget ? activeFilters.filters.budget : "All" }
-					/>
-					<FRadioGroup
-						className = "filter-col--ops"
-						name = "voted_charged"
-						titleText = ""
-						onChange = {(value, name) => onRadioChange(value, name)}
-						items = {allFiltersData[6] && allFiltersData[6].val}
-						valueSelected = { activeFilters && activeFilters.filters.voted_charged ? activeFilters.filters.voted_charged : "all" }
-					/>
-					<FRadioGroup
-						className = "filter-col--ops"
-						name = "plan_nonplan"
-						titleText = ""
-						onChange = {(value, name) => onRadioChange(value, name)}
-						items = {allFiltersData[7] && allFiltersData[7].val}
-						valueSelected = { activeFilters && activeFilters.filters.plan_nonplan ? activeFilters.filters.plan_nonplan : "all" }
-					/>
-					 <FDropdown
- 						className = "filter-col--ops"
- 						titleText = "SOE"
- 						label = "All"
- 						onChange = {onFilterChange}
- 						items = {allFiltersData[8] && allFiltersData[8].val}
- 						selectedItem = { activeFilters && activeFilters.filters.SOE ? activeFilters.filters.SOE : "All" }
- 					/>
-        </div>
 			</div>
     </div>
 	)
