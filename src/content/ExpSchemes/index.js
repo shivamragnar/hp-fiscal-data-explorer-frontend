@@ -21,7 +21,7 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 
 //actions
-import { getExpSchemesData }  from '../../actions/exp_schemes';
+import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../actions/exp_schemes';
 import { getExpSchemesFiltersData, updateExpSchemesFilters, updateSchemesOnDateRangeChange }  from '../../actions/exp_schemes_filters';
 
 var { exp_schemes : filterOrderRef, schemes_filter_comp } = require("../../data/filters_ref.json");
@@ -31,6 +31,7 @@ const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
 const ExpSchemes = ({
   exp_schemes : {
+    initData,
     data : {
       mapData,
       barChrtData : { data: barChrtData },
@@ -44,28 +45,41 @@ const ExpSchemes = ({
   exp_schemes_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
   getExpSchemesData,
   getExpSchemesFiltersData,
+  resetActiveFiltersAndDateRange,
   updateSchemesOnDateRangeChange,
   updateExpSchemesFilters }) => {
+
+
 
   const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
-  const [activeVizView, setActiveVizView] = useState("gross");
+  const [activeVizView, setActiveVizView] = useState({
+    FTimeSeriesVizView : "gross",
+    FMapVizView : "gross"
+  });
 
   useEffect(() => {
-    getExpSchemesData(activeFilters, dateRange);
+    getExpSchemesData(initData, activeFilters, dateRange);
     getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
+
+    return () => {
+      resetActiveFiltersAndDateRange();
+    };
 
   }, []);
 
-  const clearAllChildFilters = (filterName) => {
+  const clearAllSelectedOptions = (filterName) => {
     document
       .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
       .forEach(e => e.click());
   }
 
   const onViewChange = (value, name) => {
-    setActiveVizView(value);
+    setActiveVizView({
+      ...activeVizView,
+      [name] : value
+    });
   }
 
   const onFilterChange = (e, key) => {
@@ -80,19 +94,19 @@ const ExpSchemes = ({
     filterOrderRef.map((filterName,i) => {
       if(i > currFilterOrderIndex && activeFilters[filterName] ){
         delete activeFilters[filterName];
-        clearAllChildFilters(filterName);
+        clearAllSelectedOptions(filterName);
       }
     })
 
     console.log("activeFilters");
     console.log(activeFilters);
-    getExpSchemesData(activeFilters, dateRange);
-    updateExpSchemesFilters(e, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    getExpSchemesData(initData, activeFilters, dateRange);
+    updateExpSchemesFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateSchemesOnDateRangeChange(newDateRange, activeFilters);
+		updateSchemesOnDateRangeChange(initData, newDateRange, activeFilters);
 	}
 
 
@@ -102,7 +116,7 @@ const ExpSchemes = ({
       return <div id="fmap">
               <FMap
                 data={mapData}
-                dataPointToMap={activeVizView}
+                dataPointToMap={activeVizView.FMapVizView}
                 />
              </div>;
 
@@ -111,7 +125,7 @@ const ExpSchemes = ({
               data={barChrtData}
               dataToX="districtName"
               dataPoints={["gross", "netPayment"]}
-              barColors={["black", "darkGrey"]}
+              barColors={["darkGrey", "black"]}
               xLabelVals={xLabelVals}
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
@@ -121,7 +135,7 @@ const ExpSchemes = ({
       return  <Fragment>
                 <FTimeSeries
                   dataToX="date"
-                  dataToY={activeVizView}
+                  dataToY={activeVizView.FTimeSeriesVizView}
                   data={lineChrtData}
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
@@ -155,17 +169,33 @@ const ExpSchemes = ({
               <Switch  text="Table" />
             </ContentSwitcher>
 					</div>
-          { (currentVizType === 'FTimeSeries' || currentVizType === 'FMap') &&
+          { currentVizType === 'FTimeSeries' &&
             <FRadioGroup
               className = "viz-view-toggle"
-              name = "gross_netPayment"
+              name = "FTimeSeriesVizView"
               titleText = "View:"
               onChange = {(value, name) => onViewChange(value, name)}
               items = {[
                 { label : "Gross", id : "gross" },
-                { label : "Net Payment", id : "netPayment" }
+                { label : "Net Payment", id : "netPayment" },
+                { label : "Both", id : "gross,netPayment" }
+
               ]}
-              valueSelected = "gross"
+              valueSelected = {activeVizView.FTimeSeriesVizView}
+
+            />
+          }
+          { currentVizType === 'FMap' &&
+            <FRadioGroup
+              className = "viz-view-toggle"
+              name = "FMapVizView"
+              titleText = "View:"
+              onChange = {(value, name) => onViewChange(value, name)}
+              items = {[
+                { label : "Gross", id : "gross" },
+                { label : "Net Payment", id : "netPayment" },
+              ]}
+              valueSelected = {activeVizView.FMapVizView}
             />
           }
 					{ renderSwitch() }
@@ -189,7 +219,7 @@ const ExpSchemes = ({
           />
         }
         />
-      <div className="data-viz-col exp-districtwise">
+      <div className="data-viz-col exp-schemes">
         {createDataUIComponent()}
       </div>
       <div className="filter-col-wrapper">
@@ -211,6 +241,7 @@ ExpSchemes.propTypes ={
   exp_schemes_filters : PropTypes.object.isRequired,
   getExpSchemesData : PropTypes.func.isRequired,
   getExpSchemesFiltersData : PropTypes.func.isRequired,
+  resetActiveFiltersAndDateRange : PropTypes.func.isRequired,
   updateExpSchemesFilters : PropTypes.func.isRequired
 }
 
@@ -223,6 +254,7 @@ export default connect(
   mapStateToProps,
   { getExpSchemesData,
     getExpSchemesFiltersData,
+    resetActiveFiltersAndDateRange,
     updateSchemesOnDateRangeChange,
     updateExpSchemesFilters
   }

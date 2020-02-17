@@ -42,10 +42,10 @@
     "SOE"
   ],
   "receipts" : [
-     "major",
-     "sub_major",
-     "minor",
-     "sub_minor"
+     "major-major_desc",
+     "sub_major-sub_major_desc",
+     "minor-minor_desc",
+     "sub_minor-sub_minor_desc"
   ],
 
   "demandwise_filter_comp" : [

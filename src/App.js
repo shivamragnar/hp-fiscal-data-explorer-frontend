@@ -10,6 +10,9 @@ import { connect } from "react-redux";
 import { getExpDemandwiseData } from "./actions/exp_demandwise.js"
 import { getExpDemandwiseFiltersData } from './actions/exp_demandwise_filters';
 
+import { getExpDistrictwiseData } from "./actions/exp_districtwise.js"
+import { getExpDistrictwiseFiltersData } from './actions/exp_districtwise_filters';
+
 import { getReceiptsData } from "./actions/receipts.js"
 import { getReceiptsFiltersData } from './actions/receipts_filters';
 
@@ -54,8 +57,19 @@ const App = ({
 			activeFilters : initReceiptsFilters,
 			dateRange : initReceiptsDateRange
 		},
+		exp_districtwise : {
+			initData,
+			activeFilters,
+			dateRange
+		},
+		exp_districtwise_filters : {
+			allFiltersData,
+			rawFilterDataAllHeads
+		},
 		getExpDemandwiseData,
 	  getExpDemandwiseFiltersData,
+		getExpDistrictwiseData,
+	  getExpDistrictwiseFiltersData,
 		getReceiptsData,
 	  getReceiptsFiltersData,
 		location : { pathname }
@@ -66,6 +80,8 @@ const App = ({
 const apiCallQueue = [
 	{ apiFunc: () => getExpDemandwiseFiltersData() },
 	{ apiFunc: () => getExpDemandwiseData(initExpFilters, [initExpDateRange[0], initExpDateRange[1]]) },
+	// { apiFunc: () => getExpDistrictwiseData(initData, activeFilters, dateRange) },
+	// { apiFunc: () => getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads) }
 ]
 
 const fetchApisInQueue = async (idx) => {
@@ -87,29 +103,10 @@ const fetchApisInQueue = async (idx) => {
 
  }, []);
 
- useEffect(() => {
-	 console.log("CURPathname")
-	 console.log(pathname);
-
-	 return () => {
-		 console.log("pPathname")
-		 console.log(pathname);
-	 };
-
- },[pathname])
-
-
  return (
       <div>
         <FHeader1 />
-				{
-        // <MediaQuery query="(min-device-width: 768px)">
-						// <FHeader2 />
-        // </MediaQuery>
-				}
-
           <Switch>
-
 						<Route exact path="/" component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/contactus" component={ContactUs} />
@@ -118,10 +115,7 @@ const fetchApisInQueue = async (idx) => {
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
 						<Route exact path="/schemes" component={ExpSchemes} />
             <Route exact path="/receipts" component={Receipts} />
-
-            <Route exact path="/budget_highlights" component={BudgetHighlights} />
           </Switch>
-
       </div>
   );
 }
@@ -131,13 +125,26 @@ App.propTypes = {
 	receipts : PropTypes.object.isRequired,
   getExpDemandwiseData : PropTypes.func.isRequired,
   getExpDemandwiseFiltersData : PropTypes.func.isRequired,
+	getExpDistrictwiseData : PropTypes.func.isRequired,
+  getExpDistrictwiseFiltersData : PropTypes.func.isRequired,
 	getReceiptsData : PropTypes.func.isRequired,
   getReceiptsFiltersData : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  exp_demandwise : state.exp_demandwise,
+	exp_districtwise_filters : state.exp_districtwise_filters,
+	exp_districtwise : state.exp_districtwise,
+	exp_demandwise : state.exp_demandwise,
 	receipts : state.receipts
 })
 
-export default withRouter(connect(mapStateToProps, { getExpDemandwiseData, getExpDemandwiseFiltersData, getReceiptsData, getReceiptsFiltersData })(App));
+export default withRouter(connect(
+	mapStateToProps,
+	{
+		getExpDistrictwiseData,
+		getExpDistrictwiseFiltersData,
+		getExpDemandwiseData,
+		getExpDemandwiseFiltersData,
+		getReceiptsData,
+		getReceiptsFiltersData
+	})(App));

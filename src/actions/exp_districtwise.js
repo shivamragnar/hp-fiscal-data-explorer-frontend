@@ -17,6 +17,7 @@ import {
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
+const { exp_districtwise : filterOrderRef } = require("../data/filters_ref.json");
 
 export const getExpDistrictwiseData = (initData, activeFilters, dateRange) => async dispatch => {
   try {
@@ -126,6 +127,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange) => as
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
         { key: 'districtName', header: 'District' },
+        { key: 'treasuryCode', header: 'Treasury Code' },
         { key: 'budgetCode', header: 'Budget Code' },
         { key: 'gross', header: 'Gross (INR)' },
         { key: 'BTDED', header: 'BTDED (INR)' },
@@ -137,7 +139,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange) => as
       	tempTableData.rows.push({
       		id: i,
       		'districtName': d.districtName,
-          'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys),
+          'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
+          'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
       		'gross': d.gross.toLocaleString('en-IN'),
       		'BTDED': d.BTDED.toLocaleString('en-IN'),
       		'AGDED': d.AGDED.toLocaleString('en-IN'),

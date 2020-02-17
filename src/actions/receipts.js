@@ -7,13 +7,15 @@ import {
 
 import {
   getWeekwiseDates,
-  calcMonthOrWeek
+  calcMonthOrWeek,
+  createBudgetCodeString
 } from '../utils/functions';
 
 
 
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
+const { receipts : filterOrderRef } = require("../data/filters_ref.json");
 
 export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
   try {
@@ -33,9 +35,13 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     var objForPayload = {};
     activeFilterVals.map((val, i) => {
-        let tempVal = val.map(item => { return item.split('-')[0]});
-        tempVal = tempVal.join('","');
-        objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
+        let tempVal1 = val.map(item => { return item.split('-')[0]});
+        let tempVal2 = val.map(item => { return item.split('-')[1]});
+        tempVal1 = tempVal1.join('","');
+        tempVal2 = tempVal2.join('","');
+
+        objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
+        if(tempVal2) objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
     })
     console.log("objForPayload"); console.log(objForPayload);
 
@@ -78,12 +84,14 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     	i === 0 && tempTableData.headers.push(
         { key: 'date', header: month_week === "week" ? "WEEKWISE DATES" : "MONTHS" },
+        { key: 'budgetCode', header: 'BUDGET CODE' },
         { key: 'receipt', header: 'TOTAL AMOUNT IN RUPEES' }
       );
 
     	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
+        'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, filterOrderRef.length-1]),
     		'receipt': (Math.round(d.receipt*100)/100).toLocaleString('en-IN'),
     	})
     })

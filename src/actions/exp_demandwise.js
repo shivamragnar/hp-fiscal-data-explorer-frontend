@@ -11,11 +11,13 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  calcScsrOffset
+  calcScsrOffset,
+  createBudgetCodeString
 } from '../utils/functions';
 
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
+const { exp_demandwise : filterOrderRef } = require("../data/filters_ref.json");
 
 export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch => {
   try {
@@ -89,6 +91,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
 
     	i === 0 && tempTableData.headers.push(
         { key: 'date', header: 'Date' },
+        { key: 'budgetCode', header: 'Budget Code' },
         { key: 'sanction', header: 'Sanction' },
         { key: 'addition', header: 'Addition' },
         { key: 'savings', header: 'Savings' },
@@ -98,10 +101,12 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
-    		'sanction': Math.round(d.sanction*100)/100,
-    		'addition': Math.round(d.addition*100)/100,
-    		'savings': Math.round(d.savings*100)/100,
-    		'revised': Math.round(d.revised*100)/100
+        'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, filterOrderRef.length-1]),
+    		'sanction': (Math.round(d.sanction*100)/100).toLocaleString('en-IN'),
+    		'addition': (Math.round(d.addition*100)/100).toLocaleString('en-IN'),
+    		'savings': (Math.round(d.savings*100)/100).toLocaleString('en-IN'),
+    		'revised': (Math.round(d.revised*100)/100).toLocaleString('en-IN'),
+
     	})
     })
 

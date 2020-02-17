@@ -1,7 +1,8 @@
-import { GET_EXP_SUMMARY_DATA, EXP_SUMMARY_DATA_ERROR } from "../actions/types";
+import { GET_EXP_SUMMARY_DATA, SET_EXP_SUMMARY_DATA_LOADING, EXP_SUMMARY_DATA_ERROR } from "../actions/types";
 
 const initialState = {
-  data: [],
+  vizData: [],
+  tableData: {},
   loading: true,
   error: {}
 };
@@ -13,8 +14,14 @@ export default function(state = initialState, action) {
     case GET_EXP_SUMMARY_DATA:
       return {
         ...state,
-        data: payload,
+        vizData: payload.vizData,
+        tableData: payload.tableData,
         loading: false
+      };
+    case SET_EXP_SUMMARY_DATA_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     case EXP_SUMMARY_DATA_ERROR:
       return {

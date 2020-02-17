@@ -133,7 +133,7 @@ const ExpDistrictwise = ({
               data={barChrtData}
               dataToX="districtName"
               dataPoints={["gross", "netPayment"]}
-              barColors={["black", "darkGrey"]}
+              barColors={["darkGrey", "black"]}
               xLabelVals={xLabelVals}
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
@@ -217,7 +217,7 @@ const ExpDistrictwise = ({
   return (
     <div className="f-content">
       <FPageTitle
-        pageTitle="Expenditure | District Comparison"
+        pageTitle="Expenditure | Districtwise"
         showLegend={false}
         monthPicker={
           <FMonthPicker

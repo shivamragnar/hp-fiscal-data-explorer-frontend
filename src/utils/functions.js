@@ -214,24 +214,23 @@ export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderR
 
 //12
 
-export const createBudgetCodeString = (activeFilterVals, activeFilterKeys) => {
-  const budgetCodeStringArray = activeFilterVals.map((valArray, i) => {
-    if(activeFilterKeys[i] !== "District"){
-      valArray = valArray.map(val => {
-        return val.split('-')[0];
-      })
-      valArray = valArray.join(", ");
-      const keyValString = activeFilterKeys[i] + " : " + valArray;
-      return keyValString;
+export const createBudgetCodeString = (activeFilterVals, activeFilterKeys, filterOrderRef, range) => { //the range array is the indices between which we wanna
+  const budgetCodeStringArray = filterOrderRef.map((d, i) => {
+
+    if(i >= range[0] && i <= range[1]){
+      if(activeFilterKeys.includes(filterOrderRef[i])){
+        const activeKeyIdx = activeFilterKeys.indexOf(filterOrderRef[i]);
+        console.log("reached here");
+        const valCode = activeFilterVals[activeKeyIdx].map(val => {
+          return val.split('-')[0];
+        })
+        console.log("valCode"); console.log(valCode);
+        return valCode.join(", ");
+      }else{ return "all"; }
     }
   })
   const budgetCodeStringArray_clean = budgetCodeStringArray.filter(elem => elem !== undefined);
-  if(budgetCodeStringArray_clean.length > 0 ){
-    const budgetCodeString = budgetCodeStringArray_clean.join(" | ");
-    return budgetCodeString;
-  }else{
-    return "All";
-  }
+  return budgetCodeStringArray_clean.join(' - ');
 }
 
 //13

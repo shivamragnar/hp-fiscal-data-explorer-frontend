@@ -22,8 +22,6 @@ export const getExpSchemesFiltersData = (allFiltersData, rawFilterDataAllHeads) 
         console.log("need to fetch raw district filter data");
         rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_schemes");
 
-      }else{
-        console.log("already have raw distrcit filter data");
       }
 
 			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
@@ -45,21 +43,19 @@ export const getExpSchemesFiltersData = (allFiltersData, rawFilterDataAllHeads) 
 }
 
 
-export const updateExpSchemesFilters = (e, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
+export const updateExpSchemesFilters = (e, key, activeFilters, allFiltersData, rawFilterDataAllHeads ) => async dispatch => {
   try {
-    console.log("got here");
     dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES_FILTERS, payload: {} });
 
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
     if( Object.keys(activeFilters).length > 0){
-      const currFilterOrderIndex = filterOrderRef.indexOf(e.selectedItems[0].filter_name);
+      const currFilterOrderIndex = filterOrderRef.indexOf(key);
 
       allFiltersData.map((filterObj, i) => {
         if( i > currFilterOrderIndex){
           filterObj.val = [];
         }
       })
-      console.log("got here");
 
       //2 fetch raw filter data
       const activeFilterKeys = Object.keys(activeFilters);
@@ -73,18 +69,37 @@ export const updateExpSchemesFilters = (e, activeFilters, allFiltersData, rawFil
             stringForApi += '&';
           }
       })
-      console.log("THIS WILLBE THE UPDATE FILTER QUERY :");
-      console.log(`http://13.126.189.78/api/acc_heads_schemes?${stringForApi}`);
+
       const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_schemes?${stringForApi}`);
-      console.log('raw_dynamic_filter_data: ');
-      console.log(rawFilterData);
+      // console.log('raw_dynamic_filter_data: ');
+      // console.log(rawFilterData);
 
       const results = [];
-      recursFilterFind2(rawFilterData.data.records, e.selectedItems, results, 0, filterOrderRef, activeFilters, currFilterOrderIndex );
+      var query;
+      var queryFilterIdx;
+
+      if(e.selectedItems.length === 0){
+        for(var i = currFilterOrderIndex ; i >= 0 ; i--){
+          if(activeFilters[filterOrderRef[i]]){
+
+            query = activeFilters[filterOrderRef[i]].map(filterVal => {
+              return { id : filterVal }
+            })
+            queryFilterIdx = i;
+            // console.log(query);
+            break;
+          }
+        }
+      }else{
+        query = e.selectedItems;
+        queryFilterIdx = currFilterOrderIndex;
+      }
+
+      recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
       console.log("district_results");
       console.log(results);
       results.map(result => {
-        recursFilterFetch( allFiltersData, result, currFilterOrderIndex+1);
+        recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
       console.log(allFiltersData);
     }
@@ -104,7 +119,10 @@ export const updateExpSchemesFilters = (e, activeFilters, allFiltersData, rawFil
 
 
   }catch(err){
-    console.log("error > updateExpSchemesFilters");
+    dispatch({
+      type: EXP_SCHEMES_FILTERS_DATA_ERROR,
+      payload: err
+    });
   }
 }
 

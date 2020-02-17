@@ -36,10 +36,12 @@ const vizTypes = ["FSASR", "FTable"];
 
 const Receipts = ( { receipts : {
 											 data : {
+												 vizData,
 												 vizData : { data, xLabelVals, xLabelFormat } ,
 												 tableData : { headers, rows }
 											 },
 											 loading,
+											 fetching,
 											 activeFilters,
 											 dateRange
 									 },
@@ -57,8 +59,8 @@ const Receipts = ( { receipts : {
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
 	useEffect(() => {
-		getReceiptsData(activeFilters, dateRange);
-		getReceiptsFiltersData();
+			Object.keys(vizData).length === 0 && getReceiptsData(activeFilters, dateRange);
+			allFiltersData.length === 0 && getReceiptsFiltersData();
   }, []);
 
 	const onFilterChange = (e, key) => {
@@ -76,7 +78,7 @@ const Receipts = ( { receipts : {
         clearAllSelectedOptions(filterName);
       }
     })
-
+		console.log(activeFilters);
 		updateReceiptsOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
 	}
 

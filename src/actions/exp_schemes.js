@@ -2,7 +2,9 @@ import axios from "axios";
 import {
   GET_EXP_SCHEMES_DATA,
   SET_DATA_LOADING_EXP_SCHEMES,
-  EXP_SCHEMES_DATA_ERROR
+  EXP_SCHEMES_DATA_ERROR,
+  RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES,
+  HYDRATE_SCHEMES_DATA_FROM_INITDATA
 } from "./types";
 
 import {
@@ -14,8 +16,19 @@ import {
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
 
-export const getExpSchemesData = (activeFilters, dateRange) => async dispatch => {
+export const getExpSchemesData = (initData, activeFilters, dateRange) => async dispatch => {
   try {
+
+    if(Object.keys(activeFilters).length === 0 && initData){
+      dispatch({
+        type: HYDRATE_SCHEMES_DATA_FROM_INITDATA,
+        payload: {
+          data: initData,
+          dateRange: dateRange,
+          activeFilters: activeFilters
+        }
+      });
+    }else{
 
     const [ dateFrom , dateTo ] = dateRange;
     const { months , years, years_short } = yymmdd_ref;
@@ -150,7 +163,7 @@ export const getExpSchemesData = (activeFilters, dateRange) => async dispatch =>
         activeFilters: activeFilters
       }
     });
-
+  }
   } catch (err) {
     dispatch({
       type: EXP_SCHEMES_DATA_ERROR,
@@ -160,3 +173,10 @@ export const getExpSchemesData = (activeFilters, dateRange) => async dispatch =>
     });
   }
 };
+
+export const resetActiveFiltersAndDateRange = () => async dispatch => {
+  dispatch({
+    type: RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES,
+    payload: ''
+  })
+}

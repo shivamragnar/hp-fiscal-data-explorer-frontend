@@ -76,7 +76,7 @@
   padding-top: 2rem;
   z-index: 10;
 
-  &.exp-details, &.receipts, &.exp-districtwise{
+  &.exp-details, &.receipts, &.exp-districtwise, &.exp-schemes{
     padding-left: 20rem;
   }
 
@@ -119,4 +119,20 @@
 .bx--data-table tr > td:nth-child(2){
   font-size: 9px;
   font-weight: 700;
+}
+//...but dont apply the above styling to the summary page data table
+.exp-summary .bx--data-table tr > td:nth-child(2){
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+//...and in the case of districtwise, apply this style to the 3rd child as well
+.exp-districtwise .bx--data-table tr > td:nth-child(3){
+  font-size: 9px;
+  font-weight: 700;
+}
+
+//force multiselect --> option text to wrap
+.bx--list-box__menu-item .bx--checkbox-label-text{
+  white-space: normal;
 }
