@@ -55,6 +55,12 @@ const ExpDistrictwise = ({
   updateDistrictwiseOnDateRangeChange,
   updateExpDistrictwiseFilters }) => {
 
+  //handle filter bar responsiveness
+  const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+	const handleFilterBarVisibility = () => {
+		setFilterBarVisibility(!filterBarVisibility);
+	}
+
   const activeViz = vizTypes[activeVizIdx];
 
   const switchActiveViz = (e) => { setActiveVizIdx(e) };
@@ -232,13 +238,14 @@ const ExpDistrictwise = ({
       <div className="data-viz-col exp-districtwise">
         {createDataUIComponent()}
       </div>
-      <div className="filter-col-wrapper">
+      <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {districtwise_filter_comp}
           filtersLoading = {filtersLoading}
           activeFilters = {activeFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
+          onFilterIconClick={handleFilterBarVisibility}
           />
       </div>
     </div>

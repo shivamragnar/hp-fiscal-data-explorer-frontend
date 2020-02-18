@@ -52,6 +52,12 @@ const ExpDetails = ( { exp_demandwise : {
 											 updateExpDemandwiseOnDateRangeChange
 										  	} ) => {
 
+	//handle filter bar responsiveness
+  const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+	const handleFilterBarVisibility = () => {
+		setFilterBarVisibility(!filterBarVisibility);
+	}
+
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
@@ -132,14 +138,14 @@ const ExpDetails = ( { exp_demandwise : {
       <div className="data-viz-col exp-details">
 				{createDataUIComponent()}
       </div>
-
-			<div className="filter-col-wrapper">
+			<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 				<FFilterColumn2
 					filterCompData ={demandwise_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
 					activeFilters={activeFilters}
 					filtersLoading={filtersLoading}
 					onChange = {(e, key) => onFilterChange(e, key)}
+					onFilterIconClick={handleFilterBarVisibility}
 					/>
 			</div>
     </div>

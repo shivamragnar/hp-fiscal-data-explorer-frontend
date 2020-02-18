@@ -28,8 +28,13 @@ import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 //import helpers
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
+
+
 // data_ref
 const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/filters_ref.json');
+
+
+
 
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
@@ -53,6 +58,11 @@ const Receipts = ( { receipts : {
 									 location
 								   } ) => {
 
+	const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+  //handle filter bar responsiveness
+	const handleFilterBarVisibility = () => {
+		setFilterBarVisibility(!filterBarVisibility);
+	}
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
@@ -175,13 +185,15 @@ const Receipts = ( { receipts : {
       <div className="data-viz-col receipts">
 				{createDataUIComponent()}
       </div>
-			<div className="filter-col-wrapper">
+			<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
+
 				<FFilterColumn2
 					filterCompData ={receipts_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
 					activeFilters={activeFilters}
 					filtersLoading={filtersLoading}
 					onChange = {(e, key) => onFilterChange(e, key)}
+					onFilterIconClick={handleFilterBarVisibility}
 					/>
 			</div>
     </div>

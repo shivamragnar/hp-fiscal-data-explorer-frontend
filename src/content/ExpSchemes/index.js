@@ -49,7 +49,11 @@ const ExpSchemes = ({
   updateSchemesOnDateRangeChange,
   updateExpSchemesFilters }) => {
 
-
+  //handle filter bar responsiveness
+  const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+	const handleFilterBarVisibility = () => {
+		setFilterBarVisibility(!filterBarVisibility);
+	}
 
   const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
@@ -224,13 +228,14 @@ const ExpSchemes = ({
       <div className="data-viz-col exp-schemes">
         {createDataUIComponent()}
       </div>
-      <div className="filter-col-wrapper">
+      <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {schemes_filter_comp}
           filtersLoading = {filtersLoading}
           activeFilters = {activeFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
+          onFilterIconClick={handleFilterBarVisibility}
           />
       </div>
     </div>
