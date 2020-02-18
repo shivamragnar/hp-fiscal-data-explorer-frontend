@@ -126,6 +126,6 @@ export const updateExpSchemesFilters = (e, key, activeFilters, allFiltersData, r
   }
 }
 
-export const updateSchemesOnDateRangeChange = (newDateRange, activeFilters) => async dispatch => {
-  dispatch(getExpSchemesData(activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
+export const updateSchemesOnDateRangeChange = (initData, newDateRange, activeFilters) => async dispatch => {
+  dispatch(getExpSchemesData(initData, activeFilters, onDateRangeChange(newDateRange), true)); //update expData state at App level
 }

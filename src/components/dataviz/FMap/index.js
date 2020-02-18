@@ -76,7 +76,7 @@ export default class FMap extends Component<{}, State> {
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
-      <div style={{position: "relative"}}>
+      <div style={{position: "relative", zIndex: 10}}>
         <div className="f-map-tooltip-wrapper">
           <div
             className="tooptip-content-wrapper"

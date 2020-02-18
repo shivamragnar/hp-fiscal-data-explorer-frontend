@@ -16,10 +16,10 @@ import {
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
 
-export const getExpSchemesData = (initData, activeFilters, dateRange) => async dispatch => {
+export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredByDateRangeChange = false) => async dispatch => {
   try {
 
-    if(Object.keys(activeFilters).length === 0 && initData){
+    if(Object.keys(activeFilters).length === 0 && initData && triggeredByDateRangeChange === false){
       dispatch({
         type: HYDRATE_SCHEMES_DATA_FROM_INITDATA,
         payload: {

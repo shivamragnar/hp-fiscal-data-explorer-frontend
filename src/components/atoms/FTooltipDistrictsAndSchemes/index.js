@@ -10,7 +10,7 @@ const FTooltipDistrictsAndSchemes = ( {
   totalTicks
 } ) => {
 
-  console.log(datum);
+  // console.log(datum);
 
   gross = gross.toLocaleString('en-IN');
   netPayment = netPayment.toLocaleString('en-IN');

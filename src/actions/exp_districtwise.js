@@ -19,11 +19,12 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
 const { exp_districtwise : filterOrderRef } = require("../data/filters_ref.json");
 
-export const getExpDistrictwiseData = (initData, activeFilters, dateRange) => async dispatch => {
+export const getExpDistrictwiseData = (initData, activeFilters, dateRange, triggeredByDateRangeChange = false) => async dispatch => {
   try {
 
+    console.log(triggeredByDateRangeChange);
 
-    if(Object.keys(activeFilters).length === 0 && initData){
+    if(Object.keys(activeFilters).length === 0 && initData && triggeredByDateRangeChange === false){
       dispatch({
         type: HYDRATE_EXP_DISTRICTWISE_DATA_FROM_INITDATA,
         payload: {

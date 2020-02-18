@@ -126,5 +126,6 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
 }
 
 export const updateDistrictwiseOnDateRangeChange = (initData, newDateRange, activeFilters) => async dispatch => {
-  dispatch(getExpDistrictwiseData(initData, activeFilters, onDateRangeChange(newDateRange))); //update expData state at App level
+  dispatch(getExpDistrictwiseData(initData, activeFilters, onDateRangeChange(newDateRange), true)); //true = getExpDistrictwiseData is being triggered by date range change
+
 }
