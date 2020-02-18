@@ -80,6 +80,7 @@ export const getExpSchemesData = (initData, activeFilters, dateRange) => async d
       datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
       districtwiseExpVals[i].map((expArray, i) => {
         let dataObj = {};
+        dataObj.idx = i;
         dataObj.date = month_week === "month" ?
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                        getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];

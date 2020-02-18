@@ -18,7 +18,7 @@ import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
-
+import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 
 //actions
 import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../actions/exp_schemes';
@@ -129,6 +129,7 @@ const ExpSchemes = ({
               xLabelVals={xLabelVals}
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
+              tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
               />;
 
       case 'FTimeSeries':
@@ -140,6 +141,7 @@ const ExpSchemes = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[vizTypes.indexOf(currentVizType)]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
                 />
               </Fragment>
 

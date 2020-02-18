@@ -3,7 +3,14 @@ import sassVars from '../../../scss/_vars.scss'
 import tooltipBubble from '../../../imgs/tooltipBubble.svg'
 const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } = sassVars;
 
-const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, netPayment}, activeDataPoint, vizType, totalTicks} ) => {
+const FTooltipDistrictsAndSchemes = ( {
+  x, y, datum, datum : { idx, gross, AGDED, BTDED, netPayment},
+  activeDataPoint,
+  vizType,
+  totalTicks
+} ) => {
+
+  console.log(datum);
 
   gross = gross.toLocaleString('en-IN');
   netPayment = netPayment.toLocaleString('en-IN');
@@ -86,7 +93,7 @@ const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, n
         <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={22} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
         <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} textAnchor="end">₹ {gross}</text>
         <text x={paddingX} y={36} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
-        <text x={width-paddingX} y={36} text-anchor="end">+ ₹ {AGDED} </text>
+        <text x={width-paddingX} y={36} text-anchor="end">- ₹ {AGDED} </text>
         <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start">BTDED  : </text>
         <text x={width-paddingX} y={50} text-anchor="end">- ₹ {BTDED} </text>
         <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={paddingX} y={64}  letter-spacing="0.5" text-anchor="start"> Net  : </text>
@@ -99,4 +106,4 @@ const FTooltipDistricts = ( { x, y, datum, datum : { idx, gross, AGDED, BTDED, n
 
 
 
-export default FTooltipDistricts;
+export default FTooltipDistrictsAndSchemes;

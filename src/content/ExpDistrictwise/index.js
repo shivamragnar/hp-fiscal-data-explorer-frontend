@@ -21,7 +21,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
-import FTooltipDistricts from '../../components/atoms/FTooltipDistricts';
+import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 
 //actions
 import { getExpDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/exp_districtwise';
@@ -137,7 +137,7 @@ const ExpDistrictwise = ({
               xLabelVals={xLabelVals}
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
-              tooltip={<FTooltipDistricts activeDataPoint={["gross", "netPayment"]}/>}
+              tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
               />;
 
       case 'FTimeSeries':
@@ -149,7 +149,7 @@ const ExpDistrictwise = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
-                  tooltip={<FTooltipDistricts vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
+                  tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
                 />
               </Fragment>
 
