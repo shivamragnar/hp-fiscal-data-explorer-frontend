@@ -91,7 +91,6 @@ const fetchApisInQueue = async (idx) => {
 		}
 }
 
-
  useEffect(() => {
 	 if(pathname.includes("receipts") === true){
 		 apiCallQueue.unshift(

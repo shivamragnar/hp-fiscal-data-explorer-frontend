@@ -77,10 +77,10 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     districtNames.map((districtName, i) => {
       let datewiseExp = [];
       let totalExp = { districtName, gross: 0, BTDED: 0, AGDED: 0, netPayment: 0};
-      datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
+      datewiseExp.push({ "idx": 0, "date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
       districtwiseExpVals[i].map((expArray, i) => {
         let dataObj = {};
-        dataObj.idx = i;
+        dataObj.idx = i+1;
         dataObj.date = month_week === "month" ?
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                        getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];

@@ -156,6 +156,7 @@ const ExpDistrictwise = ({
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
+                  lineLabel="districtName"
                 />
               </Fragment>
 

@@ -68,7 +68,8 @@ const fColorScale = [
 
 const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
-  fontSize: '7px'
+  fontSize: '7px',
+  fontWeight: 600
   }
 
 
@@ -85,7 +86,7 @@ class FTimeSeries extends Component {
 				theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
-				padding={{ top: 50, bottom: 450, left: 50, right: 50 }}
+				padding={{ top: 50, bottom: 450, left: 50, right: 120 }}
 				containerComponent={
 		      <VictoryVoronoiContainer
 		        labels={datum => datum}
@@ -120,6 +121,7 @@ class FTimeSeries extends Component {
         {
           this.props.data && //if multiple datapoints is specified via the datapoints prop,
             this.props.data.map((d, i) =>{
+							const data = d[this.props.dataAryName];
 								return(
 	                <VictoryLine
 	                  key={i}
@@ -127,6 +129,8 @@ class FTimeSeries extends Component {
 	                  data={d[this.props.dataAryName]}
 	                  x={this.props.dataToX}
 	                  y={this.props.dataToY.split(',')[0]}
+										labels={ ({datum}) => datum.idx === data.length-1 ? d[this.props.lineLabel] : ""}
+										style={{ labels: { ...tickLabelStyle, textAnchor:"initial", alignmentBaseline:"hanging" } }}
 	                />
 	              )
             })

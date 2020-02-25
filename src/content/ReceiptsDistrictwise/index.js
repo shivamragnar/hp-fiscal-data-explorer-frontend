@@ -16,21 +16,25 @@ import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
+
 import FRadioGroup from '../../components/molecules/FRadioGroup';
+
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
+
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 
 //actions
-import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../actions/exp_schemes';
-import { getExpSchemesFiltersData, updateExpSchemesFilters, updateSchemesOnDateRangeChange }  from '../../actions/exp_schemes_filters';
+import { getReceiptsDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/receipts_districtwise';
+import { getReceiptsDistrictwiseFiltersData, updateReceiptsDistrictwiseFilters, updateReceiptsDistrictwiseOnDateRangeChange }  from '../../actions/receipts_districtwise_filters';
 
-var { exp_schemes : filterOrderRef, schemes_filter_comp } = require("../../data/filters_ref.json");
+var { receipts_districtwise : filterOrderRef, receipts_districtwise_filter_comp } = require("../../data/filters_ref.json");
 
 //Name of components to switch between
 const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
-const ExpSchemes = ({
-  exp_schemes : {
+
+const ReceiptsDistrictwise = ({
+  receipts_districtwise : {
     initData,
     data : {
       mapData,
@@ -39,15 +43,17 @@ const ExpSchemes = ({
       tableData : { headers, rows }
     },
     loading,
+    activeVizIdx,
     activeFilters,
     dateRange
   },
-  exp_schemes_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
-  getExpSchemesData,
-  getExpSchemesFiltersData,
+  receipts_districtwise_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
+  getReceiptsDistrictwiseData,
+  setActiveVizIdx,
+  getReceiptsDistrictwiseFiltersData,
   resetActiveFiltersAndDateRange,
-  updateSchemesOnDateRangeChange,
-  updateExpSchemesFilters }) => {
+  updateReceiptsDistrictwiseOnDateRangeChange,
+  updateReceiptsDistrictwiseFilters }) => {
 
   //handle filter bar responsiveness
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
@@ -55,17 +61,20 @@ const ExpSchemes = ({
 		setFilterBarVisibility(!filterBarVisibility);
 	}
 
-  const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+  const activeViz = vizTypes[activeVizIdx];
 
+  const switchActiveViz = (e) => { setActiveVizIdx(e) };
+  // const [activeViz, setActiveViz] = useState(vizTypes[0]);
   const [activeVizView, setActiveVizView] = useState({
     FTimeSeriesVizView : "gross",
     FMapVizView : "gross"
   });
 
+  // console.log(activeVizView.FTimeSeriesVizView);
+
   useEffect(() => {
-    getExpSchemesData(initData, activeFilters, dateRange);
-    getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
+    getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
+    getReceiptsDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
       resetActiveFiltersAndDateRange();
@@ -102,20 +111,21 @@ const ExpSchemes = ({
       }
     })
 
-    console.log("activeFilters");
-    console.log(activeFilters);
-    getExpSchemesData(initData, activeFilters, dateRange);
-    updateExpSchemesFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    // console.log("activeFilters");
+    // console.log(activeFilters);
+    getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
+    updateReceiptsDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateSchemesOnDateRangeChange(initData, newDateRange, activeFilters);
+		updateReceiptsDistrictwiseOnDateRangeChange(initData, newDateRange, activeFilters);
 	}
 
 
+
   const renderSwitch = () => {
-    switch (currentVizType) {
+    switch (activeViz) {
       case 'FMap':
       return <div id="fmap">
               <FMap
@@ -145,7 +155,7 @@ const ExpSchemes = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
-                  tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[vizTypes.indexOf(currentVizType)]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
+                  tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
                   lineLabel="districtName"
                 />
               </Fragment>
@@ -169,14 +179,14 @@ const ExpSchemes = ({
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
+            <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
               <Switch  text="Map" />
               <Switch  text="Bar Chart" />
               <Switch  text="Time Series" />
               <Switch  text="Table" />
             </ContentSwitcher>
 					</div>
-          { currentVizType === 'FTimeSeries' &&
+          { activeViz === 'FTimeSeries' &&
             <FRadioGroup
               className = "viz-view-toggle"
               name = "FTimeSeriesVizView"
@@ -192,7 +202,7 @@ const ExpSchemes = ({
 
             />
           }
-          { currentVizType === 'FMap' &&
+          { activeViz === 'FMap' &&
             <FRadioGroup
               className = "viz-view-toggle"
               name = "FMapVizView"
@@ -214,7 +224,7 @@ const ExpSchemes = ({
   return (
     <div className="f-content">
       <FPageTitle
-        pageTitle="Schemes"
+        pageTitle="Receipts | Districtwise"
         showLegend={false}
         monthPicker={
           <FMonthPicker
@@ -226,13 +236,13 @@ const ExpSchemes = ({
           />
         }
         />
-      <div className="data-viz-col exp-schemes">
+      <div className="data-viz-col exp-districtwise">
         {createDataUIComponent()}
       </div>
       <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
           allFiltersData = {allFiltersData && allFiltersData}
-          filterCompData = {schemes_filter_comp}
+          filterCompData = {districtwise_filter_comp}
           filtersLoading = {filtersLoading}
           activeFilters = {activeFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
@@ -244,26 +254,29 @@ const ExpSchemes = ({
 
 }
 
-ExpSchemes.propTypes ={
-  exp_schemes : PropTypes.object.isRequired,
-  exp_schemes_filters : PropTypes.object.isRequired,
-  getExpSchemesData : PropTypes.func.isRequired,
-  getExpSchemesFiltersData : PropTypes.func.isRequired,
+ReceiptsDistrictwise.propTypes ={
+  receipts_districtwise : PropTypes.object.isRequired,
+  receipts_districtwise_filters : PropTypes.object.isRequired,
+  getReceiptsDistrictwiseData : PropTypes.func.isRequired,
+  setActiveVizIdx : PropTypes.func.isRequired,
+  getReceiptsDistrictwiseFiltersData : PropTypes.func.isRequired,
   resetActiveFiltersAndDateRange : PropTypes.func.isRequired,
-  updateExpSchemesFilters : PropTypes.func.isRequired
+  updateReceiptsDistrictwiseOnDateRangeChange : PropTypes.func.isRequired,
+  updateReceiptsDistrictwiseFilters : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  exp_schemes : state.exp_schemes,
-  exp_schemes_filters : state.exp_schemes_filters
+  receipts_districtwise : state.receipts_districtwise,
+  receipts_districtwise_filters : state.receipts_districtwise_filters
 })
 
 export default connect(
   mapStateToProps,
-  { getExpSchemesData,
-    getExpSchemesFiltersData,
+  { getReceiptsDistrictwiseData,
+    setActiveVizIdx,
+    getReceiptsDistrictwiseFiltersData,
     resetActiveFiltersAndDateRange,
-    updateSchemesOnDateRangeChange,
-    updateExpSchemesFilters
+    updateReceiptsDistrictwiseOnDateRangeChange,
+    updateReceiptsDistrictwiseFilters
   }
-)(ExpSchemes);
+)(ReceiptsDistrictwise);
