@@ -170,7 +170,7 @@ const Receipts = ( { receipts : {
 	return (
 		<div className="f-content">
 			<FPageTitle
-				pageTitle="Receipts"
+				pageTitle="Receipts | Details"
 				showLegend={false}
 				monthPicker={
 					<FMonthPicker

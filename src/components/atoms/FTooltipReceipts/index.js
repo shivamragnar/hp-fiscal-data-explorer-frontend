@@ -2,7 +2,7 @@ import React from "react";
 import sassVars from '../../../scss/_vars.scss'
 const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } = sassVars;
 
-const FTooltipReceipts = ( { x, y, datum : { date, receipt } } ) => {
+const FTooltipReceipts = ( { x, y, datum : { date, districtName, receipt } } ) => {
 
   receipt = receipt.toLocaleString('en-IN');
 
@@ -33,7 +33,7 @@ const FTooltipReceipts = ( { x, y, datum : { date, receipt } } ) => {
         />
 
       <g fontWeight={500} transform="translate(0,19)" fill={white} >
-        <text x={paddingX} y={0} fill={darkGrey}  letter-spacing="0.5" text-anchor="start"> {date} </text>
+        <text x={paddingX} y={0} fill={darkGrey}  letter-spacing="0.5" text-anchor="start"> {date || districtName} </text>
         <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
         <g fontWeight={700}>
           <text x={paddingX} y={24}  letter-spacing="0.5" text-anchor="start"> RECEIPT  : </text>

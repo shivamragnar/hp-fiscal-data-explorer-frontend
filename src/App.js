@@ -99,7 +99,7 @@ const fetchApisInQueue = async (idx) => {
 		 	 { apiFunc: () => getReceiptsFiltersData() }
 		 )
 	 }
-	 // fetchApisInQueue(0);
+	 fetchApisInQueue(0);
 
  }, []);
 
