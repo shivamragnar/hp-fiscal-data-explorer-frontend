@@ -20,7 +20,7 @@ export const getReceiptsDistrictwiseFiltersData = (allFiltersData, rawFilterData
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE_FILTERS, payload: {} });
-        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury");
+        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury_rec");
       }
 
 			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
@@ -125,7 +125,7 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
   }
 }
 
-export const updateDistrictwiseOnDateRangeChange = (initData, newDateRange, activeFilters) => async dispatch => {
+export const updateReceiptsDistrictwiseOnDateRangeChange = (initData, newDateRange, activeFilters) => async dispatch => {
   dispatch(getReceiptsDistrictwiseData(initData, activeFilters, onDateRangeChange(newDateRange), true)); //true = getExpDistrictwiseData is being triggered by date range change
 
 }

@@ -41,6 +41,7 @@ import exp_details_keys from "./dictionary/exp_details_keys.json";
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
 import ExpDistrictwise from "./content/ExpDistrictwise";
+import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
 import ExpSchemes from "./content/ExpSchemes";
 import Receipts from "./content/Receipts";
 
@@ -98,7 +99,7 @@ const fetchApisInQueue = async (idx) => {
 		 	 { apiFunc: () => getReceiptsFiltersData() }
 		 )
 	 }
-	 fetchApisInQueue(0);
+	 // fetchApisInQueue(0);
 
  }, []);
 
@@ -112,6 +113,7 @@ const fetchApisInQueue = async (idx) => {
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
+						<Route exact path="/receipts/districtwise" component={ReceiptsDistrictwise} />
 						<Route exact path="/schemes" component={ExpSchemes} />
             <Route exact path="/receipts" component={Receipts} />
           </Switch>

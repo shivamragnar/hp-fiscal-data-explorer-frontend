@@ -22,6 +22,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
+import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 
 //actions
 import { getReceiptsDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/receipts_districtwise';
@@ -64,13 +65,9 @@ const ReceiptsDistrictwise = ({
   const activeViz = vizTypes[activeVizIdx];
 
   const switchActiveViz = (e) => { setActiveVizIdx(e) };
-  // const [activeViz, setActiveViz] = useState(vizTypes[0]);
-  const [activeVizView, setActiveVizView] = useState({
-    FTimeSeriesVizView : "gross",
-    FMapVizView : "gross"
-  });
 
-  // console.log(activeVizView.FTimeSeriesVizView);
+
+
 
   useEffect(() => {
     getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
@@ -86,13 +83,6 @@ const ReceiptsDistrictwise = ({
     document
       .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
       .forEach(e => e.click());
-  }
-
-  const onViewChange = (value, name) => {
-    setActiveVizView({
-      ...activeVizView,
-      [name] : value
-    });
   }
 
   const onFilterChange = (e, key) => {
@@ -111,8 +101,6 @@ const ReceiptsDistrictwise = ({
       }
     })
 
-    // console.log("activeFilters");
-    // console.log(activeFilters);
     getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
     updateReceiptsDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
 	}
@@ -130,7 +118,7 @@ const ReceiptsDistrictwise = ({
       return <div id="fmap">
               <FMap
                 data={mapData}
-                dataPointToMap={activeVizView.FMapVizView}
+                dataPointToMap={'receipt'}
                 />
              </div>;
 
@@ -138,24 +126,24 @@ const ReceiptsDistrictwise = ({
       return <FBarChart
               data={barChrtData}
               dataToX="districtName"
-              dataPoints={["gross", "netPayment"]}
+              dataPoints={["receipt"]}
               barColors={["darkGrey", "black"]}
               xLabelVals={xLabelVals}
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
-              tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
+              tooltip={<FTooltipReceipts/>}
               />;
 
       case 'FTimeSeries':
       return  <Fragment>
                 <FTimeSeries
                   dataToX="date"
-                  dataToY={activeVizView.FTimeSeriesVizView}
+                  dataToY={'receipt'}
                   data={lineChrtData}
-                  dataAryName="datewiseExp"
+                  dataAryName="datewiseRec"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
-                  tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
+                  tooltip={<FTooltipReceipts/>}
                   lineLabel="districtName"
                 />
               </Fragment>
@@ -186,35 +174,6 @@ const ReceiptsDistrictwise = ({
               <Switch  text="Table" />
             </ContentSwitcher>
 					</div>
-          { activeViz === 'FTimeSeries' &&
-            <FRadioGroup
-              className = "viz-view-toggle"
-              name = "FTimeSeriesVizView"
-              titleText = "View:"
-              onChange = {(value, name) => onViewChange(value, name)}
-              items = {[
-                { label : "Gross", id : "gross" },
-                { label : "Net Payment", id : "netPayment" },
-                { label : "Both", id : "gross,netPayment" }
-
-              ]}
-              valueSelected = {activeVizView.FTimeSeriesVizView}
-
-            />
-          }
-          { activeViz === 'FMap' &&
-            <FRadioGroup
-              className = "viz-view-toggle"
-              name = "FMapVizView"
-              titleText = "View:"
-              onChange = {(value, name) => onViewChange(value, name)}
-              items = {[
-                { label : "Gross", id : "gross" },
-                { label : "Net Payment", id : "netPayment" },
-              ]}
-              valueSelected = {activeVizView.FMapVizView}
-            />
-          }
 					{ renderSwitch() }
 				</Fragment>
 			)
@@ -242,7 +201,7 @@ const ReceiptsDistrictwise = ({
       <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
           allFiltersData = {allFiltersData && allFiltersData}
-          filterCompData = {districtwise_filter_comp}
+          filterCompData = {receipts_districtwise_filter_comp}
           filtersLoading = {filtersLoading}
           activeFilters = {activeFilters}
           onChange = {(e, key) => onFilterChange(e, key)}

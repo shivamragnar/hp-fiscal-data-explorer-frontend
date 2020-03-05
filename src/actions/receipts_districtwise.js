@@ -68,50 +68,41 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const config = { headers: { "content-type": "application/json" } };
   		const res = await axios.post(
         //******NEEDS TO BE CHANGED************//
-        `http://13.126.189.78/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
+        `http://13.126.189.78/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
       );
   		console.log("receipts districtwise raw data"); console.log(res.data.records);
 
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
-      const districtwiseExpVals = Object.values(res.data.records);
-      console.log("districtwiseExpVals");
-      console.log(districtwiseExpVals);
+      const districtwiseRecVals = Object.values(res.data.records);
+      console.log("districtwiseRecVals");
+      console.log(districtwiseRecVals);
       districtNames.map((districtName, i) => {
-        let datewiseExp = [];
-        let totalExp = { districtName, gross: 0, BTDED: 0, AGDED: 0, netPayment: 0};
-        // datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
-        districtwiseExpVals[i].map((expArray, i) => {
+        let datewiseRec = [];
+        let totalRec = { districtName, receipt: 0 };
+        districtwiseRecVals[i].map((recArray, i) => {
           let dataObj = {};
           dataObj.idx = i;
           dataObj.date = month_week === "month" ?
                          months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                          getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
-          dataObj.gross = expArray[0];
-          dataObj.BTDED = expArray[1];
-          dataObj.AGDED = expArray[2];
-          dataObj.netPayment = expArray[3];
-          datewiseExp.push(dataObj);
+          dataObj.receipt = recArray[0];
+          datewiseRec.push(dataObj);
+          totalRec.receipt += recArray[0]
 
-          totalExp.gross += expArray[0]
-          totalExp.BTDED += expArray[1]
-          totalExp.AGDED += expArray[2]
-          totalExp.netPayment += expArray[3]
         })
         tempLineChrtData.push({
           districtName,
-          datewiseExp,
-          totalExp
+          datewiseRec,
+          totalRec
         })
-        tempBarChrtData.push(totalExp);
+        tempBarChrtData.push(totalRec);
         tempMapData.features.map((feature,i) =>{
           const { properties : { NAME_2 : districtName_inJson }} = feature; //the district name as in the geojson
+          
           if(districtName_inJson.toUpperCase() === districtName ){
-            feature.properties.gross = totalExp.gross;
-            feature.properties.BTDED = totalExp.BTDED;
-            feature.properties.AGDED = totalExp.AGDED;
-            feature.properties.netPayment = totalExp.netPayment;
+            feature.properties.receipt = totalRec.receipt;
           }else{
           }
         })
@@ -131,10 +122,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
         { key: 'districtName', header: 'District' },
         { key: 'treasuryCode', header: 'Treasury Code' },
         { key: 'budgetCode', header: 'Budget Code' },
-        { key: 'gross', header: 'Gross (INR)' },
-        { key: 'BTDED', header: 'BTDED (INR)' },
-        { key: 'AGDED', header: 'AGDED (INR)' },
-        { key: 'netPayment', header: 'Net Payment (INR)' }
+        { key: 'receipt', header: 'Receipt (INR)' }
       )
 
       tempBarChrtData.map((d, i) => {
@@ -143,10 +131,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       		'districtName': d.districtName,
           'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
-      		'gross': d.gross.toLocaleString('en-IN'),
-      		'BTDED': d.BTDED.toLocaleString('en-IN'),
-      		'AGDED': d.AGDED.toLocaleString('en-IN'),
-      		'netPayment': d.netPayment.toLocaleString('en-IN')
+      		'receipt': d.receipt.toLocaleString('en-IN')
       	})
       })
       console.log("tempTableData");

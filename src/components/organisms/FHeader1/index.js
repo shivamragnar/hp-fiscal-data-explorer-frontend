@@ -72,6 +72,9 @@ const FHeader1 = () => {
               <HeaderMenuItem element={Link} to="/receipts">
                 Receipts
               </HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/receipts/districtwise">
+                Receipts Comparison
+              </HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/schemes">
                 Schemes
               </HeaderMenuItem>
