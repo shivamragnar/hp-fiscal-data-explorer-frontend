@@ -15,7 +15,7 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
   //declare the components that need to be dynamically generated
 	const Components = { MultiSelect };
 
-	const [RenderedFilterIcon, setRenderedFilterIcon ] = useState("FilterIcon"  );
+	const [RenderedFilterIcon, setRenderedFilterIcon ] = useState("FilterIcon");
 
   const handleMouseEnter = () => {
 		if(RenderedFilterIcon !== "CloseIcon") setRenderedFilterIcon( "FilterIconFilled")
@@ -28,6 +28,16 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 	const handleOnClick = () => {
 		setRenderedFilterIcon(RenderedFilterIcon === "CloseIcon" ? "FilterIcon" : "CloseIcon");
 		onFilterIconClick();
+	}
+
+	const setInitSelectedItems = (i) => {
+		const initialSelectedItems = [];
+		allFiltersData[i].val.map(d => {
+			if(activeFilters[allFiltersData[i].key].includes(d.label)){
+				initialSelectedItems.push(d);
+			}
+		})
+		return initialSelectedItems;
 	}
 
   return (
@@ -54,6 +64,7 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 		                className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
 		                titleText = {filter_comp.titleText}
 										disabled = {filtersLoading}
+										initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
 										useTitleInItem={false}
 										label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
 										invalid={false}

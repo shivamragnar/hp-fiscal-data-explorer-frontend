@@ -37,7 +37,7 @@ const ExpSummary = ({
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
 	useEffect(() => {
-		getExpSummaryData();
+		// getExpSummaryData();
 	},[])
 
 	const createDataUIComponent = () => {

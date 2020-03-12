@@ -69,8 +69,8 @@ const Receipts = ( { receipts : {
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
 
 	useEffect(() => {
-			Object.keys(vizData).length === 0 && getReceiptsData(activeFilters, dateRange);
-			allFiltersData.length === 0 && getReceiptsFiltersData();
+			// getReceiptsData(activeFilters, dateRange);
+			// getReceiptsFiltersData();
   }, []);
 
 	const onFilterChange = (e, key) => {

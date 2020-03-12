@@ -73,8 +73,8 @@ const ExpDistrictwise = ({
   console.log(activeVizView.FTimeSeriesVizView);
 
   useEffect(() => {
-    getExpDistrictwiseData(initData, activeFilters, dateRange);
-    getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
+    // getExpDistrictwiseData(initData, activeFilters, dateRange);
+    // getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
       resetActiveFiltersAndDateRange();

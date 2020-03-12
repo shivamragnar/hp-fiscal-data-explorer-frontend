@@ -2,88 +2,109 @@ import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types"
 import { Route, Switch, withRouter } from "react-router-dom";
 import axios from "axios";
-
-//redux
+import MediaQuery from "react-responsive";
 import { connect } from "react-redux";
 
-//actions
+//ACTIONS
+
+//expenditure
+import { getExpSummaryData } from "./actions/exp_summary.js"
+
 import { getExpDemandwiseData } from "./actions/exp_demandwise.js"
 import { getExpDemandwiseFiltersData } from './actions/exp_demandwise_filters';
 
 import { getExpDistrictwiseData } from "./actions/exp_districtwise.js"
 import { getExpDistrictwiseFiltersData } from './actions/exp_districtwise_filters';
 
+//receipts
 import { getReceiptsData } from "./actions/receipts.js"
 import { getReceiptsFiltersData } from './actions/receipts_filters';
 
-import MediaQuery from "react-responsive";
+import { getReceiptsDistrictwiseData } from "./actions/receipts_districtwise.js"
+import { getReceiptsDistrictwiseFiltersData } from './actions/receipts_districtwise_filters';
 
-//get idb
-import { deleteDB, wrap, unwrap } from "idb";
-import { openDB } from "idb/with-async-ittr.js";
+//schemes
+import { getExpSchemesData } from "./actions/exp_schemes.js"
+import { getExpSchemesFiltersData } from './actions/exp_schemes_filters';
 
-//from carbon's components
-import { Content } from "carbon-components-react/lib/components/UIShell";
-
-//from our components
-
+//components
 import FHeader1 from "./components/organisms/FHeader1";
 
-//from our content
+//pages
 import Home from "./content/Home";
-
-import AboutUs from "./content/AboutUs";
-import ContactUs from "./content/ContactUs";
-
-//dictionary to convert exp_details data to objects
-import exp_details_keys from "./dictionary/exp_details_keys.json";
+import BudgetHighlights from "./content/BudgetHighlights";
 
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
 import ExpDistrictwise from "./content/ExpDistrictwise";
-import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
-import ExpSchemes from "./content/ExpSchemes";
+
 import Receipts from "./content/Receipts";
+import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
 
-import BudgetHighlights from "./content/BudgetHighlights";
+import ExpSchemes from "./content/ExpSchemes";
 
+import AboutUs from "./content/AboutUs";
+import ContactUs from "./content/ContactUs";
+
+//css
 import "./App.scss";
 
+//CONFIG
+const _CONFIG = {
+	initDateRange : ["2018-04-01","2019-03-31"],
+	initActiveFilters : {},
+	initAllFiltersData : [],
+	initRawFilterDataAllHeads : {} //only applies for exp_districtwise, receipts_districtwise & schemes
+}
+
+
 const App = ({
-		exp_demandwise : {
-			activeFilters : initExpFilters,
-			dateRange : initExpDateRange
-		},
-		receipts : {
-			activeFilters : initReceiptsFilters,
-			dateRange : initReceiptsDateRange
-		},
-		exp_districtwise : {
-			initData,
-			activeFilters,
-			dateRange
-		},
-		exp_districtwise_filters : {
-			allFiltersData,
-			rawFilterDataAllHeads
-		},
+
+		getExpSummaryData,
+
 		getExpDemandwiseData,
 	  getExpDemandwiseFiltersData,
+
 		getExpDistrictwiseData,
 	  getExpDistrictwiseFiltersData,
+
 		getReceiptsData,
 	  getReceiptsFiltersData,
+
+		getReceiptsDistrictwiseData,
+	  getReceiptsDistrictwiseFiltersData,
+
+		getExpSchemesData,
+		getExpSchemesFiltersData,
+
 		location : { pathname }
 	}
 ) => {
 
 
 const apiCallQueue = [
-	{ apiFunc: () => getExpDemandwiseFiltersData() },
-	{ apiFunc: () => getExpDemandwiseData(initExpFilters, [initExpDateRange[0], initExpDateRange[1]]) },
-	// { apiFunc: () => getExpDistrictwiseData(initData, activeFilters, dateRange) },
-	// { apiFunc: () => getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads) }
+	{ apiFunc: () => getExpSummaryData() },
+
+	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getReceiptsFiltersData() },
+
+	{ apiFunc: () => getExpSchemesData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getExpSchemesFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+
+	{ apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+
+	{ apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getExpDemandwiseFiltersData() }
 ]
+
+
+
 
 const fetchApisInQueue = async (idx) => {
 		await apiCallQueue[idx].apiFunc();
@@ -93,12 +114,12 @@ const fetchApisInQueue = async (idx) => {
 }
 
  useEffect(() => {
-	 if(pathname.includes("receipts") === true){
-		 apiCallQueue.unshift(
-			 { apiFunc: () => getReceiptsData(initReceiptsFilters, initReceiptsDateRange) },
-		 	 { apiFunc: () => getReceiptsFiltersData() }
-		 )
-	 }
+	 // if(pathname.includes("receipts") === true){
+		//  apiCallQueue.unshift(
+		// 	 { apiFunc: () => getReceiptsData(initReceiptsFilters, initReceiptsDateRange) },
+		//  	 { apiFunc: () => getReceiptsFiltersData() }
+		//  )
+	 // }
 	 fetchApisInQueue(0);
 
  }, []);
@@ -122,30 +143,46 @@ const fetchApisInQueue = async (idx) => {
 }
 
 App.propTypes = {
-  exp_demandwise : PropTypes.object.isRequired,
-	receipts : PropTypes.object.isRequired,
-  getExpDemandwiseData : PropTypes.func.isRequired,
+
+	getExpSummaryData : PropTypes.func.isRequired,
+
+	getExpDemandwiseData : PropTypes.func.isRequired,
   getExpDemandwiseFiltersData : PropTypes.func.isRequired,
+
 	getExpDistrictwiseData : PropTypes.func.isRequired,
   getExpDistrictwiseFiltersData : PropTypes.func.isRequired,
+
 	getReceiptsData : PropTypes.func.isRequired,
-  getReceiptsFiltersData : PropTypes.func.isRequired
+  getReceiptsFiltersData : PropTypes.func.isRequired,
+
+	getReceiptsDistrictwiseData : PropTypes.func.isRequired,
+  getReceiptsDistrictwiseFiltersData : PropTypes.func.isRequired,
+
+	getExpSchemesData : PropTypes.func.isRequired,
+	getExpSchemesFiltersData : PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = state => ({
-	exp_districtwise_filters : state.exp_districtwise_filters,
-	exp_districtwise : state.exp_districtwise,
-	exp_demandwise : state.exp_demandwise,
-	receipts : state.receipts
+
 })
 
 export default withRouter(connect(
 	mapStateToProps,
 	{
-		getExpDistrictwiseData,
-		getExpDistrictwiseFiltersData,
+		getExpSummaryData,
 		getExpDemandwiseData,
 		getExpDemandwiseFiltersData,
+		getExpDistrictwiseData,
+		getExpDistrictwiseFiltersData,
+
 		getReceiptsData,
-		getReceiptsFiltersData
+		getReceiptsFiltersData,
+
+		getReceiptsDistrictwiseData,
+		getReceiptsDistrictwiseFiltersData,
+
+		getExpSchemesData,
+		getExpSchemesFiltersData
+
 	})(App));

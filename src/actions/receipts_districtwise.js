@@ -100,7 +100,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
         tempBarChrtData.push(totalRec);
         tempMapData.features.map((feature,i) =>{
           const { properties : { NAME_2 : districtName_inJson }} = feature; //the district name as in the geojson
-          
+
           if(districtName_inJson.toUpperCase() === districtName ){
             feature.properties.receipt = totalRec.receipt;
           }else{

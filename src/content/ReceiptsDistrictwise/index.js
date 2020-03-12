@@ -70,8 +70,8 @@ const ReceiptsDistrictwise = ({
 
 
   useEffect(() => {
-    getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
-    getReceiptsDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
+    // getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
+    // getReceiptsDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
       resetActiveFiltersAndDateRange();

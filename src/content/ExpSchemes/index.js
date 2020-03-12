@@ -64,8 +64,8 @@ const ExpSchemes = ({
   });
 
   useEffect(() => {
-    getExpSchemesData(initData, activeFilters, dateRange);
-    getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
+    // getExpSchemesData(initData, activeFilters, dateRange);
+    // getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
       resetActiveFiltersAndDateRange();
