@@ -8,9 +8,9 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  createBudgetCodeString
+  createBudgetCodeString,
+  createObjForPayload
 } from '../utils/functions';
-
 
 
 //data-refs
@@ -33,16 +33,8 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
 
-    var objForPayload = {};
-    activeFilterVals.map((val, i) => {
-        let tempVal1 = val.map(item => { return item.split('-')[0]});
-        let tempVal2 = val.map(item => { return item.split('-')[1]});
-        tempVal1 = tempVal1.join('","');
-        tempVal2 = tempVal2.join('","');
+    const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys)
 
-        objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
-        if(tempVal2) objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
-    })
     console.log("objForPayload"); console.log(objForPayload);
 
     //0 SET LOADING TO TRUE

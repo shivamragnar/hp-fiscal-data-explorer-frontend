@@ -56,6 +56,7 @@ const ReceiptsDistrictwise = ({
   updateReceiptsDistrictwiseOnDateRangeChange,
   updateReceiptsDistrictwiseFilters }) => {
 
+  let receiptsDistrictwiseActiveFilters = {...activeFilters};
   //handle filter bar responsiveness
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
 	const handleFilterBarVisibility = () => {
@@ -74,7 +75,7 @@ const ReceiptsDistrictwise = ({
     // getReceiptsDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
-      resetActiveFiltersAndDateRange();
+      // resetActiveFiltersAndDateRange();
     };
 
   }, []);
@@ -88,26 +89,26 @@ const ReceiptsDistrictwise = ({
   const onFilterChange = (e, key) => {
     //if at least 1 option is selected,
     if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
+      receiptsDistrictwiseActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
-    }else{ delete activeFilters[key]; }
+    }else{ delete receiptsDistrictwiseActiveFilters[key]; }
     //remove all child filters from activeFiltersArray
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
+      if(i > currFilterOrderIndex && receiptsDistrictwiseActiveFilters[filterName] ){
+        delete receiptsDistrictwiseActiveFilters[filterName];
         clearAllSelectedOptions(filterName);
       }
     })
 
-    getReceiptsDistrictwiseData(initData, activeFilters, dateRange);
-    updateReceiptsDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    getReceiptsDistrictwiseData(initData, receiptsDistrictwiseActiveFilters, dateRange);
+    updateReceiptsDistrictwiseFilters(e, key, receiptsDistrictwiseActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateReceiptsDistrictwiseOnDateRangeChange(initData, newDateRange, activeFilters);
+		updateReceiptsDistrictwiseOnDateRangeChange(initData, newDateRange, receiptsDistrictwiseActiveFilters);
 	}
 
 
@@ -203,7 +204,7 @@ const ReceiptsDistrictwise = ({
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {receipts_districtwise_filter_comp}
           filtersLoading = {filtersLoading}
-          activeFilters = {activeFilters}
+          activeFilters = {receiptsDistrictwiseActiveFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
           onFilterIconClick={handleFilterBarVisibility}
           />

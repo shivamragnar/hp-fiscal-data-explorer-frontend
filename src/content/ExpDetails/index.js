@@ -52,6 +52,8 @@ const ExpDetails = ( { exp_demandwise : {
 											 updateExpDemandwiseOnDateRangeChange
 										  	} ) => {
 
+	let expDetailsActiveFilters = {...activeFilters};
+
 	//handle filter bar responsiveness
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
 	const handleFilterBarVisibility = () => {
@@ -67,24 +69,24 @@ const ExpDetails = ( { exp_demandwise : {
 		console.log(e.selectedItems[0]);
 		console.log(key);
     if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
+      expDetailsActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
-    }else{ delete activeFilters[key]; }
+    }else{ delete expDetailsActiveFilters[key]; }
     //remove all child filters from activeFiltersArray
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
+      if(i > currFilterOrderIndex && expDetailsActiveFilters[filterName] ){
+        delete expDetailsActiveFilters[filterName];
         clearAllSelectedOptions(filterName);
       }
     })
 
-		updateExpDemandwiseOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
+		updateExpDemandwiseOnFilterChange(e, key, expDetailsActiveFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
 	const onDateRangeSet = (newDateRange) => {
-		updateExpDemandwiseOnDateRangeChange(newDateRange, activeFilters);
+		updateExpDemandwiseOnDateRangeChange(newDateRange, expDetailsActiveFilters);
 	}
 
 	const createDataUIComponent = () => {
@@ -142,7 +144,7 @@ const ExpDetails = ( { exp_demandwise : {
 				<FFilterColumn2
 					filterCompData ={demandwise_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
-					activeFilters={activeFilters}
+					activeFilters={expDetailsActiveFilters}
 					filtersLoading={filtersLoading}
 					onChange = {(e, key) => onFilterChange(e, key)}
 					onFilterIconClick={handleFilterBarVisibility}

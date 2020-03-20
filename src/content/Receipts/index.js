@@ -58,6 +58,8 @@ const Receipts = ( { receipts : {
 									 location
 								   } ) => {
 
+	let receiptsDetailsActiveFilters = {...activeFilters};
+
 	const [filterBarVisibility, setFilterBarVisibility] = useState(false);
   //handle filter bar responsiveness
 	const handleFilterBarVisibility = () => {
@@ -76,24 +78,24 @@ const Receipts = ( { receipts : {
 	const onFilterChange = (e, key) => {
 		//if at least 1 option is selected,
     if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
+      receiptsDetailsActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
-    }else{ delete activeFilters[key]; }
+    }else{ delete receiptsDetailsActiveFilters[key]; }
     //remove all child filters from activeFiltersArray
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
+      if(i > currFilterOrderIndex && receiptsDetailsActiveFilters[filterName] ){
+        delete receiptsDetailsActiveFilters[filterName];
         clearAllSelectedOptions(filterName);
       }
     })
-		console.log(activeFilters);
-		updateReceiptsOnFilterChange(e, key, activeFilters, allFiltersData, rawFilterData, dateRange);
+		console.log(receiptsDetailsActiveFilters);
+		updateReceiptsOnFilterChange(e, key, receiptsDetailsActiveFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
 	const onDateRangeSet = (newDateRange) => {
-		updateReceiptsOnDateRangeChange(newDateRange, activeFilters);
+		updateReceiptsOnDateRangeChange(newDateRange, receiptsDetailsActiveFilters);
 	}
 
 	const createDataUIComponent = () => {
@@ -190,7 +192,7 @@ const Receipts = ( { receipts : {
 				<FFilterColumn2
 					filterCompData ={receipts_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
-					activeFilters={activeFilters}
+					activeFilters={receiptsDetailsActiveFilters}
 					filtersLoading={filtersLoading}
 					onChange = {(e, key) => onFilterChange(e, key)}
 					onFilterIconClick={handleFilterBarVisibility}

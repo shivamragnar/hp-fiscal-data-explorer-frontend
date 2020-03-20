@@ -34,8 +34,8 @@ const ExpSchemes = ({
     initData,
     data : {
       mapData,
-      barChrtData : { data: barChrtData },
-      lineChrtData : { data: lineChrtData, xLabelVals, xLabelFormat },
+      barChrtData : { data : barChrtData },
+      lineChrtData : { data : lineChrtData, xLabelVals, xLabelFormat },
       tableData : { headers, rows }
     },
     loading,
@@ -48,6 +48,8 @@ const ExpSchemes = ({
   resetActiveFiltersAndDateRange,
   updateSchemesOnDateRangeChange,
   updateExpSchemesFilters }) => {
+
+  let schemesActiveFilters = {...activeFilters};
 
   //handle filter bar responsiveness
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
@@ -68,7 +70,7 @@ const ExpSchemes = ({
     // getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
-      resetActiveFiltersAndDateRange();
+      // resetActiveFiltersAndDateRange();
     };
 
   }, []);
@@ -89,28 +91,28 @@ const ExpSchemes = ({
   const onFilterChange = (e, key) => {
     //if at least 1 option is selected,
     if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
+      schemesActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
-    }else{ delete activeFilters[key]; }
+    }else{ delete schemesActiveFilters[key]; }
     //remove all child filters from activeFiltersArray
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
+      if(i > currFilterOrderIndex && schemesActiveFilters[filterName] ){
+        delete schemesActiveFilters[filterName];
         clearAllSelectedOptions(filterName);
       }
     })
 
-    console.log("activeFilters");
-    console.log(activeFilters);
-    getExpSchemesData(initData, activeFilters, dateRange);
-    updateExpSchemesFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    console.log("schemesActiveFilters");
+    console.log(schemesActiveFilters);
+    getExpSchemesData(initData, schemesActiveFilters, dateRange);
+    updateExpSchemesFilters(e, key, schemesActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateSchemesOnDateRangeChange(initData, newDateRange, activeFilters);
+		updateSchemesOnDateRangeChange(initData, newDateRange, schemesActiveFilters);
 	}
 
 
@@ -234,7 +236,7 @@ const ExpSchemes = ({
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {schemes_filter_comp}
           filtersLoading = {filtersLoading}
-          activeFilters = {activeFilters}
+          activeFilters = {schemesActiveFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
           onFilterIconClick={handleFilterBarVisibility}
           />

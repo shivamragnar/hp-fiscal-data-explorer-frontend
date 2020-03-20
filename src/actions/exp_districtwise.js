@@ -11,7 +11,8 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  createBudgetCodeString
+  createBudgetCodeString,
+  createObjForPayload
 } from '../utils/functions';
 
 //data-refs
@@ -52,12 +53,13 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
 
-      var objForPayload = {};
-      activeFilterVals.map((val, i) => {
-          let tempVal = val.map(item => { return item.split('-')[0]});
-          tempVal = tempVal.join('","');
-          objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-      })
+      const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
+      // var objForPayload = {};
+      // activeFilterVals.map((val, i) => {
+      //     let tempVal = val.map(item => { return item.split('-')[0]});
+      //     tempVal = tempVal.join('","');
+      //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
+      // })
       console.log("objForPayload");
       console.log(objForPayload);
 

@@ -11,7 +11,8 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  createBudgetCodeString
+  createBudgetCodeString,
+  createObjForPayload
 } from '../utils/functions';
 
 //data-refs
@@ -52,14 +53,15 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
 
-      var objForPayload = {};
-      activeFilterVals.map((val, i) => {
-          let tempVal = val.map(item => { return item.split('-')[0]});
-          tempVal = tempVal.join('","');
-          objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-      })
-      console.log("objForPayload");
-      console.log(objForPayload);
+      const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
+
+      // var objForPayload = {};
+      // activeFilterVals.map((val, i) => {
+      //     let tempVal = val.map(item => { return item.split('-')[0]});
+      //     tempVal = tempVal.join('","');
+      //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
+      // })
+      console.log("objForPayload"); console.log(objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE, payload: {} });

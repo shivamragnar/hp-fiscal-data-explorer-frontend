@@ -9,7 +9,8 @@ import {
 
 import {
   getWeekwiseDates,
-  calcMonthOrWeek
+  calcMonthOrWeek,
+  createObjForPayload
 } from '../utils/functions';
 
 //data-refs
@@ -48,13 +49,16 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
 
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
-    var objForPayload = {};
-    activeFilterVals.map((val, i) => {
-        let tempVal = val.map(item => { return item.split('-')[0]});
-        tempVal = tempVal.join('","');
-        objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
 
-    })
+    const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
+
+    // var objForPayload = {};
+    // activeFilterVals.map((val, i) => {
+    //     let tempVal = val.map(item => { return item.split('-')[0]});
+    //     tempVal = tempVal.join('","');
+    //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
+    //
+    // })
     console.log("objForPayload");
     console.log(objForPayload);
 

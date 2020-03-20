@@ -16,7 +16,7 @@ var yymmdd_ref = require("../data/yymmdd_ref.json");
 export const getReceiptsDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHeads) => async dispatch => {
   try {
 
-
+      console.log("here1");
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE_FILTERS, payload: {} });
@@ -46,7 +46,7 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
   try {
     dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE_FILTERS, payload: {} });
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
-
+    console.log('here');
 
     if( Object.keys(activeFilters).length > 0){
       const currFilterOrderIndex = filterOrderRef.indexOf(key);
@@ -57,6 +57,7 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
         }
       })
 
+console.log('here');
       //2 fetch raw filter data
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
@@ -73,6 +74,7 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
       // console.log('raw_dynamic_filter_data: ');
       // console.log(rawFilterData);
 
+console.log('here');
       const results = [];
       var query;
       var queryFilterIdx;
@@ -93,11 +95,12 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
         query = e.selectedItems;
         queryFilterIdx = currFilterOrderIndex;
       }
-
+console.log('here');
       recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
       console.log("district_results");
       console.log(results);
       results.map(result => {
+        console.log('ran map');
         recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
       console.log(allFiltersData);

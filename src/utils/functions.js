@@ -140,6 +140,7 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
           label: obj_key
         }
         allFiltersData[idx].val.push(filterOption);
+        // console.log(idx);
       }
       recursFilterFetch(allFiltersData, obj[obj_key], idx+1);
     }
@@ -148,26 +149,13 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
 
 //9
 export const filterCompGenData = () => {
-  console.log("lol");
+  // console.log("lol");
 }
 
 
 //10
 //find all the places where the selected filter exists.
 export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, activeFilters, filterChangedIdx) => {
-
-
-  // if(query === "all"){
-  //   if(filterChangedIdx === idx){
-  //     Object.keys(obj).map(obj_key => {
-  //       results.push(obj[obj_key]);
-  //     })
-  //     return;
-  //   }
-  // }
-
-  // console.log("query")
-  // console.log(query)
 
   Object.keys(obj).map(obj_key => {
     if(obj[obj_key]){
@@ -204,7 +192,8 @@ export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderR
       key: filter_name,
       val: []
     })
-    rawFilterDataAllHeads.data[filter_name].map(d => {
+
+    rawFilterDataAllHeads.data[filter_name.split('-')[0]].map(d => {
       allFiltersData[i].val.push({ filter_name, id : d, label: d })
     })
   })
@@ -220,11 +209,11 @@ export const createBudgetCodeString = (activeFilterVals, activeFilterKeys, filte
     if(i >= range[0] && i <= range[1]){
       if(activeFilterKeys.includes(filterOrderRef[i])){
         const activeKeyIdx = activeFilterKeys.indexOf(filterOrderRef[i]);
-        console.log("reached here");
+        // console.log("reached here");
         const valCode = activeFilterVals[activeKeyIdx].map(val => {
           return val.split('-')[0];
         })
-        console.log("valCode"); console.log(valCode);
+        // console.log("valCode"); console.log(valCode);
         return valCode.join(", ");
       }else{ return "all"; }
     }
@@ -239,4 +228,22 @@ export const clearAllSelectedOptions = (filterName) => {
   document
     .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
     .forEach(e => e.click());
+}
+
+//14
+
+export const createObjForPayload = (activeFilterVals, activeFilterKeys) => {
+
+  var objForPayload = {};
+
+  activeFilterVals.map((val, i) => {
+      let tempVal1 = val.map(item => { return item.split('-')[0]});
+      let tempVal2 = val.map(item => { return item.split('-')[1]});
+      tempVal1 = tempVal1.join('","');
+      tempVal2 = tempVal2.join('","');
+      objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
+      if(tempVal2) objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
+  })
+
+  return objForPayload;
 }

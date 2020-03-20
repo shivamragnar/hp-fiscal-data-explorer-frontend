@@ -12,7 +12,8 @@ import {
   getWeekwiseDates,
   calcMonthOrWeek,
   calcScsrOffset,
-  createBudgetCodeString
+  createBudgetCodeString,
+  createObjForPayload
 } from '../utils/functions';
 
 //data-refs
@@ -33,6 +34,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
 
+    // const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
     var objForPayload = {};
 
 

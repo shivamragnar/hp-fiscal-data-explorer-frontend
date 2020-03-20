@@ -55,6 +55,8 @@ const ExpDistrictwise = ({
   updateDistrictwiseOnDateRangeChange,
   updateExpDistrictwiseFilters }) => {
 
+  let expDistrictwiseActiveFilters = {...activeFilters};
+
   //handle filter bar responsiveness
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
 	const handleFilterBarVisibility = () => {
@@ -77,7 +79,7 @@ const ExpDistrictwise = ({
     // getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
 
     return () => {
-      resetActiveFiltersAndDateRange();
+      // resetActiveFiltersAndDateRange();
     };
 
   }, []);
@@ -98,28 +100,28 @@ const ExpDistrictwise = ({
   const onFilterChange = (e, key) => {
     //if at least 1 option is selected,
     if(e.selectedItems.length > 0){
-      activeFilters[key] = e.selectedItems.map(selectedItem => {
+      expDistrictwiseActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
-    }else{ delete activeFilters[key]; }
+    }else{ delete expDistrictwiseActiveFilters[key]; }
     //remove all child filters from activeFiltersArray
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
-      if(i > currFilterOrderIndex && activeFilters[filterName] ){
-        delete activeFilters[filterName];
+      if(i > currFilterOrderIndex && expDistrictwiseActiveFilters[filterName] ){
+        delete expDistrictwiseActiveFilters[filterName];
         clearAllSelectedOptions(filterName);
       }
     })
 
-    console.log("activeFilters");
-    console.log(activeFilters);
-    getExpDistrictwiseData(initData, activeFilters, dateRange);
-    updateExpDistrictwiseFilters(e, key, activeFilters, allFiltersData, rawFilterDataAllHeads);
+    console.log("expDistrictwiseActiveFilters");
+    console.log(expDistrictwiseActiveFilters);
+    getExpDistrictwiseData(initData, expDistrictwiseActiveFilters, dateRange);
+    updateExpDistrictwiseFilters(e, key, expDistrictwiseActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
-		updateDistrictwiseOnDateRangeChange(initData, newDateRange, activeFilters);
+		updateDistrictwiseOnDateRangeChange(initData, newDateRange, expDistrictwiseActiveFilters);
 	}
 
 
@@ -244,7 +246,7 @@ const ExpDistrictwise = ({
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {districtwise_filter_comp}
           filtersLoading = {filtersLoading}
-          activeFilters = {activeFilters}
+          activeFilters = {expDistrictwiseActiveFilters}
           onChange = {(e, key) => onFilterChange(e, key)}
           onFilterIconClick={handleFilterBarVisibility}
           />
