@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {
   Header,
   HeaderName,
@@ -24,14 +24,17 @@ import OverflowMenuVertical20 from '@carbon/icons-react/lib/overflow-menu--verti
 
 const FHeader1 = () => {
 
+  let history = useHistory();
 
   const [ screenWidth, setScreenWidth ] = useState(window.innerWidth);
 
-
-
+  const handleRouting = (route) => history.push(route)
 
   const desktopSecondaryLinks = <Fragment>
-                                  <HeaderMenuItem element={Link} to="/aboutus">
+                                  <HeaderMenuItem element={Link} to="/glossary">
+                                    Glossary
+                                  </HeaderMenuItem>
+                                  <HeaderMenuItem element={Link} to='/aboutus'>
                                     About Us
                                   </HeaderMenuItem>
                                   <HeaderMenuItem element={Link} to="/contactus">
@@ -43,8 +46,9 @@ const FHeader1 = () => {
                                 flipped="true"
                                 renderIcon = {() => <div><OverflowMenuVertical20 style={{fill: "white"}} /></div>}
                                 >
-                                  <OverflowMenuItem itemText="About Us" primaryFocus />
-                                  <OverflowMenuItem itemText="Contact Us" />
+                                  <OverflowMenuItem itemText="Glossary" onClick={() => handleRouting('/glossary')}/>
+                                  <OverflowMenuItem itemText="About Us" onClick={() => handleRouting('/aboutus')}/>
+                                  <OverflowMenuItem itemText="Contact Us" onClick={() => handleRouting('/contactus')}/>
                                 </OverflowMenu>
 
 

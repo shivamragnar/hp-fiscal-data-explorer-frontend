@@ -3,14 +3,16 @@ import MediaQuery from "react-responsive";
 
 //custom components
 import { MultiSelect } from 'carbon-components-react';
-
+import {Tooltip} from 'carbon-components-react'
+//carbon icons
 import FilterIcon from '@carbon/icons-react/lib/filter/32'
 import CloseIcon from '@carbon/icons-react/lib/close/32'
 import FilterIconFilled from '../../icons/FilterIconFilled';
+//data
+import glossary from '../../../data/glossary.json';
 
-//carbon icons
 
-const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoading, activeFilters, onFilterIconClick  }) => {
+const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoading, activeFilters, onFilterIconClick, section  }) => {
 
   //declare the components that need to be dynamically generated
 	const Components = { MultiSelect };
@@ -60,9 +62,18 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 	            const Component = Components[filter_comp.comp]
 	            return (
 								<div className = "filter-col--ops">
+									<Tooltip
+								    direction="right"
+								    tabIndex={0}
+								    tooltipBodyId="tooltip-body"
+								    triggerText={filter_comp.titleText}
+								  >
+								    <p id="tooltip-body">
+								      {glossary[section].data[filter_comp.name] && glossary[section].data[filter_comp.name].desc}
+								    </p>
+								  </Tooltip>
 		              <Component
 		                className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
-		                titleText = {filter_comp.titleText}
 										disabled = {filtersLoading}
 										initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
 										useTitleInItem={false}

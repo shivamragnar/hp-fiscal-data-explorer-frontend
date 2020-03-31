@@ -43,6 +43,7 @@ import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
 
 import ExpSchemes from "./content/ExpSchemes";
 
+import Glossary from "./content/Glossary";
 import AboutUs from "./content/AboutUs";
 import ContactUs from "./content/ContactUs";
 
@@ -84,23 +85,23 @@ const App = ({
 
 const apiCallQueue = [
 	{ apiFunc: () => getExpSummaryData() },
-
-	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	{ apiFunc: () => getReceiptsFiltersData() },
-
-	{ apiFunc: () => getExpSchemesData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	{ apiFunc: () => getExpSchemesFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-
-	{ apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	{ apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-
-	{ apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-
-	{ apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-
-	{ apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-
-	{ apiFunc: () => getExpDemandwiseFiltersData() }
+	//
+	// { apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	// { apiFunc: () => getReceiptsFiltersData() },
+	//
+	// { apiFunc: () => getExpSchemesData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	// { apiFunc: () => getExpSchemesFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+	//
+	// { apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	// { apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+	//
+	// { apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	//
+	// { apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	//
+	// { apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+	//
+	// { apiFunc: () => getExpDemandwiseFiltersData() }
 ]
 
 
@@ -131,6 +132,7 @@ const fetchApisInQueue = async (idx) => {
 						<Route exact path="/" component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/contactus" component={ContactUs} />
+						<Route exact path="/glossary" component={Glossary} />
             <Route exact path="/expenditure/summary" component={ExpSummary} />
             <Route exact path="/expenditure/details" component={ExpDetails} />
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />

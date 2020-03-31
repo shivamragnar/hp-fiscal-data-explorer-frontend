@@ -10,6 +10,11 @@
   height: 100%;
   overflow-y: scroll;
 
+  //overrides
+  .bx--tooltip__trigger{
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
 
   .filter-col--ops{
     padding-bottom: 2rem;

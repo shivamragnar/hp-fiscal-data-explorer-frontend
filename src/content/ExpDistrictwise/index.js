@@ -243,6 +243,7 @@ const ExpDistrictwise = ({
       </div>
       <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
+          section = 'exp_districtwise'
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {districtwise_filter_comp}
           filtersLoading = {filtersLoading}

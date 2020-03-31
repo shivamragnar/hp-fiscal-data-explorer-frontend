@@ -142,6 +142,7 @@ const ExpDetails = ( { exp_demandwise : {
       </div>
 			<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 				<FFilterColumn2
+					section = 'exp_demandwise'
 					filterCompData ={demandwise_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
 					activeFilters={expDetailsActiveFilters}

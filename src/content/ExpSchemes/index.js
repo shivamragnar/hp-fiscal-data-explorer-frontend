@@ -233,6 +233,7 @@ const ExpSchemes = ({
       </div>
       <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
         <FFilterColumn2
+          section = 'schemes'
           allFiltersData = {allFiltersData && allFiltersData}
           filterCompData = {schemes_filter_comp}
           filtersLoading = {filtersLoading}

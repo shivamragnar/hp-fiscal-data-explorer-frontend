@@ -13,9 +13,6 @@ import FTimeSeries from '../../components/dataviz/FTimeSeries';
 
 import * as d3 from "d3";
 
-//sample data
-var exp_summary_data = require('../../data/exp-summary.json');
-
 var testData = [
   { date: 0, sanction: 20, addition: 30, savings: 40, revised: 25, mark: 20 },
   { date: 7, sanction: 3000, addition: 300, savings: 400, revised: 2900, mark: 20  },

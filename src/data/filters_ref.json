@@ -58,63 +58,63 @@
   ],
 
   "demandwise_filter_comp" : [
-     { "comp" : "MultiSelect", "titleText" : "Demand"},
-     { "comp" : "MultiSelect", "titleText" : "Major"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
-     { "comp" : "MultiSelect", "titleText" : "Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Budget"},
-     { "comp" : "MultiSelect", "titleText" : "Voted / Charged"},
-     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan"},
-     { "comp" : "MultiSelect", "titleText" : "SOE"}
+     { "comp" : "MultiSelect", "titleText" : "Demand", "name" : "demand"},
+     { "comp" : "MultiSelect", "titleText" : "Major", "name" : "major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major", "name" : "sub_major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor", "name" : "minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor", "name" : "sub_minor"},
+     { "comp" : "MultiSelect", "titleText" : "Budget", "name" : "budget"},
+     { "comp" : "MultiSelect", "titleText" : "Voted / Charged", "name" : "voted_charged"},
+     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan", "name" : "plan_nonplan"},
+     { "comp" : "MultiSelect", "titleText" : "SOE", "name" : "SOE"}
   ],
 
   "receipts_filter_comp" : [
-     { "comp" : "MultiSelect", "titleText" : "Major"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
-     { "comp" : "MultiSelect", "titleText" : "Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Minor"}
+     { "comp" : "MultiSelect", "titleText" : "Major", "name" : "major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major", "name" : "sub_major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor", "name" : "minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor", "name" : "sub_minor"}
   ],
 
   "districtwise_filter_comp" : [
-     { "comp" : "MultiSelect", "titleText" : "District"},
-     { "comp" : "MultiSelect", "titleText" : "Treasury Code"},
-     { "comp" : "MultiSelect", "titleText" : "DDO Code"},
-     { "comp" : "MultiSelect", "titleText" : "Demand"},
-     { "comp" : "MultiSelect", "titleText" : "Major"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
-     { "comp" : "MultiSelect", "titleText" : "Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Budget"},
-     { "comp" : "MultiSelect", "titleText" : "Voted / Charged"},
-     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan"},
-     { "comp" : "MultiSelect", "titleText" : "SOE"}
+     { "comp" : "MultiSelect", "titleText" : "District", "name" : "District"},
+     { "comp" : "MultiSelect", "titleText" : "Treasury Code", "name" : "Treasury_Code"},
+     { "comp" : "MultiSelect", "titleText" : "DDO Code", "name" : "DDO_Code"},
+     { "comp" : "MultiSelect", "titleText" : "Demand", "name" : "demand"},
+     { "comp" : "MultiSelect", "titleText" : "Major", "name" : "major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major", "name" : "sub_major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor", "name" : "minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor", "name" : "sub_minor"},
+     { "comp" : "MultiSelect", "titleText" : "Budget", "name" : "budget"},
+     { "comp" : "MultiSelect", "titleText" : "Voted / Charged", "name" : "voted_charged"},
+     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan", "name" : "plan_nonplan"},
+     { "comp" : "MultiSelect", "titleText" : "SOE", "name" : "SOE"}
   ],
 
   "receipts_districtwise_filter_comp" : [
-     { "comp" : "MultiSelect", "titleText" : "District"},
-     { "comp" : "MultiSelect", "titleText" : "Treasury Code"},
-     { "comp" : "MultiSelect", "titleText" : "DDO Code"},
-     { "comp" : "MultiSelect", "titleText" : "Major"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
-     { "comp" : "MultiSelect", "titleText" : "Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Minor"}
+     { "comp" : "MultiSelect", "titleText" : "District", "name" : "District"},
+     { "comp" : "MultiSelect", "titleText" : "Treasury Code", "name" : "Treasury_Code"},
+     { "comp" : "MultiSelect", "titleText" : "DDO Code", "name" : "DDO_Code"},
+     { "comp" : "MultiSelect", "titleText" : "Major", "name" : "major_code"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major", "name" : "sub_major_code"},
+     { "comp" : "MultiSelect", "titleText" : "Minor", "name" : "minor_code"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor", "name" : "sub_minor_code"}
   ],
 
   "schemes_filter_comp" : [
-     { "comp" : "MultiSelect", "titleText" : "schemes"},
-     { "comp" : "MultiSelect", "titleText" : "Type"},
-     { "comp" : "MultiSelect", "titleText" : "District"},
-     { "comp" : "MultiSelect", "titleText" : "Treasury Code"},
-     { "comp" : "MultiSelect", "titleText" : "DDO Code"},
-     { "comp" : "MultiSelect", "titleText" : "Demand"},
-     { "comp" : "MultiSelect", "titleText" : "Major"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Major"},
-     { "comp" : "MultiSelect", "titleText" : "Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Sub Minor"},
-     { "comp" : "MultiSelect", "titleText" : "Budget"},
-     { "comp" : "MultiSelect", "titleText" : "Voted / Charged"},
-     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan"},
-     { "comp" : "MultiSelect", "titleText" : "SOE"}
+     { "comp" : "MultiSelect", "titleText" : "schemes", "name" : "schemes"},
+     { "comp" : "MultiSelect", "titleText" : "Type", "name" : "Type"},
+     { "comp" : "MultiSelect", "titleText" : "District", "name" : "District"},
+     { "comp" : "MultiSelect", "titleText" : "Treasury Code", "name" : "Treasury_Code"},
+     { "comp" : "MultiSelect", "titleText" : "DDO Code", "name" : "DDO_Code"},
+     { "comp" : "MultiSelect", "titleText" : "Demand", "name" : "demand"},
+     { "comp" : "MultiSelect", "titleText" : "Major", "name" : "major"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Major", "name" : "sub_major"},
+     { "comp" : "MultiSelect", "titleText" : "Minor", "name" : "minor"},
+     { "comp" : "MultiSelect", "titleText" : "Sub Minor", "name" : "sub_minor"},
+     { "comp" : "MultiSelect", "titleText" : "Budget", "name" : "budget"},
+     { "comp" : "MultiSelect", "titleText" : "Voted / Charged", "name" : "voted_charged"},
+     { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan", "name" : "plan_nonplan"},
+     { "comp" : "MultiSelect", "titleText" : "SOE", "name" : "SOE"}
   ]
 }

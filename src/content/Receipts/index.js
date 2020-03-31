@@ -190,6 +190,7 @@ const Receipts = ( { receipts : {
 			<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 
 				<FFilterColumn2
+					section = 'receipts'
 					filterCompData ={receipts_filter_comp}
 					allFiltersData={allFiltersData && allFiltersData}
 					activeFilters={receiptsDetailsActiveFilters}

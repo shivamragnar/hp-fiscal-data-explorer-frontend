@@ -70,7 +70,7 @@ console.log('here');
             stringForApi += '&';
           }
       })
-      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury?${stringForApi}`);
+      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury_rec?${stringForApi}`);
       // console.log('raw_dynamic_filter_data: ');
       // console.log(rawFilterData);
 
