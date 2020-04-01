@@ -12,6 +12,7 @@
 @import './components/organisms/FHeader1/style.scss';
 @import './components/organisms/FPageTitle/style.scss';
 @import './components/organisms/FFilterColumn2/style.scss';
+@import './components/organisms/HomeHowToUse/style.scss';
 
 //datavizcomps styles
 @import './components/dataviz/FTable/style.scss';
@@ -158,4 +159,9 @@
 //force multiselect --> option text to wrap
 .bx--list-box__menu-item .bx--checkbox-label-text{
   white-space: normal;
+}
+
+.f-link{
+  font-weight: 600;
+  line-height: 1.6em;
 }

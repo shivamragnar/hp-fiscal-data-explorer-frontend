@@ -85,23 +85,23 @@ const App = ({
 
 const apiCallQueue = [
 	{ apiFunc: () => getExpSummaryData() },
-	//
-	// { apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	// { apiFunc: () => getReceiptsFiltersData() },
-	//
-	// { apiFunc: () => getExpSchemesData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	// { apiFunc: () => getExpSchemesFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-	//
-	// { apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	// { apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-	//
-	// { apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	//
-	// { apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
-	//
-	// { apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
-	//
-	// { apiFunc: () => getExpDemandwiseFiltersData() }
+
+	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getReceiptsFiltersData() },
+
+	{ apiFunc: () => getExpSchemesData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getExpSchemesFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	{ apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+
+	{ apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+
+	{ apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getExpDemandwiseFiltersData() }
 ]
 
 

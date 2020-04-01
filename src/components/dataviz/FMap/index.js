@@ -74,7 +74,8 @@ export default class FMap extends Component<{}, State> {
 
 // style={feature => feature.properties.gross ? showStyle : hideStyle}
   render() {
-    const position = [this.state.lat, this.state.lng];
+    // const position = [this.state.lat, this.state.lng];
+    const position = [31.1048, 77.1734];
     return (
       <div style={{position: "relative", zIndex: 10}}>
         <div className="f-map-tooltip-wrapper">
@@ -99,8 +100,8 @@ export default class FMap extends Component<{}, State> {
             }
           </div>
         </div>
-      <Map center={position} zoom={this.state.zoom}>
-      <TileLayer url="https://api.mapbox.com/styles/v1/abrarburk/ck5wgtnm04osr1inyi2ng4wo5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJyYXJidXJrIiwiYSI6ImNqM284MjlrbTAwMTMyd3BuemplOTVoMmYifQ.TX_JBU6Ff8EwHVx8dJfRPg" />
+      <Map center={position} zoom={this.state.zoom} style={{backgroundColor: 'white'}}>
+      {/* <TileLayer url="https://api.mapbox.com/styles/v1/abrarburk/ck5wgtnm04osr1inyi2ng4wo5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJyYXJidXJrIiwiYSI6ImNqM284MjlrbTAwMTMyd3BuemplOTVoMmYifQ.TX_JBU6Ff8EwHVx8dJfRPg" />*/}
       <Choropleth
           data={this.props.data}
           valueProperty={feature => feature.properties[this.props.dataPointToMap]}
