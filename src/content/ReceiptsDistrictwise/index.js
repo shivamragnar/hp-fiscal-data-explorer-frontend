@@ -23,11 +23,14 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
+import FLegendBar from '../../components/atoms/FLegendBar';
 
 //actions
 import { getReceiptsDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/receipts_districtwise';
 import { getReceiptsDistrictwiseFiltersData, updateReceiptsDistrictwiseFilters, updateReceiptsDistrictwiseOnDateRangeChange }  from '../../actions/receipts_districtwise_filters';
 
+//data
+import howToUseContent from '../../data/howToUseContent.json';
 var { receipts_districtwise : filterOrderRef, receipts_districtwise_filter_comp } = require("../../data/filters_ref.json");
 
 //Name of components to switch between
@@ -65,7 +68,9 @@ const ReceiptsDistrictwise = ({
 
   const activeViz = vizTypes[activeVizIdx];
 
-  const switchActiveViz = (e) => { setActiveVizIdx(e) };
+  const switchActiveViz = (e) => {
+    setActiveVizIdx(e.index)
+  };
 
 
 
@@ -116,15 +121,33 @@ const ReceiptsDistrictwise = ({
   const renderSwitch = () => {
     switch (activeViz) {
       case 'FMap':
-      return <div id="fmap">
-              <FMap
-                data={mapData}
-                dataPointToMap={'receipt'}
-                />
-             </div>;
+      return (
+        <Fragment>
+          <FLegendBar
+            vizType='map'
+            data={
+              {key: ['Lowest' ,'Highest'], type: 'gradient', color: ["hsl(177,100%,0%)", "hsl(177,100%,70%)"]}
+            }
+            />
+          <div id="fmap">
+            <FMap
+              data={mapData}
+              dataPointToMap={'receipt'}
+              />
+           </div>
+         </Fragment>
+      )
 
       case 'FBarChart':
-      return <FBarChart
+      return (
+        <Fragment>
+        <FLegendBar
+          vizType='bar'
+          data={[
+            {key: 'Receipt', type: 'bar', color: 'darkGrey'}
+          ]}
+          />
+        <FBarChart
               data={barChrtData}
               dataToX="districtName"
               dataPoints={["receipt"]}
@@ -133,7 +156,9 @@ const ReceiptsDistrictwise = ({
               yAxisLabel="total amount in rupees"
               xAxisLabel="districts"
               tooltip={<FTooltipReceipts/>}
-              />;
+              />
+        </Fragment>
+      )
 
       case 'FTimeSeries':
       return  <Fragment>
@@ -185,6 +210,7 @@ const ReceiptsDistrictwise = ({
     <div className="f-content">
       <FPageTitle
         pageTitle="Receipts | Districtwise"
+        pageDescription= {howToUseContent[4].content.body}
         showLegend={false}
         monthPicker={
           <FMonthPicker

@@ -94,16 +94,32 @@ class FForce_X extends React.Component {
     	// 	.on("drag", dragged)
     	// 	.on("end", dragended));
 
+
+
     function handleTooltipMouseover(d, i) {
+
+      const tooltip_html = (
+        `<p class='tt_title'> ${d.demand} ${d.demand_description}</p>
+         <div class='tt_body'>
+           <p> Current Sanction: ${d.sanction_current.toLocaleString('en-IN')} INR </p>
+           <p> Percent Change: ${d.pct_change} </p>
+         <div>` )
+
+      //calc if tooltip should show towards right or left depending on pos of bubble
+      const h_offset = () => {
+        if(d.pct_change < 20){
+          return 30;
+        }else{
+          return -310;
+        }
+      }
 
       //populate tooltip with appropriate content
       tooltip.transition()
              .duration(200)
-             .style("opacity", .9);
-      tooltip.html("<strong><p>" + d.demand + "_" + d.demand_description + "</p></strong>" +
-                   "<br><p> Current Sanction: " + d.sanction_current + "</p>" +
-                   "<br><p> Change Since Last Year (%): " + d.pct_change + "</p>")
-          .style("left", (d3.event.pageX + 50) + "px")
+             .style("opacity", 1);
+      tooltip.html(tooltip_html)
+          .style("left", (d3.event.pageX + h_offset()) + "px")
           .style("top", (d3.event.pageY) + "px");
 
       //stroke the current mouseover-ed circle

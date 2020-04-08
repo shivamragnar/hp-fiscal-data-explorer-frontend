@@ -24,13 +24,13 @@ import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
+import FLegendBar from '../../components/atoms/FLegendBar';
 
 //import helpers
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
-
-
 // data_ref
+import howToUseContent from '../../data/howToUseContent.json';
 const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/filters_ref.json');
 
 
@@ -68,7 +68,11 @@ const Receipts = ( { receipts : {
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+	const switchVizType = (e) => {
+		console.log(e);
+		setCurrentVizType(vizTypes[e.index]);
+
+	}
 
 	useEffect(() => {
 			// getReceiptsData(activeFilters, dateRange);
@@ -111,51 +115,60 @@ const Receipts = ( { receipts : {
 						</ContentSwitcher>
 					</div>
 					{ currentVizType === vizTypes[0] ?
-							<FBarChart
-								data={data}
-								dataToX="date"
-								dataPoints={["receipt"]}
-								barColors={["black"]}
-								xLabelVals={xLabelVals}
-								xLabelFormat={xLabelFormat}
-								xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}
-								yAxisLabel="Total Amount in Rupees"
-								tooltip={<FTooltipReceipts/>}
-								events={[{
-									// childName: "all",
-									target: "data",
-									eventHandlers: {
-										onMouseOver: () => {
-											return [
-												{
-													// childName: "bar",
-													target: "data",
-													mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 4 }) })
-												},
-												{
-													// childName: "bar",
-													target: "labels",
-													mutation: () => ({ active: true })
-												}
-											];
-										},
-										onMouseOut: () => {
-											return [
-												{
-													// childName: "bar",
-													target: "data",
-													mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 0 }) })
-												},
-												{
-													// childName: "bar",
-													target: "labels",
-													mutation: () => ({ active: false })
-												}
-											];
+							<Fragment>
+								<FLegendBar
+									vizType='bar'
+									data={[
+										{key: 'Receipt', type: 'bar', color: 'black'}
+									]}
+									/>
+								<FBarChart
+									data={data}
+									dataToX="date"
+									dataPoints={["receipt"]}
+									barColors={["black"]}
+									xLabelVals={xLabelVals}
+									xLabelFormat={xLabelFormat}
+									xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}
+									yAxisLabel="Total Amount in Rupees"
+									tooltip={<FTooltipReceipts/>}
+									events={[{
+										// childName: "all",
+										target: "data",
+										eventHandlers: {
+											onMouseOver: () => {
+												return [
+													{
+														// childName: "bar",
+														target: "data",
+														mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 4 }) })
+													},
+													{
+														// childName: "bar",
+														target: "labels",
+														mutation: () => ({ active: true })
+													}
+												];
+											},
+											onMouseOut: () => {
+												return [
+													{
+														// childName: "bar",
+														target: "data",
+														mutation: (props) => ({ style: Object.assign({}, props.style, { strokeWidth: 0 }) })
+													},
+													{
+														// childName: "bar",
+														target: "labels",
+														mutation: () => ({ active: false })
+													}
+												];
+											}
 										}
-									}
-								}]}
-								/> :
+									}]}
+
+									/>
+							</Fragment> :
 						 <Fragment>
 							 <FTable
 								 rows={rows}
@@ -173,6 +186,7 @@ const Receipts = ( { receipts : {
 		<div className="f-content">
 			<FPageTitle
 				pageTitle="Receipts | Details"
+				pageDescription= {howToUseContent[3].content.body}
 				showLegend={false}
 				monthPicker={
 					<FMonthPicker

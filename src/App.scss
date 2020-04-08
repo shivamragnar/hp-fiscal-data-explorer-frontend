@@ -5,6 +5,7 @@
 
 //components styles
 @import './components/atoms/FLoading/style.scss';
+@import './components/atoms/FLegendBar/style.scss';
 @import './components/molecules/FMonthPicker/style.scss';
 @import './components/molecules/FDropdown/style.scss';
 @import './components/molecules/FDownloadActionTooltip/style.scss';
@@ -18,7 +19,7 @@
 @import './components/dataviz/FTable/style.scss';
 @import './components/dataviz/FSASRChart/style.scss';
 @import './components/dataviz/FBarChart/style.scss';
-@import './components/dataviz/FForce_Y/style.scss';
+@import './components/dataviz/FForce_X/style.scss';
 @import './components/dataviz/FMap/style.scss';
 
 //content styles

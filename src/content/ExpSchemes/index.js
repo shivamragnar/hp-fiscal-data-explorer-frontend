@@ -19,11 +19,14 @@ import FTable from '../../components/dataviz/FTable';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
+import FLegendBar from '../../components/atoms/FLegendBar';
 
 //actions
 import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../actions/exp_schemes';
 import { getExpSchemesFiltersData, updateExpSchemesFilters, updateSchemesOnDateRangeChange }  from '../../actions/exp_schemes_filters';
 
+//data
+import howToUseContent from '../../data/howToUseContent.json';
 var { exp_schemes : filterOrderRef, schemes_filter_comp } = require("../../data/filters_ref.json");
 
 //Name of components to switch between
@@ -58,7 +61,9 @@ const ExpSchemes = ({
 	}
 
   const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+	const switchVizType = (e) => {
+    setCurrentVizType(vizTypes[e.index]);
+  }
 
   const [activeVizView, setActiveVizView] = useState({
     FTimeSeriesVizView : "gross",
@@ -119,25 +124,55 @@ const ExpSchemes = ({
   const renderSwitch = () => {
     switch (currentVizType) {
       case 'FMap':
-      return <div id="fmap">
-              <FMap
-                data={mapData}
-                dataPointToMap={activeVizView.FMapVizView}
-                />
-             </div>;
-
+      return (
+        <Fragment>
+          <FLegendBar
+            vizType='map'
+            data={
+              {key: ['Lowest' ,'Highest'], type: 'gradient', color: ["hsl(177,100%,0%)", "hsl(177,100%,70%)"]}
+            }
+            />
+          <FRadioGroup
+            className = "viz-view-toggle"
+            name = "FMapVizView"
+            titleText = "View:"
+            onChange = {(value, name) => onViewChange(value, name)}
+            items = {[
+              { label : "Gross", id : "gross" },
+              { label : "Net Payment", id : "netPayment" },
+            ]}
+            valueSelected = {activeVizView.FMapVizView}
+          />
+          <div id="fmap">
+            <FMap
+              data={mapData}
+              dataPointToMap={activeVizView.FMapVizView}
+              />
+           </div>
+        </Fragment>
+      );
       case 'FBarChart':
-      return <FBarChart
-              data={barChrtData}
-              dataToX="districtName"
-              dataPoints={["gross", "netPayment"]}
-              barColors={["darkGrey", "black"]}
-              xLabelVals={xLabelVals}
-              yAxisLabel="total amount in rupees"
-              xAxisLabel="districts"
-              tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
-              />;
-
+      return (
+        <Fragment>
+          <FLegendBar
+            vizType='bar'
+            data={[
+              {key: 'Gross Amount', type: 'bar', color: 'darkGrey'},
+              {key: 'Net Amount', type: 'bar', color: 'black'}
+            ]}
+            />
+          <FBarChart
+            data={barChrtData}
+            dataToX="districtName"
+            dataPoints={["gross", "netPayment"]}
+            barColors={["darkGrey", "black"]}
+            xLabelVals={xLabelVals}
+            yAxisLabel="total amount in rupees"
+            xAxisLabel="districts"
+            tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
+            />
+        </Fragment>
+      );
       case 'FTimeSeries':
       return  <Fragment>
                 <FTimeSeries
@@ -158,7 +193,6 @@ const ExpSchemes = ({
               headers={headers}
               onClickDownloadBtn={(e) => { console.log(e)}}
               />
-
       default:
       return <div>nothing to display</div>;
     }
@@ -194,19 +228,6 @@ const ExpSchemes = ({
 
             />
           }
-          { currentVizType === 'FMap' &&
-            <FRadioGroup
-              className = "viz-view-toggle"
-              name = "FMapVizView"
-              titleText = "View:"
-              onChange = {(value, name) => onViewChange(value, name)}
-              items = {[
-                { label : "Gross", id : "gross" },
-                { label : "Net Payment", id : "netPayment" },
-              ]}
-              valueSelected = {activeVizView.FMapVizView}
-            />
-          }
 					{ renderSwitch() }
 				</Fragment>
 			)
@@ -217,6 +238,7 @@ const ExpSchemes = ({
     <div className="f-content">
       <FPageTitle
         pageTitle="Schemes"
+        pageDescription= {howToUseContent[5].content.body}
         showLegend={false}
         monthPicker={
           <FMonthPicker

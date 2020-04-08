@@ -19,6 +19,10 @@ import FForce from '../../components/dataviz/FForce';
 import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
+import FLegendBar from '../../components/atoms/FLegendBar';
+
+//data
+import howToUseContent from '../../data/howToUseContent.json';
 
 //Name of components to switch between
 const vizTypes = ["FForce", "FTable"];
@@ -34,7 +38,7 @@ const ExpSummary = ({
  }) => {
 
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+	const switchVizType = (e) => { setCurrentVizType(vizTypes[e.index]); }
 
 	useEffect(() => {
 		// getExpSummaryData();
@@ -54,10 +58,18 @@ const ExpSummary = ({
           </div>
 					{
 						currentVizType === vizTypes[0] ?
-						<div className="data-viz-wrapper">
-							<FForce_X nodes={vizData} />
-							{/* <FForce_Y nodes={this.props.exp_summary.data} />*/}
-						</div>
+						<Fragment>
+							<FLegendBar
+								vizType='bubble'
+								data={[
+									{key: 'The bigger the size of the circle the bigger is the expense', type: 'bubble', color: 'black'}
+								]}
+								/>
+							<div className="data-viz-wrapper">
+								<FForce_X nodes={vizData} />
+								{/* <FForce_Y nodes={this.props.exp_summary.data} />*/}
+							</div>
+						</Fragment>
 						:
 						<FTable rows={rows} headers={headers} />
 					}
@@ -70,11 +82,7 @@ const ExpSummary = ({
       <div className="f-content exp-summary-content">
 				<FPageTitle
 					pageTitle={ <span>Expenditure | Summary  <span className="f-light-grey">| FY: 2018-19</span></span> }
-					pageDescription= "Carbon is IBM’s open-source design system for digital
-					 			products and experiences. With the IBM Design Language
-					 			as its foundation, the system consists of working code,
-					 			design tools and resources, human interface guidelines,
-					 			and a vibrant community of contributors."
+					pageDescription= {howToUseContent[0].content.body}
 					showLegend={ true }
 					/>
         <div className="data-viz-col exp-summary">

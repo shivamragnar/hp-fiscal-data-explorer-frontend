@@ -1,24 +1,43 @@
-.f-page-title{
+.f-page-title-wrapper{
   border-bottom: 1px solid $extra_light_grey;
-  display: flex;
-  width: 100%;
-  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   background-color: #fff;
   z-index: 100;
-  align-items: center;
-  justify-content: space-between;
   position: sticky;
   left: 0;
   top: 3rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  min-height: 4.8rem;
 
-  .f-page-title__left-aligned-content{
+  .f-page-title{
     display: flex;
-  }
+    width: 100%;
+    padding: 1rem 2rem 0 2rem;
+    align-items: center;
+    justify-content: space-between;
 
-  .f-page-title__description{
+    .f-page-title__left-aligned-content{
+      display: flex;
+    }
+
+    .f-page-title__description{
+
+    }
+  }
+}
+
+.f-page-description-wrapper{
+
+
+  .f-page-description{
     padding-top: 0.5rem;
     width: 70%;
   }
+}
 
+.more-info-text{
+  font-weight: 600;
+    padding-right: 0.5rem;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }

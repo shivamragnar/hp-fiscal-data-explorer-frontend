@@ -27,11 +27,13 @@ import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
+import FLegendBar from '../../components/atoms/FLegendBar';
 
 //import helpers
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
 // data_ref
+import howToUseContent from '../../data/howToUseContent.json';
 const { exp_demandwise: filterOrderRef, demandwise_filter_comp } = require('../../data/filters_ref.json');
 
 //Name of components to switch between
@@ -62,7 +64,9 @@ const ExpDetails = ( { exp_demandwise : {
 
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
-	const switchVizType = (e) => { setCurrentVizType(vizTypes[e]); }
+	const switchVizType = (e) => {
+		setCurrentVizType(vizTypes[e.index]);
+	}
 
 	const onFilterChange = (e, key) => {
 		//if at least 1 option is selected,
@@ -102,12 +106,23 @@ const ExpDetails = ( { exp_demandwise : {
 						</ContentSwitcher>
 					</div>
 					{ currentVizType === vizTypes[0] ?
-							<FSASRChart
-								data={data}
-								xLabelVals={xLabelVals}
-								xLabelFormat={xLabelFormat}
-								scsrOffset={scsrOffset}
-								/> :
+						 <Fragment>
+							 <FLegendBar
+								 vizType='bar'
+								 data={[
+									 {key: 'Sanction', type: 'grooveLeft', color: ['black','orange']},
+									 {key: 'Addition', type: 'bar', color: 'orange'},
+									 {key: 'Savings', type: 'bar', color: 'blue'},
+									 {key: 'Revised', type: 'grooveRight', color: ['blue','black']}
+								 ]}
+								 />
+								<FSASRChart
+									data={data}
+									xLabelVals={xLabelVals}
+									xLabelFormat={xLabelFormat}
+							 		scsrOffset={scsrOffset}
+							 		/>
+						 </Fragment> :
 						 <Fragment>
 								<FTable
 									rows={rows}
@@ -125,6 +140,7 @@ const ExpDetails = ( { exp_demandwise : {
 		<div className="f-content">
 			<FPageTitle
 				pageTitle="Expenditure | Demand Details"
+				pageDescription= {howToUseContent[1].content.body}
 				showLegend={true}
 				monthPicker={
 					<FMonthPicker

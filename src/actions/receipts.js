@@ -42,7 +42,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     //1 PREP AND MAKE API CALL
     console.log("Axios Receipts Fetch Started");
-    console.log(`http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
+    // console.log(`http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
     const config = { headers: { "content-type": "application/json" } };
 		const res = await axios.post(
       `http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
@@ -109,7 +109,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     dispatch({
       type: RECEIPTS_DATA_ERROR,
       payload: {
-        status: err.response.status
+        status: err
       }
     });
   }

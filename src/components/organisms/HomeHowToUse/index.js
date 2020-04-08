@@ -13,49 +13,48 @@ const imgs = {
   placeholder
 }
 
+const createImg = (img) => (
+  <div className='f-tab-content__img_wrapper bx--col-lg-6'>
+    <img className='f-tab-content__img' src={img}/>
+  </div>
+)
+
+const createText = (title, body, linkRoute, linkText) => (
+  <div className='f-tab-content__text-wrapper bx--col-lg-6'>
+    <h4 className='f-tab-content__title'>{title}</h4>
+    { body.map(datum => (
+      <p className='f-tab-content__body'>{datum}</p>
+    )) }
+    <Link className='f-link f-tab-content__link' to={linkRoute}>{linkText}</Link>
+  </div>
+)
+
   return (
 
       <Fragment>
-        <Tabs
 
-          className="f-home__how-to-use-tabs"
-          iconDescription="show menu options"
-          onKeyDown={function noRefCheck(){}}
-          onSelectionChange={function noRefCheck(){}}
-          role="navigation"
-          selected={0}
-          tabContentClassName="f-tab-content"
-          triggerHref="#"
-          type="container"
-        >
         {
           howToUseContent.map((d, i) => {
             let img = imgs[d.content.img];
             return (
-              <Tab
-                id={d.id}
-                label={d.label}
-                role="presentation"
-                tabIndex={i}
-              >
-                <div className="f-tab-content-wrapper">
-                  <div className='bx--row' style={{ alignItems: 'center'}}>
-                    <div className='f-tab-content__text-wrapper bx--col-lg-6'>
-                      <h4 className='f-tab-content__title'>{d.content.title}</h4>
-                      { d.content.body.map(datum => (
-                        <p className='f-tab-content__body'>{datum}</p>
-                      )) }
-                      <Link className='f-link f-tab-content__link' to={d.content.link.route}>{d.content.link.text}</Link>
-                    </div>
-                    <div className='f-tab-content__img_wrapper bx--col-lg-6'>
-                      <img className='f-tab-content__img' src={img}/>
-                    </div>
-                  </div>
+              <div className="f-tab-content-wrapper">
+                <div className='bx--row' style={{ alignItems: 'center'}}>
+                { (i+1)%2 === 1
+                ? <Fragment>
+                  { createText(d.content.title, d.content.body, d.content.link.route, d.content.link.text) }
+                  { createImg(img) }
+                  </Fragment>
+                : <Fragment>
+                  { createImg(img) }
+                  { createText(d.content.title, d.content.body, d.content.link.route, d.content.link.text) }
+                  </Fragment>
+                }
+
                 </div>
-              </Tab>
-            )})
+              </div>
+            )
+          })
         }
-        </Tabs>
 			</Fragment>
 
   );

@@ -2,7 +2,6 @@
   "name": "fiscal_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://abrarburk.com/fiscal_pre_prod",
   "dependencies": {
     "@carbon/grid": "^10.6.0",
     "@carbon/icons-react": "^10.6.1",
@@ -60,7 +59,6 @@
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-links": "^5.2.1",
     "@storybook/addons": "^5.2.1",
-    "@storybook/react": "^5.2.1",
-    "babel-loader": "^8.0.6"
+    "@storybook/react": "^5.2.1"
   }
 }
