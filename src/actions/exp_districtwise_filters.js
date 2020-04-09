@@ -20,7 +20,7 @@ export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHe
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE_FILTERS, payload: {} });
-        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury");
+        rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_treasury");
       }
 
 			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
@@ -69,7 +69,7 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
             stringForApi += '&';
           }
       })
-      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury?${stringForApi}`);
+      const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_treasury?${stringForApi}`);
       // console.log('raw_dynamic_filter_data: ');
       // console.log(rawFilterData);
 

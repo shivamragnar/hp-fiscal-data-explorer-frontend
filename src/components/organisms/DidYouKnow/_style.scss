@@ -1,0 +1,38 @@
+
+
+
+  .f-did-you-know-content-wrapper{
+    padding-bottom: 2rem;
+    display: flex;
+    overflow: hidden;
+
+    &.f-did-you-know-content-wrapper--img{
+      display: block;
+      position: relative;
+    }
+
+    .did-you-know-slide{
+      flex: 1 0 100%;
+
+      &.did-you-know-slide--img{
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        transition: opacity 0.3s ease-out;
+      }
+
+      &.did-you-know-slide--text{
+        transition: transform 0.3s ease-out;
+      }
+
+      .f-did-you-know__body{
+        padding-top: 1rem;
+      }
+
+      .f-did-you-know__link{
+        display: block;
+        padding-top: 1rem;
+      }
+    }
+
+  }

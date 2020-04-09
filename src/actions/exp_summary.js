@@ -5,7 +5,7 @@ import { GET_EXP_SUMMARY_DATA, EXP_SUMMARY_DATA_ERROR, SET_EXP_SUMMARY_DATA_LOAD
 export const getExpSummaryData = () => async dispatch => {
   try {
     dispatch({ type: SET_EXP_SUMMARY_DATA_LOADING, payload: ""});
-    const res = await axios.get("http://13.126.189.78/api/exp_summary");
+    const res = await axios.get("https://hpback.openbudgetsindia.org/api/exp_summary");
     var tableData = {
     	headers: [],
     	rows: []

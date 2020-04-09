@@ -15,7 +15,7 @@ export const getReceiptsFiltersData = () => async dispatch => {
     console.log("Fetching Receipts Filters Started");
     dispatch({ type: SET_LOADING_RECEIPTS_FILTERS, payload: "" });
 		//fetch raw filter data
-		const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_receipts");
+		const rawFilterData = await axios.get("https://hpback.openbudgetsindia.org/api/acc_heads_receipts");
 		console.log('raw_receipts_filter_data: '); console.log(rawFilterData);
 
     const allFiltersData = []

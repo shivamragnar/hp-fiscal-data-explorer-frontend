@@ -1,6 +1,6 @@
 import React from "react"
 
-function DidYouKnow(props) {
+function DidYouKnowIcon(props) {
   return (
     <svg width={28} height={28} viewBox="0 0 28 28" fill="none" {...props}>
       <path
@@ -13,4 +13,4 @@ function DidYouKnow(props) {
   )
 }
 
-export default DidYouKnow;
+export default DidYouKnowIcon;

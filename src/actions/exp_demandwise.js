@@ -57,7 +57,7 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
     console.log("Axios Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
     const res = await axios.post(
-      `http://13.126.189.78/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
+      `https://hpback.openbudgetsindia.org/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
     console.log("demand details raw data "); console.log(res.data.records);
 

@@ -20,7 +20,7 @@ export const getReceiptsDistrictwiseFiltersData = (allFiltersData, rawFilterData
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE_FILTERS, payload: {} });
-        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_treasury_rec");
+        rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_treasury_rec");
       }
 
 			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
@@ -70,7 +70,7 @@ console.log('here');
             stringForApi += '&';
           }
       })
-      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_treasury_rec?${stringForApi}`);
+      const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_treasury_rec?${stringForApi}`);
       // console.log('raw_dynamic_filter_data: ');
       // console.log(rawFilterData);
 

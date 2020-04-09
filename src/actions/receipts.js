@@ -42,10 +42,10 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     //1 PREP AND MAKE API CALL
     console.log("Axios Receipts Fetch Started");
-    // console.log(`http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
+    // console.log(`https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
     const config = { headers: { "content-type": "application/json" } };
 		const res = await axios.post(
-      `http://13.126.189.78/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
+      `https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
 		console.log("receipts raw data"); console.log(res.data.records);
 

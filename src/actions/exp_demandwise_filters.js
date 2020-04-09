@@ -20,7 +20,7 @@ export const getExpDemandwiseFiltersData = () => async dispatch => {
         payload: ''
       })
 			//fetch raw filter data
-			const rawFilterData = await axios.get("http://13.126.189.78/api/acc_heads_desc");
+			const rawFilterData = await axios.get("https://hpback.openbudgetsindia.org/api/acc_heads_desc");
 			console.log('raw_filter_data: '); console.log(rawFilterData);
 
       const allFiltersData = []

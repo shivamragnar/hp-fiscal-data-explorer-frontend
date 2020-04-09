@@ -20,7 +20,7 @@ export const getExpSchemesFiltersData = (allFiltersData, rawFilterDataAllHeads) 
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
         console.log("need to fetch raw district filter data");
-        rawFilterDataAllHeads = await axios.get("http://13.126.189.78/api/unique_acc_heads_schemes");
+        rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_schemes");
 
       }
 
@@ -70,7 +70,7 @@ export const updateExpSchemesFilters = (e, key, activeFilters, allFiltersData, r
           }
       })
 
-      const rawFilterData = await axios.get(`http://13.126.189.78/api/acc_heads_schemes?${stringForApi}`);
+      const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_schemes?${stringForApi}`);
       // console.log('raw_dynamic_filter_data: ');
       // console.log(rawFilterData);
 

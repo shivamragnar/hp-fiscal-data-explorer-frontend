@@ -70,7 +70,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const config = { headers: { "content-type": "application/json" } };
   		const res = await axios.post(
         //******NEEDS TO BE CHANGED************//
-        `http://13.126.189.78/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
+        `https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
       );
   		console.log("receipts districtwise raw data"); console.log(res.data.records);
 

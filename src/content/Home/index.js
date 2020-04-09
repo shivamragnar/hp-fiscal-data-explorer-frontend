@@ -2,8 +2,9 @@ import React, { Fragment } from "react";
 import {Link} from "react-router-dom";
 import FHPMapImg from '../../components/atoms/FHPMapImg';
 import HomeHowToUse from '../../components/organisms/HomeHowToUse';
-import DidYouKnow from '../../components/icons/DidYouKnow';
+import DidYouKnowIcon from '../../components/icons/DidYouKnowIcon';
 import didYouKnowContent from '../../data/didYouKnowContent.json';
+import DidYouKnow from '../../components/organisms/DidYouKnow';
 
 const Home = (props) =>  {
 
@@ -22,19 +23,20 @@ const Home = (props) =>  {
         <h1 className='f-home__section-title'>How to use this Data Explorer?</h1>
         <HomeHowToUse />
       </div>
-      <div className='f-home__section f-home__did-you-know'>
+      {/*<div className='f-home__section f-home__did-you-know'>
         <h1 className='f-home__section-title'>Did you know?</h1>
         <div className='bx--row'>
         { didYouKnowContent.map((d,i) => (
           <div className='f-did-you-know-content-wrapper bx--col-lg-3'>
-            <div><DidYouKnow/></div>
+            <div><DidYouKnowIcon/></div>
             { d.content.map(datum => <p className='f-did-you-know__body' style={{fontStyle : 'italic'}}>{datum}</p>)}
             { d.link && <Link className='f-link f-did-you-know__link' to={d.link.route}>{d.link.text}</Link>}
           </div>
-        ))
-
-          }
+        )) }
         </div>
+      </div>*/}
+      <div className='f-home__section f-home__did-you-know'>
+        <DidYouKnow />
       </div>
     </div>
   )
