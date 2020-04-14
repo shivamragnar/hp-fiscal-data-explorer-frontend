@@ -1,9 +1,6 @@
 import React, {useState} from "react";
 import MediaQuery from "react-responsive";
 
-//custom components
-import FLegend from '../../../components/molecules/FLegend';
-
 import ChevronDown from '@carbon/icons-react/lib/chevron--down/16';
 import ChevronUp from '@carbon/icons-react/lib/chevron--up/16';
 
@@ -21,7 +18,6 @@ const FPageTitle = ({ pageTitle, pageDescription, monthPicker, showLegend }) => 
             <h3>{pageTitle}</h3>
           { monthPicker }
   				</div>
-        { showLegend && ( <FLegend /> ) }
   			</div>
         <div className='f-page-description-wrapper' style={{padding: showPageDesc === false ? '0' : '1rem 2rem'}}>
         { showPageDesc &&
@@ -31,8 +27,8 @@ const FPageTitle = ({ pageTitle, pageDescription, monthPicker, showLegend }) => 
 
           <div onClick={toggleSetShowDesc} style={{cursor: 'pointer'}}>
           { showPageDesc === false
-          ? <div style={{display: 'flex'}}><h6 className='more-info-text'>more info </h6><ChevronDown /></div>
-          : <div style={{display: 'flex'}}><h6 className='more-info-text'>less info </h6><ChevronUp /> </div> }
+          ? <div style={{display: 'flex'}}><h6 className='more-info-text'>more info </h6><ChevronDown className='more-info-chevron'/></div>
+          : <div style={{display: 'flex'}}><h6 className='more-info-text'>less info </h6><ChevronUp className='more-info-chevron'/> </div> }
           </div>
         </div>
       </div>
