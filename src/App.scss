@@ -5,6 +5,7 @@
 @import './scss/vars.scss';
 
 //components styles
+@import './components/atoms/FButton/style.scss';
 @import './components/atoms/FLoading/style.scss';
 @import './components/atoms/FLegendBar/style.scss';
 @import './components/molecules/FMonthPicker/style.scss';
@@ -167,4 +168,5 @@
 .f-link{
   font-weight: 600;
   line-height: 1.6em;
+  color: #B3D8E7;
 }

@@ -36,8 +36,14 @@
 
 .more-info-text{
   font-weight: 600;
-    padding-right: 0.5rem;
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.more-info-chevron{
+  padding: 1px;
+  padding-top: 3px;
+  stroke-width: 0.5px;
+  stroke: $black;
 }
