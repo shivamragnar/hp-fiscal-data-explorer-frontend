@@ -37,8 +37,8 @@ const FHeader1 = () => {
                                   <HeaderMenuItem element={Link} to='/aboutus'>
                                     About Us
                                   </HeaderMenuItem>
-                                  <HeaderMenuItem element={Link} to="/contactus">
-                                    Contact Us
+                                  <HeaderMenuItem>
+                                    <a className='f-header-link' href="https://openbudgetsindia.org/contact" target="_blank">Contact Us</a>
                                   </HeaderMenuItem>
                                 </Fragment>
 
@@ -48,14 +48,14 @@ const FHeader1 = () => {
                                 >
                                   <OverflowMenuItem itemText="Glossary" onClick={() => handleRouting('/glossary')}/>
                                   <OverflowMenuItem itemText="About Us" onClick={() => handleRouting('/aboutus')}/>
-                                  <OverflowMenuItem itemText="Contact Us" onClick={() => handleRouting('/contactus')}/>
+                                  <a href="https://openbudgetsindia.org/contact" target="_blank"><OverflowMenuItem itemText="Contact Us" /></a>
                                 </OverflowMenu>
 
 
   return(
     <HeaderContainer
       render={({isSideNavExpanded, onClickSideNavExpand}) => (
-        <div>
+        <div className='f-header'>
           <Header aria-label="Carbon Tutorial">
             <SkipToContent />
             <HeaderMenuButton

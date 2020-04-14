@@ -70,7 +70,7 @@ class FForce_X extends React.Component {
     // Define the div for the tooltip
     var tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
-        .style("opacity", 0);
+        .style("display", 'none');
 
 
     var simulation = d3.forceSimulation()
@@ -102,7 +102,7 @@ class FForce_X extends React.Component {
         `<p class='tt_title'> ${d.demand} ${d.demand_description}</p>
          <div class='tt_body'>
            <p> Current Sanction: ${d.sanction_current.toLocaleString('en-IN')} INR </p>
-           <p> Percent Change: ${d.pct_change} </p>
+           <p> Percent Change: ${d.pct_change} % </p>
          <div>` )
 
       //calc if tooltip should show towards right or left depending on pos of bubble
@@ -115,9 +115,10 @@ class FForce_X extends React.Component {
       }
 
       //populate tooltip with appropriate content
-      tooltip.transition()
-             .duration(200)
-             .style("opacity", 1);
+      tooltip.style("display", 'block')
+             // .transition()
+             // .duration(200)
+             // .style("opacity", 1);
       tooltip.html(tooltip_html)
           .style("left", (d3.event.pageX + h_offset()) + "px")
           .style("top", (d3.event.pageY) + "px");
@@ -133,9 +134,12 @@ class FForce_X extends React.Component {
     function handleTooltipMouseout(d, i){
 
       //hide tooltip
-      tooltip.transition()
-          .duration(500)
-          .style("opacity", 0);
+      // tooltip.transition()
+      //        .duration(500)
+      //        .style("opacity", 0)
+      //        .style('visibility', 'hidden');
+
+      tooltip.style('display', 'none');
 
       //de-stroke the current mouseout-ed circle
       d3.select(this)

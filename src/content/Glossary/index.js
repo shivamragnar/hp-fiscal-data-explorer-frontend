@@ -38,7 +38,7 @@ const Glossary = () => {
   return(
     <div className="f-content glossary bx--grid">
 
-      <div className='bx--offset-md-2 bx--col-md-4 glossary-contents-wrapper'>
+      <div className='bx--offset-lg-3 bx--col-lg-6 glossary-contents-wrapper'>
         <h1 style={{ fontWeight: '500'}}>Glossary</h1>
           <div className='glossary-search-bar-wrapper'>
             <Search
