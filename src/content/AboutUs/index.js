@@ -2,14 +2,28 @@ import React, {Fragment, useState} from "react";
 
 import aboutus from '../../data/aboutus.json';
 
-import arun_img from '../../imgs/arun_img.jpg';
-// import gaurav_img from '../../imgs/gaurav.jpg';
+import arun_img from '../../imgs/aboutus_imgs/arun_img.jpg';
+import gaurav_img from '../../imgs/aboutus_imgs/gaurav_img.jpg';
+import abrar_img from '../../imgs/aboutus_imgs/abrar_img.jpg';
+import namita_img from '../../imgs/aboutus_imgs/namita_img.jpg';
+import preethi_img from '../../imgs/aboutus_imgs/preethi_img.jpg';
+import sheneille_img from '../../imgs/aboutus_imgs/sheneille_img.jpg';
+import shreya_img from '../../imgs/aboutus_imgs/shreya_img.jpg';
+import simonti_img from '../../imgs/aboutus_imgs/simonti_img.jpg';
+import swati_img from '../../imgs/aboutus_imgs/swati_img.jpg';
 
 const AboutUs = () => {
 
   const imgs = {
     arun_img,
-    // gaurav_img
+    gaurav_img,
+    abrar_img,
+    namita_img,
+    preethi_img,
+    sheneille_img,
+    shreya_img,
+    simonti_img,
+    swati_img
   }
 
   return(
