@@ -61,16 +61,17 @@ class FBarChart extends Component {
         theme={VictoryTheme.material}
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
-        padding={{ left: 60, right: 60, top: 60, bottom: 60 }}
+        padding={{ left: 60, right: 60, top: 60, bottom: 100 }}
       >
       <VictoryAxis
         label={this.props.xAxisLabel}
         style={{ axisLabel: axisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
-            dx={-10}
+            dx={0}
             dy={0}
             style={tickLabelStyle}
+            textAnchor='end'
             angle={-45}
           />
         }

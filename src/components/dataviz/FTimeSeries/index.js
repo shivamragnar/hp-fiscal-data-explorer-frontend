@@ -72,6 +72,17 @@ const tickLabelStyle = {
   fontWeight: 600
   }
 
+const axisLabelStyle ={
+  padding: 40,
+  fontFamily: 'IBM Plex Sans',
+  fontSize: '7px',
+  fill: "rgb(37, 37, 37)",
+  fontWeight: 400,
+  textTransform: "uppercase",
+  wordSpacing: "0.2em",
+  letterSpacing: "0.08em"
+}
+
 
 class FTimeSeries extends Component {
 
@@ -95,10 +106,15 @@ class FTimeSeries extends Component {
 		    }
       >
       <VictoryAxis
+				label={this.props.xAxisLabel}
+				style={{ axisLabel: axisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
-            dy={-5}
+            dx={0}
+						dy={0}
             style={tickLabelStyle}
+						textAnchor="end"
+						angle={-45}
           />
         }
         tickFormat={this.props.xLabelFormat}
@@ -106,10 +122,13 @@ class FTimeSeries extends Component {
       />
       <VictoryAxis
         dependentAxis
+				label={this.props.yAxisLabel}
+				style={{ axisLabel: axisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
-            dx={5}
+            dx={0}
             style={tickLabelStyle}
+						angle={-45}
           />
         }
         tickFormat={(y) => getDynamicYLabelFormat(y)}

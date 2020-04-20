@@ -69,7 +69,7 @@ const FLegendBar = (props) => {
       return (
         <div style={{display: 'flex' }}>
           <div style={{paddingRight: '1rem'}}>{props.data.key[0]}</div>
-          <div style={{width: '8rem', background: `linear-gradient(0.25turn, ${colors[props.data.color[0]]}, ${colors[props.data.color[1]]})` }}></div>
+          <div style={{width: '8rem', background: `linear-gradient(0.25turn, ${props.data.color[0]}, ${props.data.color[1]})` }}></div>
           <div style={{paddingLeft: '1rem'}}>{props.data.key[1]}</div>
         </div>)
     }

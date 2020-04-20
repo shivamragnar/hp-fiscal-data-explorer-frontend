@@ -1,7 +1,7 @@
 import React from "react";
 import sassVars from '../../../scss/_vars.scss'
 import tooltipBubble from '../../../imgs/tooltipBubble.svg'
-const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey } = sassVars;
+const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } = sassVars;
 
 const FTooltipSASR = ( { x, y, datum : { date, sanction, revised, addition, savings}} ) => {
 
@@ -31,13 +31,14 @@ const FTooltipSASR = ( { x, y, datum : { date, sanction, revised, addition, savi
 
                       140 96
           0 96"
-        stroke="#dfdfdf"
-        fill="#fff"
-        opacity="0.9"/>
+        stroke={white}
+        strokeWidth={0.5}
+        fill={black}
+        opacity="1"/>
 
-      <g fontWeight={500} transform="translate(0,19)" >
-        <text x={paddingX} y={0} fill={grey} letter-spacing="0.5" text-anchor="start"> {date} </text>
-        <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={lightGrey} />
+      <g fontWeight={500} transform="translate(0,19)" fill={white} >
+        <text x={paddingX} y={0} fill={darkGrey} letter-spacing="0.5" text-anchor="start"> {date} </text>
+        <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
         <text x={paddingX} y={22} letter-spacing="0.5" text-anchor="start"> Sanction  : </text>
         <text x={width-paddingX} y={22} text-anchor="end">₹ {sanction}</text>
         <text x={paddingX} y={36} fill={orange} letter-spacing="0.5" text-anchor="start"> Addition  : </text>

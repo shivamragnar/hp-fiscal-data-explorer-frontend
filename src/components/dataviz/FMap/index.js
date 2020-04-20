@@ -42,7 +42,6 @@ export default class FMap extends Component<{}, State> {
   };
 
 
-
   highlightFeature(e) {
     var layer = e.target;
 
@@ -80,26 +79,31 @@ export default class FMap extends Component<{}, State> {
     return (
       <div style={{position: "relative", zIndex: 10}}>
         <div className="f-map-tooltip-wrapper">
-          <div
-            className="tooptip-content-wrapper"
-            >
+
             {
               this.state.tooltipDisplay === "block" ?
-              <div style={{ display : this.state.tooltipDisplay }}>
-                <p style={{ color: "#fff"}}>
+              <div className='f-map-tooltip' style={{ display : this.state.tooltipDisplay }}>
+                <p className='f-map-tooltip__district-name'>
                   {this.state.tooltipData.districtName && this.state.tooltipData.districtName}
                 </p>
-                <hr />
-                <p style={{ color: "#fff"}}>
-                  {this.state.tooltipData.dataPointToMap && this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')}
+                <div className='f-map-tooltip__separator'></div>
+                <div className='f-map-tooltip__data-wrapper'>
+                <p className='f-map-tooltip__data-point-key'>
+                  {this.props.dataPointToMap && `${this.props.dataPointToMap.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}:`}
                 </p>
+                <p className='f-map-tooltip__data-point-value'>
+                  {this.state.tooltipData.dataPointToMap && `${this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')} INR`}
+                </p>
+                </div>
               </div>
                 :
-              <p style={{ color: "#fff"}}>
-                hover over a district to see info
-              </p>
+              <div className="f-map-tooltip__guide-text-wrapper">
+                <p className='f-map-tooltip__guide-text'>
+                  hover over a district to see its spending info.
+                </p>
+              </div>
             }
-          </div>
+
         </div>
       <Map
         center={position}

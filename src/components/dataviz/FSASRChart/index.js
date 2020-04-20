@@ -14,11 +14,22 @@ import FTooltipSASR from '../../atoms/FTooltipSASR';
 
 import { getDynamicYLabelFormat } from '../../../utils/functions';
 
-const labelStyle = {
+const tickLabelStyle = {
   fontFamily: 'IBM Plex Sans',
   fontSize: '7px',
-  textAnchor: 'end'
+  fontWeight: 600
   }
+
+const axisLabelStyle ={
+  padding: 40,
+  fontFamily: 'IBM Plex Sans',
+  fontSize: '7px',
+  fill: "rgb(37, 37, 37)",
+  fontWeight: 400,
+  textTransform: "uppercase",
+  wordSpacing: "0.2em",
+  letterSpacing: "0.08em"
+}
 
 class FSASRChart extends Component {
 
@@ -41,20 +52,20 @@ class FSASRChart extends Component {
         domainPadding={{x: 0}}
         width= {650}
         height= {300}
-        padding={{left: 70, right: 70, top: 30, bottom: 70}}
+        padding={{left: 50, right: 70, top: 30, bottom: 80}}
       >
         <VictoryAxis
           label="Date"
-          axisLabelComponent={ <VictoryLabel dy={35} style={labelStyle} /> }
-          tickLabelComponent={ <VictoryLabel dy={0} style={labelStyle} angle={-45} /> }
+          style={{ axisLabel: axisLabelStyle }}
+          tickLabelComponent={ <VictoryLabel dy={0} style={tickLabelStyle} angle={-45} textAnchor='end' /> }
           tickFormat={this.props.xLabelFormat}
           tickValues={this.props.xLabelVals}
           />
       <VictoryAxis
         dependentAxis
         label="Amount"
-        axisLabelComponent={ <VictoryLabel dy={-45} style={labelStyle} /> }
-        tickLabelComponent={ <VictoryLabel dx={5} style={labelStyle} /> }
+        style={{ axisLabel: axisLabelStyle }}
+        tickLabelComponent={ <VictoryLabel dx={5} style={tickLabelStyle} textAnchor='end'/> }
         tickFormat={(y) => getDynamicYLabelFormat(y)}
       />
         <VictoryGroup
