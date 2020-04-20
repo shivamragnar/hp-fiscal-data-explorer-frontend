@@ -26,7 +26,7 @@ const DidYouKnow = (props) => {
     hamirpur_mandi_shimla,
     kangra,
     mandi_sirmaur,
-    shimla 
+    shimla
   }
 
   const [activeIdx, setActiveIdx] = useState(0);
