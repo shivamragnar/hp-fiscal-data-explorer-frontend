@@ -242,7 +242,9 @@ export const createObjForPayload = (activeFilterVals, activeFilterKeys) => {
       tempVal1 = tempVal1.join('","');
       tempVal2 = tempVal2.join('","');
       objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
-      if(tempVal2) objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
+      if(activeFilterKeys[i].split('-')[1] !== undefined){ //this is a check to see if our filter is if of the CODE_NAME format or simply a NAME format
+        objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
+      }
   })
 
   return objForPayload;
