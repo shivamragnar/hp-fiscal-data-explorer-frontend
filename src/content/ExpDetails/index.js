@@ -29,6 +29,8 @@ import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FLegendBar from '../../components/atoms/FLegendBar';
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 //import helpers
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
@@ -138,6 +140,7 @@ const ExpDetails = ( { exp_demandwise : {
 
 	return (
 		<div className="f-content">
+			<FPageMeta pageId = 'expenditure_demandwise' />
 			<FPageTitle
 				pageTitle="Expenditure | Demand Details"
 				pageDescription= {howToUseContent[1].content.body}

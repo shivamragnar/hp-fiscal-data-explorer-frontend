@@ -24,8 +24,11 @@ import FLegendBar from '../../components/atoms/FLegendBar';
 //data
 import howToUseContent from '../../data/howToUseContent.json';
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 //Name of components to switch between
 const vizTypes = ["FForce", "FTable"];
+
 
 
 const ExpSummary = ({
@@ -80,6 +83,7 @@ const ExpSummary = ({
 
     return (
       <div className="f-content exp-summary-content">
+				<FPageMeta pageId = 'expenditure_summary' />
 				<FPageTitle
 					pageTitle={ <span>Expenditure | Summary  <span className="f-light-grey">| FY: 2018-19</span></span> }
 					pageDescription= {howToUseContent[0].content.body}

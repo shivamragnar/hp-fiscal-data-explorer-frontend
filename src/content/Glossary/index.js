@@ -2,6 +2,7 @@ import React, {Fragment, useState} from "react";
 
 import {Search} from 'carbon-components-react';
 import glossary from '../../data/glossary.json';
+import FPageMeta from '../../components/organisms/FPageMeta';
 
 const Glossary = () => {
 
@@ -37,7 +38,7 @@ const Glossary = () => {
 
   return(
     <div className="f-content glossary bx--grid">
-
+      <FPageMeta pageId = 'glossary' />
       <div className='bx--offset-lg-3 bx--col-lg-6 glossary-contents-wrapper'>
         <h1 style={{ fontWeight: '500'}}>Glossary</h1>
           <div className='glossary-search-bar-wrapper'>

@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import ReactGA from 'react-ga';
 import PropTypes from "prop-types"
 import { Route, Switch, withRouter } from "react-router-dom";
 import axios from "axios";
@@ -58,6 +59,9 @@ const _CONFIG = {
 	initRawFilterDataAllHeads : {} //only applies for exp_districtwise, receipts_districtwise & schemes
 }
 
+ReactGA.initialize('UA-89349304-1');
+ReactGA.set({ anonymizeIp: true });
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = ({
 
@@ -83,6 +87,8 @@ const App = ({
 ) => {
 
 
+console.log(window.location.origin);
+
 const apiCallQueue = [
 	{ apiFunc: () => getExpSummaryData() },
 
@@ -95,13 +101,13 @@ const apiCallQueue = [
 	{ apiFunc: () => getReceiptsDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
 	{ apiFunc: () => getReceiptsDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
 
-	{ apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
+	/*{ apiFunc: () => getExpDemandwiseData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },*/
 
 	{ apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
 
 	{ apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
 
-	{ apiFunc: () => getExpDemandwiseFiltersData() }
+	/*{ apiFunc: () => getExpDemandwiseFiltersData() }*/
 ]
 
 
@@ -124,6 +130,8 @@ const fetchApisInQueue = async (idx) => {
 	 fetchApisInQueue(0);
 
  }, []);
+
+ console.log(window.location.href);
 
  return (
       <div>

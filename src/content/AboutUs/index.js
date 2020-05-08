@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from "react";
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 import aboutus from '../../data/aboutus.json';
 
 import arun_img from '../../imgs/aboutus_imgs/arun_img.jpg';
@@ -28,6 +30,7 @@ const AboutUs = () => {
 
   return(
     <div className="f-content aboutus bx--grid">
+      <FPageMeta pageId = 'about_us' />
       <div className='bx--offset-lg-1 bx--col-lg-10 about-us-content-wrapper'>
         <h1 style={{ fontWeight: '500'}}>About Us</h1>
         <div className='bx--row about-us-content' >

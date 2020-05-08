@@ -25,9 +25,13 @@ import FLegendBar from '../../components/atoms/FLegendBar';
 import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../actions/exp_schemes';
 import { getExpSchemesFiltersData, updateExpSchemesFilters, updateSchemesOnDateRangeChange }  from '../../actions/exp_schemes_filters';
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 //data
 import howToUseContent from '../../data/howToUseContent.json';
 var { exp_schemes : filterOrderRef, schemes_filter_comp } = require("../../data/filters_ref.json");
+
+
 
 //Name of components to switch between
 const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
@@ -238,6 +242,7 @@ const ExpSchemes = ({
 
   return (
     <div className="f-content">
+      <FPageMeta pageId = 'schemes' />
       <FPageTitle
         pageTitle="Schemes"
         pageDescription= {howToUseContent[5].content.body}

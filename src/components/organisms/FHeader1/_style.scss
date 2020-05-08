@@ -36,6 +36,15 @@
 //carbon override
 
 .f-header{
+  .bx--header{ height: 4rem;}
+  .bx--header__name{
+    padding: 0.5rem 2rem 0.5rem 1rem ;
+
+    img{
+      height: 100%;
+    }
+  }
+
   .bx--header__menu-item{
     cursor: pointer;
     &:hover{ a{ color: #f4f4f4 } }

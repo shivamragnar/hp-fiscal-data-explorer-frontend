@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from 'axios';
-
+import FPageMeta from '../../components/organisms/FPageMeta';
 //redux
 import { connect } from 'react-redux';
 
@@ -184,6 +184,7 @@ const Receipts = ( { receipts : {
 
 	return (
 		<div className="f-content">
+			<FPageMeta pageId = 'receipts' />
 			<FPageTitle
 				pageTitle="Receipts | Details"
 				pageDescription= {howToUseContent[3].content.body}

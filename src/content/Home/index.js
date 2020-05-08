@@ -6,11 +6,13 @@ import DidYouKnowIcon from '../../components/icons/DidYouKnowIcon';
 import didYouKnowContent from '../../data/didYouKnowContent.json';
 import DidYouKnow from '../../components/organisms/DidYouKnow';
 import CoverImg from '../../imgs/cover_img.svg';
+import FPageMeta from '../../components/organisms/FPageMeta';
 
 const Home = (props) =>  {
 
   return (
     <div className='f-content f-home'>
+      <FPageMeta pageId = 'home' />
       <div className='f-home__section f-home__cover'>
         <img className='f-home__cover-bg-img' src={CoverImg} alt="_blank"/>
         <div className='bx--row'>

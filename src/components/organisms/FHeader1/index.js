@@ -22,6 +22,8 @@ import MediaQuery, { useMediaQuery } from "react-responsive";
 
 import OverflowMenuVertical20 from '@carbon/icons-react/lib/overflow-menu--vertical/20';
 
+import Logo from '../../../imgs/logo_obi.png';
+
 const FHeader1 = () => {
 
   let history = useHistory();
@@ -64,12 +66,12 @@ const FHeader1 = () => {
               isActive={isSideNavExpanded}
             />
             <HeaderName element={Link} to="/" prefix="">
-              Fiscal Data Explorer
+              <img src={Logo} alt='' />
             </HeaderName>
             <HeaderNavigation className="f_primarylinks_center" aria-label="HP Fiscal Data Explorer Primary Links">
               <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
                 <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>
+                {/*<HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>*/}
                 <HeaderMenuItem element={Link} to="/expenditure/tracker">District Comparison</HeaderMenuItem>
               </HeaderMenu>
               <HeaderMenu aria-label="Receipts" menuLinkName="Receipts">

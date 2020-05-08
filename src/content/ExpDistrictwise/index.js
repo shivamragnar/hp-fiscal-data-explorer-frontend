@@ -23,6 +23,8 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 //actions
 import { getExpDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/exp_districtwise';
 import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDistrictwiseOnDateRangeChange }  from '../../actions/exp_districtwise_filters';
@@ -238,7 +240,7 @@ const ExpDistrictwise = ({
 
             />
           }
-    
+
 					{ renderSwitch() }
 				</Fragment>
 			)
@@ -247,6 +249,7 @@ const ExpDistrictwise = ({
 
   return (
     <div className="f-content">
+      <FPageMeta pageId = 'expenditure_demandwise' />
       <FPageTitle
         pageTitle="Expenditure | Districtwise"
         pageDescription= {howToUseContent[2].content.body}

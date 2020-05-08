@@ -25,6 +25,8 @@ import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrict
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 import FLegendBar from '../../components/atoms/FLegendBar';
 
+import FPageMeta from '../../components/organisms/FPageMeta';
+
 //actions
 import { getReceiptsDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/receipts_districtwise';
 import { getReceiptsDistrictwiseFiltersData, updateReceiptsDistrictwiseFilters, updateReceiptsDistrictwiseOnDateRangeChange }  from '../../actions/receipts_districtwise_filters';
@@ -208,6 +210,7 @@ const ReceiptsDistrictwise = ({
 
   return (
     <div className="f-content">
+      <FPageMeta pageId = 'receipts_districtwise' />
       <FPageTitle
         pageTitle="Receipts | Districtwise"
         pageDescription= {howToUseContent[4].content.body}
