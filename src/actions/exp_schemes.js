@@ -80,8 +80,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     console.log(districtwiseExpVals);
     districtNames.map((districtName, i) => {
       let datewiseExp = [];
-      let totalExp = { districtName, gross: 0, BTDED: 0, AGDED: 0, netPayment: 0};
-      datewiseExp.push({ "idx": 0, "date":(month_week === "month" ? " " : 0), "gross": 0, "BTDED": 0, "AGDED": 0, "netPayment": 0});
+      let totalExp = { districtName, gross: 0, AGDED: 0, BTDED: 0, netPayment: 0};
+      datewiseExp.push({ "idx": 0, "date":(month_week === "month" ? " " : 0), "gross": 0, "AGDED": 0, "BTDED": 0,  "netPayment": 0});
       districtwiseExpVals[i].map((expArray, i) => {
         let dataObj = {};
         dataObj.idx = i+1;
@@ -89,14 +89,14 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
                        getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
         dataObj.gross = expArray[0];
-        dataObj.BTDED = expArray[1];
-        dataObj.AGDED = expArray[2];
+        dataObj.AGDED = expArray[1];
+        dataObj.BTDED = expArray[2];
         dataObj.netPayment = expArray[3];
         datewiseExp.push(dataObj);
 
         totalExp.gross += expArray[0]
-        totalExp.BTDED += expArray[1]
-        totalExp.AGDED += expArray[2]
+        totalExp.AGDED += expArray[1]
+        totalExp.BTDED += expArray[2]
         totalExp.netPayment += expArray[3]
       })
       tempLineChrtData.push({
@@ -109,8 +109,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
         const { properties : { NAME_2 : districtName_inJson }} = feature; //the district name as in the geojson
         if(districtName_inJson.toUpperCase() === districtName ){
           feature.properties.gross = totalExp.gross;
-          feature.properties.BTDED = totalExp.BTDED;
           feature.properties.AGDED = totalExp.AGDED;
+          feature.properties.BTDED = totalExp.BTDED;
           feature.properties.netPayment = totalExp.netPayment;
         }else{
         }
@@ -130,8 +130,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     tempTableData.headers.push(
       { key: 'districtName', header: 'District' },
       { key: 'gross', header: 'Gross (INR)' },
-      { key: 'BTDED', header: 'BTDED (INR)' },
       { key: 'AGDED', header: 'AGDED (INR)' },
+      { key: 'BTDED', header: 'BTDED (INR)' },
       { key: 'netPayment', header: 'Net Payment (INR)' }
     )
 
@@ -141,8 +141,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     		id: i,
     		'districtName': d.districtName,
     		'gross': d.gross.toLocaleString('en-IN'),
-    		'BTDED': d.BTDED.toLocaleString('en-IN'),
     		'AGDED': d.AGDED.toLocaleString('en-IN'),
+        'BTDED': d.BTDED.toLocaleString('en-IN'),
     		'netPayment': d.netPayment.toLocaleString('en-IN')
     	})
     })
