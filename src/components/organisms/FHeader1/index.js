@@ -69,11 +69,13 @@ const FHeader1 = () => {
               <img src={Logo} alt='' />
             </HeaderName>
             <HeaderNavigation className="f_primarylinks_center" aria-label="HP Fiscal Data Explorer Primary Links">
-              <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
+              <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Districtwise</HeaderMenuItem>
+              {/*<HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
                 <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
-                {/*<HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>*/}
+                <HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>
                 <HeaderMenuItem element={Link} to="/expenditure/tracker">District Comparison</HeaderMenuItem>
-              </HeaderMenu>
+              </HeaderMenu>*/}
               <HeaderMenu aria-label="Receipts" menuLinkName="Receipts">
                 <HeaderMenuItem element={Link} to="/receipts">Details</HeaderMenuItem>
                 <HeaderMenuItem element={Link} to="/receipts/districtwise">Districtwise</HeaderMenuItem>
@@ -81,7 +83,7 @@ const FHeader1 = () => {
               <HeaderMenuItem element={Link} to="/schemes">Schemes</HeaderMenuItem>
             </HeaderNavigation>
             <HeaderNavigation className="f_secondarylinks_right" aria-label="HP Fiscal Data Explorer Secondary Links">
-            { screenWidth >= 1080 ? desktopSecondaryLinks : <div></div> }
+            { screenWidth >= 1225 ? desktopSecondaryLinks : <div></div> }
             </HeaderNavigation>
             <SideNav aria-label="Side navigation" expanded={isSideNavExpanded} isPersistent={false}>
               <SideNavItems>
@@ -94,13 +96,13 @@ const FHeader1 = () => {
                     >
                       Summary
                     </HeaderMenuItem>
-                    <HeaderMenuItem
+                    {/*<HeaderMenuItem
                       element={Link}
                       to="/expenditure/details"
                       onClick={onClickSideNavExpand}
                     >
                       Demand Details
-                    </HeaderMenuItem>
+                    </HeaderMenuItem>*/}
                     <HeaderMenuItem
                       element={Link}
                       to="/expenditure/tracker"
@@ -143,7 +145,7 @@ const FHeader1 = () => {
               </SideNavItems>
             </SideNav>
             <HeaderGlobalBar />
-            { screenWidth < 1080 ? mobileSecondaryLinks : <div></div> }
+            { screenWidth < 1225 ? mobileSecondaryLinks : <div></div> }
           </Header>
         </div>
       )}

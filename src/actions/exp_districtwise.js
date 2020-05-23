@@ -68,8 +68,10 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
+      console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
   		const res = await axios.post(
         `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
+
       );
   		console.log("exp districtwise raw data"); console.log(res.data.records);
 

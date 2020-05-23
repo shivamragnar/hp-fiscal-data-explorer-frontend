@@ -47,14 +47,14 @@
           "text": "View Expenditure Districtwise",
           "route": "/expenditure/tracker"
         },
-        "img": "placeholder"
+        "img": "exp_districtwise_img"
       }
     },
     {
       "id": "receipts",
-      "label": "Receipts | Demand Details",
+      "label": "Receipts | Details",
       "content": {
-        "title": "Receipts | Demand Details",
+        "title": "Receipts | Details",
         "body": [
           "This section provides a detailed account of all revenue accrued to the Government of Himachal Pradesh under different heads of accounts. Heads of accounts are meant to represent the nature of the receipts and the hierarchical flow of money. In this page, you can explore the aggregate revenue accrued to the departments as well as more detailed accounts of the revenue across time.",
           "This data can be obtained in the form of a visual as well as a table that can be downloaded in .csv and .json to enable users to obtain grant specific data points at a more granular level."
@@ -63,7 +63,7 @@
           "text": "View Receipts Demand Details",
           "route": "/receipts"
         },
-        "img": "placeholder"
+        "img": "rec_details_img"
       }
     },
     {
@@ -79,7 +79,7 @@
           "text": "View Receipts Districtwise",
           "route": "/receipts/districtwise"
         },
-        "img": "placeholder"
+        "img": "rec_districtwise_img"
       }
     },
     {
@@ -95,7 +95,7 @@
           "text": "View Schemes",
           "route": "/schemes"
         },
-        "img": "placeholder"
+        "img": "schemes_img"
       }
     }
   ]
