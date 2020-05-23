@@ -10,6 +10,7 @@ export const convertDataToJson = (data) => {
 //2
 export const getWeekwiseDates = ( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex) => {
 
+  console.log("dateFrom",dateFrom, "fromMonthIndex",fromMonthIndex, "toMonthIndex",toMonthIndex, "fromYearIndex)",fromYearIndex);
   //dealing with the case where toMonthIndex falls in the next year
   const toMonthIndexAddOn = toMonthIndex < fromMonthIndex ? 12 : 0;
   var allWeekWiseDays = []; //for the actual tick on x axis and the
