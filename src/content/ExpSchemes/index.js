@@ -245,7 +245,7 @@ const ExpSchemes = ({
       <FPageMeta pageId = 'schemes' />
       <FPageTitle
         pageTitle="Schemes"
-        pageDescription= {howToUseContent[5].content.body}
+        pageDescription= {howToUseContent[4].content.body}
         showLegend={false}
         monthPicker={
           <FMonthPicker
