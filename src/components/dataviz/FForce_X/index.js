@@ -6,8 +6,11 @@ import * as d3 from 'd3';
 
 class FForce_X extends React.Component {
 
+
+
   constructor(props){
     super(props);
+    this.nodeSize = 85 //increase to increase size of bubbles
   }
 
   componentDidMount() {
@@ -19,6 +22,13 @@ class FForce_X extends React.Component {
   componentWillUnmount(){
     console.log("remove svg");
     d3.selectAll("svg").remove();
+  }
+
+  componentDidUpdate(){
+    console.log("propnodes");
+    console.log(this.props.nodes);
+    d3.selectAll("svg").remove();
+    this.drawChart();
   }
 
   drawChart(){
@@ -85,8 +95,8 @@ class FForce_X extends React.Component {
     	.enter()
     	.append("circle")
     	.attr("fill", "#000000")
-    	// .attr("r", d => {d.radius = d.sanction_current/10000000; return d.radius} )
-      .attr("r", d => {d.radius = Math.sqrt(d.sanction_current / Math.PI) / 240; return d.radius} )
+    	// .attr("r", d => {d.radius = d.current/10000000; return d.radius} )
+      .attr("r", d => {d.radius = Math.sqrt(d.current / Math.PI) / (100 - this.nodeSize); return d.radius} )
       .on("mouseover", handleTooltipMouseover)
       .on("mouseout", handleTooltipMouseout)
     	// .call(d3.drag()
@@ -101,7 +111,7 @@ class FForce_X extends React.Component {
       const tooltip_html = (
         `<p class='tt_title'> ${d.demand} ${d.demand_description}</p>
          <div class='tt_body'>
-           <p> Current Sanction: ${d.sanction_current.toLocaleString('en-IN')} INR </p>
+           <p> Current Sanction: ${d.current.toLocaleString('en-IN')} INR </p>
            <p> Percent Change: ${d.pct_change} % </p>
          <div>` )
 

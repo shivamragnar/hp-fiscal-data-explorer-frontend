@@ -16,19 +16,29 @@ export const getExpSummaryData = () => async dispatch => {
     let newestYearDataObj = res.data.records[yearsToCompare[0]];
     let prevYearDataObj = res.data.records[yearsToCompare[1]];
 
+    const getPercent = (curr, prev) => {
+      return Math.round((((curr / prev) - 1)*100)*100)/100;
+    }
+
     Object.values(newestYearDataObj).map((d,i) => {
       let vizObj = {};
       let demand_string = Object.keys(newestYearDataObj)[i];
       let demand_id = demand_string.split('-')[0];
       let demand_desc = demand_string.split('-')[1];
+      vizObj.curr_year = aryOfYears[0];
+      vizObj.prev_year = aryOfYears[1];
       vizObj.demand = demand_id;
       vizObj.demand_description = demand_desc;
-      vizObj.sanction_current = d[0];
-      vizObj.sanction_previous = Object.values(prevYearDataObj)[i][0];
-      vizObj.pct_change = (vizObj.sanction_current/vizObj.sanction_previous) - 1; // in relation to 1 not 100
-      vizObj.exp_current = d[1];
-      vizObj.exp_previous = Object.values(prevYearDataObj)[i][1];
-      vizObj.exp_pct_change = (vizObj.exp_current/vizObj.exp_previous) - 1; // in relation to 1 not 100
+      vizObj.alloc = {
+        current : d[0],
+        previous : Object.values(prevYearDataObj)[i][0]
+      };
+      vizObj.alloc.pct_change = getPercent(vizObj.alloc.current, vizObj.alloc.previous);
+      vizObj.exp = {
+        current : d[1],
+        previous : Object.values(prevYearDataObj)[i][1]
+      };
+      vizObj.exp.pct_change = getPercent(vizObj.exp.current, vizObj.exp.previous) // in relation to 1 not 100
       vizData.push(vizObj);
     })
 
@@ -72,7 +82,7 @@ export const getExpSummaryData = () => async dispatch => {
     dispatch({
       type: GET_EXP_SUMMARY_DATA,
       payload: {
-        vizData: res.data.records,
+        vizData ,
         tableData
       }
     });
