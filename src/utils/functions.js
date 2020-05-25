@@ -138,7 +138,8 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
         const filterOption = {
           filter_name: allFiltersData[idx].key,
           id: obj_key,
-          label: obj_key
+          label: obj_key,
+          value: obj_key
         }
         allFiltersData[idx].val.push(filterOption);
         // console.log(idx);
@@ -195,7 +196,7 @@ export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderR
     })
 
     rawFilterDataAllHeads.data[filter_name.split('-')[0]].map(d => {
-      allFiltersData[i].val.push({ filter_name, id : d, label: d })
+      allFiltersData[i].val.push({ filter_name, id : d, label: d,  value: d })
     })
   })
 
