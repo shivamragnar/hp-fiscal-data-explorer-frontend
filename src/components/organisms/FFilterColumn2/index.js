@@ -2,8 +2,10 @@ import React, {useState, Fragment} from "react";
 import MediaQuery from "react-responsive";
 
 //custom components
-import { MultiSelect } from 'carbon-components-react';
+// import { MultiSelect } from 'carbon-components-react';
 import {Tooltip} from 'carbon-components-react'
+import MultiSelect from "../../molecules/FMultiSelect" 
+
 //carbon icons
 import FilterIcon from '@carbon/icons-react/lib/filter/32'
 import CloseIcon from '@carbon/icons-react/lib/close/32'

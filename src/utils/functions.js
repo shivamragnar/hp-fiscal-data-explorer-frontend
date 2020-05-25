@@ -194,7 +194,7 @@ export const resetFiltersToAllFilterHeads = (rawFilterDataAllHeads, filterOrderR
     })
 
     rawFilterDataAllHeads.data[filter_name.split('-')[0]].map(d => {
-      allFiltersData[i].val.push({ filter_name, id : d, label: d })
+      allFiltersData[i].val.push({ filter_name, id : d, label: d,  value: d })
     })
   })
 

@@ -4,6 +4,9 @@
 // @import './scss/normalize.scss';
 @import './scss/vars.scss';
 
+// Antd styles
+@import "~antd/dist/antd.css";
+
 //components styles
 @import './components/atoms/FButton/style.scss';
 @import './components/atoms/FLoading/style.scss';
