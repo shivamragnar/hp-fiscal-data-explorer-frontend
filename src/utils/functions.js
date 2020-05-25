@@ -137,7 +137,8 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
         const filterOption = {
           filter_name: allFiltersData[idx].key,
           id: obj_key,
-          label: obj_key
+          label: obj_key,
+          value: obj_key
         }
         allFiltersData[idx].val.push(filterOption);
         // console.log(idx);

@@ -10,7 +10,7 @@ const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem
   } 
 
   return (
-    <div className={className}>
+    <div className={className} key={items && items.length && items[0].filter_name}>
     <Select
       mode="multiple"
       disabled={disabled}
