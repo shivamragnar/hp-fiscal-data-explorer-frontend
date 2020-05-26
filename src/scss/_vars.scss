@@ -34,7 +34,7 @@ $brandBlueLightOp40: rgba(179,216,231,0.4);
 
 
 @mixin serif-style-1(){
-  font-family: 'IBM Plex Serif';
+  font-family: 'IBM Plex Serif' !important;
   font-weight: 500;
   font-size: 60px;
 
@@ -44,7 +44,7 @@ $brandBlueLightOp40: rgba(179,216,231,0.4);
 }
 
 @mixin serif-style-2(){
-  font-family: 'IBM Plex Serif';
+  font-family: 'IBM Plex Serif' !important;
   font-weight: 400;
   font-size: 36px;
   line-height: 1.5em;
@@ -56,7 +56,7 @@ $brandBlueLightOp40: rgba(179,216,231,0.4);
 }
 
 @mixin serif-style-3--italic{
-  font-family: 'IBM Plex Serif';
+  font-family: 'IBM Plex Serif' !important;
   font-size: 20px;
   line-height: 1.5em;
   font-style: italic;

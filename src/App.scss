@@ -37,7 +37,9 @@
 @import './content/ExpDetails/style.scss';
 @import './content/ExpDistrictwise/style.scss';
 
-
+body{
+  font-family: 'IBM Plex Sans' !important;
+}
 
 //carbon overrides
 .f-content{
