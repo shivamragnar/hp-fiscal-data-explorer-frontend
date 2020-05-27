@@ -2,6 +2,8 @@ import React from "react";
 
 import { Select } from 'antd';
 
+import "./_style.scss"
+
 const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem, label, invalid, invalidText, onChange, items}) => {
 
   const handleChange = (val, arr) => {
