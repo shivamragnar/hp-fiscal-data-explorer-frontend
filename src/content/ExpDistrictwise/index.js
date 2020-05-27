@@ -10,7 +10,8 @@ import { MultiSelect } from 'carbon-components-react';
 //custom components
 import FLoading from '../../components/atoms/FLoading';
 import FPageTitle from '../../components/organisms/FPageTitle';
-import FMonthPicker from '../../components/molecules/FMonthPicker';
+// import FMonthPicker from '../../components/molecules/FMonthPicker';
+import FMonthPicker from '../../components/molecules/FMonthPickerUpdated'
 
 import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
@@ -78,7 +79,7 @@ const ExpDistrictwise = ({
     FMapVizView : "gross"
   });
 
-  console.log(activeVizView.FTimeSeriesVizView);
+  // console.log(activeVizView.FTimeSeriesVizView);
 
   useEffect(() => {
     // getExpDistrictwiseData(initData, activeFilters, dateRange);
@@ -119,14 +120,15 @@ const ExpDistrictwise = ({
       }
     })
 
-    console.log("expDistrictwiseActiveFilters");
-    console.log(expDistrictwiseActiveFilters);
+    // console.log("expDistrictwiseActiveFilters");
+    // console.log(expDistrictwiseActiveFilters);
     getExpDistrictwiseData(initData, expDistrictwiseActiveFilters, dateRange);
     updateExpDistrictwiseFilters(e, key, expDistrictwiseActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
 
 
   const onDateRangeSet = (newDateRange) => {
+    console.log(newDateRange)
 		updateDistrictwiseOnDateRangeChange(initData, newDateRange, expDistrictwiseActiveFilters);
 	}
 
@@ -256,10 +258,12 @@ const ExpDistrictwise = ({
         showLegend={false}
         monthPicker={
           <FMonthPicker
-            defaultSelect = {{
-              years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
-              months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
-            dateRange = {{years:[2018, 2019], months:[4, 3]}}
+            // defaultSelect = {{
+            //   years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+            //   months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+            // dateRange = {{years:[2018, 2019], months:[4, 3]}}
+            // dateRange={["2015/04/01", "2020/03/31"]}
+            availableFinancialYears={[{label: "2014-2015", value: "2014-2015"},{label: "2015-2016", value: "2015-2016"},{label: "2016-2017", value: "2016-2017"},{label: "2017-2018", value: "2017-2018"}, {label: "2018-2019", value: "2018-2019"}]}
             onDateRangeSet={onDateRangeSet}
           />
         }
