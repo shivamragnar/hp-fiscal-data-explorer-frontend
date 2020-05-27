@@ -20,7 +20,8 @@ import { ContentSwitcher, Switch } from 'carbon-components-react';
 import FLoading from '../../components/atoms/FLoading';
 import FBarChart from '../../components/dataviz/FBarChart';
 import FTable from '../../components/dataviz/FTable';
-import FMonthPicker from '../../components/molecules/FMonthPicker';
+// import FMonthPicker from '../../components/molecules/FMonthPicker';
+import FMonthPicker from '../../components/molecules/FMonthPickerUpdated'
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
@@ -191,10 +192,12 @@ const Receipts = ( { receipts : {
 				showLegend={false}
 				monthPicker={
 					<FMonthPicker
-						defaultSelect = {{
-							years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
-							months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
-						dateRange = {{years:[2018, 2019], months:[4, 3]}}
+						// defaultSelect = {{
+						//   years:[ parseInt(dateRange[0].split('-')[0]), parseInt(dateRange[1].split('-')[0]) ],
+						//   months:[ parseInt(dateRange[0].split('-')[1]), parseInt(dateRange[1].split('-')[1]) ] }}
+						// dateRange = {{years:[2018, 2019], months:[4, 3]}}
+						// dateRange={["2015/04/01", "2020/03/31"]}
+						availableFinancialYears={[{label: "2015-2016", value: "2015-2016"},{label: "2016-2017", value: "2016-2017"},{label: "2017-2018", value: "2017-2018"}, {label: "2018-2019", value: "2018-2019"}, {label: "2019-2020", value: "2019-2020"}]}
 						onDateRangeSet={onDateRangeSet}
 					/>
 				}

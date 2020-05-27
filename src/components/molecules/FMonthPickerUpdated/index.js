@@ -11,8 +11,8 @@ const dateFormat = 'MMM. YYYY'
 const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
     const [financialYear, setFinancialYear] = useState("2019-2020")
     const [rangePickerValue, setRangePickerValue] = useState([
-        moment(`2018/04/01`, "YYYY/MM/DD"),
-        moment(`2019/03/31`, "YYYY/MM/DD")
+        moment(`2019/04/01`, "YYYY/MM/DD"),
+        moment(`2020/03/31`, "YYYY/MM/DD")
     ])
     
     const handleSelectYear = (val, arr) => {
