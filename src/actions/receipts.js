@@ -78,7 +78,9 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     ? res.data.records
     : res.data.records.map(d => d[1] ) ;
 
-    month_week === 'month' && tempVizData.push({"date": "", "receipt": 0 });  
+
+    month_week === "month" &&
+    tempVizData.push({"date": " ", "receipt": 0 });
 
     valsToMap.map((record, i) => {
       var dataObj = {};
