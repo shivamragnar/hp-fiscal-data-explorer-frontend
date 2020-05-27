@@ -51,6 +51,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
             picker="month"
             allowClear={false}
             value={rangePickerValue}
+            separator={""}
             disabledDate={current =>
                 current &&
                 (current <  moment(`${financialYear.split('-')[0]}/04/01`, "YYYY/MM/DD") ||
