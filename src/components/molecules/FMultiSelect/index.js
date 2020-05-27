@@ -16,7 +16,7 @@ const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem
     <Select
       mode="multiple"
       disabled={disabled}
-      defaultValue={initialSelectedItems ? initialSelectedItems.map(item => item.label) : []}
+      value={initialSelectedItems ? initialSelectedItems.map(item => item.label) : []}
       style={{ width: '100%' }}
       placeholder="ALL"
       options={items}
