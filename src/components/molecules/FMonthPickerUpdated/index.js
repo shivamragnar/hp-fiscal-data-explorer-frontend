@@ -9,18 +9,30 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'MMM. YYYY'
 
 const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
-    const [financialYear, setFinancialYear] = useState("2018-2019")
+    const [financialYear, setFinancialYear] = useState("2019-2020")
     const [rangePickerValue, setRangePickerValue] = useState([
         moment(`2018/04/01`, "YYYY/MM/DD"),
         moment(`2019/03/31`, "YYYY/MM/DD")
     ])
     
     const handleSelectYear = (val, arr) => {
+        let dates = val.split('-')
         setFinancialYear(val)
         setRangePickerValue([
-            moment(`${val.split('-')[0]}/04/01`, "YYYY/MM/DD"),
-            moment(`${val.split('-')[1]}/03/31`, "YYYY/MM/DD")
+            moment(`${dates[0]}/04/01`, "YYYY/MM/DD"),
+            moment(`${dates[1]}/03/31`, "YYYY/MM/DD")
         ])
+        let dateObject = {
+            from: {
+                year: dates[0],
+                month: 4
+            },
+            to: {
+                year: dates[1],
+                month: 3
+            }
+        }
+        onDateRangeSet(dateObject)
     }
     
     const handleDateRangeSelection = (dates) => {
@@ -42,7 +54,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
     return(
         <div className="ml-20">
            <Select 
-           defaultValue="2018-2019"
+           defaultValue="2019-2020"
            options={availableFinancialYears} 
            onChange={handleSelectYear}
            />
