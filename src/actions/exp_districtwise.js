@@ -12,7 +12,9 @@ import {
   getWeekwiseDates,
   calcMonthOrWeek,
   createBudgetCodeString,
-  createObjForPayload
+  createObjForPayload,
+  calcXTickVals, //0----
+  calcXTickFormats //0----
 } from '../utils/functions';
 
 //data-refs
@@ -38,6 +40,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
     }else{
 
       const [ dateFrom , dateTo ] = dateRange;
+      console.log("dateRange", dateRange)
       const { months , years, years_short } = yymmdd_ref;
       const month_week = calcMonthOrWeek(dateFrom, dateTo);
       const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
@@ -54,43 +57,43 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const activeFilterVals = Object.values(activeFilters);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      // var objForPayload = {};
-      // activeFilterVals.map((val, i) => {
-      //     let tempVal = val.map(item => { return item.split('-')[0]});
-      //     tempVal = tempVal.join('","');
-      //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-      // })
-      console.log("objForPayload");
-      console.log(objForPayload);
+      // console.log("objForPayload", objectForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE, payload: {} });
 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
-      console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
-  		const res = await axios.post(
-        `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
-
-      );
-  		console.log("exp districtwise raw data"); console.log(res.data.records);
-
+      // console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
+      const res = await axios.post( `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload})
+  		// console.log("exp districtwise raw data", res.data.records);
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
       const districtwiseExpVals = Object.values(res.data.records);
-      console.log("districtwiseExpVals");
-      console.log(districtwiseExpVals);
+      console.log('sssssss',districtwiseExpVals)
+      //calc x-tick-vals if is week
+      let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1----
+
+      //calc x-tick-formats if is week
+      let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, dateTo, dateFrom);  //2----
+
       districtNames.map((districtName, i) => {
         let datewiseExp = [];
         let totalExp = { districtName, gross: 0, AGDED: 0, BTDED: 0, netPayment: 0};
         // datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "AGDED": 0, "BTDED": 0, "netPayment": 0});
-        districtwiseExpVals[i].map((expArray, i) => {
+        let distExpValsToMap = month_week === 'month' //3----
+        ? districtwiseExpVals[i]
+        : districtwiseExpVals[i].map(d => d[1] ) ;
+        // console.log("distExpValsToMap", distExpValsToMap);
+
+        distExpValsToMap.map((expArray, i) => { //4----
           let dataObj = {};
           dataObj.idx = i;
-          dataObj.date = month_week === "month" ?
-                         months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                         getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
+          dataObj.date = month_week === "month"
+                         ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
+                         : xTickVals[i] //5----
+
           dataObj.gross = expArray[0];
           dataObj.AGDED = expArray[1];
           dataObj.BTDED = expArray[2];
@@ -120,14 +123,9 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         })
       })
 
-      console.log("tempLineChrtData");
-      console.log(tempLineChrtData);
-
-      console.log("tempBarChrtData");
-      console.log(tempBarChrtData);
-
-      console.log("tempMapData");
-      console.log(tempMapData);
+      // console.log("tempLineChrtData", tempLineChrtData);
+      // console.log("tempBarChrtData", tempBarChrtData);
+      // console.log("tempMapData", tempMapData);
 
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
@@ -152,8 +150,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       		'netPayment': d.netPayment.toLocaleString('en-IN')
       	})
       })
-      console.log("tempTableData");
-      console.log(tempTableData);
+
+      // console.log("tempTableData", tempTableData);
 
       dispatch({
         type: GET_EXP_DISTRICTWISE_DATA,
@@ -165,8 +163,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
               data:tempBarChrtData
             },
             lineChrtData: {
-              xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
-              xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
+              xLabelVals: month_week === "week" ? xTickVals : 'null', //6---
+              xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseExp.map(d => d.date),  //7---
               data:tempLineChrtData
             },
             tableData: tempTableData

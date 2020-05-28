@@ -9,7 +9,9 @@ import {
   getWeekwiseDates,
   calcMonthOrWeek,
   createBudgetCodeString,
-  createObjForPayload
+  createObjForPayload,
+  calcXTickVals,
+  calcXTickFormats
 } from '../utils/functions';
 
 
@@ -41,6 +43,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     dispatch({ type: SET_DATA_LOADING_RECEIPTS, payload: {} });
 
     //1 PREP AND MAKE API CALL
+    // console.log("hello",`https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
     console.log("Axios Receipts Fetch Started");
     // console.log(`https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
     const config = { headers: {
@@ -54,6 +57,13 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
       `https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
 		console.log("receipts raw data"); console.log(res.data.records);
+    console.log('sssssss',[res.data.records])
+    //calc x-tick-vals if is week
+    let xTickVals = calcXTickVals(month_week, [res.data.records]); //1----
+    console.log("xTickVals", xTickVals);
+
+    //calc x-tick-formats if is week
+    let xTickFormats = calcXTickFormats(month_week, [res.data.records], dateTo, dateFrom);  //2----
 
     //2 PREP DATA FOR VISUALIZATION
     var highestRecord = 0;
@@ -64,13 +74,21 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     })
     highestRecord = Math.round(highestRecord);
 
-    tempVizData.push({"date":(month_week === "month" ? " " : 0), "receipt": 0 });
-    res.data.records.map((record, i) => {
+    let valsToMap = month_week === 'month' //3----
+    ? res.data.records
+    : res.data.records.map(d => d[1] ) ;
+
+
+    month_week === "month" &&
+    tempVizData.push({"date": " ", "receipt": 0 });
+
+    valsToMap.map((record, i) => {
       var dataObj = {};
 
       dataObj.date = month_week === "month" ?
-                     months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                     getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
+                     months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
+                     : xTickVals[i] //5----
+
       dataObj.receipt = Math.round(record[0]*100)/100;
       tempVizData.push(dataObj);
     })
@@ -100,8 +118,8 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
       payload: {
         data: {
           vizData: {
-            xLabelVals:getWeekwiseDates(dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
-            xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
+            xLabelVals: month_week === "week" ? xTickVals : 'null', //6---
+            xLabelFormat: month_week === "week" ? xTickFormats : tempVizData.map(d => d.date),  //7---
             data:tempVizData,
           },
           tableData: tempTableData

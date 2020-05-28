@@ -36,11 +36,13 @@
     .f-cover-title{
       @include serif-style-1();
       line-height: 1.2em;
+      color: $white;
     }
 
     .f-cover-subtitle{
       padding-top: 2rem;
       line-height: 1.6em;
+      color: $white;
     }
   }
 

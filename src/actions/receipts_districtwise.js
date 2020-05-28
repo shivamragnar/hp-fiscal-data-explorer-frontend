@@ -12,7 +12,9 @@ import {
   getWeekwiseDates,
   calcMonthOrWeek,
   createBudgetCodeString,
-  createObjForPayload
+  createObjForPayload,
+  calcXTickVals,
+  calcXTickFormats
 } from '../utils/functions';
 
 //data-refs
@@ -54,41 +56,40 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const activeFilterVals = Object.values(activeFilters);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-
-      // var objForPayload = {};
-      // activeFilterVals.map((val, i) => {
-      //     let tempVal = val.map(item => { return item.split('-')[0]});
-      //     tempVal = tempVal.join('","');
-      //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-      // })
-      console.log("objForPayload"); console.log(objForPayload);
+      // console.log("objForPayload"); console.log(objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE, payload: {} });
 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
-  		const res = await axios.post(
-        //******NEEDS TO BE CHANGED************//
-        `https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
-      );
-  		console.log("receipts districtwise raw data"); console.log(res.data.records);
-
+  		const res = await axios.post(`https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload});
+  		// console.log("receipts districtwise raw data", res.data.records);
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
       const districtwiseRecVals = Object.values(res.data.records);
-      console.log("districtwiseRecVals");
-      console.log(districtwiseRecVals);
+      // console.log("districtwiseRecVals", districtwiseRecVals);
+
+      //calc x-tick-vals if is week
+      let xTickVals = calcXTickVals(month_week, districtwiseRecVals);
+      //calc x-tick-formats if is week
+      let xTickFormats = calcXTickFormats(month_week, districtwiseRecVals, dateTo, dateFrom);
+
+
       districtNames.map((districtName, i) => {
         let datewiseRec = [];
         let totalRec = { districtName, receipt: 0 };
-        districtwiseRecVals[i].map((recArray, i) => {
+        let distRecValsToMap = month_week === 'month'
+        ? districtwiseRecVals[i]
+        : districtwiseRecVals[i].map(d => d[1] ) ;
+
+        distRecValsToMap.map((recArray, i) => {
           let dataObj = {};
           dataObj.idx = i;
           dataObj.date = month_week === "month" ?
-                         months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                         getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
+                         months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
+                         : xTickVals[i] //5----
           dataObj.receipt = recArray[0];
           datewiseRec.push(dataObj);
           totalRec.receipt += recArray[0]
@@ -110,14 +111,9 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
         })
       })
 
-      console.log("tempLineChrtData");
-      console.log(tempLineChrtData);
-
-      console.log("tempBarChrtData");
-      console.log(tempBarChrtData);
-
-      console.log("tempMapData");
-      console.log(tempMapData);
+      // console.log("tempLineChrtData", tempLineChrtData);
+      // console.log("tempBarChrtData", tempBarChrtData);
+      // console.log("tempMapData", tempMapData);
 
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
@@ -136,8 +132,8 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       		'receipt': d.receipt.toLocaleString('en-IN')
       	})
       })
-      console.log("tempTableData");
-      console.log(tempTableData);
+
+      // console.log("tempTableData", tempTableData);
 
       dispatch({
         type: GET_RECEIPTS_DISTRICTWISE_DATA,
@@ -149,8 +145,8 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
               data:tempBarChrtData
             },
             lineChrtData: {
-              xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
-              xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
+              xLabelVals: month_week === "week" ? xTickVals : 'null', //6---
+              xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseRec.map(d => d.date),  //7---
               data:tempLineChrtData
             },
             tableData: tempTableData
@@ -164,9 +160,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
   } catch (err) {
     dispatch({
       type: RECEIPTS_DISTRICTWISE_DATA_ERROR,
-      payload: {
-        status: err
-      }
+      payload: { status: err }
     });
   }
 };

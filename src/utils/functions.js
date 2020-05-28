@@ -1,5 +1,37 @@
+import moment from 'moment';
+
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var scsr_offset = require("../data/scsr_offset.json");
+
+
+export const calcXTickVals = (month_week, districtwiseVals) => {
+  let offset = 0;
+  let corresWeekNum = month_week !== 'month' && districtwiseVals[0].map((d,i) => {
+    if(i !== 0 && districtwiseVals[0][i-1][0] > d[0]){ //if year has changed
+       offset = districtwiseVals[0][i-1][0]+1;
+    }
+    return offset + d[0];
+  })
+
+  return corresWeekNum;
+}
+
+export const calcXTickFormats = (month_week, districtwiseVals, dateTo, dateFrom) => {
+  let switchYear = false;
+  let corresWeekDateRange = month_week !== 'month' && districtwiseVals[0].map((d,i) => {
+    if(i !== 0 && districtwiseVals[0][i-1][0] > d[0]){ //if year has changed
+       switchYear = true;
+    }
+    let yearForMoment = switchYear === true ? dateTo : dateFrom;
+    return (
+      `${moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').startOf('week').format('DD MMM YY') /*gets the sunday of the week*/}
+      to
+      ${moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').endOf('week').format('DD MMM YY') /*gets the saturday of the week*/}`
+
+    )
+  })
+  return corresWeekDateRange;
+}
 
 //1
 export const convertDataToJson = (data) => {

@@ -10,7 +10,9 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
-  createObjForPayload
+  createObjForPayload,
+  calcXTickVals,
+  calcXTickFormats
 } from '../utils/functions';
 
 //data-refs
@@ -41,53 +43,48 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     const tempLineChrtData = [];
     const tempBarChrtData = [];
     const tempMapData = JSON.parse(hp_geojson);
-    // console.log("og object");
-    // console.log(hp_geojson);
-    // console.log("temp map data obj");
-    // console.log(tempMapData);
     const tempTableData = { headers : [], rows : [] };
 
     const activeFilterKeys = Object.keys(activeFilters);
     const activeFilterVals = Object.values(activeFilters);
 
     const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-
-    // var objForPayload = {};
-    // activeFilterVals.map((val, i) => {
-    //     let tempVal = val.map(item => { return item.split('-')[0]});
-    //     tempVal = tempVal.join('","');
-    //     objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
-    //
-    // })
-    console.log("objForPayload");
-    console.log(objForPayload);
+    // console.log("objForPayload", objForPayload);
 
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES, payload: {} });
 
     //1 PREP AND MAKE API CALL
     const config = { headers: { "content-type": "application/json" } };
-		const res = await axios.post(
-      `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload}
-    );
-		console.log("exp districtwise raw data"); console.log(res.data.records);
-
+		const res = await axios.post( `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload} );
+		// console.log("exp districtwise raw data", res.data.records);
 
     //2 PREP DATA FOR VISUALIZATION
     const districtNames = Object.keys(res.data.records);
-    const districtwiseExpVals = Object.values(res.data.records);
-    console.log("districtwiseExpVals");
-    console.log(districtwiseExpVals);
+    const districtwiseSchemesVals = Object.values(res.data.records);
+
+    //calc x-tick-vals if is week
+    let xTickVals = calcXTickVals(month_week, districtwiseSchemesVals); //1----
+
+    //calc x-tick-formats if is week
+    let xTickFormats = calcXTickFormats(month_week, districtwiseSchemesVals, dateTo, dateFrom);  //2----
+    // console.log("districtwiseSchemesVals", districtwiseSchemesVals);
+
     districtNames.map((districtName, i) => {
       let datewiseExp = [];
       let totalExp = { districtName, gross: 0, AGDED: 0, BTDED: 0, netPayment: 0};
-      datewiseExp.push({ "idx": 0, "date":(month_week === "month" ? " " : 0), "gross": 0, "AGDED": 0, "BTDED": 0,  "netPayment": 0});
-      districtwiseExpVals[i].map((expArray, i) => {
+      // datewiseExp.push({ "idx": 0, "date":(month_week === "month" ? " " : 0), "gross": 0, "AGDED": 0, "BTDED": 0,  "netPayment": 0});
+
+      let distSchValsToMap = month_week === 'month'
+      ? districtwiseSchemesVals[i]
+      : districtwiseSchemesVals[i].map(d => d[1] ) ;
+
+      distSchValsToMap.map((expArray, i) => {
         let dataObj = {};
         dataObj.idx = i+1;
         dataObj.date = month_week === "month" ?
-                       months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] :
-                       getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis[i];
+                       months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
+                       : xTickVals[i];
         dataObj.gross = expArray[0];
         dataObj.AGDED = expArray[1];
         dataObj.BTDED = expArray[2];
@@ -117,14 +114,9 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
       })
     })
 
-    console.log("tempLineChrtData");
-    console.log(tempLineChrtData);
-
-    console.log("tempBarChrtData");
-    console.log(tempBarChrtData);
-
-    console.log("tempMapData");
-    console.log(tempMapData);
+    // console.log("tempLineChrtData", tempLineChrtData);
+    // console.log("tempBarChrtData", tempBarChrtData);
+    // console.log("tempMapData", tempMapData);
 
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
@@ -134,7 +126,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
       { key: 'BTDED', header: 'BTDED (INR)' },
       { key: 'netPayment', header: 'Net Payment (INR)' }
     )
-
 
     tempBarChrtData.map((d, i) => {
     	tempTableData.rows.push({
@@ -146,8 +137,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     		'netPayment': d.netPayment.toLocaleString('en-IN')
     	})
     })
-    console.log("tempTableData");
-    console.log(tempTableData);
+
+    // console.log("tempTableData", tempTableData);
 
     dispatch({
       type: GET_EXP_SCHEMES_DATA,
@@ -158,8 +149,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
             data:tempBarChrtData
           },
           lineChrtData: {
-            xLabelVals:getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_x_axis,
-            xLabelFormat: month_week === "week" ? getWeekwiseDates( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex).date_for_tick : null,
+            xLabelVals: month_week === "week" ? xTickVals : 'null', //6---
+            xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseExp.map(d => d.date),  //7---
             data:tempLineChrtData
           },
           tableData: tempTableData
