@@ -2,6 +2,8 @@ import React from "react";
 
 import { Select } from 'antd';
 
+import "./_style.scss"
+
 const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem, label, invalid, invalidText, onChange, items}) => {
 
   const handleChange = (val, arr) => {
@@ -14,7 +16,7 @@ const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem
     <Select
       mode="multiple"
       disabled={disabled}
-      defaultValue={initialSelectedItems ? initialSelectedItems.map(item => item.label) : []}
+      value={initialSelectedItems ? initialSelectedItems.map(item => item.label) : []}
       style={{ width: '100%' }}
       placeholder="ALL"
       options={items}
