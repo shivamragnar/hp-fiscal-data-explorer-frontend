@@ -24,6 +24,7 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 
 import FPageMeta from '../../components/organisms/FPageMeta';
+import FNoDataFound from '../../components/organisms/FNoDataFound';
 
 //actions
 import { getExpDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/exp_districtwise';
@@ -47,6 +48,7 @@ const ExpDistrictwise = ({
       tableData : { headers, rows }
     },
     loading,
+    error,
     activeVizIdx,
     activeFilters,
     dateRange
@@ -211,11 +213,14 @@ const ExpDistrictwise = ({
   }
 
   const createDataUIComponent = () => {
-		if(loading === true){
-			return <FLoading />;
-		}else{
-			return (
-				<Fragment>
+    switch(true){
+      case loading :
+      return <FLoading />;
+      case error.status === 'emptyResponseError' :
+      return <FNoDataFound />;
+      default :
+      return (
+        <Fragment>
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
               <Switch  text="Map" />
@@ -243,8 +248,9 @@ const ExpDistrictwise = ({
 
 					{ renderSwitch() }
 				</Fragment>
-			)
-		}
+      )
+    }
+
 	}
 
   return (

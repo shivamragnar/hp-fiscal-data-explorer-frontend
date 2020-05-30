@@ -26,6 +26,7 @@ import { getExpSchemesData, resetActiveFiltersAndDateRange }  from '../../action
 import { getExpSchemesFiltersData, updateExpSchemesFilters, updateSchemesOnDateRangeChange }  from '../../actions/exp_schemes_filters';
 
 import FPageMeta from '../../components/organisms/FPageMeta';
+import FNoDataFound from '../../components/organisms/FNoDataFound';
 
 //data
 import howToUseContent from '../../data/howToUseContent.json';
@@ -47,7 +48,8 @@ const ExpSchemes = ({
     },
     loading,
     activeFilters,
-    dateRange
+    dateRange,
+    error
   },
   exp_schemes_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
   getExpSchemesData,
@@ -74,15 +76,6 @@ const ExpSchemes = ({
     FMapVizView : "gross"
   });
 
-  useEffect(() => {
-    // getExpSchemesData(initData, activeFilters, dateRange);
-    // getExpSchemesFiltersData(allFiltersData, rawFilterDataAllHeads);
-
-    return () => {
-      // resetActiveFiltersAndDateRange();
-    };
-
-  }, []);
 
   const clearAllSelectedOptions = (filterName) => {
     document
@@ -205,11 +198,14 @@ const ExpSchemes = ({
   }
 
   const createDataUIComponent = () => {
-		if(loading === true){
-			return <FLoading />;
-		}else{
-			return (
-				<Fragment>
+    switch(true){
+      case loading === true :
+      return <FLoading />;
+      case error.status === 'emptyResponseError' :
+      return <FNoDataFound />;
+      default :
+      return (
+        <Fragment>
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Map" />
@@ -236,8 +232,8 @@ const ExpSchemes = ({
           }
 					{ renderSwitch() }
 				</Fragment>
-			)
-		}
+      )
+    }
 	}
 
   return (

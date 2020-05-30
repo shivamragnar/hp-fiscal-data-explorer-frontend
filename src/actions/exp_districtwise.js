@@ -67,7 +67,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       // console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
       const res = await axios.post( `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload})
   		// console.log("exp districtwise raw data", res.data.records);
-
+      if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
       const districtwiseExpVals = Object.values(res.data.records);
@@ -179,7 +179,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
     dispatch({
       type: EXP_DISTRICTWISE_DATA_ERROR,
       payload: {
-        status: err
+        filters : { dateRange, activeFilters },
+        error : { status: err }
       }
     });
   }

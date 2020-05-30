@@ -34,12 +34,15 @@ export default function(state = initialState, action) {
     case SET_DATA_LOADING_EXP_SCHEMES:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: {}
       };
     case EXP_SCHEMES_DATA_ERROR:
       return {
         ...state,
-        error: payload,
+        error: payload.error,
+        dateRange: payload.filters.dateRange,
+        activeFilters: payload.filters.activeFilters,
         loading: false
       };
     case RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES:

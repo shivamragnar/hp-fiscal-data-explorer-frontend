@@ -27,6 +27,7 @@
 @import './components/dataviz/FForce_X/style.scss';
 @import './components/dataviz/FMap/style.scss';
 @import './components/organisms/DidYouKnow/style.scss';
+@import './components/organisms/FNoDataFound/style.scss';
 
 //content styles
 @import './content/Home/style.scss';
@@ -43,7 +44,7 @@ body{
 
 //carbon overrides
 .f-content{
-  padding-top: 3rem;
+  padding-top: 4rem;
   transform: none;
 
   &.aboutus{
@@ -82,7 +83,7 @@ body{
   width: 18rem;
   left: -18rem;
   top: 0;
-  padding: 8.8rem 0 0 0;
+  padding: 9.8rem 0 0 0;
   z-index: 10;
   transition: left 0.3s ease-out;
 
@@ -178,4 +179,15 @@ body{
   font-weight: 600;
   line-height: 1.6em;
   color: #B3D8E7;
+}
+
+.f-axis-label-style{
+  font-family: 'IBM Plex Sans';
+  font-size: 10px;
+  fill: rgb(37, 37, 37);
+  font-weight: 400;
+  text-transform: uppercase;
+  word-spacing: 0.2em;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
 }

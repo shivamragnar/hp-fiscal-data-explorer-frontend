@@ -10,13 +10,19 @@ class FForce_X extends React.Component {
 
   constructor(props){
     super(props);
-    this.nodeSize = 85 //increase to increase size of bubbles
+    this.nodeSize = 85; //increase to increase size of bubbles
+    this.axisLabelOptions = {
+      alloc:  'label for allocated',
+      exp: 'label for expenditure'
+    };
+    this.axisLabel = '';
   }
 
   componentDidMount() {
+    this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
-    console.log("propnodes");
-    console.log(this.props.nodes);
+    // console.log("propnodes");
+    // console.log(this.props.nodes);
   }
 
   componentWillUnmount(){
@@ -25,10 +31,12 @@ class FForce_X extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log("propnodes");
-    console.log(this.props.nodes);
+    // console.log("propnodes");
+    // console.log(this.props.nodes);
     d3.selectAll("svg").remove();
+    this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
+
   }
 
   drawChart(){
@@ -69,13 +77,21 @@ class FForce_X extends React.Component {
     	.range([padding, width - padding ]);
 
     // Add scales to axis
-    var x_axis = d3.axisTop()
-                   .scale(scale);
+    var x_axis = d3.axisTop().scale(scale);
 
     //Append group and insert axis
-    var axisContainer = svg.append("g")
-       .style("transform","translateY(50px)");
-    axisContainer.call(x_axis)
+    svg.append("g")
+       .style("transform","translateY(50px)")
+       .call(d3.axisTop().scale(scale))
+
+
+  // text label for the x axis
+  svg.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," +
+                           (20) + ")")
+      .attr("class","f-axis-label-style")
+      .text(this.axisLabel);
 
     // Define the div for the tooltip
     var tooltip = d3.select("body").append("div")

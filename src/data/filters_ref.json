@@ -30,8 +30,8 @@
     "Treasury_Code-Treasury",
     "DDO_Code-DDO_Desc",
     "major_code-major_desc",
-    "sub_major_code-sub_major_desc",
-    "minor_code-minor_desc",
+    "sub_major_code",
+    "minor_code",
     "sub_minor_code-sub_minor_desc"
   ],
   "exp_schemes" : [
@@ -52,8 +52,8 @@
   ],
   "receipts" : [
      "major-major_desc",
-     "sub_major-sub_major_desc",
-     "minor-minor_desc",
+     "sub_major",
+     "minor",
      "sub_minor-sub_minor_desc"
   ],
 

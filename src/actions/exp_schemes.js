@@ -58,6 +58,7 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     const config = { headers: { "content-type": "application/json" } };
 		const res = await axios.post( `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload} );
 		// console.log("exp districtwise raw data", res.data.records);
+    if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
     //2 PREP DATA FOR VISUALIZATION
     const districtNames = Object.keys(res.data.records);
@@ -164,7 +165,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     dispatch({
       type: EXP_SCHEMES_DATA_ERROR,
       payload: {
-        status: err
+        filters : { dateRange, activeFilters },
+        error : { status: err }
       }
     });
   }

@@ -26,6 +26,8 @@ import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 import FLegendBar from '../../components/atoms/FLegendBar';
 
+import FNoDataFound from '../../components/organisms/FNoDataFound';
+
 //import helpers
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
@@ -48,7 +50,8 @@ const Receipts = ( { receipts : {
 											 loading,
 											 fetching,
 											 activeFilters,
-											 dateRange
+											 dateRange,
+											 error
 									 },
 									 receipts_filters : { allFiltersData, rawFilterData, loading : filtersLoading },
 									 getReceiptsData,
@@ -103,9 +106,12 @@ const Receipts = ( { receipts : {
 	}
 
 	const createDataUIComponent = () => {
-		if(loading === true){
-			return <FLoading />;
-		}else{
+		switch(true){
+			case loading === true :
+      return <FLoading />;
+      case error.status === 'emptyResponseError' :
+      return <FNoDataFound />;
+      default :
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">

@@ -26,6 +26,7 @@ import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 import FLegendBar from '../../components/atoms/FLegendBar';
 
 import FPageMeta from '../../components/organisms/FPageMeta';
+import FNoDataFound from '../../components/organisms/FNoDataFound';
 
 //actions
 import { getReceiptsDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/receipts_districtwise';
@@ -51,7 +52,8 @@ const ReceiptsDistrictwise = ({
     loading,
     activeVizIdx,
     activeFilters,
-    dateRange
+    dateRange,
+    error
   },
   receipts_districtwise_filters : { allFiltersData, rawFilterDataAllHeads, loading : filtersLoading },
   getReceiptsDistrictwiseData,
@@ -189,23 +191,26 @@ const ReceiptsDistrictwise = ({
   }
 
   const createDataUIComponent = () => {
-		if(loading === true){
-			return <FLoading />;
-		}else{
-			return (
-				<Fragment>
-					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
-              <Switch  text="Map" />
-              <Switch  text="Bar Chart" />
-              <Switch  text="Time Series" />
-              <Switch  text="Table" />
-            </ContentSwitcher>
-					</div>
-					{ renderSwitch() }
-				</Fragment>
-			)
-		}
+    switch(true){
+      case loading === true :
+      return <FLoading />;
+        case error.status === 'emptyResponseError' :
+        return <FNoDataFound />;
+        default :
+        return (
+          <Fragment>
+  					<div className="content-switcher-wrapper">
+              <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
+                <Switch  text="Map" />
+                <Switch  text="Bar Chart" />
+                <Switch  text="Time Series" />
+                <Switch  text="Table" />
+              </ContentSwitcher>
+  					</div>
+  					{ renderSwitch() }
+  				</Fragment>
+        )
+    }
 	}
 
   return (

@@ -56,8 +56,9 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 		const res = await axios.post(
       `https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
+    if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
+
 		console.log("receipts raw data"); console.log(res.data.records);
-    console.log('sssssss',[res.data.records])
     //calc x-tick-vals if is week
     let xTickVals = calcXTickVals(month_week, [res.data.records]); //1----
     console.log("xTickVals", xTickVals);
@@ -133,7 +134,8 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     dispatch({
       type: RECEIPTS_DATA_ERROR,
       payload: {
-        status: err
+        filters : { dateRange, activeFilters },
+        error : { status: err }
       }
     });
   }

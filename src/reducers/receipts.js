@@ -26,12 +26,15 @@ export default function(state = initialState, action) {
     case SET_DATA_LOADING_RECEIPTS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: {}
       };
     case RECEIPTS_DATA_ERROR:
       return {
         ...state,
-        error: payload,
+        error: payload.error,
+        dateRange: payload.filters.dateRange,
+        activeFilters: payload.filters.activeFilters,
         loading: false
       };
     default:

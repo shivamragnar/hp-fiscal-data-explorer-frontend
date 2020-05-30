@@ -65,6 +65,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const config = { headers: { "content-type": "application/json" } };
   		const res = await axios.post(`https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload});
   		// console.log("receipts districtwise raw data", res.data.records);
+      if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
@@ -160,7 +161,10 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
   } catch (err) {
     dispatch({
       type: RECEIPTS_DISTRICTWISE_DATA_ERROR,
-      payload: { status: err }
+      payload: {
+        filters : { dateRange, activeFilters },
+        error : { status: err }
+      }
     });
   }
 };

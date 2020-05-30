@@ -15,7 +15,7 @@ import { Button } from 'carbon-components-react';
 import FLoading from '../../components/atoms/FLoading';
 import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
-import FForce from '../../components/dataviz/FForce';
+
 import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';

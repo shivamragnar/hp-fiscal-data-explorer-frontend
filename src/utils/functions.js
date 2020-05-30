@@ -17,18 +17,23 @@ export const calcXTickVals = (month_week, districtwiseVals) => {
 }
 
 export const calcXTickFormats = (month_week, districtwiseVals, dateTo, dateFrom) => {
-  let switchYear = false;
+  let switchYear = false; //this one, when it turns to true, stays true.
+  let switchYearGate = false;  // this one, when it turns to true, stays that way only for that particular loop cycle, after which it is sitched back to false
+
   let corresWeekDateRange = month_week !== 'month' && districtwiseVals[0].map((d,i) => {
     if(i !== 0 && districtwiseVals[0][i-1][0] > d[0]){ //if year has changed
        switchYear = true;
+       switchYearGate = true;
     }
     let yearForMoment = switchYear === true ? dateTo : dateFrom;
-    return (
-      `${moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').startOf('week').format('DD MMM YY') /*gets the sunday of the week*/}
-      to
-      ${moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').endOf('week').format('DD MMM YY') /*gets the saturday of the week*/}`
 
-    )
+    let xTickString = moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').startOf('week').format(switchYearGate === true ? 'DD MMM YY' : 'DD MMM') /*gets the sunday of the week*/
+                  + ' - ' +
+                  moment(yearForMoment.split('-')[0]).add(d[0], 'weeks').endOf('week').format('DD MMM YY'); /*gets the saturday of the week*/
+
+    switchYearGate = false;
+
+    return xTickString;
   })
   return corresWeekDateRange;
 }
@@ -271,12 +276,13 @@ export const createObjForPayload = (activeFilterVals, activeFilterKeys) => {
   var objForPayload = {};
 
   activeFilterVals.map((val, i) => {
-      let tempVal1 = val.map(item => { return item.split('-')[0]});
-      let tempVal2 = val.map(item => { return item.split('-')[1]});
+      let tempVal1 = val.map(item => item.split('-')[0] );
+      let tempVal2 = val.map(item => item.split('-')[1] );
       tempVal1 = tempVal1.join('","');
       tempVal2 = tempVal2.join('","');
       objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
-      if(activeFilterKeys[i].split('-')[1] !== undefined){ //this is a check to see if our filter is if of the CODE_NAME format or simply a NAME format
+      // console.log('is this underfined?',activeFilterKeys[i].split('-')[1]);
+      if(activeFilterKeys[i].split('-')[1] !== undefined){ //this is a check to see if our filter is if of the CODE_NAME format or simply a CODE format
         objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
       }
   })
