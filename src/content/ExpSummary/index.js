@@ -15,12 +15,15 @@ import { Button } from 'carbon-components-react';
 import FLoading from '../../components/atoms/FLoading';
 import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
+import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FLegendBar from '../../components/atoms/FLegendBar';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
+import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FDropdown from '../../components/molecules/FDropdown';
 
 //data
 import howToUseContent from '../../data/howToUseContent.json';
@@ -28,14 +31,38 @@ import howToUseContent from '../../data/howToUseContent.json';
 import FPageMeta from '../../components/organisms/FPageMeta';
 
 //Name of components to switch between
-const vizTypes = ["FForce", "FTable"];
+const vizTypes = ["FForce", 'FLineChart', "FTable"];
 
+ // const lineChrtData = [
+	// 	{
+	// 		name : "name1", //optional
+	// 		exp_alloc : 'allocated',
+	// 		yearwise : [
+	// 			{ year : "2017" , amount : 0},
+	// 			{ year : "2018" , amount : 3},
+	// 			{ year : "2019" , amount : 2},
+	// 			{ year : "2020" , amount : 1}
+	// 		]
+	// 	},
+	// 	{
+	// 		name : "name2", //optiona;
+	// 		exp_alloc : 'expenditure',
+	// 		yearwise : [
+	// 			{ date : "2017" ,  amount : 3},
+	// 			{ date : "2018" , amount : 1},
+	// 			{ date : "2019" , amount : 4},
+	// 			{ date : "2020" , amount : 1}
+	// 		]
+	// 	}
+	// ]
+ //...
 
 
 const ExpSummary = ({
 	exp_summary : {
 		loading,
 		vizData,
+		lineChrtData,
 		tableData : { rows, headers}
 	},
 	getExpSummaryData
@@ -47,11 +74,22 @@ const ExpSummary = ({
 	const [activeDataPoint, setActiveDataPoint] = useState('alloc');
 	const [activeVizData, setActiveVizData] = useState([]);
 
+	const [activeDemandForTimeseries, setActiveDemandForTimeseries] = useState('All Demands');
+	const handleChangeActiveDemandForTimeSeries = v => setActiveDemandForTimeseries(v.selectedItem);
+
 	const handleDataPointChange = (value,name) => {
 		setActiveDataPoint(value);
 		console.log('value',value)
 		setActiveVizData(populateActiveVizData(value));
 	}
+
+	const genDemandSelector = () => (
+		<FDropdown
+			initialSelectedItem = {activeDemandForTimeseries}
+			items = { Object.keys(lineChrtData) }
+			onChange = {(v) => handleChangeActiveDemandForTimeSeries(v)}
+			/>
+	)
 
 	const populateActiveVizData = (activeProperty) => {
 		let tempData = [];
@@ -74,6 +112,20 @@ const ExpSummary = ({
 
 	},[vizData])
 
+	const genTimeSeries = () => (
+		<Fragment>
+			<FTimeSeries
+				dataToX="year"
+				dataToY={"amount"}
+				data={lineChrtData[activeDemandForTimeseries]}
+				dataAryName="yearwise"
+				xLabelVals={[0, 1, 2 ,3]}
+				xLabelFormat={['2017','2018','2019','2020']}
+				lineLabel="exp_alloc"
+			/>
+		</Fragment>
+	)
+
 	const createDataUIComponent = () => {
 		if(loading === true){
 			return <FLoading/>
@@ -82,8 +134,9 @@ const ExpSummary = ({
 				<Fragment>
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
-              <Switch  text="Visual" />
-              <Switch  text="Table" />
+              <Switch  text="Bubble Chart" />
+              <Switch  text="Timeseries" />
+							<Switch  text="Table" />
             </ContentSwitcher>
           </div>
 					{
@@ -106,7 +159,7 @@ const ExpSummary = ({
 								]}
 								valueSelected = {activeDataPoint}
 							/>
-							<div className="data-viz-wrapper">
+						<div id="data_viz_wrapper" className="data-viz-wrapper">
 								<FForce_X
 									nodes={activeVizData && activeVizData}
 									activeDataPoint = {activeDataPoint}
@@ -114,6 +167,9 @@ const ExpSummary = ({
 								{/* <FForce_Y nodes={this.props.exp_summary.data} />*/}
 							</div>
 						</Fragment>
+						:
+						currentVizType === vizTypes[1] ?
+						<Fragment>{genTimeSeries()}</Fragment>
 						:
 						<FTable rows={rows} headers={headers} />
 					}
@@ -123,18 +179,22 @@ const ExpSummary = ({
 	}
 
     return (
-      <div className="f-content exp-summary-content">
+      <div className={`f-content exp-summary-content`}>
 				<FPageMeta pageId = 'expenditure_summary' />
 				<FPageTitle
 					pageTitle={ <span>Expenditure | Summary  <span className="f-light-grey">{`| FY: ${vizData.length > 0 && vizData[0].curr_year.split('_').join(' - ')}`}</span></span> }
 					pageDescription= {howToUseContent[0].content.body}
 					showLegend={ true }
 					/>
-        <div className="data-viz-col exp-summary">
+        <div className={`data-viz-col exp-summary ${currentVizType === vizTypes[1] ? 'timeseries-is-active' : ''}`}>
           {createDataUIComponent()}
         </div>
-        <div>
-        </div>
+			{ currentVizType === vizTypes[1] &&
+				<div className={`filter-col-wrapper`}>
+					<FFilterColumn2
+	          customComp = {<div>{genDemandSelector()}</div>}
+	          />
+				</div> }
       </div>
     );
 

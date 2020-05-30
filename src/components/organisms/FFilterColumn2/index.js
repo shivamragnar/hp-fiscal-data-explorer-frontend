@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive";
 //custom components
 // import { MultiSelect } from 'carbon-components-react';
 import {Tooltip} from 'carbon-components-react'
-import MultiSelect from "../../molecules/FMultiSelect" 
+import MultiSelect from "../../molecules/FMultiSelect"
 
 //carbon icons
 import FilterIcon from '@carbon/icons-react/lib/filter/32'
@@ -14,7 +14,7 @@ import FilterIconFilled from '../../icons/FilterIconFilled';
 import glossary from '../../../data/glossary.json';
 
 
-const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoading, activeFilters, onFilterIconClick, section  }) => {
+const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoading, activeFilters, onFilterIconClick, section, customComp  }) => {
 
   //declare the components that need to be dynamically generated
 	const Components = { MultiSelect };
@@ -59,37 +59,44 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 	    <div className="filter-col">
 
 
-	      {
-	        filterCompData.map((filter_comp,i) => {
-	            const Component = Components[filter_comp.comp]
-	            return (
-								<div className = "filter-col--ops">
-									<Tooltip
-								    direction="right"
-								    tabIndex={0}
-								    tooltipBodyId="tooltip-body"
-								    triggerText={filter_comp.titleText}
-								  >
-								    <p id="tooltip-body">
-								      {glossary[section].data[filter_comp.name] && glossary[section].data[filter_comp.name].desc}
-								    </p>
-								  </Tooltip>
-		              <Component
-		                className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
-										disabled = {filtersLoading}
-										initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
-										useTitleInItem={false}
-										label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
-										invalid={false}
-										invalidText="Invalid Selection"
-										onChange = {(e) => onChange(e, allFiltersData[i] && allFiltersData[i].key)}
-		                items = {allFiltersData[i] && allFiltersData[i].val}
-		                />
-								</div>
+	      { customComp
+					? <Fragment>{customComp}</Fragment>
+					: <Fragment>
+						{
+							filterCompData.map((filter_comp,i) => {
+			            const Component = Components[filter_comp.comp]
+			            return (
+										<div className = "filter-col--ops">
+											<Tooltip
+										    direction="right"
+										    tabIndex={0}
+										    tooltipBodyId="tooltip-body"
+										    triggerText={filter_comp.titleText}
+										  >
+										    <p id="tooltip-body">
+										      {glossary[section].data[filter_comp.name] && glossary[section].data[filter_comp.name].desc}
+										    </p>
+										  </Tooltip>
+				              <Component
+				                className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
+												disabled = {filtersLoading}
+												initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
+												useTitleInItem={false}
+												label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
+												invalid={false}
+												invalidText="Invalid Selection"
+												onChange = {(e) => onChange(e, allFiltersData[i] && allFiltersData[i].key)}
+				                items = {allFiltersData[i] && allFiltersData[i].val}
+				                />
+										</div>
 
-	            )
-	          }
-	        )
+			            )
+			          }
+			        )
+						}
+						</Fragment>
+
+
 	      }
 
 	    </div>

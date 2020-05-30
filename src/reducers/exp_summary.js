@@ -2,6 +2,7 @@ import { GET_EXP_SUMMARY_DATA, SET_EXP_SUMMARY_DATA_LOADING, EXP_SUMMARY_DATA_ER
 
 const initialState = {
   vizData: [],
+  lineChrtData: {},
   tableData: {},
   loading: true,
   error: {}
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         vizData: payload.vizData,
+        lineChrtData: payload.lineChrtData,
         tableData: payload.tableData,
         loading: false
       };

@@ -25,7 +25,7 @@
 	// ]
 //  ...
 // ]
-//3 considering the above dataset as an example, following props are required (aling with values):
+//3 considering the above dataset as an example, following props are required (along with values):
 // data = sampleData (ary)
 // dataToX = "gross" (string)
 // dataToY = "date" (string)

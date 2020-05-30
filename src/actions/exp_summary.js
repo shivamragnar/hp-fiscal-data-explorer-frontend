@@ -20,6 +20,8 @@ export const getExpSummaryData = () => async dispatch => {
       return Math.round((((curr / prev) - 1)*100)*100)/100;
     }
 
+
+
     Object.values(newestYearDataObj).map((d,i) => {
       let vizObj = {};
       let demand_string = Object.keys(newestYearDataObj)[i];
@@ -44,6 +46,53 @@ export const getExpSummaryData = () => async dispatch => {
 
     console.log('SMRY_VIZ_DATA', vizData);
 
+    let valuesFromAllYrs = Object.values(res.data.records);
+    let keysFromAllYrs = Object.keys(res.data.records);
+
+    console.log('vvvvvvv')
+    console.log(valuesFromAllYrs)
+    console.log(keysFromAllYrs)
+
+    var lineChrtData = {};
+
+    //calc tot alloc & exp amounts per year
+    lineChrtData['All Demands'] = [
+      { exp_alloc : 'allocated', yearwise : [] },
+      { exp_alloc : 'expenditure', yearwise : [] }
+    ]
+    //calc tot vals per yearx
+    aryOfYears.map((yr,i) => {
+      let totAlloc = 0;
+      let totExp = 0;
+      Object.values(valuesFromAllYrs[i]).map(v => {
+        totAlloc = totAlloc + v[0];
+        totExp = totExp + v[1];
+      })
+      lineChrtData['All Demands'][0].yearwise.push({ year : yr, amount : Math.round(totAlloc*100)/100 })
+      lineChrtData['All Demands'][1].yearwise.push({ year : yr, amount : Math.round(totExp*100)/100, pctUsed : Math.round((totExp / totAlloc)*100*100)/100+"%"})
+    })
+
+    //restructure api data for timeseries component
+    Object.keys(valuesFromAllYrs[0]).map((k,i) => {
+      lineChrtData[k] = [
+        { exp_alloc : 'allocated', yearwise : [] },
+        { exp_alloc : 'expenditure', yearwise : [] }
+      ]
+      //
+      aryOfYears.map((yr,j) => {
+        lineChrtData[k][0].yearwise.push({year: yr, amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
+        lineChrtData[k][1].yearwise.push({year: yr, amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
+      })
+    })
+
+
+
+    console.log('timeseriesDataStructure', lineChrtData);
+    // aryOfYears.map((yr,i) => {
+    //   let lineChrtDataObj = [];
+    //
+    //
+    // })
 
     var tableData = {
     	headers: [
@@ -62,7 +111,7 @@ export const getExpSummaryData = () => async dispatch => {
 
     console.log('SMRY_TBL_DATA', tableData);
 
-    let valuesFromAllYrs = Object.values(res.data.records);
+
 
     Object.values(valuesFromAllYrs[0]).map((v, v_i) => {
       tableData.rows.push({
@@ -82,7 +131,8 @@ export const getExpSummaryData = () => async dispatch => {
     dispatch({
       type: GET_EXP_SUMMARY_DATA,
       payload: {
-        vizData ,
+        vizData,
+        lineChrtData,
         tableData
       }
     });

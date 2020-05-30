@@ -121,6 +121,14 @@ body{
   &.exp-summary{
     padding-left: 2rem;
     padding-right: 2rem;
+
+    &.timeseries-is-active{
+      padding-left: 2rem;
+
+      @media screen and (min-width: 1024px){
+        padding-left: 20rem;
+      }
+    }
   }
 
   @media screen and (max-width: 1280px){

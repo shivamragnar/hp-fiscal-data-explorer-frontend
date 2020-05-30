@@ -27,13 +27,13 @@ class FForce_X extends React.Component {
 
   componentWillUnmount(){
     console.log("remove svg");
-    d3.selectAll("svg").remove();
+    d3.select("#data_viz_wrapper").selectAll("svg").remove();
   }
 
   componentDidUpdate(){
     // console.log("propnodes");
     // console.log(this.props.nodes);
-    d3.selectAll("svg").remove();
+    d3.select("#data_viz_wrapper").selectAll("svg").remove();
     this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
 
