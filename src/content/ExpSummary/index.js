@@ -119,8 +119,8 @@ const ExpSummary = ({
 				dataToY={"amount"}
 				data={lineChrtData[activeDemandForTimeseries]}
 				dataAryName="yearwise"
-				xLabelVals={[0, 1, 2 ,3]}
-				xLabelFormat={['2017','2018','2019','2020']}
+				
+				xLabelFormat={lineChrtData['All Demands'][0].yearwise.map(obj => obj.year)}
 				lineLabel="exp_alloc"
 			/>
 		</Fragment>
