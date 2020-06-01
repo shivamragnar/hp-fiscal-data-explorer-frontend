@@ -197,6 +197,8 @@ const ExpDistrictwise = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  yAxisLabel="amount"
+                  xAxisLabel="date"
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
                   lineLabel="districtName"
                 />

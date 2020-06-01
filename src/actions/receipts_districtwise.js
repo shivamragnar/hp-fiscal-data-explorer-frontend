@@ -121,7 +121,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
         { key: 'districtName', header: 'District' },
         { key: 'treasuryCode', header: 'Treasury Code' },
         { key: 'budgetCode', header: 'Budget Code' },
-        { key: 'receipt', header: 'Receipt (INR)' }
+        { key: 'receipt', header: 'Receipt (Cr)' }
       )
 
       tempBarChrtData.map((d, i) => {
@@ -130,7 +130,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       		'districtName': d.districtName,
           'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
-      		'receipt': d.receipt.toLocaleString('en-IN')
+      		'receipt': (d.receipt/10000000).toFixed(2).toLocaleString('en-IN')
       	})
       })
 

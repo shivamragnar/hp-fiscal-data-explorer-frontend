@@ -24,7 +24,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
-import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
+import FTooltipReceipts from '../../components/atoms/FTooltipReceiptsDistrictWise';
 import FLegendBar from '../../components/atoms/FLegendBar';
 
 import FPageMeta from '../../components/organisms/FPageMeta';
@@ -175,6 +175,8 @@ const ReceiptsDistrictwise = ({
                   dataAryName="datewiseRec"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  yAxisLabel="amount"
+                  xAxisLabel="date"
                   tooltip={<FTooltipReceipts/>}
                   lineLabel="districtName"
                 />

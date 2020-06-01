@@ -119,7 +119,8 @@ const ExpSummary = ({
 				dataToY={"amount"}
 				data={lineChrtData[activeDemandForTimeseries]}
 				dataAryName="yearwise"
-				
+				yAxisLabel="amount"
+                xAxisLabel="fiscal year"
 				xLabelFormat={lineChrtData['All Demands'][0].yearwise.map(obj => obj.year)}
 				lineLabel="exp_alloc"
 			/>
