@@ -10,6 +10,7 @@ import {
 import {
   getWeekwiseDates,
   calcMonthOrWeek,
+  createBudgetCodeString,
   createObjForPayload,
   calcXTickVals,
   calcXTickFormats
@@ -18,6 +19,8 @@ import {
 //data-refs
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
+const { exp_districtwise : filterOrderRef } = require("../data/filters_ref.json");
+
 
 export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredByDateRangeChange = false) => async dispatch => {
   try {
@@ -122,6 +125,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
       { key: 'districtName', header: 'District' },
+      { key: 'treasuryCode', header: 'Treasury Code' },
+      { key: 'budgetCode', header: 'Budget Code' },
       { key: 'gross', header: 'Gross (Cr)' },
       { key: 'AGDED', header: 'AGDED (Cr)' },
       { key: 'BTDED', header: 'BTDED (Cr)' },
@@ -132,6 +137,8 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     	tempTableData.rows.push({
     		id: i,
     		'districtName': d.districtName,
+        'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
+        'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
     		'gross': (d.gross/10000000).toFixed(2).toLocaleString('en-IN'),
     		'AGDED': (d.AGDED/10000000).toFixed(2).toLocaleString('en-IN'),
         'BTDED': (d.BTDED/10000000).toFixed(2).toLocaleString('en-IN'),
