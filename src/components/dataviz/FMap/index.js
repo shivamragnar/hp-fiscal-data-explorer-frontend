@@ -92,14 +92,14 @@ export default class FMap extends Component<{}, State> {
                   {this.props.dataPointToMap && `${this.props.dataPointToMap.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}:`}
                 </p>
                 <p className='f-map-tooltip__data-point-value'>
-                  {this.state.tooltipData.dataPointToMap && `${this.state.tooltipData.dataPointToMap.toLocaleString('en-IN')} INR`}
+                  {this.state.tooltipData.dataPointToMap && `${(this.state.tooltipData.dataPointToMap/10000000).toFixed(2).toLocaleString('en-IN')} Cr`}
                 </p>
                 </div>
               </div>
                 :
               <div className="f-map-tooltip__guide-text-wrapper">
                 <p className='f-map-tooltip__guide-text'>
-                  hover over a district to see its spending info.
+                  Hover over a district to see its spending info.
                 </p>
               </div>
             }
