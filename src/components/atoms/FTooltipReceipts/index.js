@@ -4,7 +4,7 @@ const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } 
 
 const FTooltipReceipts = ( { x, y, datum : { date, districtName, receipt } } ) => {
 
-  receipt = receipt.toLocaleString('en-IN');
+  receipt = (receipt/1000000).toFixed(2).toLocaleString('en-IN');
 
   const width = 145;
   const paddingX = 14;
@@ -37,7 +37,7 @@ const FTooltipReceipts = ( { x, y, datum : { date, districtName, receipt } } ) =
         <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
         <g fontWeight={700}>
           <text x={paddingX} y={24}  letter-spacing="0.5" text-anchor="start"> RECEIPT  : </text>
-          <text x={width-paddingX} y={24}  text-anchor="end">₹ {receipt} </text>
+          <text x={width-paddingX} y={24}  text-anchor="end">Cr {receipt} </text>
         </g>
       </g>
     </g>
