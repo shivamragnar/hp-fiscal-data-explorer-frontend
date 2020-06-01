@@ -122,20 +122,20 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
       { key: 'districtName', header: 'District' },
-      { key: 'gross', header: 'Gross (INR)' },
-      { key: 'AGDED', header: 'AGDED (INR)' },
-      { key: 'BTDED', header: 'BTDED (INR)' },
-      { key: 'netPayment', header: 'Net Payment (INR)' }
+      { key: 'gross', header: 'Gross (Cr)' },
+      { key: 'AGDED', header: 'AGDED (Cr)' },
+      { key: 'BTDED', header: 'BTDED (Cr)' },
+      { key: 'netPayment', header: 'Net Payment (Cr)' }
     )
 
     tempBarChrtData.map((d, i) => {
     	tempTableData.rows.push({
     		id: i,
     		'districtName': d.districtName,
-    		'gross': d.gross.toLocaleString('en-IN'),
-    		'AGDED': d.AGDED.toLocaleString('en-IN'),
-        'BTDED': d.BTDED.toLocaleString('en-IN'),
-    		'netPayment': d.netPayment.toLocaleString('en-IN')
+    		'gross': (d.gross/10000000).toFixed(2).toLocaleString('en-IN'),
+    		'AGDED': (d.AGDED/10000000).toFixed(2).toLocaleString('en-IN'),
+        'BTDED': (d.BTDED/10000000).toFixed(2).toLocaleString('en-IN'),
+    		'netPayment': (d.netPayment/10000000).toFixed(2).toLocaleString('en-IN')
     	})
     })
 
