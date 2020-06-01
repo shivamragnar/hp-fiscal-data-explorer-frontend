@@ -125,7 +125,7 @@ class FForce_X extends React.Component {
     function handleTooltipMouseover(d, i) {
 
       const tooltip_html = (
-        `<p class='tt_title'> ${d.demand} ${d.demand_description}</p>
+        `<p class='tt_title'> Grant No. ${d.demand} ${d.demand_description}</p>
          <div class='tt_body'>
            <p> Current Sanction: ${d.current.toLocaleString('en-IN')} INR </p>
            <p> Percent Change: ${d.pct_change} % </p>

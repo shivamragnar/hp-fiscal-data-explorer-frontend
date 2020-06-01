@@ -12,10 +12,10 @@ const FTooltipDistrictsAndSchemes = ( {
 
   // console.log(datum);
 
-  gross = gross.toLocaleString('en-IN');
-  netPayment = netPayment.toLocaleString('en-IN');
-  AGDED = AGDED.toLocaleString('en-IN');
-  BTDED = BTDED.toLocaleString('en-IN');
+  gross = (gross/10000000).toFixed(2).toLocaleString('en-IN');
+  netPayment = (netPayment/10000000).toFixed(2).toLocaleString('en-IN');
+  AGDED = (AGDED/10000000).toFixed(2).toLocaleString('en-IN');
+  BTDED = (BTDED/10000000).toFixed(2).toLocaleString('en-IN');
 
   if(vizType === "FTimeSeries"){
     activeDataPoint = datum._y === datum.gross ? ["gross"] : ["netPayment"];
@@ -91,13 +91,13 @@ const FTooltipDistrictsAndSchemes = ( {
         <text x={paddingX} y={0} fill={darkGrey} letterSpacing="0.5" textAnchor="start"> {xAxisDimension} </text>
         <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
         <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={22} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} textAnchor="end">₹ {gross}</text>
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} textAnchor="end">Cr {gross}</text>
         <text x={paddingX} y={36} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
-        <text x={width-paddingX} y={36} text-anchor="end">- ₹ {AGDED} </text>
+        <text x={width-paddingX} y={36} text-anchor="end"> Cr {AGDED} </text>
         <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start">BTDED  : </text>
-        <text x={width-paddingX} y={50} text-anchor="end">- ₹ {BTDED} </text>
+        <text x={width-paddingX} y={50} text-anchor="end"> Cr {BTDED} </text>
         <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={paddingX} y={64}  letter-spacing="0.5" text-anchor="start"> Net  : </text>
-        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={64}  text-anchor="end">₹ {netPayment} </text>
+        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={64}  text-anchor="end">Cr {netPayment} </text>
       </g>
     </g>
 

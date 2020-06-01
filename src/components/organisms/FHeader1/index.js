@@ -69,10 +69,10 @@ const FHeader1 = () => {
               <img src={Logo} alt='' />
             </HeaderName>
             <HeaderNavigation className="f_primarylinks_center" aria-label="HP Fiscal Data Explorer Primary Links">
-              <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/summary">Expenditure Summary</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Districtwise</HeaderMenuItem>
               {/*<HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
-                <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
+                //<HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
                 <HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>
                 <HeaderMenuItem element={Link} to="/expenditure/tracker">District Comparison</HeaderMenuItem>
               </HeaderMenu>*/}

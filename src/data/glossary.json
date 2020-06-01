@@ -10,13 +10,9 @@
         "title": "Demand Name",
         "desc": "The description of the demand for grant under that ID"
       },
-      "sanction_for_19_20": {
-        "title": "Sanction for 2019-20 (INR)",
+      "sanction": {
+        "title": "Sanction",
         "desc": "The amount of expenditure under the specific grant ‘projected’ by the government for 2019-20"
-      },
-      "sanction_for_18_19": {
-        "title": "Sanction for 2018-19 (INR)",
-        "desc": "The amount of expenditure under the specific grant ‘projected’ by the government for 2018-19"
       },
       "percent_change": {
         "title": "Percent Change",
@@ -77,59 +73,13 @@
     }
   },
 
-  "exp_demandwise":{
-    "title": "Expenditure Demandwise",
-    "data": {
-      "demand": {
-        "title": "Demand",
-        "desc": "Department in the State government"
-      },
-      "major": {
-        "title": "Major Head",
-        "desc": "Function of the government"
-      },
-      "sub_major": {
-        "title": "Sub-Major head",
-        "desc": "A subsection with this function"
-      },
-      "minor": {
-        "title": "Minor Head",
-        "desc": "A programme within a sub-sector"
-      },
-      "sub_minor": {
-        "title": "Sub Minor Head",
-        "desc": "A scheme within a programme"
-      },
-      "voted_charged": {
-        "title": "Voted/Charged",
-        "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
-      },
-      "plan_nonplan": {
-        "title": "Plan/Non-Plan",
-        "desc": "Money spent by the Government for heads such as salaries, Loans, subsides, Interests etc are considered plan and Non-plan is Money spent on all other projects of Ministries"
-      },
-      "sanction": {
-        "title": "Sanction",
-        "desc": "Refer to the amounts of expenditure ‘projected’ by the government for the ongoing/approaching financial"
-      },
-      "addition": {
-        "title": "ADDITION",
-        "desc": "Amount that is added in the sanctioned amount to meet the requirements"
-      },
-      "saving": {
-        "title": "SAVING",
-        "desc": "Amount saved after considering addition"
-      },
-      "revised": {
-        "title": "REVISED (Sanction+Addition-Saving)",
-        "desc": "This refers to the final balance for particular head"
-      }
-    }
-  },
-
   "exp_districtwise":{
     "title": "Expenditure Districtwise",
-    "data": {
+    "data":{
+      "District":{
+        "title": "District",
+        "desc": "This filter selects for specific districts within Himachal Pradesh. There are 12 districts in this state to select from."
+      }, 
       "Treasury_Code":{
         "title": "Treasury Code",
         "desc": "Every District has a treasury through which it conducts transactions. Every Treasury has its own unique code that is mentioned here"
@@ -165,6 +115,10 @@
       "plan_nonplan":{
         "title": "Plan/Non-Plan",
         "desc": "Money spent by the Government for heads such as salaries, Loans, subsides, Interests etc are considered plan and Non-plan is Money spent on all other projects of Ministries"
+      },
+      "SOE":{
+        "title": "SOE",
+        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
@@ -210,6 +164,11 @@
   "receipts_districtwise":{
     "title": "Receipts Districtwise",
     "data": {
+      "District":{
+        "title": "District",
+        "desc": "This filter selects for specific districts within Himachal Pradesh. There are 12 districts in this state to select from."
+      }, 
+
       "Treasury_Code": {
         "title": "Treasury Code",
         "desc": "Every District has a treasury through which it conducts transactions. Every Treasury has its own unique code that is mentioned here"
@@ -242,7 +201,71 @@
     "data": {
       "schemes" : {
         "title": "Schemes",
-        "desc": "Relevant Socio-economic programmes"
+        "desc": "The various ministries have come up with various government programs called schemes (Yojana) from time to time."
+      },
+      "Type" : {
+        "title": "Type",
+        "desc": "The schemes mentioned above can either be sponsored centrally or specific to Himachal."
+      },
+       "District":{
+        "title": "District",
+        "desc": "This filter selects for specific districts within Himachal Pradesh. There are 12 districts in this state to select from."
+      }, 
+      "Treasury_Code":{
+        "title": "Treasury Code",
+        "desc": "Every District has a treasury through which it conducts transactions. Every Treasury has its own unique code that is mentioned here"
+      },
+      "DDO_Code":{
+        "title": "DDO Code",
+        "desc": "A unique code for each Drawing and Disbursing Officer (DDO); the officer responsible for drawing funds from Treasuries and disburse to proper recipients."
+      },
+      "demand":{
+        "title": "Demand",
+        "desc": "Department in the State government"
+      },
+      "major":{
+        "title": "Major Head",
+        "desc": "Function of the government"
+      },
+      "sub_major":{
+        "title": "Sub-Major head",
+        "desc": "A subsection with this function"
+      },
+      "minor":{
+        "title": "Minor Head",
+        "desc": "A programme within a sub-sector"
+      },
+      "sub_minor":{
+        "title": "Sub Minor Head",
+        "desc": "A scheme within a programme"
+      },
+      "voted_charged":{
+        "title": "Voted/Charged",
+        "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
+      },
+      "plan_nonplan":{
+        "title": "Plan/Non-Plan",
+        "desc": "Money spent by the Government for heads such as salaries, Loans, subsides, Interests etc are considered plan and Non-plan is Money spent on all other projects of Ministries"
+      },
+      "SOE":{
+        "title": "SOE",
+        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+      },
+      "gross":{
+        "title": "Gross",
+        "desc": "Total Allotted amount"
+      },
+      "AGDED":{
+        "title": "AGDED",
+        "desc": "Amount added to allotted amount"
+      },
+      "BTDED":{
+        "title": "BTDED",
+        "desc": "Amount saved from total allotted amount"
+      },
+      "net_payment":{
+        "title": "Net Payment",
+        "desc": "Amount saved from total allotted amount"
       }
     }
   }

@@ -117,7 +117,7 @@ const Receipts = ( { receipts : {
 				<Fragment>
 					<div className="content-switcher-wrapper">
 						<ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
-							<Switch  text="Visual" />
+							<Switch  text="Bar Chart" />
 							<Switch  text="Table" />
 						</ContentSwitcher>
 					</div>
@@ -137,7 +137,7 @@ const Receipts = ( { receipts : {
 									xLabelVals={xLabelVals}
 									xLabelFormat={xLabelFormat}
 									xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}
-									yAxisLabel="Total Amount in Rupees"
+									yAxisLabel="Total Amount in Crores"
 									tooltip={<FTooltipReceipts/>}
 									events={[{
 										// childName: "all",
@@ -194,7 +194,7 @@ const Receipts = ( { receipts : {
 			<FPageMeta pageId = 'receipts' />
 			<FPageTitle
 				pageTitle="Receipts | Details"
-				pageDescription= {howToUseContent[3].content.body}
+				pageDescription= {howToUseContent[2].content.body}
 				showLegend={false}
 				monthPicker={
 					<FMonthPicker
