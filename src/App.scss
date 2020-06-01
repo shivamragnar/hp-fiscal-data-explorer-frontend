@@ -199,3 +199,7 @@ body{
   letter-spacing: 0.08em;
   text-anchor: middle;
 }
+
+.bx--tooltip__trigger:not(.bx--btn--icon-only):focus{
+  outline: none;
+}
