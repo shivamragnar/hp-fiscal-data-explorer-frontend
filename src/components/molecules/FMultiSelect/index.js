@@ -4,11 +4,18 @@ import { Select } from 'antd';
 
 import "./_style.scss"
 
-const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem, label, invalid, invalidText, onChange, items}) => {
+
+const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem, label, invalid, invalidText, onChange, items, type}) => {
 
   const handleChange = (val, arr) => {
     let event = {selectedItems: arr}
-    onChange(event)
+    if(type==="timeseries"){
+      val = val.filter(item => item !== 'All Demands')
+      onChange(val)
+    }
+    else{
+      onChange(event)
+    }
   } 
 
   return (
