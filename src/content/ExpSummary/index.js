@@ -25,6 +25,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FDropdown from '../../components/molecules/FDropdown';
 
+import FTooltipSummaryTimeSeries from '../../components/atoms/FTooltipSummaryTimeSeries';
 //data
 import howToUseContent from '../../data/howToUseContent.json';
 
@@ -120,8 +121,9 @@ const ExpSummary = ({
 				data={lineChrtData[activeDemandForTimeseries]}
 				dataAryName="yearwise"
 				yAxisLabel="amount"
-                xAxisLabel="fiscal year"
+        xAxisLabel="fiscal year"
 				xLabelFormat={lineChrtData['All Demands'][0].yearwise.map(obj => obj.year)}
+				tooltip={<FTooltipSummaryTimeSeries vizType={'FTimeSeries'} totalTicks={lineChrtData[activeDemandForTimeseries][0].yearwise.length}/>}
 				lineLabel="exp_alloc"
 			/>
 		</Fragment>

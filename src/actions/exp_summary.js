@@ -68,8 +68,8 @@ export const getExpSummaryData = () => async dispatch => {
         totAlloc = totAlloc + v[0];
         totExp = totExp + v[1];
       })
-      lineChrtData['All Demands'][0].yearwise.push({ year : yr, amount : Math.round(totAlloc*100)/100 })
-      lineChrtData['All Demands'][1].yearwise.push({ year : yr, amount : Math.round(totExp*100)/100, pctUsed : Math.round((totExp / totAlloc)*100*100)/100+"%"})
+      lineChrtData['All Demands'][0].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year : yr.split('_').join('-'), amount : Math.round(totAlloc*100)/100 })
+      lineChrtData['All Demands'][1].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year : yr.split('_').join('-'), amount : Math.round(totExp*100)/100, pctUsed : Math.round((totExp / totAlloc)*100*100)/100+"%"})
     })
 
     //restructure api data for timeseries component
@@ -80,8 +80,8 @@ export const getExpSummaryData = () => async dispatch => {
       ]
       //
       aryOfYears.map((yr,j) => {
-        lineChrtData[k][0].yearwise.push({year: yr, amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
-        lineChrtData[k][1].yearwise.push({year: yr, amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
+        lineChrtData[k][0].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
+        lineChrtData[k][1].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
       })
     })
 
