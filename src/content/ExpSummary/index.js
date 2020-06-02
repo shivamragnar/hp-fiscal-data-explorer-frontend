@@ -178,7 +178,7 @@ const ExpSummary = ({
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Bubble Chart" />
-              <Switch  text="Timeseries" />
+              <Switch  text="Time Series" />
 							<Switch  text="Table" />
             </ContentSwitcher>
           </div>
