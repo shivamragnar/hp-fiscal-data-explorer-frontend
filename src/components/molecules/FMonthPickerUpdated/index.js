@@ -36,6 +36,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
     }
     
     const handleDateRangeSelection = (dates) => {
+        handleSetPanelButtonActions(dates)
         if(dates){
             let dateObject = {
                 from: {
@@ -51,6 +52,18 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
             onDateRangeSet(dateObject)
         }
     }
+
+    const handleSetPanelButtonActions = (dates) => {
+        let condition = (dates[0].year() === dates[1].year()) && (dates[0].year() ===  parseInt(financialYear.split('-')[1]))
+        if(condition){
+            let button = document.querySelector('.ant-picker-header > button')
+            button.style.pointerEvents = "auto";
+            button.addEventListener('click', () => {
+                button.style.pointerEvents = "none"
+            })
+        }
+    }
+
     return(
         <div className="ml-20">
            <Select 
@@ -64,12 +77,16 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
             allowClear={false}
             value={rangePickerValue}
             separator={""}
+            onOpenChange={(open) => {
+                if(open){
+                   handleSetPanelButtonActions(rangePickerValue)
+                }
+            }}
             disabledDate={current =>
                 current &&
                 (current <  moment(`${financialYear.split('-')[0]}/04/01`, "YYYY/MM/DD") ||
                 current >  moment(`${financialYear.split('-')[1]}/03/31`, "YYYY/MM/DD"))
             }
-            onPanelChange={(val, mode) => console.log(val, mode)}
             format={dateFormat}
             onChange={handleDateRangeSelection}
         />
