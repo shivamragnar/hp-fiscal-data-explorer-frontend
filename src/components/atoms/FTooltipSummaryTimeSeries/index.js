@@ -35,9 +35,9 @@ const FTooltipSummaryTimeSeries = ( {
       case "FTimeSeries" :
       switch(true){
         case firsthalf() === true :
-        return "-5 0 140 0 140 96 0 96 0 5";
+        return "-5 0 140 0 140 60 0 60 0 5";
         default:
-        return "0 0 145 0 140 6 140 96 0 96";
+        return "0 0 145 0 140 6 140 60 0 60";
       }
       return;
              // "0 0          145 0
