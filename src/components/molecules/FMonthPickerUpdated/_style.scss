@@ -12,8 +12,10 @@
 .ant-picker-header{
   pointer-events: none !important;
 }
-
 .ant-picker-header > button{
+  font-size: 20px;
+}
+.ant-picker-header > button:last-child{
   display: none;
 }
 
