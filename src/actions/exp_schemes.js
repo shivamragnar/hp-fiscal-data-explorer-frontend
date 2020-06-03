@@ -86,6 +86,7 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
       distSchValsToMap.map((expArray, i) => {
         let dataObj = {};
         dataObj.idx = i+1;
+        dataObj.districtName = districtName;
         dataObj.date = month_week === "month" ?
                        months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
                        : xTickVals[i];

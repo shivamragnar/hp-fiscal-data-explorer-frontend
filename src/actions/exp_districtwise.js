@@ -90,6 +90,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         distExpValsToMap.map((expArray, i) => { //4----
           let dataObj = {};
           dataObj.idx = i;
+          dataObj.districtName = districtName;
           dataObj.date = month_week === "month"
                          ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
                          : xTickVals[i] //5----

@@ -80,8 +80,8 @@ export const getExpSummaryData = () => async dispatch => {
       ]
       //
       aryOfYears.map((yr,j) => {
-        lineChrtData[k][0].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
-        lineChrtData[k][1].yearwise.unshift({ idx : aryOfYears.length - 1 - i, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
+        lineChrtData[k][0].yearwise.unshift({ idx : aryOfYears.length - 1 - j, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
+        lineChrtData[k][1].yearwise.unshift({ idx : aryOfYears.length - 1 - j, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
       })
     })
 
