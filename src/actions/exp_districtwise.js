@@ -57,7 +57,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const activeFilterVals = Object.values(activeFilters);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      // console.log("objForPayload", objectForPayload);
+      console.log("objForPayload - EXP DISTRICTWISE", objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE, payload: {} });

@@ -60,18 +60,28 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
       //2 fetch raw filter data
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
+      console.log('activeFilterKeys', activeFilterKeys);
+      console.log('activeFilterVals', activeFilterVals);
       var stringForApi = "";
       activeFilterVals.map((val, i) => {
-          let tempVal = val.map(item => { return item.split('-')[0]});
-          tempVal = tempVal.join('","');
-          stringForApi +=  activeFilterKeys[i] + '="' + tempVal + '"';
+          let tempVal0 = val.map(item => { return item.split('-')[0]});
+          let tempVal1 = val.map(item => { return item.split('-')[1]});
+          tempVal0 = tempVal0.join('","');
+          tempVal1 = tempVal1.join('","');
+          console.log('activeFilterKeys[i]', activeFilterKeys[i].split('-')[0], activeFilterKeys[i].split('-')[1]);
+          stringForApi +=  activeFilterKeys[i].split('-')[0] + '="' + tempVal0 + '"';
+          if(activeFilterKeys[i].split('-')[1] !== undefined){
+            stringForApi += '&' + activeFilterKeys[i].split('-')[1] + '="' + tempVal1 + '"';
+          }
           if(i < activeFilterVals.length - 1){
             stringForApi += '&';
           }
       })
+
+      console.log( "stringForApi - exp -dtrcitwsise filters", stringForApi );
       const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_treasury?${stringForApi}`);
-      // console.log('raw_dynamic_filter_data: ');
-      // console.log(rawFilterData);
+      console.log('raw_dynamic_filter_data: ');
+      console.log(rawFilterData);
 
       const results = [];
       var query;
