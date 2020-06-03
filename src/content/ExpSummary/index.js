@@ -24,6 +24,7 @@ import FLegendBar from '../../components/atoms/FLegendBar';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FDropdown from '../../components/molecules/FDropdown';
+import MultiSelect from "../../components/molecules/FMultiSelect"
 
 import FTooltipSummaryTimeSeries from '../../components/atoms/FTooltipSummaryTimeSeries';
 //data
@@ -75,21 +76,59 @@ const ExpSummary = ({
 	const [activeDataPoint, setActiveDataPoint] = useState('alloc');
 	const [activeVizData, setActiveVizData] = useState([]);
 
-	const [activeDemandForTimeseries, setActiveDemandForTimeseries] = useState('All Demands');
-	const handleChangeActiveDemandForTimeSeries = v => setActiveDemandForTimeseries(v.selectedItem);
+	const [activeDemandForTimeseries, setActiveDemandForTimeseries] = useState(['All Demands']);
+	const handleChangeActiveDemandForTimeSeries = v => {
+		if(v.length == 0){
+			setActiveDemandForTimeseries(['All Demands']);
+		}
+		else{
+			setActiveDemandForTimeseries(v);		
+		}
+	}
+
+	const handleDataSummation = () => {
+		let data = [{exp_alloc: "allocated", yearwise: []}, {exp_alloc: "expenditure", yearwise:[]}]
+		let yearwiseData1 = []
+		let yearwiseData2 = []
+		activeDemandForTimeseries.forEach((demand, ind) => {
+			let dataArr = lineChrtData[demand]
+			if(ind === 0){
+				yearwiseData1 = dataArr[0].yearwise
+				yearwiseData2 = dataArr[1].yearwise
+			}
+			else{
+				dataArr[0].yearwise.forEach((data, index) => {
+						yearwiseData1[index].amount += data.amount
+				})
+				dataArr[1].yearwise.forEach((data, index) => {
+						yearwiseData2[index].amount += data.amount
+				})
+			}
+		})
+		data[0].yearwise = yearwiseData1
+		data[1].yearwise = yearwiseData2
+		return data
+	}
 
 	const handleDataPointChange = (value,name) => {
 		setActiveDataPoint(value);
-		console.log('value',value)
 		setActiveVizData(populateActiveVizData(value));
 	}
 
 	const genDemandSelector = () => (
-		<FDropdown
-			initialSelectedItem = {activeDemandForTimeseries}
-			items = { Object.keys(lineChrtData) }
-			onChange = {(v) => handleChangeActiveDemandForTimeSeries(v)}
-			/>
+		// <FDropdown
+		// 	initialSelectedItem = {activeDemandForTimeseries}
+		// 	items = { Object.keys(lineChrtData) }
+		// 	onChange = {(v) => {
+		// 		console.log('testing', v)
+		// 		handleChangeActiveDemandForTimeSeries(v)}}
+		// />
+		<MultiSelect 
+				initialSelectedItems={activeDemandForTimeseries && activeDemandForTimeseries.map(demand => ({label: demand, value:demand}))}
+				items = {Object.keys(lineChrtData).map(key => ({label: key, value: key})) }
+				type="timeseries"
+				onChange={(e) => handleChangeActiveDemandForTimeSeries(e)}
+		/>
 	)
 
 	const populateActiveVizData = (activeProperty) => {
@@ -118,7 +157,8 @@ const ExpSummary = ({
 			<FTimeSeries
 				dataToX="year"
 				dataToY={"amount"}
-				data={lineChrtData[activeDemandForTimeseries]}
+				// data={lineChrtData[activeDemandForTimeseries]}
+				data={handleDataSummation()}
 				dataAryName="yearwise"
 				yAxisLabel="amount"
         xAxisLabel="fiscal year"
@@ -138,7 +178,7 @@ const ExpSummary = ({
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Bubble Chart" />
-              <Switch  text="Timeseries" />
+              <Switch  text="Time Series" />
 							<Switch  text="Table" />
             </ContentSwitcher>
           </div>

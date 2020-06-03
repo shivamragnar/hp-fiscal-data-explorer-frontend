@@ -67,7 +67,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
             disabledDate={current =>
                 current &&
                 (current <  moment(`${financialYear.split('-')[0]}/04/01`, "YYYY/MM/DD") ||
-                current >  moment(`${financialYear.split('-')[1]}/04/01`, "YYYY/MM/DD"))
+                current >  moment(`${financialYear.split('-')[1]}/03/31`, "YYYY/MM/DD"))
             }
             onPanelChange={(val, mode) => console.log(val, mode)}
             format={dateFormat}
