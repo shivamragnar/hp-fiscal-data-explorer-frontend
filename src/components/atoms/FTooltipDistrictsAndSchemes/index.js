@@ -4,7 +4,7 @@ import tooltipBubble from '../../../imgs/tooltipBubble.svg'
 const { orange, blue, lightGrey, darkGrey, extraLightGrey, grey, black, white } = sassVars;
 
 const FTooltipDistrictsAndSchemes = ( {
-  x, y, datum, datum : { idx, gross, AGDED, BTDED, netPayment},
+  x, y, datum, datum : { districtName, idx, gross, AGDED, BTDED, netPayment},
   activeDataPoint,
   vizType,
   totalTicks
@@ -42,9 +42,9 @@ const FTooltipDistrictsAndSchemes = ( {
       case "FTimeSeries" :
       switch(true){
         case firsthalf() === true :
-        return "-5 0 140 0 140 96 0 96 0 5";
+        return "-5 0 140 0 140 110 0 110 0 5"; //for timeseries with the pointer to the right
         default:
-        return "0 0 145 0 140 6 140 96 0 96";
+        return "0 0 145 0 140 6 140 110 0 110"; //for timeseries with the pointer to the left
       }
       return;
              // "0 0          145 0
@@ -54,7 +54,7 @@ const FTooltipDistrictsAndSchemes = ( {
              //              140 96
              //  0 96"
       default:
-      return "0 0 140 0 140 42 145 48 140 54 140 96 0 96";
+      return "0 0 140 0 140 42 145 48 140 54 140 96 0 96"; //for bar chart i think.
              // "0 0        140 0
              //
              //             140 42
@@ -88,16 +88,17 @@ const FTooltipDistrictsAndSchemes = ( {
         opacity="1"/>
 
       <g fontWeight={500} transform="translate(0,19)" fill={white} >
-        <text x={paddingX} y={0} fill={darkGrey} letterSpacing="0.5" textAnchor="start"> {xAxisDimension} </text>
-        <line x1={paddingX} y1={8} x2={width-paddingX} y2={8} stroke={darkGrey} />
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={22} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={22} textAnchor="end">Cr {gross}</text>
-        <text x={paddingX} y={36} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
-        <text x={width-paddingX} y={36} text-anchor="end"> Cr {AGDED} </text>
-        <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start">BTDED  : </text>
-        <text x={width-paddingX} y={50} text-anchor="end"> Cr {BTDED} </text>
-        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={paddingX} y={64}  letter-spacing="0.5" text-anchor="start"> Net  : </text>
-        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={64}  text-anchor="end">Cr {netPayment} </text>
+        <text x={paddingX} y={0} fill={darkGrey} fontWeight={700} letterSpacing="0.5" textAnchor="start"> {districtName} </text>
+        <text x={paddingX} y={14} fill={darkGrey} letterSpacing="0.5" textAnchor="start"> {xAxisDimension} </text>
+        <line x1={paddingX} y1={22} x2={width-paddingX} y2={22} stroke={darkGrey} />
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={36} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={36} textAnchor="end">Cr {gross}</text>
+        <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
+        <text x={width-paddingX} y={50} text-anchor="end"> Cr {AGDED} </text>
+        <text x={paddingX} y={64} letter-spacing="0.5" text-anchor="start">BTDED  : </text>
+        <text x={width-paddingX} y={64} text-anchor="end"> Cr {BTDED} </text>
+        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={paddingX} y={78}  letter-spacing="0.5" text-anchor="start"> Net  : </text>
+        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={78}  text-anchor="end">Cr {netPayment} </text>
       </g>
     </g>
 

@@ -57,7 +57,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const activeFilterVals = Object.values(activeFilters);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      // console.log("objForPayload", objectForPayload);
+      console.log("objForPayload - EXP DISTRICTWISE", objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE, payload: {} });
@@ -90,6 +90,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         distExpValsToMap.map((expArray, i) => { //4----
           let dataObj = {};
           dataObj.idx = i;
+          dataObj.districtName = districtName;
           dataObj.date = month_week === "month"
                          ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
                          : xTickVals[i] //5----

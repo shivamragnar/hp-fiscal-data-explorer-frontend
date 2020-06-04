@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter as Router, withRouter } from 'react-router-dom';
+import ScrollToTop from "./components/molecules/FScrollToTop"
 
 //redux
 import { Provider } from 'react-redux';
@@ -12,6 +13,7 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <Router>
+    <ScrollToTop />
       <App />
     </Router>
   </Provider>,

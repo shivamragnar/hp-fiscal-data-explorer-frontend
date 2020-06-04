@@ -88,6 +88,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
         distRecValsToMap.map((recArray, i) => {
           let dataObj = {};
           dataObj.idx = i;
+          dataObj.districtName = districtName;
           dataObj.date = month_week === "month" ?
                          months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
                          : xTickVals[i] //5----
