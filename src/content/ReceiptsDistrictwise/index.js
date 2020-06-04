@@ -177,8 +177,8 @@ const ReceiptsDistrictwise = ({
   								xLabelFormat={xLabelFormat}
                   yAxisLabel="amount"
                   xAxisLabel="date"
-                  tooltip={<FTooltipReceipts vizType='FTimeSeries' totalTicks={lineChrtData[0].datewiseRec.length}/>}
-                  lineLabel="districtName"
+                  tooltip={<FTooltipReceipts/>}
+                //  lineLabel="districtName"
                 />
               </Fragment>
 
