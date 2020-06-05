@@ -78,7 +78,7 @@ const ExpSummary = ({
 
 	const [activeDemandForTimeseries, setActiveDemandForTimeseries] = useState(['All Demands']);
 	const handleChangeActiveDemandForTimeSeries = v => {
-		if(v.length == 0){
+		if(v.length === 0){
 			setActiveDemandForTimeseries(['All Demands']);
 		}
 		else{
@@ -163,7 +163,7 @@ const ExpSummary = ({
 				yAxisLabel="amount"
         xAxisLabel="fiscal year"
 				xLabelFormat={lineChrtData['All Demands'][0].yearwise.map(obj => obj.year)}
-				tooltip={<FTooltipSummaryTimeSeries vizType={'FTimeSeries'} totalTicks={lineChrtData[activeDemandForTimeseries][0].yearwise.length}/>}
+				tooltip={<FTooltipSummaryTimeSeries vizType={'FTimeSeries'} totalTicks={lineChrtData[activeDemandForTimeseries[0]][0].yearwise.length}/>}
 				lineLabel="exp_alloc"
 			/>
 		</Fragment>
