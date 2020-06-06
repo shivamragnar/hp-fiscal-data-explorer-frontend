@@ -181,6 +181,7 @@ const ExpSchemes = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  dateRange={dateRange}
                   yAxisLabel="amount"
                   xAxisLabel="date"
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[vizTypes.indexOf(currentVizType)]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}

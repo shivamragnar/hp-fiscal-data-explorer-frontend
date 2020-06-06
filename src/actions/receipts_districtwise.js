@@ -91,7 +91,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
           dataObj.districtName = districtName;
           dataObj.date = month_week === "month" ?
                          months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
-                         : xTickVals[i] //5----
+                         : xTickFormats[i] //5----
           dataObj.receipt = recArray[0];
           datewiseRec.push(dataObj);
           totalRec.receipt += recArray[0]

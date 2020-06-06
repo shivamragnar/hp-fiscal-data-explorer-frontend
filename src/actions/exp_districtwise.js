@@ -93,7 +93,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
           dataObj.districtName = districtName;
           dataObj.date = month_week === "month"
                          ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
-                         : xTickVals[i] //5----
+                         : xTickFormats[i] //5----
 
           dataObj.gross = expArray[0];
           dataObj.AGDED = expArray[1];

@@ -175,6 +175,7 @@ const ReceiptsDistrictwise = ({
                   dataAryName="datewiseRec"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  dateRange={dateRange}
                   yAxisLabel="amount"
                   xAxisLabel="date"
                   tooltip={<FTooltipReceipts vizType='FTimeSeries' totalTicks={lineChrtData[0].datewiseRec.length}/>}
