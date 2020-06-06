@@ -20,15 +20,13 @@ export const getExpSummaryData = () => async dispatch => {
       return Math.round((((curr / prev) - 1)*100)*100)/100;
     }
 
-
-
     Object.values(newestYearDataObj).map((d,i) => {
       let vizObj = {};
       let demand_string = Object.keys(newestYearDataObj)[i];
       let demand_id = demand_string.split('-')[0];
       let demand_desc = demand_string.split('-')[1];
-      vizObj.curr_year = aryOfYears[0];
-      vizObj.prev_year = aryOfYears[1];
+      vizObj.curr_year = yearsToCompare[0];
+      vizObj.prev_year = yearsToCompare[1];
       vizObj.demand = demand_id;
       vizObj.demand_description = demand_desc;
       vizObj.alloc = {
@@ -45,6 +43,8 @@ export const getExpSummaryData = () => async dispatch => {
     })
 
     console.log('SMRY_VIZ_DATA', vizData);
+
+//----------------
 
     let valuesFromAllYrs = Object.values(res.data.records);
     let keysFromAllYrs = Object.keys(res.data.records);

@@ -110,7 +110,8 @@ class FTimeSeries extends Component {
 				style={{
 					axisLabel: {
 						...axisLabelStyle,
-						padding: calcMonthOrWeek(this.props.dateRange[0], this.props.dateRange[1]) === 'month'
+						padding: this.props.dateRange && 
+										 calcMonthOrWeek(this.props.dateRange[0], this.props.dateRange[1]) === 'month'
 											? 40
 											: 70
 					}
