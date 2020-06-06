@@ -201,7 +201,7 @@ const ExpDistrictwise = ({
                   yAxisLabel="amount"
                   xAxisLabel="date"
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
-                  lineLabel="districtName"
+                //  lineLabel="districtName"
                 />
               </Fragment>
 

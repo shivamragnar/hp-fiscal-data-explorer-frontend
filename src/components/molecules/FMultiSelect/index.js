@@ -10,8 +10,14 @@ const FMultiSelect = ({className, disabled, initialSelectedItems, useTitleInItem
   const handleChange = (val, arr) => {
     let event = {selectedItems: arr}
     if(type==="timeseries"){
-      val = val.filter(item => item !== 'All Demands')
-      onChange(val)
+      if(val.length > 1 && val[val.length - 1] === 'All Demands'){
+        val = ['All Demands']
+        onChange(val)
+      }
+      else{
+        val = val.filter(item => item !== 'All Demands')
+        onChange(val)
+      }
     }
     else{
       onChange(event)
