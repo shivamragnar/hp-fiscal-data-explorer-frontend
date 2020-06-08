@@ -128,8 +128,8 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
       })
 
       aryOfYears.map(yr => {
-        tableData.rows[v_i][`allocated__${yr}`] = Object.values(res.data.records[yr])[v_i][0].toLocaleString('en-IN');
-        tableData.rows[v_i][`tot_exp__${yr}`] = Object.values(res.data.records[yr])[v_i][1].toLocaleString('en-IN');
+        tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
+        tableData.rows[v_i][`tot_exp__${yr}`] = (Object.values(res.data.records[yr])[v_i][1]/10000000).toFixed(2).toLocaleString('en-IN');
         tableData.rows[v_i][`pct_spent__${yr}`] = Object.values(res.data.records[yr])[v_i][2].toLocaleString('en-IN')+'%';
       })
     })
