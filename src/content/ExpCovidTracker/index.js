@@ -1,6 +1,6 @@
 import React from "react"
 
-import Card from "../../components/molecules/FDidYouKnowCard"
+import FDidYouKnowSection from "../../components/organisms/FDidYouKnowSection"
 
 import CoverImg from '../../imgs/cover_img.svg';
 
@@ -9,7 +9,6 @@ const ExpCovidTracker = () => {
 
   return (
     <div className='f-content f-home'>
-      {/* <FPageMeta pageId = 'home' /> */}
       <div className='f-home__section f-home__cover'>
         <img className='f-home__cover-bg-img' src={CoverImg} alt="_blank"/>
         <div className='bx--row'>
@@ -20,7 +19,7 @@ const ExpCovidTracker = () => {
         </div>
       </div>
       <div className='f-home__section'>
-        <Card />
+        <FDidYouKnowSection />
       </div>
     </div>
   )
