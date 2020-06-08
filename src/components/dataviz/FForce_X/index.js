@@ -112,7 +112,7 @@ class FForce_X extends React.Component {
     	.append("circle")
     	.attr("fill", "#000000")
     	// .attr("r", d => {d.radius = d.current/10000000; return d.radius} )
-      .attr("r", d => {d.radius = Math.sqrt(d.current / Math.PI) / (100 - this.nodeSize); return d.radius} )
+      .attr("r", d => {d.radius = Math.sqrt((d.current/100000).toFixed(2) / Math.PI) / (100 - this.nodeSize); return d.radius} )
       .on("mouseover", handleTooltipMouseover)
       .on("mouseout", handleTooltipMouseout)
     	// .call(d3.drag()
@@ -127,7 +127,7 @@ class FForce_X extends React.Component {
       const tooltip_html = (
         `<p class='tt_title'> Grant No. ${d.demand} ${d.demand_description}</p>
          <div class='tt_body'>
-           <p> Current Sanction: ${d.current.toLocaleString('en-IN')} INR </p>
+           <p> Current Sanction: ${(d.current/10000000).toFixed(2).toLocaleString('en-IN')} Cr </p>
            <p> Percent Change: ${d.pct_change} % </p>
          <div>` )
 
