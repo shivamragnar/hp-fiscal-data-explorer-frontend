@@ -26,6 +26,7 @@ const FRadioGroup = props => {
               id= {`${rbutton.filter_name}_${rbutton.id}`}
               labelText= {rbutton.label}
               value= {rbutton.id}
+              disabled={props.disableExpButton && i === 1}
             />
             )
           )
