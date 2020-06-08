@@ -69,6 +69,7 @@ const FHeader1 = () => {
               <img src={Logo} alt='' />
             </HeaderName>
             <HeaderNavigation className="f_primarylinks_center" aria-label="HP Fiscal Data Explorer Primary Links">
+              <HeaderMenuItem element={Link} to="/expenditure/covid19">COVID-19</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/expenditure/summary">Expenditure Summary</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure District-wise</HeaderMenuItem>
               {/*<HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
