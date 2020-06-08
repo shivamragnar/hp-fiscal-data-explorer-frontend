@@ -45,7 +45,7 @@ import {
 	VictoryVoronoiContainer
 } from 'victory';
 
-import { getDynamicYLabelFormat } from '../../../utils/functions';
+import { getDynamicYLabelFormat, calcMonthOrWeek } from '../../../utils/functions';
 
 import sassVars from '../../../scss/_vars.scss'
 
@@ -107,7 +107,15 @@ class FTimeSeries extends Component {
       >
       <VictoryAxis
 				label={this.props.xAxisLabel}
-				style={{ axisLabel: axisLabelStyle }}
+				style={{
+					axisLabel: {
+						...axisLabelStyle,
+						padding: this.props.dateRange && 
+										 calcMonthOrWeek(this.props.dateRange[0], this.props.dateRange[1]) === 'month'
+											? 40
+											: 70
+					}
+				}}
         tickLabelComponent={
           <VictoryLabel
             dx={0}

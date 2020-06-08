@@ -166,7 +166,7 @@ const ExpSchemes = ({
             dataPoints={["gross", "netPayment"]}
             barColors={["darkGrey", "black"]}
             xLabelVals={xLabelVals}
-            yAxisLabel="total amount in rupees"
+            yAxisLabel="total amount in Crores"
             xAxisLabel="districts"
             tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
             />
@@ -181,10 +181,11 @@ const ExpSchemes = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  dateRange={dateRange}
                   yAxisLabel="amount"
                   xAxisLabel="date"
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[vizTypes.indexOf(currentVizType)]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
-                  lineLabel="districtName"
+                  //lineLabel="districtName"
                 />
               </Fragment>
 

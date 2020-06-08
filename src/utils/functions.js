@@ -3,6 +3,29 @@ import moment from 'moment';
 var yymmdd_ref = require("../data/yymmdd_ref.json");
 var scsr_offset = require("../data/scsr_offset.json");
 
+export const prepQueryStringForFiltersApi = activeFilters => {
+  const activeFilterKeys = Object.keys(activeFilters);
+  const activeFilterVals = Object.values(activeFilters);
+  var stringForApi = "";
+
+  activeFilterVals.map((val, i) => {
+      let tempVal0 = val.map(item => { return item.split('-')[0]});
+      let tempVal1 = val.map(item => { return item.split('-')[1]});
+
+      tempVal0 = tempVal0.join('","');
+      tempVal1 = tempVal1.join('","');
+
+      stringForApi +=  activeFilterKeys[i].split('-')[0] + '="' + tempVal0 + '"';
+      if(activeFilterKeys[i].split('-')[1] !== undefined){
+        stringForApi += '&' + activeFilterKeys[i].split('-')[1] + '="' + tempVal1 + '"';
+      }
+      if(i < activeFilterVals.length - 1){
+        stringForApi += '&';
+      }
+  })
+
+  return stringForApi;
+}
 
 export const calcXTickVals = (month_week, districtwiseVals) => {
   let offset = 0;

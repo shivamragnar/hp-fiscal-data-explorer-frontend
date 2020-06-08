@@ -180,7 +180,7 @@ const ExpDistrictwise = ({
             dataPoints={["gross", "netPayment"]}
             barColors={["darkGrey", "black"]}
             xLabelVals={xLabelVals}
-            yAxisLabel="total amount in rupees"
+            yAxisLabel="total amount in crores"
             xAxisLabel="districts"
             tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
             />
@@ -197,8 +197,11 @@ const ExpDistrictwise = ({
                   dataAryName="datewiseExp"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  dateRange={dateRange}
+                  yAxisLabel="amount"
+                  xAxisLabel="date"
                   tooltip={<FTooltipDistrictsAndSchemes vizType={vizTypes[activeVizIdx]} activeDataPoint={[activeVizView]} totalTicks={lineChrtData[0].datewiseExp.length}/>}
-                  lineLabel="districtName"
+                //  lineLabel="districtName"
                 />
               </Fragment>
 
@@ -260,7 +263,7 @@ const ExpDistrictwise = ({
       <FPageMeta pageId = 'expenditure_demandwise' />
       <FPageTitle
         pageTitle="Expenditure | Districtwise"
-        pageDescription= {howToUseContent[2].content.body}
+        pageDescription= {howToUseContent[1].content.body}
         showLegend={false}
         monthPicker={
           <FMonthPicker

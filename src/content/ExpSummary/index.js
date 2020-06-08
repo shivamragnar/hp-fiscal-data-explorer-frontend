@@ -27,6 +27,7 @@ import FDropdown from '../../components/molecules/FDropdown';
 import MultiSelect from "../../components/molecules/FMultiSelect"
 import RadioTabs from "../../components/molecules/FRadioTabs"
 
+import FTooltipSummaryTimeSeries from '../../components/atoms/FTooltipSummaryTimeSeries';
 //data
 import howToUseContent from '../../data/howToUseContent.json';
 
@@ -79,7 +80,7 @@ const ExpSummary = ({
 
 	const [activeDemandForTimeseries, setActiveDemandForTimeseries] = useState(['All Demands']);
 	const handleChangeActiveDemandForTimeSeries = v => {
-		if(v.length == 0){
+		if(v.length === 0){
 			setActiveDemandForTimeseries(['All Demands']);
 		}
 		else{
@@ -169,8 +170,10 @@ const ExpSummary = ({
 				// data={lineChrtData[activeDemandForTimeseries]}
 				data={handleDataSummation()}
 				dataAryName="yearwise"
-				
+				yAxisLabel="amount"
+        xAxisLabel="fiscal year"
 				xLabelFormat={lineChrtData['All Demands'][0].yearwise.map(obj => obj.year)}
+				tooltip={<FTooltipSummaryTimeSeries vizType={'FTimeSeries'} totalTicks={lineChrtData[activeDemandForTimeseries[0]][0].yearwise.length}/>}
 				lineLabel="exp_alloc"
 			/>
 		</Fragment>
@@ -185,7 +188,7 @@ const ExpSummary = ({
 					<div className="content-switcher-wrapper">
             <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Bubble Chart" />
-              <Switch  text="Timeseries" />
+              <Switch  text="Time Series" />
 							<Switch  text="Table" />
             </ContentSwitcher>
           </div>

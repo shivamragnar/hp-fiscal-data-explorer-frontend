@@ -8,7 +8,13 @@ import {
 import { getExpSchemesData } from "./exp_schemes";
 
 
-import { onDateRangeChange, recursFilterFetch, recursFilterFind2, resetFiltersToAllFilterHeads } from "../utils/functions";
+import {
+  onDateRangeChange,
+  recursFilterFetch,
+  recursFilterFind2,
+  resetFiltersToAllFilterHeads,
+  prepQueryStringForFiltersApi
+} from "../utils/functions";
 
 var { exp_schemes : filterOrderRef } = require("../data/filters_ref.json");
 var yymmdd_ref = require("../data/yymmdd_ref.json");
@@ -19,12 +25,12 @@ export const getExpSchemesFiltersData = (allFiltersData, rawFilterDataAllHeads) 
       dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES_FILTERS, payload: {} });
 			//fetch raw filter data all heads only if we dont already have it in redux store
       if(Object.keys(rawFilterDataAllHeads).length === 0){
-        console.log("need to fetch raw district filter data");
+
         rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_schemes");
 
       }
 
-			console.log('raw_filter_data_all_heads: '); console.log(rawFilterDataAllHeads);
+			// console.log('raw_filter_data_all_heads: ', rawFilterDataAllHeads);
 
       //populate all dropdown filters' data from the raw response provided by API
       allFiltersData = resetFiltersToAllFilterHeads( rawFilterDataAllHeads, filterOrderRef);
@@ -58,17 +64,7 @@ export const updateExpSchemesFilters = (e, key, activeFilters, allFiltersData, r
       })
 
       //2 fetch raw filter data
-      const activeFilterKeys = Object.keys(activeFilters);
-      const activeFilterVals = Object.values(activeFilters);
-      var stringForApi = "";
-      activeFilterVals.map((val, i) => {
-          let tempVal = val.map(item => { return item.split('-')[0]});
-          tempVal = tempVal.join('","');
-          stringForApi +=  activeFilterKeys[i] + '="' + tempVal + '"';
-          if(i < activeFilterVals.length - 1){
-            stringForApi += '&';
-          }
-      })
+      let stringForApi = prepQueryStringForFiltersApi(activeFilters);
 
       const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_schemes?${stringForApi}`);
       // console.log('raw_dynamic_filter_data: ');
@@ -96,20 +92,16 @@ export const updateExpSchemesFilters = (e, key, activeFilters, allFiltersData, r
       }
 
       recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
-      console.log("district_results");
-      console.log(results);
+      // console.log("district_results");
+      // console.log(results);
       results.map(result => {
         recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
-      console.log(allFiltersData);
+      // console.log(allFiltersData);
     }
     //else if we have no active filters fetch rawFilterDataAllHeads and populate allFiltersData. e.g. when active filters are deselected.
     else{
-      console.log("allFiltersData_before");
-      console.log(allFiltersData);
       allFiltersData = resetFiltersToAllFilterHeads(rawFilterDataAllHeads, filterOrderRef);
-      console.log("allFiltersData_after");
-      console.log(allFiltersData);
     }
 
     dispatch({

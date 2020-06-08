@@ -12,8 +12,8 @@ class FForce_X extends React.Component {
     super(props);
     this.nodeSize = 85; //increase to increase size of bubbles
     this.axisLabelOptions = {
-      alloc:  'label for allocated',
-      exp: 'label for expenditure'
+      alloc:  'Percentage change in allocation between BE 2019-20 & BE 2018-19',
+      exp: 'Percentage change in unaudited actual expenditure between 2019-20 and 2018-19'
     };
     this.axisLabel = '';
   }
@@ -125,7 +125,7 @@ class FForce_X extends React.Component {
     function handleTooltipMouseover(d, i) {
 
       const tooltip_html = (
-        `<p class='tt_title'> ${d.demand} ${d.demand_description}</p>
+        `<p class='tt_title'> Grant No. ${d.demand} ${d.demand_description}</p>
          <div class='tt_body'>
            <p> Current Sanction: ${d.current.toLocaleString('en-IN')} INR </p>
            <p> Percent Change: ${d.pct_change} % </p>

@@ -159,7 +159,7 @@ const ReceiptsDistrictwise = ({
               dataPoints={["receipt"]}
               barColors={["darkGrey", "black"]}
               xLabelVals={xLabelVals}
-              yAxisLabel="total amount in rupees"
+              yAxisLabel="total amount in crores"
               xAxisLabel="districts"
               tooltip={<FTooltipReceipts/>}
               />
@@ -175,8 +175,11 @@ const ReceiptsDistrictwise = ({
                   dataAryName="datewiseRec"
                   xLabelVals={xLabelVals}
   								xLabelFormat={xLabelFormat}
+                  dateRange={dateRange}
+                  yAxisLabel="amount"
+                  xAxisLabel="date"
                   tooltip={<FTooltipReceipts/>}
-                  lineLabel="districtName"
+                //  lineLabel="districtName"
                 />
               </Fragment>
 
@@ -220,7 +223,7 @@ const ReceiptsDistrictwise = ({
       <FPageMeta pageId = 'receipts_districtwise' />
       <FPageTitle
         pageTitle="Receipts | Districtwise"
-        pageDescription= {howToUseContent[4].content.body}
+        pageDescription= {howToUseContent[3].content.body}
         showLegend={false}
         monthPicker={
           <FMonthPicker

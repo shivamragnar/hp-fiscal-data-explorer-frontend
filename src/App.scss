@@ -172,6 +172,13 @@ body{
   font-weight: inherit;
 }
 
+//...and in the case of schemes, apply this style to the 3rd child as well
+.exp-schemes .bx--data-table tr > td:nth-child(3){
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
 //...and in the case of districtwise, apply this style to the 3rd child as well
 .exp-districtwise .bx--data-table tr > td:nth-child(3){
   font-size: 9px;
