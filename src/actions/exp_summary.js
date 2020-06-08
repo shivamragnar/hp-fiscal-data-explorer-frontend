@@ -2,14 +2,22 @@ import axios from "axios";
 import { GET_EXP_SUMMARY_DATA, EXP_SUMMARY_DATA_ERROR, SET_EXP_SUMMARY_DATA_LOADING } from "./types";
 
 
-export const getExpSummaryData = () => async dispatch => {
+export const getExpSummaryData = (current, previous, rawData) => async dispatch => {
   try {
-    dispatch({ type: SET_EXP_SUMMARY_DATA_LOADING, payload: ""});
-    const res = await axios.get("http://13.126.189.78/api/allocation_exp_summary");
+    let res, yearsToCompare,aryOfYears
+    if(rawData){
+      res = rawData
+      yearsToCompare = [current, previous]
+      aryOfYears = Object.keys(res.data.records); //all the years that are being returned by data from jewset to oldest
+    }
+    else{
+      dispatch({ type: SET_EXP_SUMMARY_DATA_LOADING, payload: ""});
+      res = await axios.get("http://13.126.189.78/api/allocation_exp_summary");
+      aryOfYears = Object.keys(res.data.records); //all the years that are being returned by data from jewset to oldest
+      yearsToCompare = [aryOfYears[0], aryOfYears[1]] //gets newest and second to newest F year
+    }
 
-    let aryOfYears = Object.keys(res.data.records); //all the years that are being returned by data from jewset to oldest
-
-    let yearsToCompare = [aryOfYears[0], aryOfYears[1]] //gets newest and second to newest F year
+    let initData = res
 
     let vizData = [];
 
@@ -25,8 +33,8 @@ export const getExpSummaryData = () => async dispatch => {
       let demand_string = Object.keys(newestYearDataObj)[i];
       let demand_id = demand_string.split('-')[0];
       let demand_desc = demand_string.split('-')[1];
-      vizObj.curr_year = yearsToCompare[0];
-      vizObj.prev_year = yearsToCompare[1];
+      vizObj.curr_year = current ? current : aryOfYears[0];
+      vizObj.prev_year = previous ? previous : aryOfYears[1];
       vizObj.demand = demand_id;
       vizObj.demand_description = demand_desc;
       vizObj.alloc = {
@@ -131,6 +139,7 @@ export const getExpSummaryData = () => async dispatch => {
     dispatch({
       type: GET_EXP_SUMMARY_DATA,
       payload: {
+        initData,
         vizData,
         lineChrtData,
         tableData

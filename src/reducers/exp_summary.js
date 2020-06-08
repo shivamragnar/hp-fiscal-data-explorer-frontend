@@ -1,6 +1,7 @@
 import { GET_EXP_SUMMARY_DATA, SET_EXP_SUMMARY_DATA_LOADING, EXP_SUMMARY_DATA_ERROR } from "../actions/types";
 
 const initialState = {
+  initData: {},
   vizData: [],
   lineChrtData: {},
   tableData: {},
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
     case GET_EXP_SUMMARY_DATA:
       return {
         ...state,
+        initData: payload.initData,
         vizData: payload.vizData,
         lineChrtData: payload.lineChrtData,
         tableData: payload.tableData,

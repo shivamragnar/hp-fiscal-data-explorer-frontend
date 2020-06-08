@@ -25,6 +25,7 @@ import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FDropdown from '../../components/molecules/FDropdown';
 import MultiSelect from "../../components/molecules/FMultiSelect"
+import RadioTabs from "../../components/molecules/FRadioTabs"
 
 import FTooltipSummaryTimeSeries from '../../components/atoms/FTooltipSummaryTimeSeries';
 //data
@@ -65,6 +66,7 @@ const ExpSummary = ({
 		loading,
 		vizData,
 		lineChrtData,
+		initData,
 		tableData : { rows, headers}
 	},
 	getExpSummaryData
@@ -131,6 +133,14 @@ const ExpSummary = ({
 		/>
 	)
 
+	const handleSelectFiscalYear = (e) => {
+		let curr_year = e.target.value.split('-').join('_')
+		// Need to update this line
+		let prev_year = `20${parseInt(e.target.value.split('-')[1]) - 2}_${parseInt(e.target.value.split('-')[1])-1}`
+		console.log('curr prev', curr_year, prev_year)
+		getExpSummaryData(curr_year, prev_year, initData)
+	}
+
 	const populateActiveVizData = (activeProperty) => {
 		let tempData = [];
 		vizData.map(d => {
@@ -191,6 +201,7 @@ const ExpSummary = ({
 									{key: 'The bigger the size of the circle the bigger is the amount', type: 'bubble', color: 'black'}
 								]}
 								/>
+							<RadioTabs className="mt-10" onChange={handleSelectFiscalYear}/>
 							<FRadioGroup
 								className = "viz-view-toggle"
 								name = "FSmryDataPointSwitcher"
@@ -200,6 +211,7 @@ const ExpSummary = ({
 									{ label : "Allocated", id : "alloc" },
 									{ label : "Expenditure", id : "exp" },
 								]}
+								disableExpButton={vizData && vizData[0].curr_year==="2020-21"}
 								valueSelected = {activeDataPoint}
 							/>
 						<div id="data_viz_wrapper" className="data-viz-wrapper">
