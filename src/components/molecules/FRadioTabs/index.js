@@ -15,7 +15,7 @@ const FRadioTabs = (props) => {
         financialYears.map((year, i) => {
           if(i===0 || i===4){
             return (
-              <Tooltip title={i === 0 ? TooltipText[0] : TooltipText[1]} color={'#000000'}>
+              <Tooltip title={i === 0 ? TooltipText[0] : TooltipText[1]} >
                 <Radio.Button value={year.label} disabled={year.disabled}>{year.label}</Radio.Button>
               </Tooltip>
             )
