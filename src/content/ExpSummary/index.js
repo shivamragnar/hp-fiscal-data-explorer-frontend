@@ -218,6 +218,8 @@ const ExpSummary = ({
 								<FForce_X
 									nodes={activeVizData && activeVizData}
 									activeDataPoint = {activeDataPoint}
+									curr_year={vizData && vizData[0].curr_year.split('_').join('-')}
+									prev_year={vizData && vizData[0].prev_year.split('_').join('-')}
 									/>
 								{/* <FForce_Y nodes={this.props.exp_summary.data} />*/}
 							</div>

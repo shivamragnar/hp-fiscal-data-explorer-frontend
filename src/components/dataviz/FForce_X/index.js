@@ -11,14 +11,15 @@ class FForce_X extends React.Component {
   constructor(props){
     super(props);
     this.nodeSize = 85; //increase to increase size of bubbles
-    this.axisLabelOptions = {
-      alloc:  'Percentage change in allocation between BE 2019-20 & BE 2018-19',
-      exp: 'Percentage change in unaudited actual expenditure between 2019-20 and 2018-19'
-    };
+    this.axisLabelOptions = {}
     this.axisLabel = '';
   }
 
   componentDidMount() {
+    this.axisLabelOptions = {
+      alloc:  `Percentage change in allocation between BE ${this.props.curr_year} & BE ${this.props.prev_year}`,
+      exp: `Percentage change in unaudited actual expenditure between ${this.props.curr_year} and ${this.props.prev_year}`
+    };
     this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
     // console.log("propnodes");
@@ -34,6 +35,10 @@ class FForce_X extends React.Component {
     // console.log("propnodes");
     // console.log(this.props.nodes);
     d3.select("#data_viz_wrapper").selectAll("svg").remove();
+    this.axisLabelOptions = {
+      alloc:  `Percentage change in allocation between BE ${this.props.curr_year} & BE ${this.props.prev_year}`,
+      exp: `Percentage change in unaudited actual expenditure between ${this.props.curr_year} and ${this.props.prev_year}`
+    };
     this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
 
