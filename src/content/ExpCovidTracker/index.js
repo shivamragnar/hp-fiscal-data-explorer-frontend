@@ -7,7 +7,7 @@ import CoverImg from "../../imgs/cover_img.svg";
 const ExpCovidTracker = () => {
 	return (
 		<div className="f-content f-home">
-			<div className="f-home__section f-home__cover">
+			{/* <div className="f-home__section f-home__cover">
 				<img
 					className="f-home__cover-bg-img"
 					src={CoverImg}
@@ -26,7 +26,8 @@ const ExpCovidTracker = () => {
 						</h4>
 					</div>
 				</div>
-			</div>
+			</div> */}
+			<iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1t9sSeZyLFykxPpd3ep3-DioIHiEBpF5v2scdMSk7xN8&font=Default&lang=en&initial_zoom=2&height=750' width='100%' height='750' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>
 			<div className="f-home__section">
 				<FDidYouKnowSection />
 			</div>
