@@ -126,12 +126,40 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
         id : v_i,
         demandname: Object.keys(valuesFromAllYrs[0])[v_i]
       })
-
+/*      let i = 0;
+      for (i<=aryOfYears.length; i++;){
+        if (aryOfYears[i] == "2020_21") {
+              aryOfYears.map(yr => {
+                tableData.rows[v_i][`allocated__${yr}`] ="N/A";
+                tableData.rows[v_i][`tot_exp__${yr}`] = (Object.values(res.data.records[yr])[v_i][1]/10000000).toFixed(2).toLocaleString('en-IN');
+                tableData.rows[v_i][`pct_spent__${yr}`] = Object.values(res.data.records[yr])[v_i][2].toLocaleString('en-IN')+'%';
+              })
+            }
+        
+        else{
+         aryOfYears.map(yr => {
+                 tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
+                 tableData.rows[v_i][`tot_exp__${yr}`] = (Object.values(res.data.records[yr])[v_i][1]/10000000).toFixed(2).toLocaleString('en-IN');
+                 tableData.rows[v_i][`pct_spent__${yr}`] = Object.values(res.data.records[yr])[v_i][2].toLocaleString('en-IN')+'%';
+               })
+             }
+        }
+      })*/
       aryOfYears.map(yr => {
+        if (yr === "2020_21"){
+        tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
+        tableData.rows[v_i][`tot_exp__${yr}`] = "N/A";
+        tableData.rows[v_i][`pct_spent__${yr}`] = "N/A";
+      }
+      else{
+
         tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
         tableData.rows[v_i][`tot_exp__${yr}`] = (Object.values(res.data.records[yr])[v_i][1]/10000000).toFixed(2).toLocaleString('en-IN');
         tableData.rows[v_i][`pct_spent__${yr}`] = Object.values(res.data.records[yr])[v_i][2].toLocaleString('en-IN')+'%';
+
+      }
       })
+
     })
 
     console.log('SMRY_TBL_DATA', tableData);
