@@ -211,7 +211,7 @@ const ExpSummary = ({
 									{ label : "Allocated", id : "alloc" },
 									{ label : "Expenditure", id : "exp" },
 								]}
-								disableExpButton={vizData && vizData[0].curr_year==="2020-21"}
+								disableExpButton={vizData && vizData[0] && vizData[0].curr_year==="2020-21"}
 								valueSelected = {activeDataPoint}
 							/>
 						<div id="data_viz_wrapper" className="data-viz-wrapper">
