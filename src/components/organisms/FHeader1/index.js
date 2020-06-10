@@ -128,6 +128,13 @@ const FHeader1 = () => {
                       Districtwise
                     </HeaderMenuItem>
                   </HeaderMenu>
+                  <HeaderMenuItem 
+                    element={Link} 
+                    to="/expenditure/covid19" 
+                    onClick={onClickSideNavExpand}
+                  >
+                    COVID-19
+                  </HeaderMenuItem>
                   <HeaderMenuItem
                     element={Link}
                     to="/aboutus"
