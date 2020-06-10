@@ -32,7 +32,7 @@ const FTooltipDistrictsAndSchemes = ( {
     }
   }
 
-  const xAxisDimension = (vizType === "FTimeSeries") ?  datum.date :  datum.districtName;
+  const xAxisDimension = (vizType === "FTimeSeries") ?  datum.date :  "";
 
   const width = 140;
   const paddingX = 14;
@@ -54,7 +54,7 @@ const FTooltipDistrictsAndSchemes = ( {
              //              140 96
              //  0 96"
       default:
-      return "0 0 140 0 140 42 145 48 140 54 140 96 0 96"; //for bar chart i think.
+      return "0 0 140 0 140 42 145 48 140 54 140 106 0 106"; //for bar chart i think.
              // "0 0        140 0
              //
              //             140 42

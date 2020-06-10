@@ -182,7 +182,7 @@ const ExpDistrictwise = ({
             xLabelVals={xLabelVals}
             yAxisLabel="total amount in crores"
             xAxisLabel="districts"
-            tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
+            tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]} vizType={vizTypes[activeVizIdx]}/>}
             />
         </Fragment>
       )
