@@ -103,14 +103,14 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     	i === 0 && tempTableData.headers.push(
         { key: 'date', header: month_week === "week" ? "WEEKWISE DATES" : "MONTHS" },
         { key: 'budgetCode', header: 'BUDGET CODE' },
-        { key: 'receipt', header: 'TOTAL AMOUNT IN CRORES' }
+        { key: 'receipt', header: 'TOTAL AMOUNT IN LACS' }
       );
 
     	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
         'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, filterOrderRef.length-1]),
-    		'receipt': (d.receipt/10000000).toFixed(2).toLocaleString('en-IN'),
+    		'receipt': (d.receipt/100000).toFixed(2).toLocaleString('en-IN'),
     	})
     })
 

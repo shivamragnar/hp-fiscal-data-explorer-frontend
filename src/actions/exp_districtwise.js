@@ -133,10 +133,10 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         { key: 'districtName', header: 'District' },
         { key: 'treasuryCode', header: 'Treasury Code' },
         { key: 'budgetCode', header: 'Budget Code' },
-        { key: 'gross', header: 'Gross (Cr)' },
-        { key: 'AGDED', header: 'AGDED (Cr)' },
-        { key: 'BTDED', header: 'BTDED (Cr)' },
-        { key: 'netPayment', header: 'Net Payment (Cr)' }
+        { key: 'gross', header: 'Gross (Lacs)' },
+        { key: 'AGDED', header: 'AGDED (Lacs)' },
+        { key: 'BTDED', header: 'BTDED (Lacs)' },
+        { key: 'netPayment', header: 'Net Payment (Lacs)' }
       )
 
       tempBarChrtData.map((d, i) => {
@@ -145,10 +145,10 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       		'districtName': d.districtName,
           'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
-      		'gross': (d.gross/10000000).toFixed(2).toLocaleString('en-IN'),
-          'AGDED': (d.AGDED/10000000).toFixed(2).toLocaleString('en-IN'),
-      		'BTDED': (d.BTDED/10000000).toFixed(2).toLocaleString('en-IN'),
-      		'netPayment': (d.netPayment/10000000).toFixed(2).toLocaleString('en-IN')
+      		'gross': (d.gross/100000).toFixed(2).toLocaleString('en-IN'),
+          'AGDED': (d.AGDED/100000).toFixed(2).toLocaleString('en-IN'),
+      		'BTDED': (d.BTDED/100000).toFixed(2).toLocaleString('en-IN'),
+      		'netPayment': (d.netPayment/100000).toFixed(2).toLocaleString('en-IN')
       	})
       })
 

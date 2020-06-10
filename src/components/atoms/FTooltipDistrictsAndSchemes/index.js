@@ -12,10 +12,10 @@ const FTooltipDistrictsAndSchemes = ( {
 
   // console.log(datum);
 
-  gross = (gross/10000000).toFixed(2).toLocaleString('en-IN');
-  netPayment = (netPayment/10000000).toFixed(2).toLocaleString('en-IN');
-  AGDED = (AGDED/10000000).toFixed(2).toLocaleString('en-IN');
-  BTDED = (BTDED/10000000).toFixed(2).toLocaleString('en-IN');
+  gross = (gross/100000).toFixed(2).toLocaleString('en-IN');
+  netPayment = (netPayment/100000).toFixed(2).toLocaleString('en-IN');
+  AGDED = (AGDED/100000).toFixed(2).toLocaleString('en-IN');
+  BTDED = (BTDED/100000).toFixed(2).toLocaleString('en-IN');
 
   if(vizType === "FTimeSeries"){
     activeDataPoint = datum._y === datum.gross ? ["gross"] : ["netPayment"];
@@ -92,13 +92,13 @@ const FTooltipDistrictsAndSchemes = ( {
         <text x={paddingX} y={14} fill={darkGrey} letterSpacing="0.5" textAnchor="start"> {xAxisDimension} </text>
         <line x1={paddingX} y1={22} x2={width-paddingX} y2={22} stroke={darkGrey} />
         <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={paddingX} y={36} letterSpacing="0.5" textAnchor="start"> Gross  : </text>
-        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={36} textAnchor="end">Cr {gross}</text>
+        <text fontWeight={activeDataPoint.includes("gross") ? 700 : 500} x={width-paddingX} y={36} textAnchor="end">Lacs {gross}</text>
         <text x={paddingX} y={50} letter-spacing="0.5" text-anchor="start"> AGDED  : </text>
-        <text x={width-paddingX} y={50} text-anchor="end"> Cr {AGDED} </text>
+        <text x={width-paddingX} y={50} text-anchor="end"> Lacs {AGDED} </text>
         <text x={paddingX} y={64} letter-spacing="0.5" text-anchor="start">BTDED  : </text>
-        <text x={width-paddingX} y={64} text-anchor="end"> Cr {BTDED} </text>
+        <text x={width-paddingX} y={64} text-anchor="end"> Lacs {BTDED} </text>
         <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={paddingX} y={78}  letter-spacing="0.5" text-anchor="start"> Net  : </text>
-        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={78}  text-anchor="end">Cr {netPayment} </text>
+        <text fontWeight={activeDataPoint.includes("netPayment") ? 700 : 500} x={width-paddingX} y={78}  text-anchor="end">Lacs {netPayment} </text>
       </g>
     </g>
 
