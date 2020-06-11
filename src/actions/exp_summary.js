@@ -13,7 +13,7 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
     else{
       dispatch({ type: SET_EXP_SUMMARY_DATA_LOADING, payload: ""});
       res = await axios.get("https://hpback.openbudgetsindia.org/api/allocation_exp_summary");
-      aryOfYears = Object.keys(res.data.records).sort().reverse(); //all the years that are being returned by data from jewset to oldest
+      aryOfYears = Object.keys(res.data.records) //all the years that are being returned by data from jewset to oldest
       yearsToCompare = [aryOfYears[0], aryOfYears[1]] //gets newest and second to newest F year
     }
 
