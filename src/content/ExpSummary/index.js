@@ -36,6 +36,8 @@ import FPageMeta from '../../components/organisms/FPageMeta';
 //Name of components to switch between
 const vizTypes = ["FForce", 'FLineChart', "FTable"];
 
+const noExpDataYears = ["2016_17", "2020_21"]
+
  // const lineChrtData = [
 	// 	{
 	// 		name : "name1", //optional
@@ -211,7 +213,7 @@ const ExpSummary = ({
 									{ label : "Allocated", id : "alloc" },
 									{ label : "Expenditure", id : "exp" },
 								]}
-								disableExpButton={vizData && vizData[0] && vizData[0].curr_year==="2020_21"}
+								disableExpButton={vizData && vizData[0] && noExpDataYears.includes(vizData[0].curr_year)}
 								valueSelected = {activeDataPoint}
 							/>
 						<div id="data_viz_wrapper" className="data-viz-wrapper">
