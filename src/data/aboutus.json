@@ -43,6 +43,16 @@
     "img": "arun_img",
     "name": "Arun Sudarsan",
     "desc": "Arun is an Economist, passionate about #OpenData and its potential to increase state transparency and accountability. He believes in empowering state agencies to make policy decisions based on the best available evidence. Loves teaching. Previously worked at NITI Aayog."
+  },
+  {
+    "img": "shivam_img",
+    "name": "Shivam Sharma",
+    "desc": "Shivam is a Front End Developer. He loves to convert numbers into meaningful visual elements that are more civicly engaged. Education to underprivileged is his social motive. He likes to travel, being foodie, and watch one season a night."
+  },
+  {
+    "img": "arpit_img",
+    "name": "Arpit Arora",
+    "desc": "Arpit is a statistician by trade. He believes in building sustainable and intersectional solutions for the society. Avid cyclist and reader. Passionate about #OpenEducation."
   }
 
 ]

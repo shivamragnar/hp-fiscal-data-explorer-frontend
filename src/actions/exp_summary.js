@@ -151,6 +151,11 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
         tableData.rows[v_i][`tot_exp__${yr}`] = "N/A";
         tableData.rows[v_i][`pct_spent__${yr}`] = "N/A";
       }
+        else if (yr === "2015_16"){
+        tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
+        tableData.rows[v_i][`tot_exp__${yr}`] = "N/A";
+        tableData.rows[v_i][`pct_spent__${yr}`] = "N/A";
+      }
       else{
 
         tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
