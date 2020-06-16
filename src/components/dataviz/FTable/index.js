@@ -38,8 +38,14 @@ class FTable extends Component {
   }
 
   render() {
-
-
+    
+    const dataG = this.props.headers && this.props.rows && this.props.rows.map((rowItem) => {
+      const obj = {}
+      this.props.headers.forEach(header => {
+        obj[header.header] = rowItem[header.key]
+      })
+      return obj
+    })
 
     return (
       <div className="f-table-comp-wrapper">
@@ -54,7 +60,8 @@ class FTable extends Component {
                           <TableToolbarSearch  onChange={onInputChange} />
                           <TableToolbarAction onClick={this.props.onClickDownloadBtn}>
                             <FDownloadActionTooltip
-                              data={this.props.rows}
+                              // data={this.props.rows}
+                              data={dataG}
                               />
                         </TableToolbarAction>
                           {
