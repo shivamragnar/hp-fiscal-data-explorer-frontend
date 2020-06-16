@@ -166,7 +166,7 @@ const ExpSchemes = ({
             dataPoints={["gross", "netPayment"]}
             barColors={["darkGrey", "black"]}
             xLabelVals={xLabelVals}
-            yAxisLabel="total amount in Crores"
+            yAxisLabel="Amount"
             xAxisLabel="districts"
             tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]}/>}
             />
