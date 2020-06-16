@@ -180,7 +180,7 @@ const ExpDistrictwise = ({
             dataPoints={["gross", "netPayment"]}
             barColors={["darkGrey", "black"]}
             xLabelVals={xLabelVals}
-            yAxisLabel="total amount in crores"
+            yAxisLabel="Amount"
             xAxisLabel="districts"
             tooltip={<FTooltipDistrictsAndSchemes activeDataPoint={["gross", "netPayment"]} vizType={vizTypes[activeVizIdx]}/>}
             />

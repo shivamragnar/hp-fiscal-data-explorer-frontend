@@ -136,8 +136,8 @@ const Receipts = ( { receipts : {
 									barColors={["black"]}
 									xLabelVals={xLabelVals}
 									xLabelFormat={xLabelFormat}
-									xAxisLabel={xLabelFormat === null ? "Months" : "Weekwise dates"}
-									yAxisLabel="Total Amount in Crores"
+									xAxisLabel={xLabelFormat === null ? "Months" : "date"}
+									yAxisLabel="Amount"
 									tooltip={<FTooltipReceipts/>}
 									events={[{
 										// childName: "all",
