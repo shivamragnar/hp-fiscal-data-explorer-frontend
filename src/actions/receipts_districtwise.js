@@ -41,10 +41,14 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
 
       const [ dateFrom , dateTo ] = dateRange;
       const { months , years, years_short } = yymmdd_ref;
-      const month_week = calcMonthOrWeek(dateFrom, dateTo);
+
+      // As there is no data for 2020-21 we need to update code while we update data for it
+      const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
+
+      const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
       const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
       const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-      const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
+      const toMonthIndex = parseInt(updatedDateTo.split('-')[1])-1;
 
       const tempLineChrtData = [];
       const tempBarChrtData = [];
@@ -63,7 +67,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
-  		const res = await axios.post(`https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload});
+  		const res = await axios.post(`https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload});
   		// console.log("receipts districtwise raw data", res.data.records);
       if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
@@ -75,7 +79,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       //calc x-tick-vals if is week
       let xTickVals = calcXTickVals(month_week, districtwiseRecVals);
       //calc x-tick-formats if is week
-      let xTickFormats = calcXTickFormats(month_week, districtwiseRecVals, dateTo, dateFrom);
+      let xTickFormats = calcXTickFormats(month_week, districtwiseRecVals, updatedDateTo, dateFrom);
 
 
       districtNames.map((districtName, i) => {
