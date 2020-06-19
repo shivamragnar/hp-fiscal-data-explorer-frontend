@@ -62,43 +62,21 @@ const ExpDistrictwise = ({
   updateDistrictwiseOnDateRangeChange,
   updateExpDistrictwiseFilters }) => {
 
-  let expDistrictwiseActiveFilters = {...activeFilters};
+  //----------- initiatialization and handler pairs -----------//
 
-  //handle filter bar responsiveness
+  //#1 LEFT FILTER BAR
   const [filterBarVisibility, setFilterBarVisibility] = useState(false);
-	const handleFilterBarVisibility = () => {
-		setFilterBarVisibility(!filterBarVisibility);
-	}
+	const handleFilterBarVisibility = () => setFilterBarVisibility(!filterBarVisibility)
 
+  //#2 CONTENT SWITCHER TABS
   const activeViz = vizTypes[activeVizIdx];
+  const switchActiveViz = (e) => setActiveVizIdx(e.index)
 
-  const switchActiveViz = (e) => {
-    setActiveVizIdx(e.index)
-  };
-  // const [activeViz, setActiveViz] = useState(vizTypes[0]);
+  //#3 SECONDARY CONTENT SWITCHER RADIO BUTTONS
   const [activeVizView, setActiveVizView] = useState({
     FTimeSeriesVizView : "gross",
     FMapVizView : "gross"
   });
-
-  // console.log(activeVizView.FTimeSeriesVizView);
-
-  useEffect(() => {
-    // getExpDistrictwiseData(initData, activeFilters, dateRange);
-    // getExpDistrictwiseFiltersData(allFiltersData, rawFilterDataAllHeads);
-
-    return () => {
-      // resetActiveFiltersAndDateRange();
-    };
-
-  }, []);
-
-  const clearAllSelectedOptions = (filterName) => {
-    document
-      .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
-      .forEach(e => e.click());
-  }
-
   const onViewChange = (value, name) => {
     setActiveVizView({
       ...activeVizView,
@@ -106,14 +84,18 @@ const ExpDistrictwise = ({
     });
   }
 
+  //#4 MAIN DATA & FILTER DATA HANDLERS.
+  let expDistrictwiseActiveFilters = {...activeFilters};
+
   const onFilterChange = (e, key) => {
-    //if at least 1 option is selected,
-    if(e.selectedItems.length > 0){
+    //#1 ADD OR REMOVE FILTER ID, depending on if its a selection or deselection
+    if(e.selectedItems.length > 0){ //if at least 1 option is selected,
       expDistrictwiseActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
       })
     }else{ delete expDistrictwiseActiveFilters[key]; }
-    //remove all child filters from activeFiltersArray
+
+    //#2 remove all child filters from activeFiltersArray : because thats the rule : PARENT FILTER RESETS CHILD FILTERS
     const currFilterOrderIndex = filterOrderRef.indexOf(key);
     filterOrderRef.map((filterName,i) => {
       if(i > currFilterOrderIndex && expDistrictwiseActiveFilters[filterName] ){
@@ -122,17 +104,25 @@ const ExpDistrictwise = ({
       }
     })
 
-    // console.log("expDistrictwiseActiveFilters");
-    // console.log(expDistrictwiseActiveFilters);
     getExpDistrictwiseData(initData, expDistrictwiseActiveFilters, dateRange);
     updateExpDistrictwiseFilters(e, key, expDistrictwiseActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
-
 
   const onDateRangeSet = (newDateRange) => {
     console.log(newDateRange)
 		updateDistrictwiseOnDateRangeChange(initData, newDateRange, expDistrictwiseActiveFilters);
 	}
+
+  //----------- END initiatialization and handler pairs -----------//
+
+
+  //----------- probably redundant now, since multiselect comp has changed -------------//
+  const clearAllSelectedOptions = (filterName) => {
+    document
+      .querySelectorAll(`.f-${filterName}-multiselect .bx--list-box__selection--multi`)
+      .forEach(e => e.click());
+  }
+  //----------- probably redundant now, since multiselect comp has changed -------------//
 
 
 

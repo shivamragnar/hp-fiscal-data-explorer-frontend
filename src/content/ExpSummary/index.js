@@ -17,7 +17,7 @@ import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
-import FForce_Y from '../../components/dataviz/FForce_Y';
+// import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FLegendBar from '../../components/atoms/FLegendBar';
@@ -82,7 +82,7 @@ const ExpSummary = ({
 			setActiveDemandForTimeseries(['All Demands']);
 		}
 		else{
-			setActiveDemandForTimeseries(v);		
+			setActiveDemandForTimeseries(v);
 		}
 	}
 
@@ -123,7 +123,7 @@ const ExpSummary = ({
 		// 		console.log('testing', v)
 		// 		handleChangeActiveDemandForTimeSeries(v)}}
 		// />
-		<MultiSelect 
+		<MultiSelect
 				initialSelectedItems={activeDemandForTimeseries && activeDemandForTimeseries.map(demand => ({label: demand, value:demand}))}
 				items = {Object.keys(lineChrtData).map(key => ({label: key, value: key})) }
 				type="timeseries"
