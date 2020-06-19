@@ -210,3 +210,7 @@ body{
 .bx--tooltip__trigger:not(.bx--btn--icon-only):focus{
   outline: none;
 }
+
+.ant-tooltip-inner {
+  background-color: #000000 !important;
+}

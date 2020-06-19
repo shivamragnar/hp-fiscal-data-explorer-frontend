@@ -38,6 +38,7 @@ import BudgetHighlights from "./content/BudgetHighlights";
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
 import ExpDistrictwise from "./content/ExpDistrictwise";
+import ExpCovidTracker from "./content/ExpCovidTracker"
 
 import Receipts from "./content/Receipts";
 import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
@@ -53,7 +54,7 @@ import "./App.scss";
 
 //CONFIG
 const _CONFIG = {
-	initDateRange : ["2019-04-01","2020-03-31"],
+	initDateRange : ["2020-04-01","2020-05-30"],
 	initActiveFilters : {},
 	initAllFiltersData : [],
 	initRawFilterDataAllHeads : {} //only applies for exp_districtwise, receipts_districtwise & schemes
@@ -146,6 +147,7 @@ const fetchApisInQueue = async (idx) => {
             <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
 						<Route exact path="/receipts/districtwise" component={ReceiptsDistrictwise} />
 						<Route exact path="/schemes" component={ExpSchemes} />
+						<Route exact path="/expenditure/covid19" component={ExpCovidTracker} />
             <Route exact path="/receipts" component={Receipts} />
           </Switch>
       </div>

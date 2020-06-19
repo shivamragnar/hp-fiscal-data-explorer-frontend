@@ -33,7 +33,18 @@ const tickLabelStyle = {
   fontWeight: 600
   }
 
-const axisLabelStyle ={
+const xaxisLabelStyle ={
+  padding: 80,
+  fontFamily: 'IBM Plex Sans',
+  fontSize: '7px',
+  fill: "rgb(37, 37, 37)",
+  fontWeight: 400,
+  textTransform: "uppercase",
+  wordSpacing: "0.2em",
+  letterSpacing: "0.08em"
+}
+
+const yaxisLabelStyle ={
   padding: 50,
   fontFamily: 'IBM Plex Sans',
   fontSize: '7px',
@@ -43,6 +54,7 @@ const axisLabelStyle ={
   wordSpacing: "0.2em",
   letterSpacing: "0.08em"
 }
+
 
 
 
@@ -65,7 +77,7 @@ class FBarChart extends Component {
       >
       <VictoryAxis
         label={this.props.xAxisLabel}
-        style={{ axisLabel: axisLabelStyle }}
+        style={{ axisLabel: xaxisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
             dx={0}
@@ -81,7 +93,7 @@ class FBarChart extends Component {
       <VictoryAxis
         dependentAxis
         label={this.props.yAxisLabel}
-        style={{ axisLabel: axisLabelStyle }}
+        style={{ axisLabel: yaxisLabelStyle }}
         tickLabelComponent={
           <VictoryLabel
             dx={0}

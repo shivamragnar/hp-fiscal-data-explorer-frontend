@@ -9,19 +9,27 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'MMM. YYYY'
 
 const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
-    const [financialYear, setFinancialYear] = useState("2019-2020")
+    const [financialYear, setFinancialYear] = useState("2020-2021")
     const [rangePickerValue, setRangePickerValue] = useState([
-        moment(`2019/04/01`, "YYYY/MM/DD"),
-        moment(`2020/03/31`, "YYYY/MM/DD")
+        moment(`2020/04/01`, "YYYY/MM/DD"),
+        moment(`2020/05/31`, "YYYY/MM/DD")
     ])
     
     const handleSelectYear = (val, arr) => {
         let dates = val.split('-')
         setFinancialYear(val)
-        setRangePickerValue([
-            moment(`${dates[0]}/04/01`, "YYYY/MM/DD"),
-            moment(`${dates[1]}/03/31`, "YYYY/MM/DD")
-        ])
+        if(val === "2020-2021"){
+            setRangePickerValue([
+                moment(`2020/04/01`, "YYYY/MM/DD"),
+                moment(`2020/05/31`, "YYYY/MM/DD")
+            ])    
+        }
+        else{
+            setRangePickerValue([
+                moment(`${dates[0]}/04/01`, "YYYY/MM/DD"),
+                moment(`${dates[1]}/03/31`, "YYYY/MM/DD")
+            ])
+        }
         let dateObject = {
             from: {
                 year: dates[0],
@@ -67,7 +75,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
     return(
         <div className="ml-20">
            <Select 
-           defaultValue="2019-2020"
+           defaultValue="2020-2021"
            options={availableFinancialYears} 
            onChange={handleSelectYear}
            />
@@ -82,10 +90,16 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
                    handleSetPanelButtonActions(rangePickerValue)
                 }
             }}
-            disabledDate={current =>
-                current &&
-                (current <  moment(`${financialYear.split('-')[0]}/04/01`, "YYYY/MM/DD") ||
-                current >  moment(`${financialYear.split('-')[1]}/03/31`, "YYYY/MM/DD"))
+            disabledDate={current => {
+                if(financialYear === "2020-2021"){
+                    return current && current < moment('2020/04/01', "YYYY/MM/DD") || current > moment('2020/05/31', "YYYY/MM/DD")
+                }
+                else{
+                    return current &&
+                    (current <  moment(`${financialYear.split('-')[0]}/04/01`, "YYYY/MM/DD") ||
+                    current >  moment(`${financialYear.split('-')[1]}/03/31`, "YYYY/MM/DD"))
+                }
+            }
             }
             format={dateFormat}
             onChange={handleDateRangeSelection}

@@ -38,10 +38,14 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
 
     const [ dateFrom , dateTo ] = dateRange;
     const { months , years, years_short } = yymmdd_ref;
-    const month_week = calcMonthOrWeek(dateFrom, dateTo);
+
+    // As there is no data for 2020-21 we need to update code while we update data for it
+    const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
+
+    const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
     const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
     const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-    const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
+    const toMonthIndex = parseInt(updatedDateTo.split('-')[1])-1;
 
     const tempLineChrtData = [];
     const tempBarChrtData = [];
@@ -59,7 +63,7 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
 
     //1 PREP AND MAKE API CALL
     const config = { headers: { "content-type": "application/json" } };
-		const res = await axios.post( `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload} );
+		const res = await axios.post( `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload} );
 		// console.log("exp districtwise raw data", res.data.records);
     if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
@@ -71,7 +75,7 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     let xTickVals = calcXTickVals(month_week, districtwiseSchemesVals); //1----
 
     //calc x-tick-formats if is week
-    let xTickFormats = calcXTickFormats(month_week, districtwiseSchemesVals, dateTo, dateFrom);  //2----
+    let xTickFormats = calcXTickFormats(month_week, districtwiseSchemesVals, updatedDateTo, dateFrom);  //2----
     // console.log("districtwiseSchemesVals", districtwiseSchemesVals);
 
     districtNames.map((districtName, i) => {
@@ -128,10 +132,10 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
       { key: 'districtName', header: 'District' },
       { key: 'treasuryCode', header: 'Treasury Code' },
       { key: 'budgetCode', header: 'Budget Code' },
-      { key: 'gross', header: 'Gross (Cr)' },
-      { key: 'AGDED', header: 'AGDED (Cr)' },
-      { key: 'BTDED', header: 'BTDED (Cr)' },
-      { key: 'netPayment', header: 'Net Payment (Cr)' }
+      { key: 'gross', header: 'Gross (Lacs)' },
+      { key: 'AGDED', header: 'AGDED (Lacs)' },
+      { key: 'BTDED', header: 'BTDED (Lacs)' },
+      { key: 'netPayment', header: 'Net Payment (Lacs)' }
     )
 
     tempBarChrtData.map((d, i) => {
@@ -140,10 +144,10 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     		'districtName': d.districtName,
         'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
         'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
-    		'gross': (d.gross/10000000).toFixed(2).toLocaleString('en-IN'),
-    		'AGDED': (d.AGDED/10000000).toFixed(2).toLocaleString('en-IN'),
-        'BTDED': (d.BTDED/10000000).toFixed(2).toLocaleString('en-IN'),
-    		'netPayment': (d.netPayment/10000000).toFixed(2).toLocaleString('en-IN')
+    		'gross': (d.gross/100000).toFixed(2).toLocaleString('en-IN'),
+    		'AGDED': (d.AGDED/100000).toFixed(2).toLocaleString('en-IN'),
+        'BTDED': (d.BTDED/100000).toFixed(2).toLocaleString('en-IN'),
+    		'netPayment': (d.netPayment/100000).toFixed(2).toLocaleString('en-IN')
     	})
     })
 

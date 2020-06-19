@@ -42,10 +42,14 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const [ dateFrom , dateTo ] = dateRange;
       console.log("dateRange", dateRange)
       const { months , years, years_short } = yymmdd_ref;
-      const month_week = calcMonthOrWeek(dateFrom, dateTo);
+
+      // As there is no data for 2020-21 we need to update code while we update data for it
+      const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
+
+      const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
       const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
       const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-      const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
+      const toMonthIndex = parseInt(updatedDateTo.split('-')[1])-1;
 
       const tempLineChrtData = [];
       const tempBarChrtData = [];
@@ -65,7 +69,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
       // console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
-      const res = await axios.post( `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload})
+      const res = await axios.post( `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload})
   		// console.log("exp districtwise raw data", res.data.records);
       if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
       //2 PREP DATA FOR VISUALIZATION
@@ -76,7 +80,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1----
 
       //calc x-tick-formats if is week
-      let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, dateTo, dateFrom);  //2----
+      let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, updatedDateTo, dateFrom);  //2----
 
       districtNames.map((districtName, i) => {
         let datewiseExp = [];
@@ -133,10 +137,10 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         { key: 'districtName', header: 'District' },
         { key: 'treasuryCode', header: 'Treasury Code' },
         { key: 'budgetCode', header: 'Budget Code' },
-        { key: 'gross', header: 'Gross (Cr)' },
-        { key: 'AGDED', header: 'AGDED (Cr)' },
-        { key: 'BTDED', header: 'BTDED (Cr)' },
-        { key: 'netPayment', header: 'Net Payment (Cr)' }
+        { key: 'gross', header: 'Gross (Lacs)' },
+        { key: 'AGDED', header: 'AGDED (Lacs)' },
+        { key: 'BTDED', header: 'BTDED (Lacs)' },
+        { key: 'netPayment', header: 'Net Payment (Lacs)' }
       )
 
       tempBarChrtData.map((d, i) => {
@@ -145,10 +149,10 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       		'districtName': d.districtName,
           'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
-      		'gross': (d.gross/10000000).toFixed(2).toLocaleString('en-IN'),
-          'AGDED': (d.AGDED/10000000).toFixed(2).toLocaleString('en-IN'),
-      		'BTDED': (d.BTDED/10000000).toFixed(2).toLocaleString('en-IN'),
-      		'netPayment': (d.netPayment/10000000).toFixed(2).toLocaleString('en-IN')
+      		'gross': (d.gross/100000).toFixed(2).toLocaleString('en-IN'),
+          'AGDED': (d.AGDED/100000).toFixed(2).toLocaleString('en-IN'),
+      		'BTDED': (d.BTDED/100000).toFixed(2).toLocaleString('en-IN'),
+      		'netPayment': (d.netPayment/100000).toFixed(2).toLocaleString('en-IN')
       	})
       })
 

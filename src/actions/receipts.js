@@ -24,10 +24,14 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     const [ dateFrom , dateTo ] = dateRange;
     const { months , years, years_short } = yymmdd_ref;
-    const month_week = calcMonthOrWeek(dateFrom, dateTo);
+
+    // As there is no data for 2020-21 we need to update code while we update data for it
+    const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
+
+    const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
     const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
     const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-    const toMonthIndex = parseInt(dateTo.split('-')[1])-1;
+    const toMonthIndex = parseInt(updatedDateTo.split('-')[1])-1;
 
     const tempVizData = [];
     const tempTableData = { headers : [], rows : [] };
@@ -54,7 +58,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     } };
 		const res = await axios.post(
-      `https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
+      `https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${updatedDateTo}`, {filters:objForPayload}, config
     );
     if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
@@ -64,7 +68,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     console.log("xTickVals", xTickVals);
 
     //calc x-tick-formats if is week
-    let xTickFormats = calcXTickFormats(month_week, [res.data.records], dateTo, dateFrom);  //2----
+    let xTickFormats = calcXTickFormats(month_week, [res.data.records], updatedDateTo, dateFrom);  //2----
 
     //2 PREP DATA FOR VISUALIZATION
     var highestRecord = 0;
@@ -103,14 +107,14 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     	i === 0 && tempTableData.headers.push(
         { key: 'date', header: month_week === "week" ? "WEEKWISE DATES" : "MONTHS" },
         { key: 'budgetCode', header: 'BUDGET CODE' },
-        { key: 'receipt', header: 'TOTAL AMOUNT IN CRORES' }
+        { key: 'receipt', header: 'TOTAL AMOUNT IN LACS' }
       );
 
     	i !== 0 && tempTableData.rows.push({
     		id: i,
     		'date': d.date,
         'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, filterOrderRef.length-1]),
-    		'receipt': (d.receipt/10000000).toFixed(2).toLocaleString('en-IN'),
+    		'receipt': (d.receipt/100000).toFixed(2).toLocaleString('en-IN'),
     	})
     })
 

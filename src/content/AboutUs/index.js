@@ -13,6 +13,8 @@ import sheneille_img from '../../imgs/aboutus_imgs/sheneille_img.jpg';
 import shreya_img from '../../imgs/aboutus_imgs/shreya_img.jpg';
 import simonti_img from '../../imgs/aboutus_imgs/simonti_img.jpg';
 import swati_img from '../../imgs/aboutus_imgs/swati_img.jpg';
+import arpit_img from '../../imgs/aboutus_imgs/arpit_img.jpg';
+import shivam_img from '../../imgs/aboutus_imgs/shivam_img.jpg';
 
 const AboutUs = () => {
 
@@ -25,7 +27,9 @@ const AboutUs = () => {
     sheneille_img,
     shreya_img,
     simonti_img,
-    swati_img
+    swati_img,
+    arpit_img,
+    shivam_img
   }
 
   return(
