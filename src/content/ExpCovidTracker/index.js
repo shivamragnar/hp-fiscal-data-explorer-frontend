@@ -3,6 +3,13 @@ import React from "react";
 import FDidYouKnowSection from "../../components/organisms/FDidYouKnowSection";
 
 import CoverImg from "../../imgs/cover_img.svg";
+import img_1 from "../../imgs/covid/1.jpg";
+import img_2 from "../../imgs/covid/2.jpg";
+import img_3 from "../../imgs/covid/3.jpg";
+import img_5 from "../../imgs/covid/5.jpg";
+import img_14 from "../../imgs/covid/14.png";
+import img_18 from "../../imgs/covid/18.png";
+
 
 const ExpCovidTracker = () => {
 	return (
