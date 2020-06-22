@@ -11,6 +11,7 @@ class FForce_X extends React.Component {
   constructor(props){
     super(props);
     this.nodeSize = 85; //increase to increase size of bubbles
+    this.axisRange = [-100, 100] //modifiy this to change the range of the x-axis scale
     this.axisLabelOptions = {}
     this.axisLabel = '';
   }
@@ -78,7 +79,7 @@ class FForce_X extends React.Component {
       // .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")");
 
     var scale = d3.scaleLinear()
-    	.domain([-40, 70])
+    	.domain(this.axisRange)
     	.range([padding, width - padding ]);
 
     // Add scales to axis
