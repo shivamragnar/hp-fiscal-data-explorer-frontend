@@ -15,6 +15,8 @@ import exp_schemes_filters from "./exp_schemes_filters";
 import receipts from "./receipts";
 import receipts_filters from "./receipts_filters";
 
+import exp_covid from "./exp_covid"
+
 export default combineReducers({
   exp_summary,
 
@@ -31,4 +33,6 @@ export default combineReducers({
   exp_schemes_filters,
 
   receipts,
-  receipts_filters });
+  receipts_filters,
+
+  exp_covid });
