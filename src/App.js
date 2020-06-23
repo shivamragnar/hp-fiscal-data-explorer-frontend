@@ -28,6 +28,10 @@ import { getReceiptsDistrictwiseFiltersData } from './actions/receipts_districtw
 import { getExpSchemesData } from "./actions/exp_schemes.js"
 import { getExpSchemesFiltersData } from './actions/exp_schemes_filters';
 
+//COVID
+
+import { getExpCovidData } from "./actions/exp_covid"
+
 //components
 import FHeader1 from "./components/organisms/FHeader1";
 
@@ -83,6 +87,8 @@ const App = ({
 		getExpSchemesData,
 		getExpSchemesFiltersData,
 
+		getExpCovidData,
+
 		location : { pathname }
 	}
 ) => {
@@ -107,6 +113,8 @@ const apiCallQueue = [
 	{ apiFunc: () => getExpDistrictwiseData(null /*initData*/, _CONFIG.initActiveFilters, _CONFIG.initDateRange) },
 
 	{ apiFunc: () => getExpDistrictwiseFiltersData(_CONFIG.initAllFiltersData, _CONFIG.initRawFilterDataAllHeads) },
+
+	{ apiFunc: () => getExpCovidData() },
 
 	/*{ apiFunc: () => getExpDemandwiseFiltersData() }*/
 ]
@@ -171,7 +179,9 @@ App.propTypes = {
   getReceiptsDistrictwiseFiltersData : PropTypes.func.isRequired,
 
 	getExpSchemesData : PropTypes.func.isRequired,
-	getExpSchemesFiltersData : PropTypes.func.isRequired
+	getExpSchemesFiltersData : PropTypes.func.isRequired,
+
+	getExpCovidData : PropTypes.func.isRequired
 
 }
 
@@ -195,6 +205,8 @@ export default withRouter(connect(
 		getReceiptsDistrictwiseFiltersData,
 
 		getExpSchemesData,
-		getExpSchemesFiltersData
+		getExpSchemesFiltersData,
+
+		getExpCovidData
 
 	})(App));
