@@ -14,7 +14,7 @@
 	border-radius: 5px;
   height: 200px;
 	display: flex;
-	align-items: center;
+	// align-items: center;
 	justify-content: center;
   transition: all 0.5s ease;
   border: 1px solid #e9e9e9;
@@ -22,6 +22,20 @@
 
 .against-humanity:hover{
   background-color: black;
+
+  .learn-more-link{
+	  text-align: center;
+	  padding: 5px;
+	  border: 1px solid white;
+	  border-radius: 10px;
+	  color: white !important;
+	  cursor: pointer;
+	  text-decoration: none;
+  }
+  .learn-more-link:hover{
+	  background-color: white;
+	  color: black !important;
+  }
 }
 
 .against-humanity:hover .card-text{
@@ -32,9 +46,50 @@
 	transform: translate3D(0, -1px, 0) scale(1.03);
 }
 
+.card{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.learn-more-link{
+	text-align: center;
+	padding: 5px;
+	border: 1px solid #e1e1e1;
+	border-radius: 10px;
+	color: black !important;
+	cursor: pointer;
+	text-decoration: none;
+}
+
 .card-text {
 	font-size: 18px;
 	color: #000000;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+	.card-container {
+		height: 300px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+	.card-text {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1070px) {
+	.card-text {
+		font-size: 14px;
+	}
+}
+
+
+@media only screen and (min-width: 1070px) and (max-width: 1200px) {
+	.card-text {
+		font-size: 16px;
+	}
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1200px) {
