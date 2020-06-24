@@ -178,6 +178,12 @@ body{
   font-weight: 700;
 }
 
+//...but dont apply the above styling to the covid page data table
+.exp-covid .bx--data-table tr > td:nth-child(2){
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 
 //...and in the case of districtwise, apply this style to the 3rd child as well
 .exp-districtwise .bx--data-table tr > td:nth-child(3){

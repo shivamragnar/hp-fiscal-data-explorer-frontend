@@ -52,7 +52,7 @@ class FTable extends Component {
               <DataTable
                 rows={this.props.rows}
                 headers={this.props.headers}
-                isSortable
+                isSortable={this.props.sort === false ? this.props.sort : true}
                 render={({ rows, headers, getHeaderProps, getBatchActionProps, onInputChange, sortBy }) => (
                   <TableContainer title="DataTable with Toolbar">
                     <TableToolbar>

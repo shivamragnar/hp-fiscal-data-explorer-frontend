@@ -1,0 +1,9 @@
+.exp-covid table {
+    table-layout: fixed;
+    thead div{
+        display: inline-block;
+      }
+    th:hover{
+            background: #cacaca;
+    }
+}

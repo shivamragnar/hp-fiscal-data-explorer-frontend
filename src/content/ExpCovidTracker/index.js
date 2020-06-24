@@ -1,37 +1,58 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+//redux
+import { connect } from 'react-redux';
+
 import FDidYouKnowSection from "../../components/organisms/FDidYouKnowSection";
+import FTable from '../../components/dataviz/FTable';
+import FLoading from '../../components/atoms/FLoading';
+
+import "./_style.scss"
 
 
-const ExpCovidTracker = () => {
+const ExpCovidTracker = ({
+	exp_covid : {
+		tableData : { headers, rows },
+		loading,
+		error,
+	  }
+}) => {
 	return (
 		<div className="f-content f-home">
-			{/* <div className="f-home__section f-home__cover">
-				<img
-					className="f-home__cover-bg-img"
-					src={CoverImg}
-					alt="_blank"
-				/>
-				<div className="bx--row">
-					<div className="f-home__cover-text-wrapper bx--offset-lg-6 bx--col-lg-6">
-						<h1 className="f-cover-title">
-							COVID-19 Expenditure Tracker
-						</h1>
-						<h4 className="f-cover-subtitle">
-							The Covid-19 tracker is an exclusive addition to
-							this tool where citizens can explore the initiatives
-							taken up by the government of Himachal Pradesh
-							during the COVID-19 Epidemic.
-						</h4>
-					</div>
-				</div>
-			</div> */}
-			<iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1t9sSeZyLFykxPpd3ep3-DioIHiEBpF5v2scdMSk7xN8&font=Default&lang=en&initial_zoom=2&height=750' width='100%' height='750' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>
+			<iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1t9sSeZyLFykxPpd3ep3-DioIHiEBpF5v2scdMSk7xN8&font=Default&lang=en&initial_zoom=2&height=750' 
+			width='100%' height='750' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0' title="Himachal COVID Timeline"></iframe>
 			<div className="f-home__section">
 				<FDidYouKnowSection />
+			</div>
+			<div className="f-home__section exp-covid">
+				{
+					loading ? 
+					<FLoading/>
+					:
+					<FTable
+						rows={rows}
+						headers={headers}
+						onClickDownloadBtn={(e) => { console.log(e)}}
+						sort={false}
+              		/>
+				}
 			</div>
 		</div>
 	);
 };
 
-export default ExpCovidTracker;
+
+
+ExpCovidTracker.propTypes ={
+	exp_covid : PropTypes.object.isRequired
+  }
+  
+  const mapStateToProps = state => ({
+	exp_covid : state.exp_covid
+  })
+  
+  export default connect(
+	mapStateToProps,
+	null
+  )(ExpCovidTracker);
