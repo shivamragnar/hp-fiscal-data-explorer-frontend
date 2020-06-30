@@ -312,3 +312,7 @@ export const createObjForPayload = (activeFilterVals, activeFilterKeys) => {
 
   return objForPayload;
 }
+
+export const toTitleCase = (word) => {
+  return word[0].toUpperCase() + word.slice(1);
+}

@@ -9,12 +9,12 @@ import {
 } from "./types";
 
 import {
-  getWeekwiseDates,
   calcMonthOrWeek,
   createBudgetCodeString,
   createObjForPayload,
   calcXTickVals, //0----
-  calcXTickFormats //0----
+  calcXTickFormats, //0----
+  toTitleCase
 } from '../utils/functions';
 
 //data-refs
@@ -25,13 +25,10 @@ const { exp_districtwise : filterOrderRef } = require("../data/filters_ref.json"
 export const getExpDistrictwiseData = (initData, activeFilters, dateRange, triggeredByDateRangeChange = false) => async dispatch => {
   try {
 
-    console.log(triggeredByDateRangeChange);
-
     if(Object.keys(activeFilters).length === 0 && initData && triggeredByDateRangeChange === false){
       dispatch({
         type: HYDRATE_EXP_DISTRICTWISE_DATA_FROM_INITDATA,
         payload: {
-          populateInitData: false,
           data: initData,
           dateRange: dateRange,
           activeFilters: activeFilters
@@ -40,7 +37,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
     }else{
 
       const [ dateFrom , dateTo ] = dateRange;
-      console.log("dateRange", dateRange)
+      // console.log("DOCU: dateRange", dateRange)
+      // console.log("DOCU: activeFilters", activeFilters)
       const { months , years, years_short } = yymmdd_ref;
 
       // As there is no data for 2020-21 we need to update code while we update data for it
@@ -49,19 +47,14 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
       const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
       const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
-      const toMonthIndex = parseInt(updatedDateTo.split('-')[1])-1;
-
-      const tempLineChrtData = [];
-      const tempBarChrtData = [];
-      const tempMapData = JSON.parse(hp_geojson);
-
-      const tempTableData = { headers : [], rows : [] };
 
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
+      // console.log("DOCU: activeFilterKeys", activeFilterKeys);
+      // console.log("DOCU: activeFilterVals", activeFilterVals);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      console.log("objForPayload - EXP DISTRICTWISE", objForPayload);
+      console.log("DOCU: objForPayload", objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE, payload: {} });
@@ -69,26 +62,39 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
       // console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
-      const res = await axios.post( `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload})
+      const res = await axios.post(
+        `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${updatedDateTo}&range=${toTitleCase(month_week)}`,
+        { filters : objForPayload },
+        config
+      )
   		// console.log("exp districtwise raw data", res.data.records);
       if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
+
+      console.log('DOCU: response data', res.data );
+
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
       const districtwiseExpVals = Object.values(res.data.records);
-      console.log('sssssss',districtwiseExpVals)
-      //calc x-tick-vals if is week
-      let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1----
 
+      //calc x-tick-vals if is week
+      let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1---- //redundant can get rid of it
       //calc x-tick-formats if is week
       let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, updatedDateTo, dateFrom);  //2----
+
+
+      const tempLineChrtData = [];
+      const tempBarChrtData = [];
+      const tempMapData = JSON.parse(hp_geojson);
+      const tempTableData = { headers : [], rows : [] };
+
 
       districtNames.map((districtName, i) => {
         let datewiseExp = [];
         let totalExp = { districtName, gross: 0, AGDED: 0, BTDED: 0, netPayment: 0};
         // datewiseExp.push({"date":(month_week === "month" ? " " : 0), "gross": 0, "AGDED": 0, "BTDED": 0, "netPayment": 0});
         let distExpValsToMap = month_week === 'month' //3----
-        ? districtwiseExpVals[i]
-        : districtwiseExpVals[i].map(d => d[1] ) ;
+                               ? districtwiseExpVals[i]
+                               : districtwiseExpVals[i].map(d => d[1] ) ;
         // console.log("distExpValsToMap", distExpValsToMap);
 
         distExpValsToMap.map((expArray, i) => { //4----
@@ -96,9 +102,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
           dataObj.idx = i;
           dataObj.districtName = districtName;
           dataObj.date = month_week === "month"
-                         ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
+                         ? months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex] //can also be handled within the calcXTickFormats function itself
                          : xTickFormats[i] //5----
-
           dataObj.gross = expArray[0];
           dataObj.AGDED = expArray[1];
           dataObj.BTDED = expArray[2];
@@ -161,14 +166,13 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       dispatch({
         type: GET_EXP_DISTRICTWISE_DATA,
         payload: {
-          populateInitData: initData ? false : true, //populate and store 'all data' so that we dont have to make API call again and again.
           data: {
             mapData: tempMapData,
             barChrtData: {
               data:tempBarChrtData
             },
             lineChrtData: {
-              xLabelVals: month_week === "week" ? xTickVals : 'null', //6---
+              xLabelVals: month_week === "week" ? 'null' : 'null', //6--- //redundant can get rid of it.
               xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseExp.map(d => d.date),  //7---
               data:tempLineChrtData
             },
