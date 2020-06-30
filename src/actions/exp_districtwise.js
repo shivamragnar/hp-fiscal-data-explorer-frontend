@@ -147,7 +147,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       	tempTableData.rows.push({
       		id: i,
       		'districtName': d.districtName,
-          'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
+          'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [1, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
       		'gross': (d.gross/100000).toFixed(2).toLocaleString('en-IN'),
           'AGDED': (d.AGDED/100000).toFixed(2).toLocaleString('en-IN'),
