@@ -45,8 +45,6 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
 
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
-      const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
-      const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
 
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
@@ -86,7 +84,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const tempBarChrtData = [];
       const tempMapData = JSON.parse(hp_geojson);
       const tempTableData = { headers : [], rows : [] };
-
+      const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
+      const fromYearIndex = years.indexOf(dateFrom.split('-')[0]);
 
       districtNames.map((districtName, i) => {
         let datewiseExp = [];
@@ -163,25 +162,25 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
 
       // console.log("tempTableData", tempTableData);
 
-      dispatch({
-        type: GET_EXP_DISTRICTWISE_DATA,
-        payload: {
-          data: {
-            mapData: tempMapData,
-            barChrtData: {
-              data:tempBarChrtData
+        dispatch({
+          type: GET_EXP_DISTRICTWISE_DATA,
+          payload: {
+            data: {
+              mapData: tempMapData,
+              barChrtData: {
+                data:tempBarChrtData
+              },
+              lineChrtData: {
+                xLabelVals: month_week === "week" ? 'null' : 'null', //6--- //redundant can get rid of it.
+                xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseExp.map(d => d.date),  //7---
+                data:tempLineChrtData
+              },
+              tableData: tempTableData
             },
-            lineChrtData: {
-              xLabelVals: month_week === "week" ? 'null' : 'null', //6--- //redundant can get rid of it.
-              xLabelFormat: month_week === "week" ? xTickFormats : tempLineChrtData[0].datewiseExp.map(d => d.date),  //7---
-              data:tempLineChrtData
-            },
-            tableData: tempTableData
-          },
-          dateRange: dateRange,
-          activeFilters: activeFilters
-        }
-      });
+            dateRange: dateRange,
+            activeFilters: activeFilters
+          }
+        });
     }
 
   } catch (err) {
