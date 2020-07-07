@@ -8,13 +8,13 @@ var hp_geojson = require("../../../data/hp_geojson.json");
 // console.log(hp_geojson);
 
 
-const style = {
-    fillColor: '#FFFFFF',
-    weight: 2,
-    opacity: 1,
-    color: '#fff',
-    fillOpacity: 0.8
-}
+// const style = {
+//     fillColor: '#FFFFFF',
+//     weight: 2,
+//     opacity: 1,
+//     color: '#fff',
+//     fillOpacity: 0.8
+// }
 
 type State = {
   lat: number,
@@ -72,6 +72,16 @@ export default class FMap extends Component<{}, State> {
     })
   }
 
+  handleMapStyle = (feature) => {
+    return {
+    fillColor: feature.properties.gross ? '#FFFFFF' : '#E8E8E8',
+    weight: 2,
+    opacity: 1,
+    color: feature.properties.gross ? '#FFFFFF' : '#e1e1e1',
+    fillOpacity: 0.8
+    }
+  }
+
 // style={feature => feature.properties.gross ? showStyle : hideStyle}
   render() {
     // const position = [this.state.lat, this.state.lng];
@@ -92,7 +102,7 @@ export default class FMap extends Component<{}, State> {
                   {this.props.dataPointToMap && `${this.props.dataPointToMap.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}:`}
                 </p>
                 <p className='f-map-tooltip__data-point-value'>
-                  {this.state.tooltipData.dataPointToMap && `${(this.state.tooltipData.dataPointToMap/10000000).toFixed(2).toLocaleString('en-IN')} Cr`}
+                  {this.state.tooltipData.dataPointToMap ? `${(this.state.tooltipData.dataPointToMap/10000000).toFixed(2).toLocaleString('en-IN')} Cr` : "N/A"}
                 </p>
                 </div>
               </div>
@@ -115,7 +125,7 @@ export default class FMap extends Component<{}, State> {
           data={this.props.data}
           valueProperty={feature => feature.properties[this.props.dataPointToMap]}
           scale={["hsl(177,100%,0%)", "hsl(177,100%,70%)"]}
-          style={style}
+          style={this.handleMapStyle}
           steps={7}
           mode="e"
           onEachFeature={(feature, layer) => layer.on({
