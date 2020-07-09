@@ -194,6 +194,7 @@ const ExpSchemes = ({
               rows={rows}
               headers={headers}
               onClickDownloadBtn={(e) => { console.log(e)}}
+              showTotal={true}
               />
       default:
       return <div>nothing to display</div>;

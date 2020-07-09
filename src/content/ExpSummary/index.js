@@ -230,7 +230,7 @@ const ExpSummary = ({
 						currentVizType === vizTypes[1] ?
 						<Fragment>{genTimeSeries()}</Fragment>
 						:
-						<FTable rows={rows} headers={headers} />
+						<FTable rows={rows} headers={headers} showTotal={false}/>
 					}
 				</Fragment>
 			)

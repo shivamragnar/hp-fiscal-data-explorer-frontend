@@ -188,6 +188,7 @@ const ReceiptsDistrictwise = ({
               rows={rows}
               headers={headers}
               onClickDownloadBtn={(e) => { console.log(e)}}
+              showTotal={true}
               />
 
       default:
