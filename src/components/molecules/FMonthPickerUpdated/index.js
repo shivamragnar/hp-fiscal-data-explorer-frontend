@@ -12,7 +12,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
     const [financialYear, setFinancialYear] = useState("2020-2021")
     const [rangePickerValue, setRangePickerValue] = useState([
         moment(`2020/04/01`, "YYYY/MM/DD"),
-        moment(`2020/05/31`, "YYYY/MM/DD")
+        moment(`2020/06/30`, "YYYY/MM/DD")
     ])
     
     const handleSelectYear = (val, arr) => {
@@ -21,7 +21,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
         if(val === "2020-2021"){
             setRangePickerValue([
                 moment(`2020/04/01`, "YYYY/MM/DD"),
-                moment(`2020/05/31`, "YYYY/MM/DD")
+                moment(`2020/06/30`, "YYYY/MM/DD")
             ])    
         }
         else{
@@ -92,7 +92,7 @@ const FMonthPickerUpdated = ({onDateRangeSet, availableFinancialYears}) => {
             }}
             disabledDate={current => {
                 if(financialYear === "2020-2021"){
-                    return current && current < moment('2020/04/01', "YYYY/MM/DD") || current > moment('2020/05/31', "YYYY/MM/DD")
+                    return current && current < moment('2020/04/01', "YYYY/MM/DD") || current > moment('2020/06/30', "YYYY/MM/DD")
                 }
                 else{
                     return current &&
