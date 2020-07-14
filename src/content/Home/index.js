@@ -5,7 +5,7 @@ import HomeHowToUse from '../../components/organisms/HomeHowToUse';
 import DidYouKnowIcon from '../../components/icons/DidYouKnowIcon';
 import didYouKnowContent from '../../data/didYouKnowContent.json';
 import DidYouKnow from '../../components/organisms/DidYouKnow';
-import CoverImg from '../../imgs/cover_img.svg';
+import CoverImg from '../../imgs/cover_img_3.svg';
 import FPageMeta from '../../components/organisms/FPageMeta';
 
 const Home = (props) =>  {
