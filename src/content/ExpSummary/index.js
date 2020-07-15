@@ -17,6 +17,9 @@ import FTable from '../../components/dataviz/FTable';
 import FSlope from '../../components/dataviz/FSlope';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
+// Custom Content Swticher
+import FContentSwitcher from "../../components/molecules/FContentSwitcher"
+
 // import FForce_Y from '../../components/dataviz/FForce_Y';
 import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
@@ -188,11 +191,20 @@ const ExpSummary = ({
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
+            {/* <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Bubble Chart" />
               <Switch  text="Time Series" />
 							<Switch  text="Table" />
-            </ContentSwitcher>
+            </ContentSwitcher> */}
+			<FContentSwitcher 
+				onChange={switchVizType}  
+				options={[
+					{label: "Bubble Chart", infoText: "Graphical representation of grant-wise expenditure in Himachal Pradesh"},
+					{label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
+					{label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+				defaultValue="Bubble Chart"
+				activeVizIdx={vizTypes.indexOf(currentVizType)}
+            />
           </div>
 					{
 						currentVizType === vizTypes[0] ?
@@ -230,7 +242,7 @@ const ExpSummary = ({
 						currentVizType === vizTypes[1] ?
 						<Fragment>{genTimeSeries()}</Fragment>
 						:
-						<FTable rows={rows} headers={headers} />
+						<FTable rows={rows} headers={headers} showTotal={false}/>
 					}
 				</Fragment>
 			)

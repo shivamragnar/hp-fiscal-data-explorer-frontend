@@ -20,6 +20,10 @@ import { ContentSwitcher, Switch } from 'carbon-components-react';
 import FLoading from '../../components/atoms/FLoading';
 import FBarChart from '../../components/dataviz/FBarChart';
 import FTable from '../../components/dataviz/FTable';
+
+// Custom Content Swticher
+import FContentSwitcher from "../../components/molecules/FContentSwitcher"
+
 // import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FMonthPicker from '../../components/molecules/FMonthPickerUpdated'
 import FPageTitle from '../../components/organisms/FPageTitle';
@@ -116,10 +120,18 @@ const Receipts = ( { receipts : {
 			return (
 				<Fragment>
 					<div className="content-switcher-wrapper">
-						<ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
+						{/* <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
 							<Switch  text="Bar Chart" />
 							<Switch  text="Table" />
-						</ContentSwitcher>
+						</ContentSwitcher> */}
+						<FContentSwitcher 
+							onChange={switchVizType}  
+							options={[
+							{label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
+							{label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+							defaultValue="Bar Chart"
+							activeVizIdx={vizTypes.indexOf(currentVizType)}
+						/>
 					</div>
 					{ currentVizType === vizTypes[0] ?
 							<Fragment>
@@ -181,6 +193,7 @@ const Receipts = ( { receipts : {
 								 rows={rows}
 								 headers={headers}
 								 onClickDownloadBtn={(e) => { console.log(e)}}
+								 showTotal={true}
 								 />
 						 </Fragment>
 				 	 }

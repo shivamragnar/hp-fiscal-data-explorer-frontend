@@ -43,7 +43,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const { months , years, years_short } = yymmdd_ref;
 
       // As there is no data for 2020-21 we need to update code while we update data for it
-      const updatedDateTo = dateTo === "2021-03-31" ? "2020-05-31" : dateTo
+      const updatedDateTo = dateTo === "2021-03-31" ? "2020-06-30" : dateTo
 
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
       const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
@@ -133,7 +133,7 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       	tempTableData.rows.push({
       		id: i,
       		'districtName': d.districtName,
-          'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [0, 2]),
+          'treasuryCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [1, 2]),
           'budgetCode' : createBudgetCodeString(activeFilterVals, activeFilterKeys, filterOrderRef, [3, filterOrderRef.length-1]),
       		'receipt': (d.receipt/100000).toFixed(2).toLocaleString('en-IN')
       	})

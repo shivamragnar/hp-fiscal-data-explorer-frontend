@@ -27,6 +27,9 @@ import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrict
 import FPageMeta from '../../components/organisms/FPageMeta';
 import FNoDataFound from '../../components/organisms/FNoDataFound';
 
+// Custom Content Swticher
+import FContentSwitcher from "../../components/molecules/FContentSwitcher"
+
 //actions
 import { getExpDistrictwiseData, setActiveVizIdx, resetActiveFiltersAndDateRange }  from '../../actions/exp_districtwise';
 import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDistrictwiseOnDateRangeChange }  from '../../actions/exp_districtwise_filters';
@@ -200,6 +203,7 @@ const ExpDistrictwise = ({
               rows={rows}
               headers={headers}
               onClickDownloadBtn={(e) => { console.log(e)}}
+              showTotal={true}
               />
 
       default:
@@ -217,12 +221,22 @@ const ExpDistrictwise = ({
       return (
         <Fragment>
 					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
+            {/* <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
               <Switch  text="Map" />
               <Switch  text="Bar Chart" />
               <Switch  text="Time Series" />
               <Switch  text="Table" />
-            </ContentSwitcher>
+            </ContentSwitcher> */}
+            <FContentSwitcher 
+            onChange={switchActiveViz}  
+            options={[
+              {label: "Map", infoText: "Gives a geospatial representation of the district wise expenditure in Himachal Pradesh"}, 
+              {label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
+              {label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
+              {label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+            defaultValue="Map"
+            activeVizIdx={activeVizIdx}
+            />
 					</div>
           { activeViz === 'FTimeSeries' &&
             <FRadioGroup

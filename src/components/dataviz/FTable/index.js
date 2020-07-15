@@ -37,6 +37,29 @@ class FTable extends Component {
     console.log(rows);
   }
 
+  handleTotalColumn = (rows) => {
+    if(!rows.length){
+      return
+    }
+    let colspan = 0
+    let total = []
+    rows[0].cells.forEach((cell, index) => {
+      if(isNaN(Number(cell.value))){
+        colspan = index + 1
+      }
+    })
+    rows.forEach((row) => {
+      row.cells.forEach((cell, index) => {
+        if(index >= colspan){
+          total[index] = total[index] ? +(total[index] + parseFloat(cell.value)).toFixed(2).toLocaleString('en-IN') : parseFloat(cell.value)
+        }
+      })
+    })
+    let totalRow = ["Total", ...total.slice(colspan)]
+    return {totalRow, colspan}
+  }
+
+
   render() {
     
     const dataG = this.props.headers && this.props.rows && this.props.rows.map((rowItem) => {
@@ -53,7 +76,9 @@ class FTable extends Component {
                 rows={this.props.rows}
                 headers={this.props.headers}
                 isSortable={this.props.sort === false ? this.props.sort : true}
-                render={({ rows, headers, getHeaderProps, getBatchActionProps, onInputChange, sortBy }) => (
+                render={({ rows, headers, getHeaderProps, getBatchActionProps, onInputChange, sortBy }) => {
+                  let footerData = this.handleTotalColumn(rows)
+                  return(
                   <TableContainer title="DataTable with Toolbar">
                     <TableToolbar>
                         <TableToolbarContent>
@@ -92,10 +117,25 @@ class FTable extends Component {
                           </TableRow>
                         ))}
                       </TableBody>
+                      {
+                        rows.length && this.props.showTotal
+                        ?
+                          <tfoot>
+                            <tr>
+                              {
+                                footerData.totalRow.map((data, index) => (
+                                    <td className="total-column" colspan={index === 0 ? footerData.colspan : 1}>{data}</td>
+                                ))
+                              }
+                            </tr>
+                          </tfoot>
+                        :null
+                      }
                     </Table>
                     </div>
                   </TableContainer>
                 )}
+              }
               />
       </div>
     )
