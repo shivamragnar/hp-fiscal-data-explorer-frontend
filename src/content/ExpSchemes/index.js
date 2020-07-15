@@ -13,6 +13,8 @@ import FPageTitle from '../../components/organisms/FPageTitle';
 // import FMonthPicker from '../../components/molecules/FMonthPicker';
 import FMonthPicker from '../../components/molecules/FMonthPickerUpdated'
 
+// Custom Content Swticher
+import FContentSwitcher from "../../components/molecules/FContentSwitcher"
 
 import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
@@ -211,12 +213,22 @@ const ExpSchemes = ({
       return (
         <Fragment>
 					<div className="content-switcher-wrapper">
-            <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
+            {/* <ContentSwitcher onChange={switchVizType} selectedIndex={vizTypes.indexOf(currentVizType)} >
               <Switch  text="Map" />
               <Switch  text="Bar Chart" />
               <Switch  text="Time Series" />
               <Switch  text="Table" />
-            </ContentSwitcher>
+            </ContentSwitcher> */}
+            <FContentSwitcher 
+            onChange={switchVizType}  
+            options={[
+              {label: "Map", infoText: "Gives a geospatial representation of the district wise expenditure in Himachal Pradesh"}, 
+              {label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
+              {label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
+              {label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+            defaultValue="Map"
+            activeVizIdx={vizTypes.indexOf(currentVizType)}
+            />
 					</div>
           { currentVizType === 'FTimeSeries' &&
             <FRadioGroup

@@ -14,6 +14,9 @@ import FPageTitle from '../../components/organisms/FPageTitle';
 import FMonthPicker from '../../components/molecules/FMonthPickerUpdated'
 
 
+// Custom Content Swticher
+import FContentSwitcher from "../../components/molecules/FContentSwitcher";
+
 import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeries';
@@ -206,12 +209,22 @@ const ReceiptsDistrictwise = ({
         return (
           <Fragment>
   					<div className="content-switcher-wrapper">
-              <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
+              {/* <ContentSwitcher onChange={switchActiveViz} selectedIndex={activeVizIdx} >
                 <Switch  text="Map" />
                 <Switch  text="Bar Chart" />
                 <Switch  text="Time Series" />
                 <Switch  text="Table" />
-              </ContentSwitcher>
+              </ContentSwitcher> */}
+              <FContentSwitcher 
+                onChange={switchActiveViz}  
+                options={[
+                  {label: "Map", infoText: "Gives a geospatial representation of the district wise expenditure in Himachal Pradesh"}, 
+                  {label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
+                  {label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
+                  {label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+                defaultValue="Map"
+                activeVizIdx={activeVizIdx}
+              />
   					</div>
   					{ renderSwitch() }
   				</Fragment>
