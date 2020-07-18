@@ -17,8 +17,9 @@ const Home = (props) =>  {
         <img className='f-home__cover-bg-img' src={CoverImg} alt="_blank"/>
         <div className='bx--row'>
           <div className='f-home__cover-text-wrapper bx--offset-lg-6 bx--col-lg-6'>
-            <h1 className='f-cover-title'>Himachal Fiscal Data Explorer</h1>
-            <h4 className='f-cover-subtitle'>Fiscal Data Explorer is a unique tool where citizens can explore both budgets and spending data of state governments in an easy to comprehend and simple to use manner.</h4>
+            <h1 className='f-cover-title'>Himachal Pradesh Fiscal Data Explorer</h1>
+            <h4 className='f-cover-subtitle'>Fiscal Data Explorer is a unique tool where citizens can explore both budgets and spending data of state governments and district treasuries in an easy to comprehend and simple to use manner.</h4>
+            <h5 className='f-cover-subtitle'>Data Sourced from Himachal Pradesh's IFMIS - <a href = "https://himkosh.nic.in/" target= "_blank"> Himkosh </a></h5>
           </div>
           {/*<div className='bx--col-lg-6 f-home__cover-img-wrapper'><FHPMapImg style={{width:'100%'}} /></div>*/}
         </div>
