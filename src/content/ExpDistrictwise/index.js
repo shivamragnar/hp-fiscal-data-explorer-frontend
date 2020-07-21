@@ -36,11 +36,13 @@ import { getExpDistrictwiseFiltersData, updateExpDistrictwiseFilters, updateDist
 
 //data
 import howToUseContent from '../../data/howToUseContent.json';
+import Tooltips from "../../utils/tooltips"
 var { exp_districtwise : filterOrderRef, districtwise_filter_comp } = require("../../data/filters_ref.json");
 
 //Name of components to switch between
 const vizTypes = ["FMap", "FBarChart", "FTimeSeries", "FTable"];
 
+const tooltips = Tooltips.exp_districtwise
 
 const ExpDistrictwise = ({
   exp_districtwise : {
@@ -230,10 +232,11 @@ const ExpDistrictwise = ({
             <FContentSwitcher 
             onChange={switchActiveViz}  
             options={[
-              {label: "Map", infoText: "Gives a geospatial representation of the district wise expenditure in Himachal Pradesh"}, 
-              {label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
-              {label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
-              {label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+              {label: "Map", infoText: tooltips.map_chart_tooltip}, 
+              {label: "Bar Chart", infoText: tooltips.bar_chart_tooltip}, 
+              {label: "Time Series", infoText: tooltips.time_series_chart_tooltip}, 
+              {label: "Table", infoText: tooltips.table_tooltip}
+            ]}
             defaultValue="Map"
             activeVizIdx={activeVizIdx}
             />
