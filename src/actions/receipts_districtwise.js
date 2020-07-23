@@ -123,10 +123,10 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
 
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
-        { key: 'districtName', header: 'District' },
-        { key: 'treasuryCode', header: 'Treasury Code' },
-        { key: 'budgetCode', header: 'Budget Code' },
-        { key: 'receipt', header: 'Receipt (Lacs)' }
+        { key: 'districtName', header: 'District', tooltip: "District Name" },
+        { key: 'treasuryCode', header: 'Treasury Code', tooltip: "Unique code associated with each treasury." },
+        { key: 'budgetCode', header: 'Budget Code', tooltip: "Unique codes associated with Account Heads" },
+        { key: 'receipt', header: 'Receipt (Lacs)', tooltip: "Revenue in Rupees Lakhs" }
       )
 
       tempBarChrtData.map((d, i) => {

@@ -200,6 +200,7 @@ const ExpSchemes = ({
               headers={headers}
               onClickDownloadBtn={(e) => { console.log(e)}}
               showTotal={true}
+              showHeaderTooltip={true}
               />
       default:
       return <div>nothing to display</div>;

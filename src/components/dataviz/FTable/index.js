@@ -2,7 +2,8 @@ import React, {
   Component
 } from "react";
 import {Content} from 'carbon-components-react/lib/components/UIShell';
-import { DataTable, Button, Tooltip } from 'carbon-components-react';
+import { DataTable, Button } from 'carbon-components-react';
+import { Tooltip } from 'antd';
 
 import FDownloadActionTooltip from '../../molecules/FDownloadActionTooltip'
 
@@ -101,11 +102,24 @@ class FTable extends Component {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          {headers.map(header => (
-                            <TableHeader {...getHeaderProps({ header })}>
-                              {header.header}
-                            </TableHeader>
-                          ))}
+                          {headers.map(header => {
+                            if(this.props.showHeaderTooltip){
+                                return(
+                                  <Tooltip title={header.tooltip}>
+                                    <TableHeader {...getHeaderProps({ header })}>
+                                      {header.header}
+                                    </TableHeader>
+                                  </Tooltip>
+                                )
+                            }
+                            else{
+                              return(
+                                <TableHeader {...getHeaderProps({ header })}>
+                                  {header.header}
+                                </TableHeader>
+                              )
+                            }
+                          })}
                         </TableRow>
                       </TableHead>
                       <TableBody>
