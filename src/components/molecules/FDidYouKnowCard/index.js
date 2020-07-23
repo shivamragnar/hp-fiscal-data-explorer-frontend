@@ -6,32 +6,32 @@ const data = [
 	{
 		heading: "Heading 1",
 		link: "https://hp.openbudgetsindia.org/#/expenditure/tracker",
-        text:"The Food and Civil services and Social justice and empowerment departments have seen substantial increases in spending during the months (April and May) when the state went into lock down"	
+        text:"The Food and Civil Supplies, and the Social Justice and Empowerment departments have seen substantial increases in spending during the months of April and May when the state went into lockdown"	
     },
 	{
 		heading: "Heading 2",
 		link: "http://covidorders.hp.gov.in/frontend/web/writeData/Shimla/f69e104b1b24b2ed8358e0e4b0994b3c96d1fbdc.pdf",
-		text:"The Himachal Pradesh government is paying ASHA workers an additional incentive of 1000 rs/month from March to June 2020"
+		text:"The Government of Himachal Pradesh provided extra incentive of ₹1000 / month to ASHA workers for the months of March - June 2020"
 	},
 	{
 		heading: "Heading 3",
 		link: "https://hpsdma.nic.in/index1.aspx?lsid=7854&lev=1&lid=5225&langid=1",
-		text:"The HP State Disaster Management Authority received rs 78 crores from different donors for the fight against COVID-19"
+		text:"The Himachal Pradesh State Disaster Management Authority received ₹82 crores (₹780 million) from donors as on 23 July 2020"
 	},
 	{
 		heading: "Heading 4",
 		link: "http://covidorders.hp.gov.in/frontend/web/writeData/Shimla/5f88d992649cb0548b54e0589a850d41b7d3e1de.pdf",
-		text:"On 28th May, the state put out a comprehensive Emergency Response and Health Systems Package which details the release of approximately 14 crores to different districts and CMO’s for the fight against COVID-19"
+		text:"On May 28, 2020 the Himachal Pradesh government put out a comprehensive Emergency Response and Health Systems Package which detailed the release of nearly ₹14 crores (₹140 million) to various districts and Chief Medical Officers for the fight against COVID-19"
 	},
 	{
 		heading: "Heading 5 ",
 		link: "https://hpsdma.nic.in/index1.aspx?lsid=7854&lev=1&lid=5225&langid=1",
-		text:"Of the 78 crores that has been donated, the State Disaster Management fund has spent 13 crores till date. This has been mainly spent toward purchase of PPE kits, transportation of stranded migrants and deployment of guard to keep order "
+		text:"As on 23 July 2020, ₹18 crores (₹300 million) have been allotted to various departments of the government for purchase of PPE kits, transportation of stranded migrant workers, and deployment of home guards to maintain law and order"
 	},
 	{
 		heading: "Heading 6",
 		link: "https://hp.openbudgetsindia.org/#/receipts",
-		text:"Himachal Pradesh is facing a 54% reduction in it’s revenue for this fiscal year (rs 646 crores) compared to last year (rs 1, 411 crore)"
+		text:"Himachal Pradesh government, in the months of April - June 2020, received only 48% of the revenue it received in the same months in 2019"
 	}
 ];
 
