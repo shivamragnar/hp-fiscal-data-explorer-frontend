@@ -92,7 +92,8 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
       dataObj.date = month_week === "month" ?
                      months[(i+fromMonthIndex)%12]+" "+years_short[Math.floor((i+fromMonthIndex)/12) + fromYearIndex]
-                     : xTickVals[i] //5----
+                    //  : xTickVals[i] //5----
+                    : xTickFormats[i]
 
       dataObj.receipt = Math.round(record[0]*100)/100;
       tempVizData.push(dataObj);
