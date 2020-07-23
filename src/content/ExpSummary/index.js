@@ -80,6 +80,10 @@ const ExpSummary = ({
 	getExpSummaryData
  }) => {
 
+	//#1 LEFT FILTER BAR
+	const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+	const handleFilterBarVisibility = () => setFilterBarVisibility(!filterBarVisibility)
+
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e.index]); }
 
@@ -265,9 +269,10 @@ const ExpSummary = ({
           {createDataUIComponent()}
         </div>
 			{ currentVizType === vizTypes[1] &&
-				<div className={`filter-col-wrapper`}>
+				<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 					<FFilterColumn2
-	          customComp = {<div>{genDemandSelector()}</div>}
+						  customComp = {<div>{genDemandSelector()}</div>}
+						  onFilterIconClick={handleFilterBarVisibility}
 	          />
 				</div> }
       </div>
