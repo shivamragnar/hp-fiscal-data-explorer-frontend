@@ -45,6 +45,7 @@ const AboutUs = () => {
               </div>
               <div className='f-person-card__text-wrapper'>
               <h3 className='f-person-card__name'>{d.name}</h3>
+              <h5 className='f-person-card__org'>{d.org}</h5>
               <p className='f-person-card__desc'>{d.desc}</p>
               </div>
             </div>
