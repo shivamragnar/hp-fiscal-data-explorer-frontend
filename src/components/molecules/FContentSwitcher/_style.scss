@@ -61,3 +61,16 @@
 .w-100{
     width: 100%;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 499px){
+    .content-switcher{
+        width: 100% !important;
+    }
+}
+
+
+@media only screen and (min-width: 500px) and (max-width: 768px){
+    .content-switcher{
+        width: 70% !important;
+    }
+}

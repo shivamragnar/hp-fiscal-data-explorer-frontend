@@ -33,6 +33,7 @@ import RadioTabs from "../../components/molecules/FRadioTabs"
 import FTooltipSummaryTimeSeries from '../../components/atoms/FTooltipSummaryTimeSeries';
 //data
 import howToUseContent from '../../data/howToUseContent.json';
+import Tooltips from "../../utils/tooltips"
 
 import FPageMeta from '../../components/organisms/FPageMeta';
 
@@ -40,6 +41,8 @@ import FPageMeta from '../../components/organisms/FPageMeta';
 const vizTypes = ["FForce", 'FLineChart', "FTable"];
 
 const noExpDataYears = ["2016_17", "2020_21"]
+
+const tooltips = Tooltips.exp_summary
 
  // const lineChrtData = [
 	// 	{
@@ -76,6 +79,10 @@ const ExpSummary = ({
 	},
 	getExpSummaryData
  }) => {
+
+	//#1 LEFT FILTER BAR
+	const [filterBarVisibility, setFilterBarVisibility] = useState(false);
+	const handleFilterBarVisibility = () => setFilterBarVisibility(!filterBarVisibility)
 
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => { setCurrentVizType(vizTypes[e.index]); }
@@ -199,9 +206,10 @@ const ExpSummary = ({
 			<FContentSwitcher 
 				onChange={switchVizType}  
 				options={[
-					{label: "Bubble Chart", infoText: "Graphical representation of grant-wise expenditure in Himachal Pradesh"},
-					{label: "Time Series", infoText: "Graphical representation of district-wise expenditure across time in Himachal Pradesh"}, 
-					{label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+					{label: "Bubble Chart", infoText: tooltips.bubble_chart_tooltip},
+					{label: "Time Series", infoText: tooltips.time_series_chart_tooltip}, 
+					{label: "Table", infoText: tooltips.table_tooltip}
+				]}
 				defaultValue="Bubble Chart"
 				activeVizIdx={vizTypes.indexOf(currentVizType)}
             />
@@ -261,9 +269,10 @@ const ExpSummary = ({
           {createDataUIComponent()}
         </div>
 			{ currentVizType === vizTypes[1] &&
-				<div className={`filter-col-wrapper`}>
+				<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 					<FFilterColumn2
-	          customComp = {<div>{genDemandSelector()}</div>}
+						  customComp = {<div>{genDemandSelector()}</div>}
+						  onFilterIconClick={handleFilterBarVisibility}
 	          />
 				</div> }
       </div>

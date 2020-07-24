@@ -129,13 +129,13 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
 
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
-      { key: 'districtName', header: 'District' },
-      { key: 'treasuryCode', header: 'Treasury Code' },
-      { key: 'budgetCode', header: 'Budget Code' },
-      { key: 'gross', header: 'Gross (Lacs)' },
-      { key: 'AGDED', header: 'AGDED (Lacs)' },
-      { key: 'BTDED', header: 'BTDED (Lacs)' },
-      { key: 'netPayment', header: 'Net Payment (Lacs)' }
+      { key: 'districtName', header: 'District', tooltip: "District Name" },
+        { key: 'treasuryCode', header: 'Treasury Code', tooltip: "Unique code associated with each treasury." },
+        { key: 'budgetCode', header: 'Budget Code', tooltip: "Unique codes associated with Account Heads" },
+        { key: 'gross', header: 'Gross (Lacs)', tooltip: "Total Allocated Amount" },
+        { key: 'AGDED', header: 'AGDED (Lacs)', tooltip: "Accountant General Deductions" },
+        { key: 'BTDED', header: 'BTDED (Lacs)', tooltip: "Book Transfer Deductions" },
+        { key: 'netPayment', header: 'Net Payment (Lacs)', tooltip: "Gross - (AGDED + BTDED)"}
     )
 
     tempBarChrtData.map((d, i) => {

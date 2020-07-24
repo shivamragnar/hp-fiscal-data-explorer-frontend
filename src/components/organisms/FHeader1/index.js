@@ -50,7 +50,7 @@ const FHeader1 = () => {
                                 >
                                   <OverflowMenuItem itemText="Glossary" onClick={() => handleRouting('/glossary')}/>
                                   <OverflowMenuItem itemText="About Us" onClick={() => handleRouting('/aboutus')}/>
-                                  <a href="https://openbudgetsindia.org/contact" target="_blank"><OverflowMenuItem itemText="Contact Us" /></a>
+                                  <a href="https://openbudgetsindia.org/contact" target="_blank" className="w-100"><OverflowMenuItem itemText="Contact Us" /></a>
                                 </OverflowMenu>
 
 
@@ -69,8 +69,10 @@ const FHeader1 = () => {
               <img src={Logo} alt='' />
             </HeaderName>
             <HeaderNavigation className="f_primarylinks_center" aria-label="HP Fiscal Data Explorer Primary Links">
-              <HeaderMenuItem element={Link} to="/expenditure/summary">Expenditure Summary</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure District-wise</HeaderMenuItem>
+            <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
+              <HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/expenditure/tracker">Districtwise</HeaderMenuItem>
+            </HeaderMenu>
               {/*<HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
                 //<HeaderMenuItem element={Link} to="/expenditure/summary">Summary</HeaderMenuItem>
                 <HeaderMenuItem element={Link} to="/expenditure/details">Demand Details</HeaderMenuItem>
@@ -135,7 +137,7 @@ const FHeader1 = () => {
                   >
                     COVID-19
                   </HeaderMenuItem>
-                  <HeaderMenuItem
+                  {/* <HeaderMenuItem
                     element={Link}
                     to="/aboutus"
                     onClick={onClickSideNavExpand}
@@ -148,7 +150,7 @@ const FHeader1 = () => {
                     onClick={onClickSideNavExpand}
                   >
                     Contact Us
-                  </HeaderMenuItem>
+                  </HeaderMenuItem> */}
                 </HeaderSideNavItems>
               </SideNavItems>
             </SideNav>

@@ -37,6 +37,7 @@ import FNoDataFound from '../../components/organisms/FNoDataFound';
 import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
 
 // data_ref
+import Tooltips from "../../utils/tooltips"
 import howToUseContent from '../../data/howToUseContent.json';
 const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/filters_ref.json');
 
@@ -45,6 +46,8 @@ const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/f
 
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];
+
+const tooltips = Tooltips.receipts_details
 
 const Receipts = ( { receipts : {
 											 data : {
@@ -127,8 +130,8 @@ const Receipts = ( { receipts : {
 						<FContentSwitcher 
 							onChange={switchVizType}  
 							options={[
-							{label: "Bar Chart", infoText: "Gives a graphical representation of District-wise Expenditure in different districts in Himachal Pradesh"}, 
-							{label: "Table", infoText: "The table below contains district-wise expenditure details in Himachal Pradesh. The search results can be downloaded and reused"}]}
+							{label: "Bar Chart", infoText: tooltips.bar_chart_tooltip}, 
+							{label: "Table", infoText: tooltips.table_tooltip}]}
 							defaultValue="Bar Chart"
 							activeVizIdx={vizTypes.indexOf(currentVizType)}
 						/>
