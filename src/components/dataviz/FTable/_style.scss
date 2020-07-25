@@ -1,7 +1,10 @@
-//override
-.bx--overflow-menu-options__option{
-  width: auto;
-  height: 3rem;
+.f-table-comp-wrapper{
+  //override
+  .bx--overflow-menu-options__option{
+    width: auto;
+    height: 3rem;
+    padding: 0;
+  }
 }
 
 .bx--overflow-menu-options__btn{
