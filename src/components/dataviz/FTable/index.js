@@ -73,6 +73,12 @@ class FTable extends Component {
 
     return (
       <div className="f-table-comp-wrapper">
+              {
+                this.props.showInCroresText
+                ?
+                <span>Figures are in Crores.</span>
+                :null
+              }
               <DataTable
                 rows={this.props.rows}
                 headers={this.props.headers}
