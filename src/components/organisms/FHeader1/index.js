@@ -42,6 +42,9 @@ const FHeader1 = () => {
                                   <HeaderMenuItem>
                                     <a className='f-header-link' href="https://openbudgetsindia.org/contact" target="_blank">Contact Us</a>
                                   </HeaderMenuItem>
+                                  <HeaderMenuItem>
+                                    <a className='f-header-link' href="https://github.com/CivicDataLab/hp-fiscal-data-explorer-documentation/wiki" target="_blank">Wiki</a>
+                                  </HeaderMenuItem>
                                 </Fragment>
 
   const mobileSecondaryLinks =  <OverflowMenu
@@ -51,6 +54,7 @@ const FHeader1 = () => {
                                   <OverflowMenuItem itemText="Glossary" onClick={() => handleRouting('/glossary')}/>
                                   <OverflowMenuItem itemText="About Us" onClick={() => handleRouting('/aboutus')}/>
                                   <a href="https://openbudgetsindia.org/contact" target="_blank" className="w-100"><OverflowMenuItem itemText="Contact Us" /></a>
+                                  <a href="https://github.com/CivicDataLab/hp-fiscal-data-explorer-documentation/wiki" target="_blank" className="w-100"><OverflowMenuItem itemText="Wiki" /></a>
                                 </OverflowMenu>
 
 
