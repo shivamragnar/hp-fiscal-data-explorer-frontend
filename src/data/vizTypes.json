@@ -1,0 +1,7 @@
+{
+    "exp_districtwise" : ["FMap", "FBarChart", "FTimeSeries", "FTable"],
+    "exp_summary": ["FForce", "FLineChart", "FTable"],
+    "receipts": ["FSASR", "FTable"],
+    "receipts_districtwise": ["FMap", "FBarChart", "FTimeSeries", "FTable"],
+    "exp_schemes": ["FMap", "FBarChart", "FTimeSeries", "FTable"]
+}

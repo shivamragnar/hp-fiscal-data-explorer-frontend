@@ -30,6 +30,12 @@ const tooltips = {
         bar_chart_tooltip : "Gives a graphical representation of district wise expenditure from different departments in Himachal Pradesh across time",
         time_series_chart_tooltip : "Graphical representation of expenditure for select schemes across time in Himachal Pradesh",
         table_tooltip: "The table below contains expenditure details for select schemes in Himachal Pradesh. The search results can be downloaded and reused"
+    },
+    exp_schemes : {
+        map_chart_tooltip : "Gives a geospatial representation of the district wise expenditure for select schemes in Himachal Pradesh",
+        bar_chart_tooltip : "Gives a graphical representation of district wise expenditure from different departments in Himachal Pradesh across time",
+        time_series_chart_tooltip : "Graphical representation of expenditure for select schemes across time in Himachal Pradesh",
+        table_tooltip: "The table below contains expenditure details for select schemes in Himachal Pradesh. The search results can be downloaded and reused"
     }
 };
 
