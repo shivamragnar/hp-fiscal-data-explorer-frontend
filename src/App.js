@@ -41,18 +41,19 @@ import BudgetHighlights from "./content/BudgetHighlights";
 
 import ExpSummary from "./content/ExpSummary";
 import ExpDetails from "./content/ExpDetails";
-import ExpDistrictwise from "./content/ExpDistrictwise";
+// import ExpDistrictwise from "./content/ExpDistrictwise";
 import ExpCovidTracker from "./content/ExpCovidTracker"
 
 import Receipts from "./content/Receipts";
-import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
+// import ReceiptsDistrictwise from "./content/ReceiptsDistrictwise";
 
-import ExpSchemes from "./content/ExpSchemes";
+// import ExpSchemes from "./content/ExpSchemes";
 
 import Glossary from "./content/Glossary";
 import AboutUs from "./content/AboutUs";
 import ContactUs from "./content/ContactUs";
 
+import DetailsBoilerPlate from "./content/Details"
 //css
 import "./App.scss";
 
@@ -146,16 +147,16 @@ const fetchApisInQueue = async (idx) => {
       <div>
         <FHeader1 />
           <Switch>
-						<Route exact path="/" component={Home} />
+			<Route exact path="/" component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/contactus" component={ContactUs} />
-						<Route exact path="/glossary" component={Glossary} />
+			<Route exact path="/glossary" component={Glossary} />
             <Route exact path="/expenditure/summary" component={ExpSummary} />
-            <Route exact path="/expenditure/details" component={ExpDetails} />
-            <Route exact path="/expenditure/tracker" component={ExpDistrictwise} />
-						<Route exact path="/receipts/districtwise" component={ReceiptsDistrictwise} />
-						<Route exact path="/schemes" component={ExpSchemes} />
-						<Route exact path="/expenditure/covid19" component={ExpCovidTracker} />
+            {/* <Route exact path="/expenditure/details" component={ExpDetails} /> */}
+			<Route exact path="/expenditure/tracker" render={() => <DetailsBoilerPlate  FirstReducer="exp_districtwise" SecondReducer="exp_districtwise_filters"/>}  />
+			<Route exact path="/receipts/districtwise" render={() => <DetailsBoilerPlate  FirstReducer="receipts_districtwise" SecondReducer="receipts_districtwise_filters"/>}  />
+			<Route exact path="/schemes" render={() => <DetailsBoilerPlate  FirstReducer="exp_schemes" SecondReducer="exp_schemes_filters"/>}  />
+			<Route exact path="/expenditure/covid19" component={ExpCovidTracker} />
             <Route exact path="/receipts" component={Receipts} />
           </Switch>
       </div>
