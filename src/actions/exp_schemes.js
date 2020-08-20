@@ -4,7 +4,8 @@ import {
   SET_DATA_LOADING_EXP_SCHEMES,
   EXP_SCHEMES_DATA_ERROR,
   RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES,
-  HYDRATE_SCHEMES_DATA_FROM_INITDATA
+  HYDRATE_SCHEMES_DATA_FROM_INITDATA,
+  SCHEMES_SWITCH_ACTIVE_VIZ_IDX
 } from "./types";
 
 import {
@@ -183,6 +184,17 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     });
   }
 };
+
+export const setActiveVizIdx = (e) => async dispatch => {
+  try{
+    dispatch({
+      type: SCHEMES_SWITCH_ACTIVE_VIZ_IDX,
+      payload: e
+    })
+  }catch(err){
+
+  }
+}
 
 export const resetActiveFiltersAndDateRange = () => async dispatch => {
   dispatch({

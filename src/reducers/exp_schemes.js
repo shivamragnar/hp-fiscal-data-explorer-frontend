@@ -3,7 +3,8 @@ import {
   SET_DATA_LOADING_EXP_SCHEMES,
   EXP_SCHEMES_DATA_ERROR,
   RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES,
-  HYDRATE_SCHEMES_DATA_FROM_INITDATA
+  HYDRATE_SCHEMES_DATA_FROM_INITDATA,
+  SCHEMES_SWITCH_ACTIVE_VIZ_IDX
  } from "../actions/types";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   dateRange: ["2020-04-01","2020-06-30"],
   activeFilters: {},
   loading: true,
+  activeVizIdx: 0,
   error: {}
 };
 
@@ -51,6 +53,11 @@ export default function(state = initialState, action) {
         activeFilters: {},
         dateRange: ["2020-04-01","2020-06-30"]
       }
+    case SCHEMES_SWITCH_ACTIVE_VIZ_IDX:
+      return {
+        ...state,
+        activeVizIdx: payload
+      };
     default:
       return state;
   }
