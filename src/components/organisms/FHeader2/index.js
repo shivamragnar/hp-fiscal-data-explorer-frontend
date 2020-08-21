@@ -23,7 +23,7 @@ const FHeader2 = () => ( <HeaderContainer render={( { isSideNavExpanded, onClick
             <SkipToContent/>
 
               <HeaderNavigation className="f_primarylinks_center" aria-label="Carbon Tutorial">
-                <HeaderMenuItem element={Link} to="/aboutus">
+                <HeaderMenuItem element={Link} to="/budget_highlights">
                   Budget Highlights
                 </HeaderMenuItem>
 
@@ -32,13 +32,13 @@ const FHeader2 = () => ( <HeaderContainer render={( { isSideNavExpanded, onClick
                   <HeaderMenuItem element={Link} to="/expenditure/details">Expenditure Details</HeaderMenuItem>
                   <HeaderMenuItem element={Link} to="/expenditure/tracker">Expenditure Tracker</HeaderMenuItem>
                 </HeaderMenu>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/receipts">
                   Receipts
                 </HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/sectors">
                   Sectors
                 </HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/contactus">
+                <HeaderMenuItem element={Link} to="/schemes">
                   Schemes
                 </HeaderMenuItem>
               </HeaderNavigation>

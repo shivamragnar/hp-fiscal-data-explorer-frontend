@@ -1,53 +1,57 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 
 
+import ReactDOM from 'react-dom';
+
+//custom components
+
+import FForce_col from '../../components/dataviz/FForce_col';
+import * as d3 from "d3";
+
+//sample data
+var exp_summary_data = require('../../data/exp-summary.json');
 
 
 class Home extends Component {
-  constructor( props ) {
-    super( props )
 
-    this.state = {
-      data: [
-          {quarter: 1, earnings: 3000},
-          {quarter: 2, earnings: 6500},
-          {quarter: 3, earnings: 4250},
-          {quarter: 4, earnings: 19000}
-      ],
-      xLabelPos: [1, 2, 3, 4],
-      xLabelTxt: ["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"],
-      yLabelFormat: ["$", "k", 1/1000]
+  constructor(props) {
+		super(props);
+
+    var nodes = [];
+    var n = 30;
+    for (var y = 0; y < n; ++y) {
+      for (var x = 0; x < n; ++x) {
+        nodes.push({
+          x: 15,
+          y: y
+        })
+      }
     }
 
-    this.change = this.change.bind( this );
-  }
+		this.state = {
+      data: {
+        "nodes": nodes,
+        "nodes_2": exp_summary_data,
+      }
+    };
 
-  change() {
-    this.setState( {
-        data: [
-
-            {quarter: 1, earnings: 30100},
-            {quarter: 2, earnings: 61500},
-            {quarter: 3, earnings: 14250},
-            {quarter: 4, earnings: 19000}
-
-        ]
-    } )
-  }
+	}
 
   render() {
-
-    const {data, data2, xLabelPos, xLabelTxt, yLabelFormat} = this.state;
-
+    console.log("nodes");
+    console.log(this.state.data.nodes);
     return (
       <div>
-        
+      <div style={{width:"50%"}}>
 
+          {
+            // <FForce_col data={this.state.data} />
+          }
 
       </div>
+    </div>
     )
   }
 }
+
 export default Home;

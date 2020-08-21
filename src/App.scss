@@ -1,4 +1,108 @@
+@import './scss/vars.scss';
+
+// @import './scss/normalize.scss';
+@import './scss/vars.scss';
+
+//components styles
+@import './components/atoms/FButton/style.scss';
+@import './components/organisms/FHeader1/style.scss';
+@import './components/organisms/FHeader2/style.scss';
+
+//datavizcomps styles
+
+@import './components/dataviz/FTable/style.scss';
+@import './components/dataviz/FSASRChart/style.scss';
+@import './components/dataviz/FBarChart/style.scss';
+
+//content styles
+@import './content/Home/style.scss';
+@import './content/AboutUs/style.scss';
+@import './content/ContactUs/style.scss';
+@import './content/ExpSummary/style.scss';
+@import './content/ExpDetails/style.scss';
+@import './content/ExpTracker/style.scss';
+
 //carbon overrides
 .bx--content{
   padding-top: 8rem;
+  transform: none;
+
+  @media screen and (max-width: 767px){
+    padding-top: 5rem;
+  }
+}
+
+.text-col{
+  position: fixed;
+  width: 30rem;
+  left: 2rem;
+  top: 8rem;
+  background-color: $extra_light_grey;
+  padding: 2rem;
+
+  @media screen and (max-width: 1280px){
+    width: 26rem;
+  }
+
+  @media screen and (max-width: 992px){
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.filter-col-wrapper{
+  height: 100vh;
+  position: fixed;
+  width: 16rem;
+  left: 2rem;
+  top: 0rem;
+  padding: 8rem 0 2rem 0;
+
+  .filter-col{
+    background-color: $extra_light_grey;
+    padding: 2rem;
+    height: 100%;
+    overflow: scroll;
+
+    .filter-col--ops{
+      padding-bottom: 2rem;
+    }
+  }
+}
+
+.data-viz-col{
+  width: 100%;
+  padding-left: 32rem;
+
+  &.exp-details{
+    padding-left: 18rem;
+  }
+
+  @media screen and (max-width: 1280px){
+    padding-left: 30rem;
+  }
+
+  @media screen and (max-width: 992px){
+    padding-top: 2rem;
+    padding-left: 0;
+  }
+}
+
+//content switcher component
+
+//override
+.bx--content-switcher{
+  width: 50%;
+
+  @media screen and (max-width: 540px){
+    width: 100%;
+  }
+}
+
+//not-override
+.content-switcher-wrapper{
+  display: flex;
+  justify-content: center;
 }

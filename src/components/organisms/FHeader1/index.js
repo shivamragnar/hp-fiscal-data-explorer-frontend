@@ -7,8 +7,7 @@ import {
   HeaderNavigation,
   HeaderMenuItem,
   HeaderMenuButton,
-  HeaderGlobalBar,
-  HeaderGlobalAction,
+  HeaderGlobalBar,  
   SkipToContent,
   SideNav,
   SideNavItems,
@@ -48,6 +47,29 @@ const FHeader1 = () => (
           >
             <SideNavItems>
               <HeaderSideNavItems>
+                <HeaderMenu aria-label="Expenditure" menuLinkName="Expenditure">
+                  <HeaderMenuItem
+                    element={Link}
+                    to="/expenditure/summary"
+                    onClick={onClickSideNavExpand}
+                  >
+                    Summary
+                  </HeaderMenuItem>
+                  <HeaderMenuItem
+                    element={Link}
+                    to="/expenditure/details"
+                    onClick={onClickSideNavExpand}
+                  >
+                    Expenditure Details
+                  </HeaderMenuItem>
+                  <HeaderMenuItem
+                    element={Link}
+                    to="/expenditure/tracker"
+                    onClick={onClickSideNavExpand}
+                  >
+                    Expenditure Tracker
+                  </HeaderMenuItem>
+                </HeaderMenu>
                 <HeaderMenuItem
                   element={Link}
                   to="/aboutus"
