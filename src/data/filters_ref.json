@@ -56,6 +56,12 @@
      "minor",
      "sub_minor-sub_minor_desc"
   ],
+  "procurements" : [
+     "sdg",
+     "works",
+     "indicator",
+     "kpi"
+  ],
 
   "demandwise_filter_comp" : [
      { "comp" : "MultiSelect", "titleText" : "Demand", "name" : "demand"},
@@ -116,5 +122,11 @@
      { "comp" : "MultiSelect", "titleText" : "Voted / Charged", "name" : "voted_charged"},
      { "comp" : "MultiSelect", "titleText" : "Plan / Non Plan", "name" : "plan_nonplan"},
      { "comp" : "MultiSelect", "titleText" : "SOE", "name" : "SOE"}
+  ],
+  "procurements_filter_comp" : [
+   { "comp" : "Select", "titleText" : "SDG", "name" : "sdg"},
+   { "comp" : "Select", "titleText" : "Type of Activity", "name" : "works"},
+   { "comp" : "Select", "titleText" : "Indicator Type", "name" : "indicator"},
+   { "comp" : "Select", "titleText" : "Key Performance Indicator", "name" : "kpi"}
   ]
 }

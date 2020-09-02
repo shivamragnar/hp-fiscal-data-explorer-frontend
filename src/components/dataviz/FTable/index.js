@@ -3,9 +3,12 @@ import React, {
 } from "react";
 import {Content} from 'carbon-components-react/lib/components/UIShell';
 import { DataTable, Button } from 'carbon-components-react';
-import { Tooltip } from 'antd';
+import { Tooltip, Progress } from 'antd';
+import { legend_point_1, legend_point_2, legend_point_3, legend_point_4, legend_point_5 } from '../../../scss/_vars.scss'
+
 
 import FDownloadActionTooltip from '../../molecules/FDownloadActionTooltip'
+
 
 const {
   TableContainer,
@@ -58,6 +61,18 @@ class FTable extends Component {
     })
     let totalRow = ["Total", ...total.slice(colspan)]
     return {totalRow, colspan}
+  }
+
+  getColor = (cellValue) => {
+    return cellValue > 0.8
+    ? "hsl(177, 100%, 70%)"
+    : cellValue > 0.6
+    ? "hsl(177, 100%, 56%)"
+    : cellValue > 0.4
+    ? "hsl(177, 100%, 42%)"
+    : cellValue > 0.2
+    ? "hsl(177, 100%, 28%)"
+    : "hsl(177, 100%, 14%)";
   }
 
 
@@ -132,7 +147,15 @@ class FTable extends Component {
                         {rows.map(row => (
                           <TableRow key={row.id}>
                             {row.cells.map(cell => (
-                              <TableCell key={cell.id}>{cell.value}</TableCell>
+                              <TableCell key={cell.id}>
+                                {
+                                  this.props.showBar && !this.props.kpis.includes(cell.value) && (cell.value !== "null")
+                                  ?
+                                  <Progress percent={cell.value*100} trailColor="#b3b3b3" strokeColor={this.getColor(cell.value)} format={(percent) => percent/100 } />
+                                  :
+                                  cell.value === "null" ? "Not Available" : cell.value
+                                }
+                                </TableCell>
                             ))}
                           </TableRow>
                         ))}

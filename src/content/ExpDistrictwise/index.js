@@ -285,20 +285,22 @@ const ExpDistrictwise = ({
           />
         }
         />
-      <div className="data-viz-col exp-districtwise">
-        {createDataUIComponent()}
-      </div>
-      <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
-        <FFilterColumn2
-          section = 'exp_districtwise'
-          allFiltersData = {allFiltersData && allFiltersData}
-          filterCompData = {districtwise_filter_comp}
-          filtersLoading = {filtersLoading}
-          activeFilters = {expDistrictwiseActiveFilters}
-          onChange = {(e, key) => onFilterChange(e, key)}
-          onFilterIconClick={handleFilterBarVisibility}
-          />
-      </div>
+        <div className="d-flex flex-row-reverse p-relative">
+          <div className="data-viz-col exp-districtwise">
+           {createDataUIComponent()}
+          </div>
+          <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
+            <FFilterColumn2
+              section = 'exp_districtwise'
+              allFiltersData = {allFiltersData && allFiltersData}
+              filterCompData = {districtwise_filter_comp}
+              filtersLoading = {filtersLoading}
+              activeFilters = {expDistrictwiseActiveFilters}
+              onChange = {(e, key) => onFilterChange(e, key)}
+              onFilterIconClick={handleFilterBarVisibility}
+              />
+          </div>
+        </div>
     </div>
   )
 

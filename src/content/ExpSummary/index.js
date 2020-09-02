@@ -265,16 +265,19 @@ const ExpSummary = ({
 					pageDescription= {howToUseContent[0].content.body}
 					showLegend={ true }
 					/>
-        <div className={`data-viz-col exp-summary ${currentVizType === vizTypes[1] ? 'timeseries-is-active' : ''}`}>
-          {createDataUIComponent()}
-        </div>
+		<div className="d-flex flex-row-reverse p-relative">
+			<div className={`data-viz-col exp-summary ${currentVizType === vizTypes[1] ? 'timeseries-is-active' : ''}`}>
+			{createDataUIComponent()}
+			</div>
 			{ currentVizType === vizTypes[1] &&
 				<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
 					<FFilterColumn2
 						  customComp = {<div>{genDemandSelector()}</div>}
 						  onFilterIconClick={handleFilterBarVisibility}
-	          />
-				</div> }
+	          		/>
+				</div> 
+			}
+		</div>
       </div>
     );
 

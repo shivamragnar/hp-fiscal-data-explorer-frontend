@@ -32,6 +32,9 @@ import { getExpSchemesFiltersData } from './actions/exp_schemes_filters';
 
 import { getExpCovidData } from "./actions/exp_covid"
 
+//Procurements
+import { getProcurementsData } from "./actions/procurements"
+
 //components
 import FHeader1 from "./components/organisms/FHeader1";
 
@@ -52,6 +55,8 @@ import ExpSchemes from "./content/ExpSchemes";
 import Glossary from "./content/Glossary";
 import AboutUs from "./content/AboutUs";
 import ContactUs from "./content/ContactUs";
+
+import OCPDashboard from "./content/OCPDashboard"
 
 //css
 import "./App.scss";
@@ -89,6 +94,8 @@ const App = ({
 
 		getExpCovidData,
 
+		getProcurementsData,
+
 		location : { pathname }
 	}
 ) => {
@@ -97,6 +104,8 @@ const App = ({
 console.log(window.location.origin);
 
 const apiCallQueue = [
+	{ apiFunc: () => getProcurementsData("2020-2021") },
+
 	{ apiFunc: () => getExpSummaryData() },
 
 	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
@@ -137,6 +146,7 @@ const fetchApisInQueue = async (idx) => {
 		//  )
 	 // }
 	 fetchApisInQueue(0);
+	 
 
  }, []);
 
@@ -157,6 +167,7 @@ const fetchApisInQueue = async (idx) => {
 						<Route exact path="/schemes" component={ExpSchemes} />
 						<Route exact path="/expenditure/covid19" component={ExpCovidTracker} />
             <Route exact path="/receipts" component={Receipts} />
+            <Route exact path="/procurement/analysis" component={OCPDashboard} />
           </Switch>
       </div>
   );
@@ -207,6 +218,7 @@ export default withRouter(connect(
 		getExpSchemesData,
 		getExpSchemesFiltersData,
 
-		getExpCovidData
+		getExpCovidData,
+		getProcurementsData,
 
 	})(App));

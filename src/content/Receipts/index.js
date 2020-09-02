@@ -224,21 +224,22 @@ const Receipts = ( { receipts : {
 					/>
 				}
 				/>
-      <div className="data-viz-col receipts">
-				{createDataUIComponent()}
-      </div>
-			<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
-
-				<FFilterColumn2
-					section = 'receipts'
-					filterCompData ={receipts_filter_comp}
-					allFiltersData={allFiltersData && allFiltersData}
-					activeFilters={receiptsDetailsActiveFilters}
-					filtersLoading={filtersLoading}
-					onChange = {(e, key) => onFilterChange(e, key)}
-					onFilterIconClick={handleFilterBarVisibility}
-					/>
-			</div>
+				<div className="d-flex flex-row-reverse p-relative">
+					<div className="data-viz-col receipts">
+						{createDataUIComponent()}
+					</div>
+					<div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
+						<FFilterColumn2
+							section = 'receipts'
+							filterCompData ={receipts_filter_comp}
+							allFiltersData={allFiltersData && allFiltersData}
+							activeFilters={receiptsDetailsActiveFilters}
+							filtersLoading={filtersLoading}
+							onChange = {(e, key) => onFilterChange(e, key)}
+							onFilterIconClick={handleFilterBarVisibility}
+							/>
+					</div>
+				</div>
     </div>
 	)
 }

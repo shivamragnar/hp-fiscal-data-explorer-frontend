@@ -268,5 +268,26 @@
         "desc": "Amount saved from total allotted amount"
       }
     }
+  },
+  "procurements" : {
+    "title": "Procurements",
+    "data": {
+      "sdg" : {
+        "title": "SDGs",
+        "desc": "Sustainable Development Goal"
+      },
+      "works" : {
+        "title": "Types of Activity",
+        "desc": "The type of keyword/Activity"
+      },
+      "indicator" : {
+        "title": "Idicator Type",
+        "desc": "The type of performance indicator"
+      },
+       "kpi":{
+        "title": "Key Performance Indicators",
+        "desc": "The Key Performance Indicators popularly known as KPIs"
+      }
+    }
   }
 }

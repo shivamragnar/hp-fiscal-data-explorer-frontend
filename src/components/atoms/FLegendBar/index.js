@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import { Button } from "carbon-components-react";
-import { darkGrey, black, orange, blue } from '../../../scss/_vars.scss'
+import { darkGrey, black, orange, blue, legend_point_1, legend_point_2, legend_point_3, legend_point_4, legend_point_5 } from '../../../scss/_vars.scss'
 
 
 const FLegendBar = (props) => {
@@ -11,7 +11,12 @@ const FLegendBar = (props) => {
     darkGrey,
     black,
     orange,
-    blue
+    blue,
+    legend_point_1,
+    legend_point_2,
+    legend_point_3,
+    legend_point_4,
+    legend_point_5,
   }
 
 
@@ -20,7 +25,7 @@ const FLegendBar = (props) => {
       case props.vizType === 'bar' || props.vizType === 'bubble':
       return (
         <Fragment>
-        {props.data.map((d,i) =>(
+        {props.data.map((d,i) =>( 
         <Fragment>
         { d.type === 'grooveLeft' && (
           <div className='f-legend-item--flex'>
@@ -72,6 +77,26 @@ const FLegendBar = (props) => {
           <div style={{width: '8rem', background: `linear-gradient(0.25turn, ${props.data.color[0]}, ${props.data.color[1]})` }}></div>
           <div style={{paddingLeft: '1rem'}}>{props.data.key[1]}</div>
         </div>)
+      case props.vizType === "procurement_map": 
+      return (
+        <Fragment>
+        {props.showTitle ? <div className="legend-title-text">{props.showTitle}</div> : null }
+        {props.data.map((d,i) =>( 
+          <div className='f-legend-item--flex'>
+            <div
+              className='groove-icon--bubble'
+              style={{
+                borderRadius: `50%`,
+                backgroundColor: colors[d.color]
+              }}
+            >
+            </div>
+            <div className='groove-text'>{d.key}</div>
+          </div>
+          ))}
+          </Fragment>
+      )
+      default : return <></>
     }
   }
 

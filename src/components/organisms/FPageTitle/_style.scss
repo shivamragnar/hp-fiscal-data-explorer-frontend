@@ -50,3 +50,12 @@
   stroke-width: 0.5px;
   stroke: $black;
 }
+
+.f-page-title__subtitle{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+  .mb-0{
+    margin-bottom: 0 !important;  
+  }
+}

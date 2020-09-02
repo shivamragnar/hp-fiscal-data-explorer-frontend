@@ -17,6 +17,8 @@ import receipts_filters from "./receipts_filters";
 
 import exp_covid from "./exp_covid"
 
+import procurements from "./procurements"
+
 export default combineReducers({
   exp_summary,
 
@@ -35,4 +37,8 @@ export default combineReducers({
   receipts,
   receipts_filters,
 
-  exp_covid });
+  exp_covid,
+
+  procurements
+
+});

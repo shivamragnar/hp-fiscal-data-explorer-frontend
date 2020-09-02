@@ -88,6 +88,7 @@ const FHeader1 = () => {
               </HeaderMenu>
               <HeaderMenuItem element={Link} to="/schemes">Schemes</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/expenditure/covid19">COVID-19</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/procurement/analysis">Procurements</HeaderMenuItem>
             </HeaderNavigation>
             <HeaderNavigation className="f_secondarylinks_right" aria-label="HP Fiscal Data Explorer Secondary Links">
             { screenWidth >= 1225 ? desktopSecondaryLinks : <div></div> }
@@ -140,6 +141,13 @@ const FHeader1 = () => {
                     onClick={onClickSideNavExpand}
                   >
                     COVID-19
+                  </HeaderMenuItem>
+                  <HeaderMenuItem 
+                    element={Link} 
+                    to="/procurement/analysis" 
+                    onClick={onClickSideNavExpand}
+                  >
+                    Procurements
                   </HeaderMenuItem>
                   {/* <HeaderMenuItem
                     element={Link}
