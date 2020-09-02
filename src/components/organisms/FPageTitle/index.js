@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive";
 import ChevronDown from '@carbon/icons-react/lib/chevron--down/16';
 import ChevronUp from '@carbon/icons-react/lib/chevron--up/16';
 
-const FPageTitle = ({ pageTitle, pageDescription, monthPicker, showLegend }) => {
+const FPageTitle = ({ pageTitle, pageDescription, monthPicker, showLegend, subTitle }) => {
 
   const [showPageDesc, setShowPageDesc] = useState(false);
 
@@ -15,7 +15,10 @@ const FPageTitle = ({ pageTitle, pageDescription, monthPicker, showLegend }) => 
       <div className='f-page-title-wrapper'>
         <div className="f-page-title">
   				<div className="f-page-title__left-aligned-content">
-            <h3>{pageTitle}</h3>
+            <div className="f-page-title__subtitle">
+              <h3 className={`${subTitle ? "mb-0" : ""}`}>{pageTitle}</h3>
+              {subTitle ? <span>{subTitle}</span> : null}
+            </div>
           { monthPicker }
   				</div>
   			</div>
