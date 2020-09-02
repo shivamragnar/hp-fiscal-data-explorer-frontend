@@ -78,7 +78,10 @@ body{
 }
 
 .filter-col-wrapper{
-  height: 100vh;
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
   // position: fixed;
   position: absolute;
   width: 18rem;
@@ -111,7 +114,7 @@ body{
   width: 100%;
   padding-top: 3rem;
   z-index: 10;
-  height: 100vh;
+  min-height: 100vh;
 
   &.exp-details, &.receipts, &.exp-districtwise, &.exp-schemes{
     padding-left: 2rem;
