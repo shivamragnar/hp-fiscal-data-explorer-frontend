@@ -79,13 +79,15 @@ body{
 
 .filter-col-wrapper{
   height: 100vh;
-  position: fixed;
+  // position: fixed;
+  position: absolute;
   width: 18rem;
   left: -18rem;
   top: 0;
   padding: 9.8rem 0 0 0;
   z-index: 10;
   transition: left 0.3s ease-out;
+  padding-top: 0;
 
   @media screen and (min-width: 1024px){
     left: 0;
@@ -109,6 +111,7 @@ body{
   width: 100%;
   padding-top: 3rem;
   z-index: 10;
+  height: 100vh;
 
   &.exp-details, &.receipts, &.exp-districtwise, &.exp-schemes{
     padding-left: 2rem;
@@ -219,4 +222,16 @@ body{
 
 .ant-tooltip-inner {
   background-color: #000000 !important;
+}
+
+.flex-row-reverse{
+  flex-direction: row-reverse;
+}
+
+.p-relative{
+  position: relative;
+}
+.data-table-wrapper{
+  max-height: 70vh;
+  // overflow-y: scroll;
 }

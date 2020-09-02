@@ -276,20 +276,22 @@ const ExpSchemes = ({
           />
         }
         />
-      <div className="data-viz-col exp-schemes">
-        {createDataUIComponent()}
-      </div>
-      <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
-        <FFilterColumn2
-          section = 'schemes'
-          allFiltersData = {allFiltersData && allFiltersData}
-          filterCompData = {schemes_filter_comp}
-          filtersLoading = {filtersLoading}
-          activeFilters = {schemesActiveFilters}
-          onChange = {(e, key) => onFilterChange(e, key)}
-          onFilterIconClick={handleFilterBarVisibility}
-          />
-      </div>
+        <div className="d-flex flex-row-reverse p-relative">
+          <div className="data-viz-col exp-schemes">
+            {createDataUIComponent()}
+          </div>
+          <div className={`filter-col-wrapper ${filterBarVisibility === true ? "show" : "hide"}`}>
+            <FFilterColumn2
+              section = 'schemes'
+              allFiltersData = {allFiltersData && allFiltersData}
+              filterCompData = {schemes_filter_comp}
+              filtersLoading = {filtersLoading}
+              activeFilters = {schemesActiveFilters}
+              onChange = {(e, key) => onFilterChange(e, key)}
+              onFilterIconClick={handleFilterBarVisibility}
+              />
+          </div>
+        </div>
     </div>
   )
 
