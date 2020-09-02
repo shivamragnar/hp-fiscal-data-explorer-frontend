@@ -1,6 +1,10 @@
 .methodology-wrapper{
     padding: 3.5rem 1.5rem;
     background-color: #f3f3f3;
+    ul{
+        list-style-type: disc;
+        padding-left: 30px;
+    }
 }
 
 .methodology-wrapper .container{
@@ -8,3 +12,4 @@
     max-width: 1380px;
     margin: 0 auto;
 }
+
