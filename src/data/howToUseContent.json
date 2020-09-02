@@ -81,5 +81,22 @@
         },
         "img": "schemes"
       }
+    },
+    {
+      "id": "procurements",
+      "label": "Procurements | Analysis",
+      "content": {
+        "title": "Procurements | Analysis",
+        "body": [
+          "The index informs Himachal Pradesh’s health procurements and the performance of various districts across FY 2017 to July 2020 on the procurement process in terms of efficiency and competition. The index assesses six indicators for the 12 districts in Himachal Pradesh.",
+          "The overall procurement process index is made up of six indicators:",
+          "Average number of days for bid submission, Average number of days for bid evaluation, Difference between the awarded and tender value, Per-capita spending, Average number of bids per tender and number of tenders that were contracted after validity date"
+        ],
+        "link": {                                         
+          "text": "View Procurements",
+          "route": "/procurements/analysis"
+        },
+        "img": "procurements"
+      }
     }
   ]
