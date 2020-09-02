@@ -5,6 +5,7 @@ import MediaQuery from "react-responsive";
 // import { MultiSelect } from 'carbon-components-react';
 import {Tooltip} from 'carbon-components-react'
 import MultiSelect from "../../molecules/FMultiSelect"
+import Select from "../../molecules/FSelect";
 
 //carbon icons
 import FilterIcon from '@carbon/icons-react/lib/filter/32'
@@ -17,7 +18,7 @@ import glossary from '../../../data/glossary.json';
 const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoading, activeFilters, onFilterIconClick, section, customComp  }) => {
 
   //declare the components that need to be dynamically generated
-	const Components = { MultiSelect };
+	const Components = { MultiSelect, Select };
 
 	const [RenderedFilterIcon, setRenderedFilterIcon ] = useState("FilterIcon");
 
@@ -37,12 +38,19 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 	const setInitSelectedItems = (i) => {
 		const initialSelectedItems = [];
 		allFiltersData[i].val.map(d => {
-			if(activeFilters[allFiltersData[i].key].includes(d.label)){
+			if(activeFilters[allFiltersData[i].key].hasOwnProperty('val') ){
+				if(activeFilters[allFiltersData[i].key].val.includes(d.label)){
+					initialSelectedItems.push(d);
+				}
+			}
+			else if(activeFilters[allFiltersData[i].key].includes(d.label)){
 				initialSelectedItems.push(d);
 			}
 		})
 		return initialSelectedItems;
 	}
+
+	console.log('FIltercolumn 2', activeFilters)
 
   return (
 
@@ -78,15 +86,15 @@ const FFilterColumn2 = ({ onChange, allFiltersData, filterCompData, filtersLoadi
 										    </p>
 										  </Tooltip>
 				              <Component
-				                className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
-												disabled = {filtersLoading}
-												initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
-												useTitleInItem={false}
-												label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
-												invalid={false}
-												invalidText="Invalid Selection"
-												onChange = {(e) => onChange(e, allFiltersData[i] && allFiltersData[i].key)}
-				                items = {allFiltersData[i] && allFiltersData[i].val}
+								// className={`f-${allFiltersData[i] && allFiltersData[i].key}-multiselect`}
+								disabled = {filtersLoading || (activeFilters[filter_comp.name] ? !activeFilters[filter_comp.name].status : false)}
+								initialSelectedItems = {allFiltersData[i] &&  activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)}
+								useTitleInItem={false}
+								// label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
+								invalid={false}
+								invalidText="Invalid Selection"
+								onChange = {(e) => onChange(e, allFiltersData[i] && allFiltersData[i].key)}
+								items = {allFiltersData[i] && allFiltersData[i].val}
 				                />
 										</div>
 
