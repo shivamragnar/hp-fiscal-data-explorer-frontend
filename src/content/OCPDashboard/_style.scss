@@ -1,0 +1,74 @@
+// .ocp-dashboard{
+//     display: flex;
+//     flex-direction: row-reverse;
+// }
+
+// .filter-col-wrapper{
+//     position: relative !important;
+//     padding-top: 0 !important;
+    // min-width: 288px !important;
+    // left : -288px;
+// }
+
+// @media screen and (max-width: 1023px){
+//     .filter-col-wrapper.hide {
+//         left: -288px;
+//     }
+// }
+
+// @media screen and (max-width: 1023px){
+//     .filter-col-wrapper{
+//       &.hide{
+//         left: -18rem;
+//       }
+  
+//       &.show{
+//         left: 0;
+//       }
+//     }
+//   }
+
+.procurements .bx--data-table tr > td:nth-child(0){
+    font-size: 9px !important;
+    font-weight: 700 !important;
+  }
+
+  #fmapOCP {
+    padding: 2rem 2rem 2rem 0;
+    .leaflet-container{
+      height: 650px;
+    }
+  }
+  
+  .ocp-dashboard-content{
+
+    //override
+    .bx--overflow-menu-options__option{
+      width: auto;
+      height: 3rem;
+    }
+  
+    .f-table-comp-wrapper{
+      .bx--data-table-container{
+        .data-table-wrapper{
+          .bx--data-table{
+            thead{
+              .bx--table-sort { padding-left: 0 }
+              tr > th{ 
+                  border-right: none !important;
+                  min-width: 151px;
+                }
+            }
+  
+            tbody{
+              tr > td{ 
+                    border-right: none !important;
+                    min-width: 151px;
+                }
+            }
+          }
+        }
+      }
+    }
+  }
+  
