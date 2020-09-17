@@ -109,6 +109,9 @@ body{
   }
 }
 
+.VictoryContainer{
+  height: fit-content !important;
+}
 
 .data-viz-col{
   width: 100%;
@@ -237,4 +240,17 @@ body{
 .data-table-wrapper{
   max-height: 70vh;
   // overflow-y: scroll;
+}
+
+.report-text{
+  font-size: 16px !important;
+  color: white !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  text-decoration-skip-ink: none !important;
+}
+
+.text-bold{
+  font-weight: bold !important;
 }
