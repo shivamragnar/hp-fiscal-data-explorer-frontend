@@ -47,7 +47,19 @@ export default class FMap extends Component<{}, State> {
 			zoom: 7,
 			tooltipDisplay: "none",
 			tooltipData: {},
+			isMobile:false
 		};
+	}
+
+	componentDidMount(){
+		let isMobile = this.isMobile();
+		this.setState({
+			isMobile
+		})
+	}
+
+	isMobile = () => {
+		return window.innerWidth < 768 
 	}
 
 	highlightFeature = (e) => {
@@ -240,7 +252,7 @@ export default class FMap extends Component<{}, State> {
 				<Map
 					center={position}
 					scrollWheelZoom={false}
-					zoom={8}
+					zoom={this.state.isMobile ? 7 : 8}
 					zoomControl={false}
 					style={{ backgroundColor: "white" }}
 					doubleClickZoom={false}

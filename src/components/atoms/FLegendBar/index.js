@@ -81,6 +81,7 @@ const FLegendBar = (props) => {
       return (
         <Fragment>
         {props.showTitle ? <div className="legend-title-text">{props.showTitle}</div> : null }
+        <div className="d-flex flex-wrap">
         {props.data.map((d,i) =>( 
           <div className='f-legend-item--flex'>
             <div
@@ -94,6 +95,7 @@ const FLegendBar = (props) => {
             <div className='groove-text'>{d.key}</div>
           </div>
           ))}
+        </div>
           </Fragment>
       )
       default : return <></>

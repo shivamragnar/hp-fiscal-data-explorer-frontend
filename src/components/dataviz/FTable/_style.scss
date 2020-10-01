@@ -43,3 +43,10 @@
 .ant-progress-text{
   color: rgba(0, 0, 0, 0.45) !important;
 }
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+  .f-table-comp-wrapper{
+    padding-right: 0;
+  }
+}

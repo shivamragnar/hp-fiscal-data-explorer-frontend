@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select } from "antd";
+import { Select, Row, Col } from "antd";
 import { Event32, Events32, Receipt32, Flash32 } from "@carbon/icons-react";
 
 import "./_style.scss";
@@ -36,8 +36,8 @@ const DistrictReport = (props) => {
 				/>
 				{Object.keys(props.districtReport).length ? (
 					<div style={{ margin: "25px 0px" }}>
-						<div className="d-flex justfy-flex-end">
-							<div className="left-column w-50">
+						<Row className="d-flex justfy-flex-end">
+							<Col sm={24} md={12}>
 								<h2>
 									{capitalize(activeDistrict)} in Perspective
 								</h2>
@@ -96,8 +96,8 @@ const DistrictReport = (props) => {
 										}
 									</p>
 								</div>
-							</div>
-							<div className="right-column">
+							</Col>
+							<Col sm={24} md={12}>
 								<p>
 									{
 										props.districtReport[activeDistrict][
@@ -105,8 +105,8 @@ const DistrictReport = (props) => {
 										]
 									}
 								</p>
-							</div>
-						</div>
+							</Col>
+						</Row>
 					</div>
 				) : (
 					""
