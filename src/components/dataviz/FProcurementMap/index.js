@@ -258,6 +258,7 @@ export default class FMap extends Component<{}, State> {
 					doubleClickZoom={false}
 					// load={this.handleMapPosition}
 					ref={this.mapRef}
+					dragging={false}
 				>
 					<GeoJSON
 						data={this.props.data}
