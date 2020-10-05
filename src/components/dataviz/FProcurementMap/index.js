@@ -244,7 +244,7 @@ export default class FMap extends Component<{}, State> {
 					) : (
 						<div className="f-map-tooltip__guide-text-wrapper">
 							<p className="f-map-tooltip__guide-text">
-								Hover over a district to see its spending info.
+								{this.state.isMobile ? "Click a district to see its spending info." :"Hover over a district to see its spending info."}
 							</p>
 						</div>
 					)}
@@ -267,6 +267,7 @@ export default class FMap extends Component<{}, State> {
 							layer.on({
 								mouseover: this.highlightFeature,
 								mouseout: this.resetHighlight,
+								click: this.highlightFeature,
 							})
 						}
 					/>
