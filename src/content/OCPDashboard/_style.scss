@@ -58,7 +58,15 @@
     .f-page-title__subtitle h3{
       font-size: 1.2rem;
     }
-  
+    @media screen and (max-width: 375px){
+      .f-page-title__subtitle h3{
+        font-size: 0.8rem;
+      }
+      
+      .f-page-title__subtitle span{
+        font-size: 0.75rem;
+      }
+    }
     .f-table-comp-wrapper{
       .bx--data-table-container{
         .data-table-wrapper{
