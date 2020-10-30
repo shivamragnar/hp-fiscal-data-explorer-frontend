@@ -9,7 +9,7 @@ import {
 const initialState = {
   initData: null,
   data: { mapData:{}, barChrtData:{}, lineChrtData:{}, tableData:{}},
-  dateRange: ["2020-04-01","2020-06-30"],
+  dateRange: ["2020-04-01","2020-09-30"],
   activeFilters: {},
   loading: true,
   activeVizIdx: 0,
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activeFilters: {},
-        dateRange: ["2020-04-01","2020-06-30"]
+        dateRange: ["2020-04-01","2020-09-30"]
       }
     case RECEIPTS_DISTRICTWISE_SWITCH_ACTIVE_VIZ_IDX:
       return {
