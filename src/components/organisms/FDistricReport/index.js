@@ -62,29 +62,29 @@ const DistrictReport = (props) => {
 								</p>
 								<div className="performance-indicators">
 									<p>
-										<Flash32 /> Process Efficiency :{" "}
+										<Flash32 /> Internal Efficiency :{" "}
 										{
 											props.districtReport[
 												activeDistrict
 											][
-												"Procurement Process Efficiency Index"
+												"Procurement Internal Efficiency Index"
 											]
 										}
 									</p>
 									<p>
-										<Event32 /> Fiscal Planning :{" "}
+										<Event32 /> Value For Money :{" "}
 										{
 											props.districtReport[
 												activeDistrict
-											]["Participation Promotion Index"]
+											]["Value For Money Index"]
 										}
 									</p>
 									<p>
-										<Events32 /> Participation Promotion :{" "}
+										<Events32 /> Competition :{" "}
 										{
 											props.districtReport[
 												activeDistrict
-											]["Fiscal Planning Index"]
+											]["Competition Index"]
 										}
 									</p>
 									<p className="text-bold">

@@ -5,7 +5,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23,7 +23,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.72,
 									"KULLU": 0.0,
@@ -87,7 +87,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -124,7 +124,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -142,7 +142,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.06,
 									"KULLU": 0.0,
@@ -206,7 +206,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -243,7 +243,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -261,7 +261,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -325,7 +325,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -362,7 +362,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -380,7 +380,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -444,7 +444,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -481,7 +481,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -499,7 +499,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -563,7 +563,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -619,7 +619,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -728,7 +728,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -837,7 +837,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.33,
 									"KULLU": 0.0,
@@ -965,7 +965,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1074,7 +1074,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1183,7 +1183,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1330,7 +1330,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1439,7 +1439,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1503,7 +1503,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1650,7 +1650,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -1759,7 +1759,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -1823,7 +1823,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -1951,7 +1951,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2060,7 +2060,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2124,7 +2124,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2271,7 +2271,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2380,7 +2380,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2444,7 +2444,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2572,7 +2572,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2681,7 +2681,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2745,7 +2745,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2892,7 +2892,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2910,7 +2910,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -2974,7 +2974,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3011,7 +3011,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3029,7 +3029,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3093,7 +3093,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3130,7 +3130,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3148,7 +3148,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3212,7 +3212,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3268,7 +3268,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3377,7 +3377,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3441,7 +3441,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -3569,7 +3569,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.56,
 									"KULLU": 0.76,
@@ -3678,7 +3678,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.01,
 									"KULLU": 0.19,
@@ -3742,7 +3742,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.62,
 									"KULLU": 0.96,
@@ -3870,7 +3870,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.76,
 									"KULLU": 0.62,
@@ -3979,7 +3979,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.01,
 									"KULLU": 0.1,
@@ -4043,7 +4043,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.49,
 									"KULLU": 0.55,
@@ -4190,7 +4190,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -4208,7 +4208,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -4272,7 +4272,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -4309,7 +4309,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.98,
@@ -4418,7 +4418,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.62,
 									"KULLU": 1.0,
@@ -4527,7 +4527,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.18,
@@ -4655,7 +4655,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -4764,7 +4764,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -4828,7 +4828,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -4956,7 +4956,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5065,7 +5065,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5129,7 +5129,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5276,7 +5276,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5294,7 +5294,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5358,7 +5358,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5395,7 +5395,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -5504,7 +5504,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5568,7 +5568,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -5696,7 +5696,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5805,7 +5805,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -5869,7 +5869,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6016,7 +6016,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6034,7 +6034,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.01,
@@ -6098,7 +6098,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6135,7 +6135,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -6244,7 +6244,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.02,
@@ -6353,7 +6353,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.33,
 									"KULLU": 0.0,
@@ -6481,7 +6481,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6590,7 +6590,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.88,
 									"KULLU": 0.05,
@@ -6699,7 +6699,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6827,7 +6827,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -6936,7 +6936,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.71,
 									"KULLU": 0.11,
@@ -7045,7 +7045,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7173,7 +7173,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7282,7 +7282,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.51,
 									"KULLU": 0.0,
@@ -7391,7 +7391,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7557,7 +7557,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7666,7 +7666,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7730,7 +7730,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7877,7 +7877,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -7986,7 +7986,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8095,7 +8095,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8223,7 +8223,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8241,7 +8241,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8305,7 +8305,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8342,7 +8342,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8451,7 +8451,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8560,7 +8560,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8688,7 +8688,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8706,7 +8706,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8770,7 +8770,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8826,7 +8826,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -8935,7 +8935,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.23,
 									"KULLU": 0.18,
@@ -9044,7 +9044,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9172,7 +9172,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9281,7 +9281,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.6,
 									"KULLU": 0.05,
@@ -9390,7 +9390,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9518,7 +9518,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9627,7 +9627,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.04,
@@ -9736,7 +9736,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9864,7 +9864,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9882,7 +9882,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.9,
 									"KULLU": 0.69,
@@ -9946,7 +9946,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -9983,7 +9983,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10092,7 +10092,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.7,
 									"KULLU": 0.04,
@@ -10201,7 +10201,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10348,7 +10348,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10457,7 +10457,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10521,7 +10521,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10649,7 +10649,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10758,7 +10758,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10822,7 +10822,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -10969,7 +10969,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11078,7 +11078,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11187,7 +11187,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11315,7 +11315,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11424,7 +11424,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11488,7 +11488,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11635,7 +11635,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11653,7 +11653,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11717,7 +11717,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11754,7 +11754,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11863,7 +11863,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -11927,7 +11927,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -12055,7 +12055,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -12073,7 +12073,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -12137,7 +12137,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -12193,7 +12193,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.54,
 									"KULLU": 0.0,
@@ -12302,7 +12302,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -12366,7 +12366,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.72,
 									"KULLU": 0.0,
@@ -12494,7 +12494,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.52,
 									"KULLU": 0.78,
@@ -12603,7 +12603,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.52,
@@ -12667,7 +12667,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.19,
 									"KULLU": 1.0,
@@ -12795,7 +12795,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.52,
 									"KULLU": 0.0,
@@ -12904,7 +12904,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.35,
 									"KULLU": 0.0,
@@ -12968,7 +12968,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -13096,7 +13096,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13114,7 +13114,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.08,
 									"KULLU": 0.0,
@@ -13178,7 +13178,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13234,7 +13234,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13343,7 +13343,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.11,
 									"KULLU": 0.0,
@@ -13452,7 +13452,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13580,7 +13580,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13689,7 +13689,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.06,
 									"KULLU": 0.51,
@@ -13798,7 +13798,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -13926,7 +13926,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14035,7 +14035,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14099,7 +14099,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14246,7 +14246,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14355,7 +14355,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14419,7 +14419,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14547,7 +14547,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14656,7 +14656,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14720,7 +14720,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -14848,7 +14848,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.57,
 									"KULLU": 0.0,
@@ -14957,7 +14957,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15021,7 +15021,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.5,
 									"KULLU": 0.0,
@@ -15168,7 +15168,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15186,7 +15186,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15250,7 +15250,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15287,7 +15287,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15396,7 +15396,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15460,7 +15460,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15626,7 +15626,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15735,7 +15735,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15844,7 +15844,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -15991,7 +15991,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16100,7 +16100,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16164,7 +16164,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16292,7 +16292,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16401,7 +16401,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16465,7 +16465,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16593,7 +16593,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16702,7 +16702,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16766,7 +16766,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16913,7 +16913,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -16931,7 +16931,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.12,
 									"KULLU": 0.01,
@@ -16995,7 +16995,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17032,7 +17032,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17141,7 +17141,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17250,7 +17250,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17378,7 +17378,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17487,7 +17487,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17551,7 +17551,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17698,7 +17698,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17807,7 +17807,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17871,7 +17871,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -17999,7 +17999,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18108,7 +18108,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18172,7 +18172,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18300,7 +18300,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18409,7 +18409,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18473,7 +18473,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18620,7 +18620,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18638,7 +18638,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18702,7 +18702,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18739,7 +18739,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18848,7 +18848,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -18912,7 +18912,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19059,7 +19059,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19168,7 +19168,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19232,7 +19232,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19360,7 +19360,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -19469,7 +19469,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.68,
 									"KULLU": 0.0,
@@ -19533,7 +19533,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.04,
 									"KULLU": 0.0,
@@ -19661,7 +19661,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19770,7 +19770,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19834,7 +19834,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -19962,7 +19962,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20071,7 +20071,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20135,7 +20135,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20301,7 +20301,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 1.0,
@@ -20410,7 +20410,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 1.0,
@@ -20474,7 +20474,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 1.0,
@@ -20621,7 +20621,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20730,7 +20730,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20839,7 +20839,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20967,7 +20967,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -20985,7 +20985,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21049,7 +21049,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21086,7 +21086,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21104,7 +21104,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21168,7 +21168,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21205,7 +21205,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21223,7 +21223,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21287,7 +21287,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21324,7 +21324,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21342,7 +21342,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21406,7 +21406,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21462,7 +21462,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21571,7 +21571,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.06,
 									"KULLU": 0.0,
@@ -21680,7 +21680,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21808,7 +21808,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -21917,7 +21917,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.75,
 									"KULLU": 0.09,
@@ -22026,7 +22026,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22154,7 +22154,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22263,7 +22263,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.93,
 									"KULLU": 0.02,
@@ -22372,7 +22372,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22500,7 +22500,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22609,7 +22609,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.46,
 									"KULLU": 0.41,
@@ -22718,7 +22718,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22846,7 +22846,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -22955,7 +22955,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.08,
 									"KULLU": 0.0,
@@ -23064,7 +23064,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23211,7 +23211,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23320,7 +23320,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23429,7 +23429,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23557,7 +23557,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23575,7 +23575,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23639,7 +23639,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23695,7 +23695,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -23804,7 +23804,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23868,7 +23868,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -23996,7 +23996,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24105,7 +24105,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24169,7 +24169,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24297,7 +24297,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24406,7 +24406,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24470,7 +24470,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24617,7 +24617,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24726,7 +24726,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24790,7 +24790,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -24937,7 +24937,7 @@
 				"values": {
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25046,7 +25046,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25110,7 +25110,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25238,7 +25238,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25347,7 +25347,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25411,7 +25411,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25558,7 +25558,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25576,7 +25576,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25640,7 +25640,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25677,7 +25677,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25695,7 +25695,7 @@
 								"values": {},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25759,7 +25759,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25796,7 +25796,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -25905,7 +25905,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26014,7 +26014,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26161,7 +26161,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26270,7 +26270,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26334,7 +26334,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26462,7 +26462,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.44,
 									"KULLU": 0.72,
@@ -26571,7 +26571,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.18,
 									"KULLU": 0.23,
@@ -26635,7 +26635,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.46,
 									"KULLU": 0.78,
@@ -26763,7 +26763,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26872,7 +26872,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -26936,7 +26936,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -27064,7 +27064,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.86,
 									"KULLU": 0.93,
@@ -27173,7 +27173,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.05,
 									"KULLU": 0.7,
@@ -27237,7 +27237,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.2,
 									"KULLU": 0.58,
@@ -27365,7 +27365,7 @@
 					},
 					"MATERIAL AND SUPPLY": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -27474,7 +27474,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.38,
@@ -27583,7 +27583,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -27730,7 +27730,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -27839,7 +27839,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.31,
 									"KULLU": 0.0,
@@ -27948,7 +27948,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -28076,7 +28076,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.5,
@@ -28185,7 +28185,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.09,
 									"KULLU": 0.6,
@@ -28294,7 +28294,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.63,
@@ -28422,7 +28422,7 @@
 					},
 					"MACHINERY AND EQUIPMENT": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -28531,7 +28531,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -28595,7 +28595,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -28723,7 +28723,7 @@
 					},
 					"MAINTENANCE": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.57,
@@ -28832,7 +28832,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -28896,7 +28896,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.69,
@@ -29043,7 +29043,7 @@
 				"values": {
 					"REMUNERATION TO OUTSOURCED EMPLOYEES": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -29152,7 +29152,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -29261,7 +29261,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 1.0,
 									"KULLU": 0.0,
@@ -29389,7 +29389,7 @@
 					},
 					"MAJOR WORKS": {
 						"values": {
-							"Process Efficiency": {
+							"Internal Efficiency": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -29498,7 +29498,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Fiscal Planning": {
+							"Value For Money": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
@@ -29562,7 +29562,7 @@
 								},
 								"type": "kpi_category"
 							},
-							"Participation Promotion": {
+							"Competition": {
 								"index": {
 									"HAMIRPUR": 0.0,
 									"KULLU": 0.0,
