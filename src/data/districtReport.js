@@ -3,9 +3,9 @@ import React from "react";
 export const districtReport = [
 	{
 		District: "Bilaspur",
-		"Procurement Process Efficiency Index": 0.272,
-		"Participation Promotion Index": 0.389,
-		"Fiscal Planning Index": 0.04,
+		"Procurement Internal Efficiency Index": 0.272,
+		"Competition Index": 0.389,
+		"Value For Money Index": 0.04,
 		Total: 0.468,
 		"Report Card": (
 			<div>
@@ -99,9 +99,9 @@ export const districtReport = [
 	},
 	{
 		District: "Chamba",
-		"Procurement Process Efficiency Index": 0.445,
-		"Participation Promotion Index": 0.491,
-		"Fiscal Planning Index": 0.271,
+		"Procurement Internal Efficiency Index": 0.445,
+		"Competition Index": 0.491,
+		"Value For Money Index": 0.271,
 		Total: 0.806,
 		"Report Card": (
 			<div>
@@ -184,9 +184,9 @@ export const districtReport = [
 	},
 	{
 		District: "Hamirpur",
-		"Procurement Process Efficiency Index": 0.558,
-		"Participation Promotion Index": 0.285,
-		"Fiscal Planning Index": 0.567,
+		"Procurement Internal Efficiency Index": 0.558,
+		"Competition Index": 0.285,
+		"Value For Money Index": 0.567,
 		Total: 0.941,
 		"Report Card": (
 			<div>
@@ -269,9 +269,9 @@ export const districtReport = [
 	},
 	{
 		District: "Kangra",
-		"Procurement Process Efficiency Index": 0.6,
-		"Participation Promotion Index": 0.361,
-		"Fiscal Planning Index": 0.057,
+		"Procurement Internal Efficiency Index": 0.6,
+		"Competition Index": 0.361,
+		"Value For Money Index": 0.057,
 		Total: 0.68,
 		"Report Card": (
 			<div>
@@ -371,9 +371,9 @@ export const districtReport = [
 	},
 	{
 		District: "Kinnaur",
-		"Procurement Process Efficiency Index": 0.269,
-		"Participation Promotion Index": 0.286,
-		"Fiscal Planning Index": 0.055,
+		"Procurement Internal Efficiency Index": 0.269,
+		"Competition Index": 0.286,
+		"Value For Money Index": 0.055,
 		Total: 0.407,
 		"Report Card": (
 			<div>
@@ -452,9 +452,9 @@ export const districtReport = [
 	},
 	{
 		District: "Kullu",
-		"Procurement Process Efficiency Index": 0.417,
-		"Participation Promotion Index": 0.681,
-		"Fiscal Planning Index": 0.085,
+		"Procurement Internal Efficiency Index": 0.417,
+		"Competition Index": 0.681,
+		"Value For Money Index": 0.085,
 		Total: 0.79,
 		"Report Card": (
 			<div>
@@ -539,9 +539,9 @@ export const districtReport = [
 	},
 	{
 		District: "Mandi",
-		"Procurement Process Efficiency Index": 0.457,
-		"Participation Promotion Index": 0.34,
-		"Fiscal Planning Index": 0.077,
+		"Procurement Internal Efficiency Index": 0.457,
+		"Competition Index": 0.34,
+		"Value For Money Index": 0.077,
 		Total: 0.584,
 		"Report Card": (
 			<div>
@@ -620,9 +620,9 @@ export const districtReport = [
 	},
 	{
 		District: "Shimla",
-		"Procurement Process Efficiency Index": 0.383,
-		"Participation Promotion Index": 0.438,
-		"Fiscal Planning Index": 0.677,
+		"Procurement Internal Efficiency Index": 0.383,
+		"Competition Index": 0.438,
+		"Value For Money Index": 0.677,
 		Total: 1,
 		"Report Card": (
 			<div>
@@ -711,9 +711,9 @@ export const districtReport = [
 	},
 	{
 		District: "Sirmaur",
-		"Procurement Process Efficiency Index": 0.258,
-		"Participation Promotion Index": 0.38,
-		"Fiscal Planning Index": 0.2,
+		"Procurement Internal Efficiency Index": 0.258,
+		"Competition Index": 0.38,
+		"Value For Money Index": 0.2,
 		Total: 0.56,
 		"Report Card": (
 			<div>
@@ -793,9 +793,9 @@ export const districtReport = [
 	},
 	{
 		District: "Solan",
-		"Procurement Process Efficiency Index": 0.272,
-		"Participation Promotion Index": 0.664,
-		"Fiscal Planning Index": 0.023,
+		"Procurement Internal Efficiency Index": 0.272,
+		"Competition Index": 0.664,
+		"Value For Money Index": 0.023,
 		Total: 0.641,
 		"Report Card": (
 			<div>
@@ -875,9 +875,9 @@ export const districtReport = [
 	},
 	{
 		District: "Una",
-		"Procurement Process Efficiency Index": 0.504,
-		"Participation Promotion Index": 0.362,
-		"Fiscal Planning Index": 0.001,
+		"Procurement Internal Efficiency Index": 0.504,
+		"Competition Index": 0.362,
+		"Value For Money Index": 0.001,
 		Total: 0.579,
 		"Report Card": (
 			<div>
@@ -954,9 +954,9 @@ export const districtReport = [
 	},
 	{
 		District: "Lahaul & Spiti",
-		"Procurement Process Efficiency Index": 0,
-		"Participation Promotion Index": 0,
-		"Fiscal Planning Index": 0,
+		"Procurement Internal Efficiency Index": 0,
+		"Competition Index": 0,
+		"Value For Money Index": 0,
 		Total: 0,
 		"Report Card": (
 			<div>
