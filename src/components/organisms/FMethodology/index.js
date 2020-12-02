@@ -100,6 +100,15 @@ const Methodology = () => {
 						</li>
 						<li>
 							<a
+								href="https://superset.civicdatalab.in/superset/dashboard/hp_health_infra_v1/?standalone=true"
+								target="_blank"
+								className="resource-link"
+							>
+								Infrastructure Health Dashboard
+							</a>
+						</li>
+						<li>
+							<a
 								href="https://drive.google.com/file/d/1kRCNYg0oQgRCRitbXLtVdy2pLDP9fyY5/view?usp=sharing"
 								target="_blank"
 								className="resource-link"
