@@ -3,6 +3,7 @@ import {sdgData} from "../data/sdgDescription";
 import { procurements } from "../data/filters_ref.json";
 import {districtReport} from "../data/districtReport"
 import { KPIDistrictMapping} from "../data/KPIDistrictmapping"
+import OCDS_tenders from "../data/data_tenders_json.json"
 
 import {
 	GET_PROCUREMENTS_DATA,
@@ -70,7 +71,9 @@ export const getProcurementsData = (dateRange) => async (dispatch) => {
 	let mapData = calculateMapData(currYearData);
     let tableData = calculateTableData(); // currently giving table for SDG description
     let districtReport  = calculateDistrictReport();
-    let KPIDistrictTableData = calculateKPIDistrictTableData(dateRange)
+	let KPIDistrictTableData = calculateKPIDistrictTableData(dateRange)
+	let ocdsTendersData = calculateOCDSTableData()
+	
 	dispatch({
 		type: GET_PROCUREMENTS_DATA,
 		payload: {
@@ -81,7 +84,8 @@ export const getProcurementsData = (dateRange) => async (dispatch) => {
 			activeFilters: activeFilters,
             allFiltersData: allFiltersData,
             districtReport: districtReport,
-            KPIDistrictTableData: KPIDistrictTableData,
+			KPIDistrictTableData: KPIDistrictTableData,
+			ocdsTendersData: ocdsTendersData, 
 			loading: false,
 		},
 	});
@@ -379,3 +383,24 @@ export const updateFiltersData = (
 		});
 	}, 1000);
 };
+
+export const calculateOCDSTableData = () => {
+	let headerArray = Object.keys(OCDS_tenders[0])
+	const tableDataHeaders = headerArray.map((header,index) => {
+		return {
+			key: header,
+			header: header,
+			tooltip: ""
+		}
+	})
+
+	const tableDataRows = OCDS_tenders.map((data, index) => {
+		const result = {}
+		headerArray.map(header => {
+			result[header] = data[header]
+		})
+		result.id = Math.random()*10 + headerArray[0]
+		return result
+	})	
+	return {tableDataHeaders, tableDataRows}
+}

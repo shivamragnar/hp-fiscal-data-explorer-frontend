@@ -17,6 +17,7 @@ const initialState = {
 	loading: true,
 	KPIDistrictTableData: {},
 	error: {},
+	ocdsTendersData: {}
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +35,7 @@ export default function (state = initialState, action) {
 				dateRange: payload.dateRange,
 				districtReport: payload.districtReport,
 				KPIDistrictTableData: payload.KPIDistrictTableData,
+				ocdsTendersData: payload.ocdsTendersData,
 				loading: false,
 			};
 		case SET_PROCUREMENTS_DATA_LOADING:
