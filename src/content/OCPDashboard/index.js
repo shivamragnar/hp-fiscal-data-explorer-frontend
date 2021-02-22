@@ -58,6 +58,7 @@ const OCPDashboard = ({
 		dateRange,
 		districtReport,
 		KPIDistrictTableData : {tableDataHeaders: kpiTableHeaders, tableDataRows: kpiTableRows, tablekpis: tablekpis},
+		ocdsTendersData,
 		error,
 	},
 	updateFiltersData,
@@ -318,6 +319,16 @@ const OCPDashboard = ({
 						/>
 					</div>
 				)}
+			</div>
+			<div className="section-wrapper">
+					<FTable
+						rows={ocdsTendersData.tableDataRows ? ocdsTendersData.tableDataRows : []}
+						headers={ocdsTendersData.tableDataHeaders ? ocdsTendersData.tableDataHeaders : []}
+						onClickDownloadBtn={(e) => {
+							console.log(e);
+						}}
+						showHeaderTooltip={false}
+					/>
 			</div>
 			<DistrictReport districtReport={districtReport} />
 			<Methodology />
