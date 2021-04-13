@@ -42,7 +42,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const { months , years, years_short } = yymmdd_ref;
 
       // As there is no data for 2020-21 we need to update code while we update data for it
-      const updatedDateTo = dateTo === "2021-03-31" ? "2020-09-30" : dateTo
+      const updatedDateTo = dateTo === "2021-03-31" ? "2020-10-30" : dateTo
 
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
 

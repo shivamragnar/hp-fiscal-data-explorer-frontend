@@ -3,7 +3,8 @@ import {sdgData} from "../data/sdgDescription";
 import { procurements } from "../data/filters_ref.json";
 import {districtReport} from "../data/districtReport"
 import { KPIDistrictMapping} from "../data/KPIDistrictmapping"
-import OCDS_tenders from "../data/data_tenders_json.json"
+import OCDS_tender from "../data/tender_data.json";
+import OCDS_award from "../data/award_data.json";
 
 import {
 	GET_PROCUREMENTS_DATA,
@@ -11,6 +12,7 @@ import {
 	SET_PROCUREMENTS_DATA_LOADING,
 	UPDATE_DATERANGE,
 } from "./types";
+import { Header } from "carbon-components-react";
 
 var hp_geojson = JSON.stringify(require("../data/hp_geojson.json"));
 
@@ -73,6 +75,7 @@ export const getProcurementsData = (dateRange) => async (dispatch) => {
     let districtReport  = calculateDistrictReport();
 	let KPIDistrictTableData = calculateKPIDistrictTableData(dateRange)
 	let ocdsTendersData = calculateOCDSTableData()
+	let ocdsAwardsData = calculateOCDSTableDataAward()
 	
 	dispatch({
 		type: GET_PROCUREMENTS_DATA,
@@ -86,6 +89,7 @@ export const getProcurementsData = (dateRange) => async (dispatch) => {
             districtReport: districtReport,
 			KPIDistrictTableData: KPIDistrictTableData,
 			ocdsTendersData: ocdsTendersData, 
+			ocdsAwardsData: ocdsAwardsData,
 			loading: false,
 		},
 	});
@@ -385,7 +389,7 @@ export const updateFiltersData = (
 };
 
 export const calculateOCDSTableData = () => {
-	let headerArray = Object.keys(OCDS_tenders[0])
+	let headerArray = Object.keys(OCDS_tender)
 	const tableDataHeaders = headerArray.map((header,index) => {
 		return {
 			key: header,
@@ -394,13 +398,37 @@ export const calculateOCDSTableData = () => {
 		}
 	})
 
-	const tableDataRows = OCDS_tenders.map((data, index) => {
+	const tableDataRows = OCDS_tender[headerArray[0]].map((data, index) => {
 		const result = {}
 		headerArray.map(header => {
-			result[header] = data[header]
+			result[header] = OCDS_tender[header][index]
 		})
 		result.id = Math.random()*10 + headerArray[0]
 		return result
 	})	
+	return {tableDataHeaders, tableDataRows}
+}
+
+
+export const calculateOCDSTableDataAward = () => {
+	let headerArray = Object.keys(OCDS_award)
+	const tableDataHeaders = headerArray.map((header,index) => {
+		return {
+			key: header,
+			header: header,
+			tooltip: ""
+		}
+	})
+
+	const tableDataRows = OCDS_award[headerArray[0]].map((data, index) => {
+		const result = {}
+		headerArray.map(header => {
+			result[header] = OCDS_award[header][index]
+		})
+		
+		return result
+	})	
+	console.log("kdnejwfnejfnejfne")
+	console.log(tableDataRows)
 	return {tableDataHeaders, tableDataRows}
 }

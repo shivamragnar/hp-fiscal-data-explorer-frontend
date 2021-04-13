@@ -42,6 +42,7 @@ var {
 
 //Name of components to switch between
 const vizTypes = ["FMap", "FTable", "FTableSDG"];
+const vizTypesData = ["FTableTenders", "FTableAwards"];
 
 const noExpDataYears = ["2016_17", "2020_21"];
 
@@ -59,6 +60,7 @@ const OCPDashboard = ({
 		districtReport,
 		KPIDistrictTableData : {tableDataHeaders: kpiTableHeaders, tableDataRows: kpiTableRows, tablekpis: tablekpis},
 		ocdsTendersData,
+		ocdsAwardsData,
 		error,
 	},
 	updateFiltersData,
@@ -68,6 +70,11 @@ const OCPDashboard = ({
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => {
 		setCurrentVizType(vizTypes[e.index]);
+	};
+
+	const [currentVizTypeData, setCurrentVizTypeData] = useState(vizTypesData[0]);
+	const switchVizTypeData = (e) => {
+		setCurrentVizTypeData(vizTypesData[e.index]);
 	};
 
 	//handle filter bar responsiveness
@@ -239,6 +246,38 @@ const OCPDashboard = ({
 		}
 	};
 
+	const renderUIData = () => {
+		switch (currentVizTypeData) {
+			case "FTableTenders":
+				return (
+					<FTable
+						rows={ocdsTendersData.tableDataRows ? ocdsTendersData.tableDataRows : []}
+						headers={ocdsTendersData.tableDataHeaders ? ocdsTendersData.tableDataHeaders : []}
+						onClickDownloadBtn={(e) => {
+							console.log(e);
+						}}
+						showHeaderTooltip={true}
+					/>
+				);
+
+				case "FTableAwards":
+					return (
+						<FTable
+							rows={ocdsAwardsData.tableDataRows ? ocdsAwardsData.tableDataRows : []}
+							headers={ocdsAwardsData.tableDataHeaders ? ocdsAwardsData.tableDataHeaders : []}
+							onClickDownloadBtn={(e) => {
+								console.log(e);
+							}}
+							showHeaderTooltip={true}
+						/>
+					);
+	
+
+			default:
+				return <div>nothing to display</div>;
+		}
+	};
+
 	return (
 		<div className={`f-content exp-summary-content ocp-dashboard-content`}>
 			<FPageMeta pageId="expenditure_summary" />
@@ -321,15 +360,35 @@ const OCPDashboard = ({
 				)}
 			</div>
 			<div className="section-wrapper">
-					<FTable
-						rows={ocdsTendersData.tableDataRows ? ocdsTendersData.tableDataRows : []}
-						headers={ocdsTendersData.tableDataHeaders ? ocdsTendersData.tableDataHeaders : []}
-						onClickDownloadBtn={(e) => {
-							console.log(e);
-						}}
-						showHeaderTooltip={false}
-					/>
+						<>
+							<div className="content-switcher-wrapper">
+								<FContentSwitcher
+									onChange={switchVizTypeData}
+									options={[
+										{
+											label: "Tenders OCDS Data",
+											infoText:
+												tooltips.map_chart_tooltip,
+										},
+										{
+											label: "Awards OCDS Data",
+											infoText: tooltips.table_tooltip,
+										},
+										
+									]}
+									
+									activeVizIdx={vizTypesData.indexOf(
+										currentVizTypeData
+									)}
+								/>
+							</div>
+							{renderUIData()}
+							
+						</>
+			
+					
 			</div>
+			
 			<DistrictReport districtReport={districtReport} />
 			<Methodology />
 		</div>
