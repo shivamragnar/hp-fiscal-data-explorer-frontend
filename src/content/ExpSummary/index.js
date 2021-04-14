@@ -170,6 +170,9 @@ const ExpSummary = ({
 	useEffect(() => {
 		if(vizData.length > 0){
 			setActiveVizData(populateActiveVizData('alloc'));
+      if (noExpDataYears.includes(vizData[0].curr_year)) {
+        setActiveDataPoint('alloc');
+      }
 		}
 
 	},[vizData])
