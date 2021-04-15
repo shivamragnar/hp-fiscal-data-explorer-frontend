@@ -118,7 +118,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
@@ -249,7 +249,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
