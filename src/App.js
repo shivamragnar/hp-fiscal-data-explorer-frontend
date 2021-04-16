@@ -63,7 +63,7 @@ import "./App.scss";
 
 //CONFIG
 const _CONFIG = {
-	initDateRange : ["2020-04-01","2020-09-30"],
+	initDateRange : ["2020-04-01","2021-03-31"],
 	initActiveFilters : {},
 	initAllFiltersData : [],
 	initRawFilterDataAllHeads : {} //only applies for exp_districtwise, receipts_districtwise & schemes
