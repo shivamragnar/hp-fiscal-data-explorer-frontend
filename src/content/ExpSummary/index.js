@@ -120,7 +120,7 @@ const ExpSummary = ({
 			}
 		})
 		data[0].yearwise = yearwiseData1
-		data[1].yearwise = yearwiseData2
+		data[1].yearwise = yearwiseData2.filter(year => year.amount > 0)
 		return data
 	}
 
