@@ -108,6 +108,10 @@
         "title": "Sub Minor Head",
         "desc": "A scheme within a programme"
       },
+      "budget":{
+        "title": "Budget Code",
+        "desc": "Budget Head provides information on the sources & share of funding for a particular expenditure. For e.g. S25N indicates that the state's share is 25%, where as C90N is 90% central share. Complete list of budget codes can be found here"
+      },
       "voted_charged":{
         "title": "Voted/Charged",
         "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
@@ -118,7 +122,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
@@ -239,6 +243,10 @@
         "title": "Sub Minor Head",
         "desc": "A scheme within a programme"
       },
+      "budget":{
+        "title": "Budget Code",
+        "desc": "Budget Head provides information on the sources & share of funding for a particular expenditure. For e.g. S25N indicates that the state's share is 25%, where as C90N is 90% central share. Complete list of budget codes can be found here"
+      },
       "voted_charged":{
         "title": "Voted/Charged",
         "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
@@ -249,7 +257,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",

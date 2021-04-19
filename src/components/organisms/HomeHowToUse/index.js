@@ -10,6 +10,7 @@ import budget_receipts from '../../../imgs/home_page_images/details_receipts.png
 import treasury_exp from '../../../imgs/home_page_images/exp_district_wise_hpfde.png'
 import treasury_rec from '../../../imgs/home_page_images/rec_districtwise_hpfde.png'
 import schemes from '../../../imgs/home_page_images/schemes_hpfde.png'
+import procurements from '../../../imgs/home_page_images/procurements.png'
 
 
 const HomeHowToUse = (props) => {
@@ -20,7 +21,7 @@ const history = useHistory();
 
 const handleClick = linkRoute => history.push(linkRoute);
 
-const imgs = { placeholder, budget_receipts, treasury_exp, treasury_rec, schemes }
+const imgs = { placeholder, budget_receipts, treasury_exp, treasury_rec, schemes, procurements }
 
 const createImg = (img) => (
   <div className='f-tab-content__img_wrapper bx--col-lg-6'>
