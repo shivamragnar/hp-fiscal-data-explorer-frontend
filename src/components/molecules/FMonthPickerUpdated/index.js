@@ -104,7 +104,7 @@ const FMonthPickerUpdated = ({
 								(current &&
 									current <
 										moment("2020/04/01", "YYYY/MM/DD")) ||
-								current > moment("2020/03/31", "YYYY/MM/DD")
+								current > moment("2021/03/31", "YYYY/MM/DD")
 							);
 						} else {
 							return (
