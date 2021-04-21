@@ -25,7 +25,7 @@ import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FLegendBar from '../../components/atoms/FLegendBar';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FTimeSeries from '../../components/dataviz/FTimeSeriesSummary';
 import FDropdown from '../../components/molecules/FDropdown';
 import MultiSelect from "../../components/molecules/FMultiSelect"
 import RadioTabs from "../../components/molecules/FRadioTabs"
