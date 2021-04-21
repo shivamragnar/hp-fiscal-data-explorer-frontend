@@ -33,7 +33,7 @@ const ExpCovidTracker = ({
 					<FTable
 						rows={rows}
 						headers={headers}
-						onClickDownloadBtn={(e) => { console.log(e)}}
+						onClickDownloadBtn={(e) => { }}
 						sort={false}
               		/>
 				}

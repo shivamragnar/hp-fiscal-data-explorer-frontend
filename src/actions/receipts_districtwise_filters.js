@@ -28,7 +28,6 @@ export const getReceiptsDistrictwiseFiltersData = (allFiltersData, rawFilterData
         rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_treasury_rec");
       }
 
-			console.log('raw_filter_data_all_heads: ', rawFilterDataAllHeads);
 
       //populate all dropdown filters' data from the raw response provided by API
       allFiltersData = resetFiltersToAllFilterHeads( rawFilterDataAllHeads, filterOrderRef);
@@ -51,7 +50,6 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
   try {
     dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE_FILTERS, payload: {} });
     //call dynamic filter data API if we have some active filters. e.g. a filter was selected
-    console.log('here');
 
     if( Object.keys(activeFilters).length > 0){
       const currFilterOrderIndex = filterOrderRef.indexOf(key);
@@ -66,10 +64,7 @@ export const updateReceiptsDistrictwiseFilters = (e, key, activeFilters, allFilt
       let stringForApi = prepQueryStringForFiltersApi(activeFilters);
 
       const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_treasury_rec?${stringForApi}`);
-      // console.log('raw_dynamic_filter_data: ');
-      // console.log(rawFilterData);
 
-console.log('here');
       const results = [];
       var query;
       var queryFilterIdx;
@@ -82,7 +77,6 @@ console.log('here');
               return { id : filterVal }
             })
             queryFilterIdx = i;
-            // console.log(query);
             break;
           }
         }
@@ -92,12 +86,10 @@ console.log('here');
       }
 
       recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
-      // console.log("district_results", results);
 
       results.map(result => {
         recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
-      // console.log(allFiltersData);
     }
     //else if we have no active filters fetch rawFilterDataAllHeads and populate allFiltersData. e.g. when active filters are deselected.
     else{

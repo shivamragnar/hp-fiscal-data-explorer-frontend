@@ -134,7 +134,6 @@ const ExpSummary = ({
 		// 	initialSelectedItem = {activeDemandForTimeseries}
 		// 	items = { Object.keys(lineChrtData) }
 		// 	onChange = {(v) => {
-		// 		console.log('testing', v)
 		// 		handleChangeActiveDemandForTimeSeries(v)}}
 		// />
 		<MultiSelect
@@ -149,7 +148,6 @@ const ExpSummary = ({
 		let curr_year = e.target.value.split('-').join('_')
 		// Need to update this line
 		let prev_year = `20${parseInt(e.target.value.split('-')[1]) - 2}_${parseInt(e.target.value.split('-')[1])-1}`
-		console.log('curr prev', curr_year, prev_year)
 		getExpSummaryData(curr_year, prev_year, initData)
 	}
 

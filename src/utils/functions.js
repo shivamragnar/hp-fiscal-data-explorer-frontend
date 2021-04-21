@@ -70,7 +70,6 @@ export const convertDataToJson = (data) => {
 //2
 export const getWeekwiseDates = ( dateFrom, fromMonthIndex, toMonthIndex, fromYearIndex) => {
 
-  console.log("dateFrom",dateFrom, "fromMonthIndex",fromMonthIndex, "toMonthIndex",toMonthIndex, "fromYearIndex)",fromYearIndex);
   //dealing with the case where toMonthIndex falls in the next year
   const toMonthIndexAddOn = toMonthIndex < fromMonthIndex ? 12 : 0;
   var allWeekWiseDays = []; //for the actual tick on x axis and the
@@ -192,8 +191,6 @@ export const recursFilterFind = (obj, query, results, idx, filterOrderRef, activ
 export const recursFilterFetch = (allFiltersData, obj, idx) => {
   Object.keys(obj).map(obj_key => {
     if(obj[obj_key]){
-      // console.log("idx" + idx);
-      // console.log(allFiltersData[idx]);
       if(allFiltersData[idx].val.some(item => item.id === obj_key) !== true){
         const filterOption = {
           filter_name: allFiltersData[idx].key,
@@ -202,7 +199,6 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
           value: obj_key
         }
         allFiltersData[idx].val.push(filterOption);
-        // console.log(idx);
       }
       recursFilterFetch(allFiltersData, obj[obj_key], idx+1);
     }
@@ -211,7 +207,6 @@ export const recursFilterFetch = (allFiltersData, obj, idx) => {
 
 //9
 export const filterCompGenData = () => {
-  // console.log("lol");
 }
 
 
@@ -221,10 +216,7 @@ export const recursFilterFind2 = (obj, query, results, idx, filterOrderRef, acti
 
   Object.keys(obj).map(obj_key => {
     if(obj[obj_key]){
-      // console.log("obj[obj_key]");
-      // console.log(obj[obj_key]);
       query.map(query_item => {
-        // console.log("im reachin here");
         if(obj_key === query_item.id ){
           results.push(obj[query_item.id]);
         }
@@ -271,11 +263,9 @@ export const createBudgetCodeString = (activeFilterVals, activeFilterKeys, filte
     if(i >= range[0] && i <= range[1]){
       if(activeFilterKeys.includes(filterOrderRef[i])){
         const activeKeyIdx = activeFilterKeys.indexOf(filterOrderRef[i]);
-        // console.log("reached here");
         const valCode = activeFilterVals[activeKeyIdx].map(val => {
           return val.split('-')[0];
         })
-        // console.log("valCode"); console.log(valCode);
         return valCode.join(", ");
       }else{ return "all"; }
     }
@@ -304,7 +294,6 @@ export const createObjForPayload = (activeFilterVals, activeFilterKeys) => {
       tempVal1 = tempVal1.join('","');
       tempVal2 = tempVal2.join('","');
       objForPayload[activeFilterKeys[i].split('-')[0]] =  '"' + tempVal1 + '"';
-      // console.log('is this underfined?',activeFilterKeys[i].split('-')[1]);
       if(activeFilterKeys[i].split('-')[1] !== undefined){ //this is a check to see if our filter is if of the CODE_NAME format or simply a CODE format
         objForPayload[activeFilterKeys[i].split('-')[1]] =  '"' + tempVal2 + '"';
       }

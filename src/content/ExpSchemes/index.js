@@ -113,8 +113,6 @@ const ExpSchemes = ({
       }
     })
 
-    console.log("schemesActiveFilters");
-    console.log(schemesActiveFilters);
     getExpSchemesData(initData, schemesActiveFilters, dateRange);
     updateExpSchemesFilters(e, key, schemesActiveFilters, allFiltersData, rawFilterDataAllHeads);
 	}
@@ -198,7 +196,7 @@ const ExpSchemes = ({
       return <FTable
               rows={rows}
               headers={headers}
-              onClickDownloadBtn={(e) => { console.log(e)}}
+              onClickDownloadBtn={(e) => { }}
               showTotal={true}
               showHeaderTooltip={true}
               />

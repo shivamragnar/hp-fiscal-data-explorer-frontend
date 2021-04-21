@@ -91,9 +91,7 @@ class BudgetHighlights extends Component {
   async getData(apiUrl){
     try{
       const res = await axios.get(apiUrl);
-      console.log(res);
     }catch(err){
-      console.log(err);
     }
   }
 

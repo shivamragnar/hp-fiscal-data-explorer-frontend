@@ -56,7 +56,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     const activeFilterVals = Object.values(activeFilters);
 
     const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-    // console.log("objForPayload", objForPayload);
 
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_EXP_SCHEMES, payload: {} });
@@ -64,7 +63,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     //1 PREP AND MAKE API CALL
     const config = { headers: { "content-type": "application/json" } };
 		const res = await axios.post( `https://hpback.openbudgetsindia.org/api/schemes?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload} );
-		// console.log("exp districtwise raw data", res.data.records);
     if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
     //2 PREP DATA FOR VISUALIZATION
@@ -76,7 +74,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
 
     //calc x-tick-formats if is week
     let xTickFormats = calcXTickFormats(month_week, districtwiseSchemesVals, updatedDateTo, dateFrom);  //2----
-    // console.log("districtwiseSchemesVals", districtwiseSchemesVals);
 
     districtNames.map((districtName, i) => {
       let datewiseExp = [];
@@ -123,9 +120,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
       })
     })
 
-    // console.log("tempLineChrtData", tempLineChrtData);
-    // console.log("tempBarChrtData", tempBarChrtData);
-    // console.log("tempMapData", tempMapData);
 
     //3 PREP DATA FOR TABLE
     tempTableData.headers.push(
@@ -151,7 +145,6 @@ export const getExpSchemesData = (initData, activeFilters, dateRange, triggeredB
     	})
     })
 
-    // console.log("tempTableData", tempTableData);
 
     dispatch({
       type: GET_EXP_SCHEMES_DATA,

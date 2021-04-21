@@ -25,7 +25,6 @@ const { receipts_districtwise : filterOrderRef } = require("../data/filters_ref.
 export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, triggeredByDateRangeChange = false) => async dispatch => {
   try {
 
-    console.log(triggeredByDateRangeChange);
 
     if(Object.keys(activeFilters).length === 0 && initData && triggeredByDateRangeChange === false){
       dispatch({
@@ -60,7 +59,6 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       const activeFilterVals = Object.values(activeFilters);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      // console.log("objForPayload"); console.log(objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_RECEIPTS_DISTRICTWISE, payload: {} });
@@ -68,13 +66,11 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
   		const res = await axios.post(`https://hpback.openbudgetsindia.org/api/treasury_rec?start=${dateFrom}&end=${updatedDateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`, {filters:objForPayload});
-  		// console.log("receipts districtwise raw data", res.data.records);
       if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
       const districtwiseRecVals = Object.values(res.data.records);
-      // console.log("districtwiseRecVals", districtwiseRecVals);
 
       //calc x-tick-vals if is week
       let xTickVals = calcXTickVals(month_week, districtwiseRecVals);
@@ -116,11 +112,6 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
           }
         })
       })
-
-      // console.log("tempLineChrtData", tempLineChrtData);
-      // console.log("tempBarChrtData", tempBarChrtData);
-      // console.log("tempMapData", tempMapData);
-
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
         { key: 'districtName', header: 'District', tooltip: "District Name" },
@@ -139,7 +130,6 @@ export const getReceiptsDistrictwiseData = (initData, activeFilters, dateRange, 
       	})
       })
 
-      // console.log("tempTableData", tempTableData);
 
       dispatch({
         type: GET_RECEIPTS_DISTRICTWISE_DATA,

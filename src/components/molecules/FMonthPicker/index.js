@@ -53,8 +53,6 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
             super(props, context)
 
             const { years, months }= this.props.defaultSelect;
-            // console.log("defaultSelect");
-            // console.log(this.props.defaultSelect);
             this.state = {
                 mrange2: {from: {year: years[0], month: months[0]}, to: {year: years[1], month: months[1]}}, //default setting
             }
@@ -156,9 +154,6 @@ var yymmdd_ref = require("../../../data/yymmdd_ref.json");
             this.refs.pickRange2.show()
         }
         handleRangeChange2(value, month, listIndex) {
-            // console.log("value: "+ value);
-            // console.log("month: "+ month);
-            // console.log("listIndex: "+ listIndex);
         }
         handleRangeDissmis2(newDateRange) {
             this.setState( {mrange2: newDateRange} )

@@ -100,9 +100,6 @@ const App = ({
 	}
 ) => {
 
-
-console.log(window.location.origin);
-
 const apiCallQueue = [
 	{ apiFunc: () => getProcurementsData("2020-2021") },
 
@@ -149,8 +146,6 @@ const fetchApisInQueue = async (idx) => {
 	 
 
  }, []);
-
- console.log(window.location.href);
 
  return (
       <div>

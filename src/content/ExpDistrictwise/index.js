@@ -114,7 +114,6 @@ const ExpDistrictwise = ({
 	}
 
   const onDateRangeSet = (newDateRange) => {
-    console.log(newDateRange)
 		updateDistrictwiseOnDateRangeChange(initData, newDateRange, expDistrictwiseActiveFilters);
 	}
 
@@ -204,7 +203,7 @@ const ExpDistrictwise = ({
       return <FTable
               rows={rows}
               headers={headers}
-              onClickDownloadBtn={(e) => { console.log(e)}}
+              onClickDownloadBtn={(e) => { }}
               showTotal={true}
               showHeaderTooltip={true}
               />

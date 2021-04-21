@@ -59,16 +59,12 @@ export const getExpSummaryData = (current, previous, rawData) => async (dispatch
       vizData.push(vizObj);
     });
 
-    console.log('SMRY_VIZ_DATA', vizData);
 
     //----------------
 
     let valuesFromAllYrs = Object.values(sortedRecords);
     let keysFromAllYrs = Object.keys(sortedRecords);
 
-    console.log('vvvvvvv');
-    console.log(valuesFromAllYrs);
-    console.log(keysFromAllYrs);
 
     var lineChrtData = {};
 
@@ -105,27 +101,11 @@ export const getExpSummaryData = (current, previous, rawData) => async (dispatch
         { exp_alloc: 'expenditure', yearwise: [] }
       ];
       //
-      aryOfYears.map((yr, j) => {
-        lineChrtData[k][0].yearwise.unshift({
-          idx: aryOfYears.length - 1 - j,
-          year: yr.split('_').join('-'),
-          amount: Object.values(valuesFromAllYrs[j])[i][0]
-        }); //allocated
-        lineChrtData[k][1].yearwise.unshift({
-          idx: aryOfYears.length - 1 - j,
-          year: yr.split('_').join('-'),
-          amount: Object.values(valuesFromAllYrs[j])[i][1],
-          pctUsed: Object.values(valuesFromAllYrs[j])[i][2]
-        }); //expenditure
-      });
-    });
-
-    console.log('timeseriesDataStructure', lineChrtData);
-    // aryOfYears.map((yr,i) => {
-    //   let lineChrtDataObj = [];
-    //
-    //
-    // })
+      aryOfYears.map((yr,j) => {
+        lineChrtData[k][0].yearwise.unshift({ idx :  aryOfYears.length - 1 - j, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][0] }) //allocated
+        lineChrtData[k][1].yearwise.unshift({ idx :  aryOfYears.length - 1 - j, year: yr.split('_').join('-'), amount: Object.values(valuesFromAllYrs[j])[i][1], pctUsed: Object.values(valuesFromAllYrs[j])[i][2]  }) //expenditure
+      })
+    })
 
     var tableData = {
       headers: [{ key: 'demandname', header: 'Demand Name' }],
@@ -139,8 +119,6 @@ export const getExpSummaryData = (current, previous, rawData) => async (dispatch
         { key: `pct_spent__${yr}`, header: `Percentage Spent (${yr.split('_')[0] + ' - ' + yr.split('_')[1]})` }
       );
     });
-
-    console.log('SMRY_TBL_DATA', tableData);
 
     Object.values(valuesFromAllYrs[0]).map((v, v_i) => {
       tableData.rows.push({
@@ -192,7 +170,6 @@ export const getExpSummaryData = (current, previous, rawData) => async (dispatch
       });
     });
 
-    console.log('SMRY_TBL_DATA', tableData);
 
     dispatch({
       type: GET_EXP_SUMMARY_DATA,
