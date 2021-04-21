@@ -98,7 +98,7 @@ class FTimeSeries extends Component {
         width= {this.props.chartWidth}
         height= {this.props.chartHeight}
 				padding={{ top: 50, bottom: 450, left: 50, right: 120 }}
-				domain={{y: [0, 5000000000]}}
+				domain={{y: [0, 6000000000]}}
 				containerComponent={
 		      <VictoryVoronoiContainer
 		        labels={datum => datum}
