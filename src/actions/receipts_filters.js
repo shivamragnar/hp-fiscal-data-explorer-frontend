@@ -12,11 +12,9 @@ var { receipts : filterOrderRef } = require("../data/filters_ref.json");
 
 export const getReceiptsFiltersData = () => async dispatch => {
   try {
-    console.log("Fetching Receipts Filters Started");
     dispatch({ type: SET_LOADING_RECEIPTS_FILTERS, payload: "" });
 		//fetch raw filter data
 		const rawFilterData = await axios.get("https://hpback.openbudgetsindia.org/api/acc_heads_receipts");
-		console.log('raw_receipts_filter_data: '); console.log(rawFilterData);
 
     const allFiltersData = []
     filterOrderRef.map(filter_name => {
@@ -68,7 +66,6 @@ export const updateReceiptsOnFilterChange = (e, key, activeFilters, allFiltersDa
               return { id : filterVal }
             })
             queryFilterIdx = i;
-            // console.log(query);
             break;
           }
         }
@@ -83,10 +80,7 @@ export const updateReceiptsOnFilterChange = (e, key, activeFilters, allFiltersDa
         recursFilterFetch( allFiltersData, result, queryFilterIdx+1); //+1 cuz we wanna populate filterData only from first child of currFilter onwards
       })
 
-    // console.log("results");
-    // console.log(results);
     }else{
-      console.log("getAllFilterdsData Again ");
       allFiltersData = [];
       filterOrderRef.map(filter_name => {
         allFiltersData.push({
@@ -101,7 +95,6 @@ export const updateReceiptsOnFilterChange = (e, key, activeFilters, allFiltersDa
     dispatch({ type: UPDATE_RECEIPTS_FILTERS_DATA, payload: allFiltersData });
     dispatch(getReceiptsData(activeFilters, dateRange)); //update expData state at App level
   }catch(err){
-    console.log("Receipts filters update error!");
   }
 
 }

@@ -40,26 +40,20 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
 
     activeFilterVals.map((val, i) => {
         let tempVal = val.map(item => { return item.split('-')[0]});
-        console.log("got here");
         tempVal = tempVal.join('","');
         // tempVal = tempVal.join(',');
         objForPayload[activeFilterKeys[i]] =  '"' + tempVal + '"';
         // objForPayload[activeFilterKeys[i]] =  tempVal;
     })
 
-
-    console.log("objForPayload"); console.log(objForPayload);
-
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_EXP_DEMANDWISE, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    console.log("Axios Fetch Started");
     const config = { headers: { "content-type": "application/json" } };
     const res = await axios.post(
       `https://hpback.openbudgetsindia.org/api/detail_exp_${month_week}?start=${dateFrom}&end=${dateTo}`, {filters:objForPayload}, config
     );
-    console.log("demand details raw data "); console.log(res.data.records);
 
     //2 PREP DATA FOR VISUALIZATION
     var highestRecord = 0;
@@ -84,9 +78,6 @@ export const getExpDemandwiseData = (activeFilters, dateRange) => async dispatch
       dataObj.mark = Math.round((1/100)*highestRecord);
       tempVizData.push(dataObj);
     })
-
-    console.log("tempVizData")
-    console.log(tempVizData)
 
     //3 PREP DATA FOR TABLE
     tempVizData.map((d, i) => {

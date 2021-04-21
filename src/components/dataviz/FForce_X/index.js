@@ -23,8 +23,6 @@ class FForce_X extends React.Component {
     };
     this.axisLabel = this.axisLabelOptions[this.props.activeDataPoint];
     this.drawChart();
-    // console.log("propnodes");
-    // console.log(this.props.nodes);
   }
 
   componentWillUnmount(){
@@ -33,8 +31,6 @@ class FForce_X extends React.Component {
   }
 
   componentDidUpdate(){
-    // console.log("propnodes");
-    // console.log(this.props.nodes);
     d3.select("#data_viz_wrapper").selectAll("svg").remove();
     this.axisLabelOptions = {
       alloc:  `Percentage change in allocation between BE ${this.props.curr_year} & BE ${this.props.prev_year}`,
@@ -62,9 +58,6 @@ class FForce_X extends React.Component {
     		})
     	}
     }
-    console.log("this.props.nodes");
-    console.log(this.props.nodes);
-
     var svg = d3.select(".data-viz-wrapper")
     	.append("svg")
     	.attr("width", width)

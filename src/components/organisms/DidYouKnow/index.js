@@ -44,7 +44,6 @@ const DidYouKnow = (props) => {
   }
 
   const autoUpdateIdx = () => {
-    console.log('ran again');
     setInterval(() => updateActiveIdx(), 8000);
   }
 
@@ -53,7 +52,6 @@ const DidYouKnow = (props) => {
       return Math.floor(Math.random() * Math.floor(max));
     }
 
-    console.log(getRandomInt(didYouKnowContent.length));
     setActiveIdx(getRandomInt(didYouKnowContent.length));
   }
 

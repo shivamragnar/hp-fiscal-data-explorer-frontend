@@ -56,8 +56,6 @@ const FFilterColumn2 = ({
     return initialSelectedItems;
   };
 
-  console.log('FIltercolumn 2', activeFilters);
-
   return (
     <div className="filter-col-wrapper-2">
       <div
@@ -81,8 +79,6 @@ const FFilterColumn2 = ({
           <Fragment>
             {filterCompData.map((filter_comp, i) => {
               const Component = Components[filter_comp.comp];
-              console.log('active filter', activeFilters[filter_comp.name]);
-              // console.log('active filter status', activeFilters[filter_comp.name].status);
               return (
                 <div className="filter-col--ops">
                   <Tooltip

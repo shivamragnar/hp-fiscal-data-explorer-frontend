@@ -192,7 +192,7 @@ const ReceiptsDistrictwise = ({
       return <FTable
               rows={rows}
               headers={headers}
-              onClickDownloadBtn={(e) => { console.log(e)}}
+              onClickDownloadBtn={(e) => {}}
               showTotal={true}
               showHeaderTooltip={true}
               />
