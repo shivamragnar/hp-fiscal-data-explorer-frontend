@@ -13,8 +13,9 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
     else{
       dispatch({ type: SET_EXP_SUMMARY_DATA_LOADING, payload: ""});
       res = await axios.get("https://hpback.openbudgetsindia.org/api/allocation_exp_summary");
-      aryOfYears = Object.keys(res.data.records) //all the years that are being returned by data from jewset to oldest
-      yearsToCompare = [aryOfYears[0], aryOfYears[1]] //gets newest and second to newest F year
+      aryOfYears = Object.keys(res.data.records).sort().reverse() //all the years that are being returned by data from jewset to oldest
+      // potential bug - the years returned above are not from latest to oldest; 2020_21 and 2021_22 are at the end;
+      yearsToCompare = [aryOfYears[0],aryOfYears[1]] //gets newest and second to newest F year
     }
 
     let initData = res
@@ -146,7 +147,7 @@ export const getExpSummaryData = (current, previous, rawData) => async dispatch 
         }
       })*/
       aryOfYears.map(yr => {
-        if (yr === "2020_21"){
+        if (yr === "2021_22"){
         tableData.rows[v_i][`allocated__${yr}`] = (Object.values(res.data.records[yr])[v_i][0]/10000000).toFixed(2).toLocaleString('en-IN');
         tableData.rows[v_i][`tot_exp__${yr}`] = "N/A";
         tableData.rows[v_i][`pct_spent__${yr}`] = "N/A";
