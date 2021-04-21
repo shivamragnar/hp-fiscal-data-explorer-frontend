@@ -40,7 +40,7 @@ import FPageMeta from '../../components/organisms/FPageMeta';
 //Name of components to switch between
 const vizTypes = ["FForce", 'FLineChart', "FTable"];
 
-const noExpDataYears = ["2016_17", "2020_21"]
+const noExpDataYears = ["2016_17", "2021_22"]
 
 const tooltips = Tooltips.exp_summary
 

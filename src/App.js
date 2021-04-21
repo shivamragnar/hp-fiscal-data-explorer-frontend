@@ -106,7 +106,7 @@ console.log(window.location.origin);
 const apiCallQueue = [
 	{ apiFunc: () => getProcurementsData("2020-2021") },
 
-	{ apiFunc: () => getExpSummaryData("2020_21", "2019_20") },
+	{ apiFunc: () => getExpSummaryData("2021_22", "2020_21") },
 
 	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
 	{ apiFunc: () => getReceiptsFiltersData() },
