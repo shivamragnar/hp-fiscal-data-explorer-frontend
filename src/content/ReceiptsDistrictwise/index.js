@@ -19,7 +19,7 @@ import FContentSwitcher from "../../components/molecules/FContentSwitcher";
 
 import FMap from '../../components/dataviz/FMap';
 import FBarChart from '../../components/dataviz/FBarChart';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FTimeSeries from '../../components/dataviz/FTimeSeriesReciepts';
 import FTable from '../../components/dataviz/FTable';
 
 import FRadioGroup from '../../components/molecules/FRadioGroup';
