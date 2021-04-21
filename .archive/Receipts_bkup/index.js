@@ -69,7 +69,6 @@ const Receipts = ( { receipts : {
   }, []);
 
 	const onRadioChange = (value, name) => {
-		console.log(value + "," + name);
 		onFilterChange({selectedItem:{filter_name:name,id:value}});
   }
 
@@ -105,7 +104,7 @@ const Receipts = ( { receipts : {
 							 <FTable
 								 rows={rows}
 								 headers={headers}
-								 onClickDownloadBtn={(e) => { console.log(e)}}
+								 onClickDownloadBtn={(e) => { }}
 								 />
 						 </Fragment>
 				 	 }

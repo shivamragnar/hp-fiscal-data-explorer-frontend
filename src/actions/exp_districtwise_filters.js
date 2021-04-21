@@ -29,8 +29,6 @@ export const getExpDistrictwiseFiltersData = (allFiltersData, rawFilterDataAllHe
         rawFilterDataAllHeads = await axios.get("https://hpback.openbudgetsindia.org/api/unique_acc_heads_treasury");
       }
 
-			// console.log( 'raw_filter_data_all_heads: ', rawFilterDataAllHeads );
-
       //populate all dropdown filters' data from the raw response provided by API
       allFiltersData = resetFiltersToAllFilterHeads( rawFilterDataAllHeads, filterOrderRef);
 
@@ -67,8 +65,6 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
       let stringForApi = prepQueryStringForFiltersApi(activeFilters)
 
       const rawFilterData = await axios.get(`https://hpback.openbudgetsindia.org/api/acc_heads_treasury?${stringForApi}`);
-      // console.log('raw_dynamic_filter_data: ');
-      // console.log(rawFilterData);
 
       const results = [];
       var query;
@@ -82,7 +78,6 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
               return { id : filterVal }
             })
             queryFilterIdx = i;
-            // console.log(query);
             break;
           }
         }
@@ -92,12 +87,9 @@ export const updateExpDistrictwiseFilters = (e, key, activeFilters, allFiltersDa
       }
 
       recursFilterFind2(rawFilterData.data.records, query, results, 0, filterOrderRef, activeFilters, queryFilterIdx );
-      // console.log("district_results");
-      // console.log(results);
       results.map(result => {
         recursFilterFetch( allFiltersData, result, queryFilterIdx+1);
       })
-      // console.log(allFiltersData);
     }
     //else if we have no active filters fetch rawFilterDataAllHeads and populate allFiltersData. e.g. when active filters are deselected.
     else{

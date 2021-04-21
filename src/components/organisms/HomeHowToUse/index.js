@@ -51,7 +51,6 @@ const createText = (title, body, linkRoute, linkText, padding) => {
           howToUseContent.map((d, i) => {
             if(d.id !== "expenditure_demandwise"){
               let img = imgs[d.content.img];
-              console.log(screenWidth);
               return (
                 <Fragment>
                   <div className="f-tab-content-wrapper">

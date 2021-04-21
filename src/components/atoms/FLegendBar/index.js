@@ -5,8 +5,6 @@ import { darkGrey, black, orange, blue, legend_point_1, legend_point_2, legend_p
 
 const FLegendBar = (props) => {
 
-  console.log(props);
-
   const colors = {
     darkGrey,
     black,

@@ -21,8 +21,6 @@ export const getExpDemandwiseFiltersData = () => async dispatch => {
       })
 			//fetch raw filter data
 			const rawFilterData = await axios.get("https://hpback.openbudgetsindia.org/api/acc_heads_desc");
-			console.log('raw_filter_data: '); console.log(rawFilterData);
-
       const allFiltersData = []
       filterOrderRef.map(filter_name => {
         allFiltersData.push({
@@ -80,7 +78,6 @@ export const updateExpDemandwiseOnFilterChange = (
             return { id : filterVal }
           })
           queryFilterIdx = i;
-          // console.log(query);
           break;
         }
       }
@@ -96,7 +93,6 @@ export const updateExpDemandwiseOnFilterChange = (
     })
 
   }else{
-    console.log("get All Filters Data Again");
     allFiltersData = [];
     filterOrderRef.map(filter_name => {
       allFiltersData.push({

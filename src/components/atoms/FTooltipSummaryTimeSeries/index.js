@@ -9,14 +9,11 @@ const FTooltipSummaryTimeSeries = ( {
   totalTicks
 } ) => {
 
-  // console.log(datum);
 
   amount = (amount/10000000).toFixed(2).toLocaleString('en-IN');
 
   let activeDataPoint = '';
 
-  // console.log(datum);
-  // console.log(totalTicks);
   const firsthalf = () => {
     if(datum.idx+1 > totalTicks/2){
       return false;

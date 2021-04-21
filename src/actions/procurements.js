@@ -282,13 +282,6 @@ export const updateFiltersData = (
 			loading: true,
 		},
 	});
-	console.log(
-		"testing inside update filters data",
-		filterIndex,
-		activeFilters,
-		dateRange,
-		allFiltersData
-	);
 	// updateActiveFilters(filterIndex, filter, activeFilters)
 	let mapData, tableData;
 	// if(filterIndex !== procurements.length - 1){

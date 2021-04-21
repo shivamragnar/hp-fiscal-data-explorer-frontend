@@ -8,7 +8,6 @@ import "./_style.scss";
 
 var hp_geojson = require("../../../data/hp_geojson.json");
 
-// console.log(hp_geojson);
 
 // const style = {
 //     fillColor: '#FFFFFF',

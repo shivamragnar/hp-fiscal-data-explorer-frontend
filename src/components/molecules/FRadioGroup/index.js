@@ -6,7 +6,6 @@ import FormGroup from 'carbon-components-react/lib/components/FormGroup';
 
 const FRadioGroup = props => {
 
-  console.log('valueSelected: '+ props.valueSelected);
 
   return (
     <div className={props.className}>

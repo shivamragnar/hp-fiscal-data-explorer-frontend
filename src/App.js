@@ -100,13 +100,10 @@ const App = ({
 	}
 ) => {
 
-
-console.log(window.location.origin);
-
 const apiCallQueue = [
 	{ apiFunc: () => getProcurementsData("2020-2021") },
 
-	{ apiFunc: () => getExpSummaryData("2021_22", "2020_21") },
+	{ apiFunc: () => getExpSummaryData() },
 
 	{ apiFunc: () => getReceiptsData(_CONFIG.initActiveFilters, _CONFIG.initDateRange) },
 	{ apiFunc: () => getReceiptsFiltersData() },
@@ -149,8 +146,6 @@ const fetchApisInQueue = async (idx) => {
 	 
 
  }, []);
-
- console.log(window.location.href);
 
  return (
       <div>

@@ -82,18 +82,15 @@ const OCPDashboard = ({
 		let prev_year = `20${parseInt(e.target.value.split("-")[1]) - 2}_${
 			parseInt(e.target.value.split("-")[1]) - 1
 		}`;
-		console.log("curr prev", curr_year, prev_year);
 		// getExpSummaryData(curr_year, prev_year, initData)
 	};
 
 	const onDateRangeSet = (newDateRange) => {
 		const dateRange = `${newDateRange.from.year}-${newDateRange.to.year}`;
-		console.log("testing date ranges ", dateRange);
 		updateProcurementsDateRange(dateRange);
 	};
 
 	const onFilterChange = (e, key) => {
-		console.log("testing e and key", e, key, procurements_keys);
 		let filterIndex = procurements_keys.findIndex((elem) => elem === key);
 		// #1 ADD OR REMOVE FILTER ID, depending on if its a selection or deselection
 		// if(e.selectedItems.length > 0){ //if at least 1 option is selected,
@@ -213,7 +210,6 @@ const OCPDashboard = ({
 							headers={kpiTableHeaders}
 							kpis={tablekpis}
 							onClickDownloadBtn={(e) => {
-								console.log(e);
 							}}
 							showBar={true}
 							activeFilters={activeFilters}
@@ -227,7 +223,6 @@ const OCPDashboard = ({
 						rows={rows}
 						headers={headers}
 						onClickDownloadBtn={(e) => {
-							console.log(e);
 						}}
 						showHeaderTooltip={true}
 					/>

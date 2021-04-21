@@ -13,7 +13,6 @@ const Glossary = () => {
   })
 
   const [ data, setData ] = useState(glossaryData);
-  console.log(data);
 
   const handleSearch = e => {
 
@@ -32,7 +31,6 @@ const Glossary = () => {
         }
       })
     })
-    // console.log(results);
     setData(results);
   }
 
