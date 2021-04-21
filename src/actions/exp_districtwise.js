@@ -42,7 +42,7 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       const { months , years, years_short } = yymmdd_ref;
 
       // As there is no data for 2020-21 we need to update code while we update data for it
-      const updatedDateTo = dateTo === "2021-03-31" ? "2020-09-30" : dateTo
+      const updatedDateTo = dateTo === "2021-03-31" ? "2021-03-31" : dateTo
 
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
 
@@ -78,7 +78,8 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1---- //redundant can get rid of it
       //calc x-tick-formats if is week
       let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, updatedDateTo, dateFrom);  //2----
-
+      console.log("dnewjfhjefheufhuebfeujfbn jenfe")
+      console.log(xTickFormats)
 
       const tempLineChrtData = [];
       const tempBarChrtData = [];
