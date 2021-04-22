@@ -51,6 +51,10 @@ $brandBlueLightOp40: rgba(179,216,231,0.4);
   @media screen and ( max-width : 1280px){
     font-size: 48px;
   }
+
+  @media screen and ( max-width : 420px){
+    font-size: 30px;
+  }
 }
 
 @mixin serif-style-2(){
