@@ -449,7 +449,7 @@ export const getProcurementsDataTenderAPI =
 
       //1 PREP AND MAKE API CALL
       const res = await axios.post(
-        `http://13.126.189.78/api/procurement_tenders?year=${newDateRange}`,
+        `https://hpback.openbudgetsindia.org/api/procurement_tenders?year=${newDateRange}`,
         { filters: {} }
       );
 
@@ -530,7 +530,7 @@ export const getProcurementsDataTenderAPIUpdateFilters =
       //1 PREP AND MAKE API CALL
       const res = await axios.post(
         // `http://localhost:8000/api/procurement_tenders?year=${dateRange}`,
-        `http://13.126.189.78/api/procurement_tenders?year=${dateRange}`,
+        `https://hpback.openbudgetsindia.org/api/procurement_tenders?year=${dateRange}`,
         { filters: objPayload }
       );
       headersForRows = Object.keys(res.data.records);
@@ -578,7 +578,9 @@ export const getProcurementsDataAwardsAPI = (idToMatch) => async (dispatch) => {
     dispatch({ type: SET_PROCUREMENTS_DATA_AWARDS_LOADING_API, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    const res = await axios.get("http://13.126.189.78/api/procurement_awards");
+    const res = await axios.get(
+      "https://hpback.openbudgetsindia.org/api/procurement_awards"
+    );
 
     headersForRows = Object.keys(res.data.records);
     headersForRows.map((header) => {
