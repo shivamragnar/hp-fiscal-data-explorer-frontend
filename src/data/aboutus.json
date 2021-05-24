@@ -6,6 +6,13 @@
     "desc": "Shreya Agrawal is a data fanatic who loves to scrutinize data as well as answering unanswered questions using visualizations. She also enjoys developing softwares."
   },
   {
+    "img": "arpit_img",
+    "name": "Arpit Arora",
+    "org": "CivicDataLab",
+    "desc": "Arpit is a statistician by trade. He believes in building sustainable and intersectional solutions for the society. Avid cyclist and reader. Passionate about #OpenEducation."
+  },
+
+  {
     "img": "abrar_img",
     "name": "Abrar Burk",
     "org": "CivicDataLab",
@@ -54,16 +61,16 @@
     "desc": "Arun is an Economist, passionate about #OpenData and its potential to increase state transparency and accountability. He believes in empowering state agencies to make policy decisions based on the best available evidence. Loves teaching. Previously worked at NITI Aayog."
   },
   {
+    "img": "akhil_img",
+    "name": "Akhil Sagiraju",
+    "org": "CivicDataLab",
+    "desc": "Akhil is a self taught Front-End developer who loves open source software. He is also a proponent of minimalism and a frequent headbanger."
+  },
+  {
     "img": "shivam_img",
     "name": "Shivam Sharma",
     "org": "CivicDataLab",
     "desc": "Shivam is a Front End Developer. He loves to convert numbers into meaningful visual elements that are more civicly engaged. Education to underprivileged is his social motive. He likes to travel, being foodie, and watch one season a night."
-  },
-  {
-    "img": "arpit_img",
-    "name": "Arpit Arora",
-    "org": "CivicDataLab",
-    "desc": "Arpit is a statistician by trade. He believes in building sustainable and intersectional solutions for the society. Avid cyclist and reader. Passionate about #OpenEducation."
   }
 
 ]

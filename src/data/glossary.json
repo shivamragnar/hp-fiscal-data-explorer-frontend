@@ -28,7 +28,7 @@
       },
       "account_heads": {
         "title": "Account Heads",
-        "desc": "are meant to represent the nature of the income or expenditure, these also represent hierarchical money flow. They are demand,major,sub_major, minor, sub_minor, budget. For example a demand 16 corresponds to Forests and wildlife, under which a major of 2406 further drills down into this demand. A sub-major of 01 under this major corresponds to Forestry, under this a sub-minor of 105 corresponds to Forest produce, a subminor of 003 under this corresponds to Driftwood and confiscated forest produce."
+        "desc": "Are meant to represent the nature of the income or expenditure, these also represent hierarchical money flow. They are demand,major,sub_major, minor, sub_minor, budget. For example a demand 16 corresponds to Forests and wildlife, under which a major of 2406 further drills down into this demand. A sub-major of 01 under this major corresponds to Forestry, under this a sub-minor of 105 corresponds to Forest produce, a subminor of 003 under this corresponds to Driftwood and confiscated forest produce."
       },
       "plan": {
         "title": "Plan",
@@ -108,6 +108,10 @@
         "title": "Sub Minor Head",
         "desc": "A scheme within a programme"
       },
+      "budget":{
+        "title": "Budget Code",
+        "desc": "Budget Head provides information on the sources & share of funding for a particular expenditure. For e.g. S25N indicates that the state's share is 25%, where as C90N is 90% central share. Complete list of budget codes can be found here"
+      },
       "voted_charged":{
         "title": "Voted/Charged",
         "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
@@ -118,7 +122,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
@@ -239,6 +243,10 @@
         "title": "Sub Minor Head",
         "desc": "A scheme within a programme"
       },
+      "budget":{
+        "title": "Budget Code",
+        "desc": "Budget Head provides information on the sources & share of funding for a particular expenditure. For e.g. S25N indicates that the state's share is 25%, where as C90N is 90% central share. Complete list of budget codes can be found here"
+      },
       "voted_charged":{
         "title": "Voted/Charged",
         "desc": "Expenditure that has to be authorised by the legislature/parliament is Voted Expenditure while that which is automatically debited from the Consolidated Fund of India is called Charged Expenditure. E.g.: interest payments, salaries of the President, Lok Sabha speaker, etc. cannot be voted upon in the Parliament."
@@ -249,7 +257,7 @@
       },
       "SOE":{
         "title": "SOE",
-        "desc": "Statement of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
+        "desc": "Standard Object of Expenditure. This is the actual defined expenditures like salary, pensions, reimbursements etc"
       },
       "gross":{
         "title": "Gross",
@@ -269,20 +277,49 @@
       }
     }
   },
+  "covid" : {
+    "title": "COVID Page",
+    "data": {
+      "covid_timeline" : {
+        "title": "COVID-19 in Himachal Pradesh : Timeline",
+        "desc": "It is a tool where citizens can see the chronology of government orders towards COVID-19 merged with changing caseload or severity. ."
+      },
+      "Name" : {
+        "title": "Name of Department/District/Organisation",
+        "desc": "This is the organization/district officer or department that the funds were sanctioned toward."
+      },
+      "Date" : {
+        "title": "Date of Sanction",
+        "desc": "The date on which the funds were sanctioned."
+      },
+       "Funds":{
+        "title": "Funds Sanctioned",
+        "desc": "How much money was actually sanctioned in Indian Rs"
+      },
+      "Funds_from":{
+       "title": "Funds Sanctioned from",
+       "desc": "Where the sanctioned amount came from"
+     },
+     "Purpose":{
+      "title": "Purpose",
+      "desc": "The activity for which funds were sanctioned"
+    }
+    }
+  },
   "procurements" : {
     "title": "Procurements",
     "data": {
       "sdg" : {
-        "title": "SDGs",
-        "desc": "Sustainable Development Goal"
+        "title": "SDG Targets",
+        "desc": "This refers to the sustainable development goal that the procurement maps to."
       },
       "works" : {
         "title": "Types of Activity",
-        "desc": "The type of keyword/Activity"
+        "desc": "This refers to type of procurement - It can be Major Works (construction), Maintenance, Remuneration to outsourcing services, Machinery and Equipment, and other kinds of Materials and Supplies."
       },
       "indicator" : {
         "title": "Idicator Type",
-        "desc": "The type of performance indicator"
+        "desc": "Indicators measure the performance of the tendering process. These are measured on a relative cumulative index values and lie on a scale from 0-1 where 0 is relatively poor performance and 1 is relatively good performance. They are made up of Key Performance Indicators and they measure internal efficiency, value for money and competition."
       },
        "kpi":{
         "title": "Key Performance Indicators",

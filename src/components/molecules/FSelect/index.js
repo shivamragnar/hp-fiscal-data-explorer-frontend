@@ -10,11 +10,9 @@ const { Option } = Select;
 const FSelect = ({className, disabled, initialSelectedItems, useTitleInItem, label, invalid, invalidText, onChange, items, type}) => {
 
   const handleChange = (val, arr) => {
-    console.log('testing handle change for ', val, arr)
     let event = {selectedItems: arr}
     onChange(event);
   } 
-  console.log('inside single select element', items, initialSelectedItems)
   return (
     <div className={className} key={items && items.length && items[0].filter_name}>
     <Select

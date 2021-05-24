@@ -72,8 +72,6 @@ const ExpDetails = ( { exp_demandwise : {
 
 	const onFilterChange = (e, key) => {
 		//if at least 1 option is selected,
-		console.log(e.selectedItems[0]);
-		console.log(key);
     if(e.selectedItems.length > 0){
       expDetailsActiveFilters[key] = e.selectedItems.map(selectedItem => {
         return selectedItem.id;
@@ -129,7 +127,7 @@ const ExpDetails = ( { exp_demandwise : {
 								<FTable
 									rows={rows}
 									headers={headers}
-									onClickDownloadBtn={(e) => { console.log(e)}}
+									onClickDownloadBtn={(e) => { }}
 								  />
 						 </Fragment>
 				 	 }

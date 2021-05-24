@@ -25,7 +25,7 @@ import FForce_X from '../../components/dataviz/FForce_X';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FLegendBar from '../../components/atoms/FLegendBar';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
+import FTimeSeries from '../../components/dataviz/FTimeSeriesSummary';
 import FDropdown from '../../components/molecules/FDropdown';
 import MultiSelect from "../../components/molecules/FMultiSelect"
 import RadioTabs from "../../components/molecules/FRadioTabs"
@@ -40,7 +40,7 @@ import FPageMeta from '../../components/organisms/FPageMeta';
 //Name of components to switch between
 const vizTypes = ["FForce", 'FLineChart', "FTable"];
 
-const noExpDataYears = ["2016_17", "2020_21"]
+const noExpDataYears = ["2016_17", "2021_22"]
 
 const tooltips = Tooltips.exp_summary
 
@@ -120,7 +120,7 @@ const ExpSummary = ({
 			}
 		})
 		data[0].yearwise = yearwiseData1
-		data[1].yearwise = yearwiseData2
+		data[1].yearwise = yearwiseData2.filter(year => year.amount > 0)
 		return data
 	}
 
@@ -134,7 +134,6 @@ const ExpSummary = ({
 		// 	initialSelectedItem = {activeDemandForTimeseries}
 		// 	items = { Object.keys(lineChrtData) }
 		// 	onChange = {(v) => {
-		// 		console.log('testing', v)
 		// 		handleChangeActiveDemandForTimeSeries(v)}}
 		// />
 		<MultiSelect
@@ -149,7 +148,6 @@ const ExpSummary = ({
 		let curr_year = e.target.value.split('-').join('_')
 		// Need to update this line
 		let prev_year = `20${parseInt(e.target.value.split('-')[1]) - 2}_${parseInt(e.target.value.split('-')[1])-1}`
-		console.log('curr prev', curr_year, prev_year)
 		getExpSummaryData(curr_year, prev_year, initData)
 	}
 
@@ -170,6 +168,9 @@ const ExpSummary = ({
 	useEffect(() => {
 		if(vizData.length > 0){
 			setActiveVizData(populateActiveVizData('alloc'));
+      if (noExpDataYears.includes(vizData[0].curr_year)) {
+        setActiveDataPoint('alloc');
+      }
 		}
 
 	},[vizData])

@@ -26,7 +26,7 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     const { months , years, years_short } = yymmdd_ref;
 
     // As there is no data for 2020-21 we need to update code while we update data for it
-    const updatedDateTo = dateTo === "2021-03-31" ? "2020-10-31" : dateTo
+    const updatedDateTo = dateTo === "2021-03-31" ? "2021-03-31" : dateTo
 
     const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
     const fromMonthIndex = parseInt(dateFrom.split('-')[1])-1;
@@ -41,15 +41,11 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
 
     const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys)
 
-    console.log("objForPayload"); console.log(objForPayload);
 
     //0 SET LOADING TO TRUE
     dispatch({ type: SET_DATA_LOADING_RECEIPTS, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    // console.log("hello",`https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
-    console.log("Axios Receipts Fetch Started");
-    // console.log(`https://hpback.openbudgetsindia.org/api/detail_receipts_${month_week}?start=${dateFrom}&end=${dateTo}`)
     const config = { headers: {
       "content-type": "application/json",
       "Access-Control-Request-Method": "POST",
@@ -62,10 +58,8 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
     );
     if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
-		console.log("receipts raw data"); console.log(res.data.records);
     //calc x-tick-vals if is week
     let xTickVals = calcXTickVals(month_week, [res.data.records]); //1----
-    console.log("xTickVals", xTickVals);
 
     //calc x-tick-formats if is week
     let xTickFormats = calcXTickFormats(month_week, [res.data.records], updatedDateTo, dateFrom);  //2----
@@ -98,9 +92,6 @@ export const getReceiptsData = (activeFilters, dateRange) => async dispatch => {
       dataObj.receipt = Math.round(record[0]*100)/100;
       tempVizData.push(dataObj);
     })
-
-    console.log("tempVizData");
-    console.log(tempVizData);
 
     //3 PREP DATA FOR TABLE
     tempVizData.map((d, i) => {

@@ -80,7 +80,6 @@ const Receipts = ( { receipts : {
 	//initialize useState hook
 	const [currentVizType, setCurrentVizType] = useState(vizTypes[0]);
 	const switchVizType = (e) => {
-		console.log(e);
 		setCurrentVizType(vizTypes[e.index]);
 
 	}
@@ -105,7 +104,6 @@ const Receipts = ( { receipts : {
         clearAllSelectedOptions(filterName);
       }
     })
-		console.log(receiptsDetailsActiveFilters);
 		updateReceiptsOnFilterChange(e, key, receiptsDetailsActiveFilters, allFiltersData, rawFilterData, dateRange);
 	}
 
@@ -195,7 +193,7 @@ const Receipts = ( { receipts : {
 							 <FTable
 								 rows={rows}
 								 headers={headers}
-								 onClickDownloadBtn={(e) => { console.log(e)}}
+								 onClickDownloadBtn={(e) => { }}
 								 showTotal={true}
 								 />
 						 </Fragment>

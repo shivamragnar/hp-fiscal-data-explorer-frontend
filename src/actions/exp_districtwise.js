@@ -37,38 +37,30 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
     }else{
 
       const [ dateFrom , dateTo ] = dateRange;
-      // console.log("DOCU: dateRange", dateRange)
-      // console.log("DOCU: activeFilters", activeFilters)
       const { months , years, years_short } = yymmdd_ref;
 
       // As there is no data for 2020-21 we need to update code while we update data for it
-      const updatedDateTo = dateTo === "2021-03-31" ? "2020-10-30" : dateTo
+      const updatedDateTo = dateTo === "2021-03-31" ? "2021-03-31" : dateTo
 
       const month_week = calcMonthOrWeek(dateFrom, updatedDateTo);
 
       const activeFilterKeys = Object.keys(activeFilters);
       const activeFilterVals = Object.values(activeFilters);
-      // console.log("DOCU: activeFilterKeys", activeFilterKeys);
-      // console.log("DOCU: activeFilterVals", activeFilterVals);
 
       const objForPayload = createObjForPayload(activeFilterVals, activeFilterKeys);
-      console.log("DOCU: objForPayload", objForPayload);
 
       //0 SET LOADING TO TRUE
       dispatch({ type: SET_DATA_LOADING_EXP_DISTRICTWISE, payload: {} });
 
       //1 PREP AND MAKE API CALL
       const config = { headers: { "content-type": "application/json" } };
-      // console.log('exp_districtwise_api_call:', `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${dateTo}&range=${month_week[0].toUpperCase() + month_week.slice(1)}`);
       const res = await axios.post(
         `https://hpback.openbudgetsindia.org/api/treasury_exp?start=${dateFrom}&end=${updatedDateTo}&range=${toTitleCase(month_week)}`,
         { filters : objForPayload },
         config
       )
-  		// console.log("exp districtwise raw data", res.data.records);
       if(Object.keys(res.data.records).length === 0) throw "emptyResponseError";
 
-      console.log('DOCU: response data', res.data );
 
       //2 PREP DATA FOR VISUALIZATION
       const districtNames = Object.keys(res.data.records);
@@ -78,7 +70,6 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       let xTickVals = calcXTickVals(month_week, districtwiseExpVals); //1---- //redundant can get rid of it
       //calc x-tick-formats if is week
       let xTickFormats = calcXTickFormats(month_week, districtwiseExpVals, updatedDateTo, dateFrom);  //2----
-
 
       const tempLineChrtData = [];
       const tempBarChrtData = [];
@@ -94,7 +85,6 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         let distExpValsToMap = month_week === 'month' //3----
                                ? districtwiseExpVals[i]
                                : districtwiseExpVals[i].map(d => d[1] ) ;
-        // console.log("distExpValsToMap", distExpValsToMap);
 
         distExpValsToMap.map((expArray, i) => { //4----
           let dataObj = {};
@@ -132,9 +122,6 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
         })
       })
 
-      // console.log("tempLineChrtData", tempLineChrtData);
-      // console.log("tempBarChrtData", tempBarChrtData);
-      // console.log("tempMapData", tempMapData);
 
       //3 PREP DATA FOR TABLE
       tempTableData.headers.push(
@@ -160,7 +147,6 @@ export const getExpDistrictwiseData = (initData, activeFilters, dateRange, trigg
       	})
       })
 
-      // console.log("tempTableData", tempTableData);
 
         dispatch({
           type: GET_EXP_DISTRICTWISE_DATA,

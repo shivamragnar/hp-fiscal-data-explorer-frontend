@@ -10,7 +10,6 @@ const FTooltipDistrictsAndSchemes = ( {
   totalTicks
 } ) => {
 
-  // console.log(datum);
 
   gross = (gross/100000).toFixed(2).toLocaleString('en-IN');
   netPayment = (netPayment/100000).toFixed(2).toLocaleString('en-IN');
@@ -22,8 +21,6 @@ const FTooltipDistrictsAndSchemes = ( {
   }
 
 
-  // console.log(datum);
-  // console.log(totalTicks);
   const firsthalf = () => {
     if(datum.idx+1 > totalTicks/2){
       return false;
