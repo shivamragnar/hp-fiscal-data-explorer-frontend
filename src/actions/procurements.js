@@ -6,6 +6,10 @@ import { KPIDistrictMapping } from "../data/KPIDistrictmapping";
 import OCDS_tender from "../data/tender_data.json";
 import OCDS_award from "../data/award_data.json";
 import axios from "axios";
+import {
+  tooltips_procurement_tender,
+  tooltips_procurement_awards,
+} from "../data/table_tooltips_procurement";
 
 import {
   GET_PROCUREMENTS_DATA,
@@ -438,6 +442,7 @@ let tableDataTenders = { headers: [], rows: [] };
 export const getProcurementsDataTenderAPI =
   (newDateRange) => async (dispatch) => {
     try {
+      console.log(Object.values(tooltips_procurement_tender[0]));
       tableDataTenders = { headers: [], rows: [] };
       let headersForRows = [];
       let idToMatch = [];
@@ -454,6 +459,7 @@ export const getProcurementsDataTenderAPI =
       );
 
       headersForRows = Object.keys(res.data.records);
+
       let booleanColumns = [
         "tender/allowPreferentialBidder",
         "tender/participationFees/1/exemptionAllowed",
@@ -462,12 +468,14 @@ export const getProcurementsDataTenderAPI =
         "tender/participationFee/0/multiCurrencyAllowed",
         "tender/allowTwoStageBid",
       ];
-      headersForRows.map((header) => {
+      headersForRows.map((header, index) => {
         tableDataTenders.headers.push({
           key: header,
           header: header,
-          tooltip: "",
+          // tooltip: "",
+          tooltip: Object.values(tooltips_procurement_tender[index]),
         });
+        console.log(index);
       });
       res.data.records[headersForRows[0]].map((key, index) => {
         let result = {};
@@ -533,12 +541,13 @@ export const getProcurementsDataTenderAPIUpdateFilters =
         `https://hpback.openbudgetsindia.org/api/procurement_tenders?year=${dateRange}`,
         { filters: objPayload }
       );
+
       headersForRows = Object.keys(res.data.records);
-      headersForRows.map((header) => {
+      headersForRows.map((header, index) => {
         tableDataTenders.headers.push({
           key: header,
           header: header,
-          tooltip: "",
+          tooltip: Object.values(tooltips_procurement_tender[index]),
         });
       });
       res.data.records[headersForRows[0]].map((key, index) => {
@@ -570,6 +579,7 @@ export const getProcurementsDataTenderAPIUpdateFilters =
 
 export const getProcurementsDataAwardsAPI = (idToMatch) => async (dispatch) => {
   console.log("fewfkewhfieh");
+  console.log(tooltips_procurement_awards);
   try {
     let tableData = { headers: [], rows: [] };
     let headersForRows = [];
@@ -583,11 +593,11 @@ export const getProcurementsDataAwardsAPI = (idToMatch) => async (dispatch) => {
     );
 
     headersForRows = Object.keys(res.data.records);
-    headersForRows.map((header) => {
+    headersForRows.map((header, index) => {
       tableData.headers.push({
         key: header,
         header: header,
-        tooltip: "",
+        tooltip: Object.values(tooltips_procurement_awards[index]),
       });
     });
 

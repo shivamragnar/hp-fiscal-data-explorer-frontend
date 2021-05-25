@@ -396,6 +396,7 @@ const OCPDashboard = ({
           </div>
         )}
       </div>
+      <div></div>
       <div className="section-wrapper">
         <>
           <div className="content-switcher-wrapper">
@@ -403,16 +404,24 @@ const OCPDashboard = ({
               onChange={switchVizTypeData}
               options={[
                 {
-                  label: "Tenders OCDS Data",
-                  infoText: tooltips.map_chart_tooltip,
+                  label: "Tenders Data (OCDS Mapped)",
+                  infoText:
+                    "Tender data mapped to open contracting data standards",
                 },
                 {
-                  label: "Awards OCDS Data",
-                  infoText: tooltips.table_tooltip,
+                  label: "Awards Data (OCDS Mapped)",
+                  infoText:
+                    "Awards data mapped to open contracting data standards",
                 },
               ]}
               activeVizIdx={vizTypesData.indexOf(currentVizTypeData)}
             />
+          </div>
+          <div>
+            <p className="note-procurement-table">
+              Note: You can filter the table using SDG and Type of Activity
+              filters on the left
+            </p>
           </div>
           {renderUIData()}
         </>
