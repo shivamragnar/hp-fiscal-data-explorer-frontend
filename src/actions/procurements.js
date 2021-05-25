@@ -588,9 +588,8 @@ export const getProcurementsDataAwardsAPI = (idToMatch) => async (dispatch) => {
     dispatch({ type: SET_PROCUREMENTS_DATA_AWARDS_LOADING_API, payload: {} });
 
     //1 PREP AND MAKE API CALL
-    const res = await axios.get(
-      "https://hpback.openbudgetsindia.org/api/procurement_awards"
-    );
+
+    const res = await axios.get("https://hpback.openbudgetsindia.org/api/procurement_awards");
 
     headersForRows = Object.keys(res.data.records);
     headersForRows.map((header, index) => {
