@@ -65,22 +65,9 @@ Folder structure
 ├── LICENSE
 ├── README.md
 ├── build
-│   ├── favicon.ico
-│   ├── logo192.png
-│   ├── logo512.png
-│   ├── manifest.json
-│   └── robots.txt
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── assets
-│   ├── favicon.png
-│   ├── index.html
-│   ├── logo192.png
-│   ├── logo512.png
-│   ├── manifest.json
-│   ├── robots.txt
-│   └── sitemap.xml
 ├── src
 │   ├── App.js
 │   ├── App.scss
