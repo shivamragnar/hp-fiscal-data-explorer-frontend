@@ -103,4 +103,4 @@ Folder structure
 ```
 License
 -------
-The code is licensed under MIT License while the contents inside the content folder are licensed under CC-BY-4.0.
+The code is licensed under MIT License while the contents inside the content folder are licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
