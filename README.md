@@ -1,23 +1,16 @@
 
-About CDL
--------
+What and Why this repository?
+-----------------------------
+This repository is to publish the frontend code of Himachal Pradesh Fiscal Data Explorer. Fiscal Data Explorer is a unique tool where citizens can explore both budgets and spending data of Himachal Pradesh in an easy to comprehend and simple to use manner. The project is divided into two repositories hp-fiscal-data-explorer-frontend and hp-fiscal-data-explorer-backend. This repository is the first step towards building more open source fiscal explorers. We selected Himachal Pradesh as our target state because Himachal Pradesh’s finance department uploads the district wise expenditure and revenue data on daily basis on Himkosh of how different stakeholders. The data uploaded is granular and accessible as compared to other states.
 
-CivicDataLab works with a goal to use data, tech, design and social science to strengthen the course of civic engagements. We work to harness the potential of open-source movement to enable citizens to engage better with public reforms. We aim to grow data and tech literacy of various governments, nonprofits, think-tanks, media houses, universities etc to enable data-driven decision making at scale. The team has been instrumental in starting initiatives like DataKind Bangalore, Open Budgets India, etc. We believe in becoming thought partners in change with the help of our collaborations.
+Relevant Links
+--------------
+* [Platform link](https://hp.openbudgetsindia.org/#/)
+* [Backend repository link](https://github.com/CivicDataLab/hp-fiscal-data-explorer-backend)
+* [Wiki](https://github.com/CivicDataLab/hp-fiscal-data-explorer-backend/wiki)
 
-What is Fiscal Data Explorer?
--------
-
-Fiscal Data Explorer is a unique tool where citizens can explore both budgets and spending data of Himachal Pradesh in an easy to comprehend and simple to use manner.
-
-Why did we select Himachal Pradesh selected as our first target state?
--------
-
-Himachal Pradesh’s finance department uploads the district wise expenditure and revenue data on daily basis on Himkosh of how different stakeholders. The data uploaded is granular and accessible as compared to other states.
-
-
-Running
--------
-Prerequisites:
+Pre-requisites
+--------------
 
 ```
   Node.js: 12.6.0, 
@@ -25,6 +18,7 @@ Prerequisites:
 ```
 
 Installation
+--------------
 
 ```
 # Setup Development environment
@@ -41,12 +35,10 @@ $ yarn
 # Run the server
 $ yarn start
 
-#Go to `http://localhost:3000/` 
-
 ```
 
-How to contribute ?
--------
+Contributing Guidelines
+-----------------------
  * Create an issue for a feature/bug.
  * Discuss the implementation on the issue itself while attaching the supporting docs there.
  * Create a new branch for the issue.
@@ -64,3 +56,51 @@ How to contribute ?
 - [Preethi G](https://github.com/preethical)
 - [Shivam Sharma](https://github.com/shivamragnar)
 - [Shreya Agrawal](https://github.com/shreyaagrawal0809)
+
+Folder structure
+----------------
+
+```
+.
+├── LICENSE
+├── README.md
+├── build
+│   ├── favicon.ico
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── package-lock.json
+├── package.json
+├── public
+│   ├── assets
+│   ├── favicon.png
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src
+│   ├── App.js
+│   ├── App.scss
+│   ├── App.test.js
+│   ├── actions
+│   ├── components
+│   ├── content
+│   ├── data
+│   ├── dictionary
+│   ├── imgs
+│   ├── index.js
+│   ├── index.scss
+│   ├── logo.svg
+│   ├── reducers
+│   ├── scss
+│   ├── serviceWorker.js
+│   ├── store.js
+│   └── utils
+└── yarn.lock
+```
+License
+-------
+The code is licensed under MIT License while the contents inside the content folder are licensed under CC-BY-4.0.
