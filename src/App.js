@@ -67,11 +67,11 @@ import "./App.scss";
 
 //CONFIG
 const _CONFIG = {
-	initDateRange : ["2020-04-01","2021-03-31"],
-	initActiveFilters : {},
-	initAllFiltersData : [],
-	initRawFilterDataAllHeads : {} //only applies for exp_districtwise, receipts_districtwise & schemes
-}
+  initDateRange: ["2020-04-01", "2021-12-31"],
+  initActiveFilters: {},
+  initAllFiltersData: [],
+  initRawFilterDataAllHeads: {}, //only applies for exp_districtwise, receipts_districtwise & schemes
+};
 
 ReactGA.initialize("UA-89349304-1");
 ReactGA.set({ anonymizeIp: true });
@@ -217,7 +217,6 @@ const App = ({
         <Route exact path="/procurement/analysis" component={OCPDashboard} />
       </Switch>
     </div>
-
   );
 };
 

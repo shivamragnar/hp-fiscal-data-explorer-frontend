@@ -3,22 +3,22 @@ import {
   SET_DATA_LOADING_EXP_SCHEMES,
   EXP_SCHEMES_DATA_ERROR,
   RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES,
-  HYDRATE_SCHEMES_DATA_FROM_INITDATA
- } from "../actions/types";
+  HYDRATE_SCHEMES_DATA_FROM_INITDATA,
+} from "../actions/types";
 
 const initialState = {
   initData: null,
-  data: { mapData:{}, barChrtData:{}, lineChrtData:{}, tableData:{}},
-  dateRange: ["2020-04-01","2021-03-31"],
+  data: { mapData: {}, barChrtData: {}, lineChrtData: {}, tableData: {} },
+  dateRange: ["2020-04-01", "2021-12-31"],
   activeFilters: {},
   loading: true,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
-  const initDataVal = state.initData ? state.initData : (payload && payload.data);
+  const initDataVal = state.initData ? state.initData : payload && payload.data;
 
   switch (type) {
     case GET_EXP_SCHEMES_DATA:
@@ -29,13 +29,13 @@ export default function(state = initialState, action) {
         data: payload.data,
         dateRange: payload.dateRange,
         activeFilters: payload.activeFilters,
-        loading: false
+        loading: false,
       };
     case SET_DATA_LOADING_EXP_SCHEMES:
       return {
         ...state,
         loading: true,
-        error: {}
+        error: {},
       };
     case EXP_SCHEMES_DATA_ERROR:
       return {
@@ -43,14 +43,14 @@ export default function(state = initialState, action) {
         error: payload.error,
         dateRange: payload.filters.dateRange,
         activeFilters: payload.filters.activeFilters,
-        loading: false
+        loading: false,
       };
     case RESET_ACTIVE_FILTERS_AND_DATE_RANGE_SCHEMES:
       return {
         ...state,
         activeFilters: {},
-        dateRange: ["2020-04-01","2021-03-31"]
-      }
+        dateRange: ["2020-04-01", "2021-12-31"],
+      };
     default:
       return state;
   }

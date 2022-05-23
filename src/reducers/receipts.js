@@ -1,17 +1,18 @@
 import {
   GET_RECEIPTS_DATA,
   SET_DATA_LOADING_RECEIPTS,
-  RECEIPTS_DATA_ERROR } from "../actions/types";
+  RECEIPTS_DATA_ERROR,
+} from "../actions/types";
 
 const initialState = {
-  data: { vizData:{}, tableData:{}},
-  dateRange: ["2020-04-01","2021-03-31"],
+  data: { vizData: {}, tableData: {} },
+  dateRange: ["2020-04-01", "2021-12-31"],
   activeFilters: {},
   loading: true,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -21,13 +22,13 @@ export default function(state = initialState, action) {
         data: payload.data,
         dateRange: payload.dateRange,
         activeFilters: payload.activeFilters,
-        loading: false
+        loading: false,
       };
     case SET_DATA_LOADING_RECEIPTS:
       return {
         ...state,
         loading: true,
-        error: {}
+        error: {},
       };
     case RECEIPTS_DATA_ERROR:
       return {
@@ -35,7 +36,7 @@ export default function(state = initialState, action) {
         error: payload.error,
         dateRange: payload.filters.dateRange,
         activeFilters: payload.filters.activeFilters,
-        loading: false
+        loading: false,
       };
     default:
       return state;
