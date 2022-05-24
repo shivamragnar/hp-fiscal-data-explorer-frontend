@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   data: { vizData: {}, tableData: {} },
-  dateRange: ["2021-04-01", "2021-12-31"],
+  dateRange: ["2021-04-01", "2022-03-31"],
   activeFilters: {},
   loading: true,
   error: {},
