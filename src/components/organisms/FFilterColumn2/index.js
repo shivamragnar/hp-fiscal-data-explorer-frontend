@@ -97,7 +97,7 @@ const FFilterColumn2 = ({
                     initialSelectedItems={
                       allFiltersData[i] && activeFilters[allFiltersData[i].key] && setInitSelectedItems(i)
                     }
-                    useTitleInItem={false}
+                    useTitleInItem={true}
                     // label={filtersLoading ? "Loading..." : activeFilters[allFiltersData[i].key] ? activeFilters[allFiltersData[i].key].join(", ") : "All"}
                     invalid={false}
                     invalidText="Invalid Selection"
