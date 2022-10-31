@@ -114,7 +114,7 @@ const Receipts = ( { receipts : {
 	const createDataUIComponent = () => {
 		switch(true){
 			case loading === true :
-      return <FLoading />;
+      return  <div className="loading-indicator-wrapper"><FLoading /></div>;
       case error.status === 'emptyResponseError' :
       return <FNoDataFound />;
       default :

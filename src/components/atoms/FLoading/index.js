@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {Loading} from "carbon-components-react";
 
 export default function FLoading(props) {

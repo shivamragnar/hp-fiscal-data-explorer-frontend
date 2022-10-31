@@ -194,7 +194,7 @@ const ExpSummary = ({
 
 	const createDataUIComponent = () => {
 		if(loading === true){
-			return <FLoading/>
+			return <div className="loading-indicator-wrapper"><FLoading /></div>
 		}else{
 			return (
 				<Fragment>
