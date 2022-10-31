@@ -30,7 +30,13 @@
 }
 
 @media screen and ( max-width : 1055px){
-    .f-tab-content__text-wrapper{
-      padding-bottom: 5rem;
+  .f-tab-content-wrapper{
+    padding-top: 5rem;
+    &:first-of-type{
+      padding-top: 2rem;
     }
+  }
+  .f-tab-content__text-wrapper{
+    padding-bottom: 5rem;
+  }
 }
