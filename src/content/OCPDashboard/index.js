@@ -349,7 +349,7 @@ const OCPDashboard = ({
           }`}
         >
           {loading ? (
-            <FLoading />
+            <div className="loading-indicator-wrapper"><FLoading /></div>
           ) : (
             <>
               <div className="content-switcher-wrapper">
