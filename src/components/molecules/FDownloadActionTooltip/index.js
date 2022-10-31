@@ -1,11 +1,9 @@
-import React, {Component} from "react";
-import { Link } from "react-router-dom";
-import Dropdown from "carbon-components-react/lib/components/Dropdown";
+import React from "react";
 import {Tooltip, Button} from "carbon-components-react";
 import Download16 from '@carbon/icons-react/lib/download/16';
 
 //download files components
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 //import helpers
 import { convertDataToJson } from '../../../utils/functions';

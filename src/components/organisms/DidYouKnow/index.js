@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useRef, Fragment} from "react";
-import {Tabs, Tab } from 'carbon-components-react';
+import React, {useState, useEffect, Fragment} from "react";
 import {Link} from "react-router-dom";
 
 import ChevronLeft from '@carbon/icons-react/lib/chevron--left/32';
@@ -13,8 +12,6 @@ import hamirpur_mandi_shimla from '../../../imgs/didyouknow_imgs/hamirpur_mandi_
 import kangra from '../../../imgs/didyouknow_imgs/kangra.svg';
 import mandi_sirmaur from '../../../imgs/didyouknow_imgs/mandi_sirmaur.svg';
 import shimla from '../../../imgs/didyouknow_imgs/shimla.svg';
-
-import {white, grey} from '../../../scss/_vars.scss'
 
 const DidYouKnow = (props) => {
 

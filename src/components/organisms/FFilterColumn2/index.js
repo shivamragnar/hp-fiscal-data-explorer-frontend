@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import MediaQuery from 'react-responsive';
 
 //custom components
 // import { MultiSelect } from 'carbon-components-react';

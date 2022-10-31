@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {useState} from "react";
 
 import {Search} from 'carbon-components-react';
 import glossary from '../../data/glossary.json';

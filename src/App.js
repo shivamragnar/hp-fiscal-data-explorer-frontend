@@ -1,9 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import { Route, Switch, withRouter } from "react-router-dom";
-import axios from "axios";
-import MediaQuery from "react-responsive";
 import { connect } from "react-redux";
 
 //ACTIONS

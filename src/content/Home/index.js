@@ -1,10 +1,5 @@
-import React, { Fragment } from "react";
-import {Link} from "react-router-dom";
-import FHPMapImg from '../../components/atoms/FHPMapImg';
+import React from "react";
 import HomeHowToUse from '../../components/organisms/HomeHowToUse';
-import DidYouKnowIcon from '../../components/icons/DidYouKnowIcon';
-import didYouKnowContent from '../../data/didYouKnowContent.json';
-import DidYouKnow from '../../components/organisms/DidYouKnow';
 import CoverImg from '../../imgs/cover_img_3.svg';
 import FPageMeta from '../../components/organisms/FPageMeta';
 

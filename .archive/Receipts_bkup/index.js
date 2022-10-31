@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 //redux
 import { connect } from 'react-redux';
@@ -15,25 +13,15 @@ import {
 	updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters';
 
 //carbon components
-import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
-import FButton from '../../components/atoms/FButton';
 import FLoading from '../../components/atoms/FLoading';
 import FBarChart from '../../components/dataviz/FBarChart';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
 import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
-import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FPageTitle from '../../components/organisms/FPageTitle';
-
-//import helpers
-import { convertDataToJson } from '../../utils/functions';
-
-// data_ref
-const { receipts: filterOrderRef, receipts_filter_comp } = require('../../data/filters_ref.json');
 
 //Name of components to switch between
 const vizTypes = ["FSASR", "FTable"];

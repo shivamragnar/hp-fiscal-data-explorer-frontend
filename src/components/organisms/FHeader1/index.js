@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import {Link, useHistory} from "react-router-dom";
 import {
   Header,
@@ -13,12 +13,9 @@ import {
   SideNavItems,
   HeaderSideNavItems,
   HeaderMenu,
-  HeaderGlobalAction
 } from "carbon-components-react/lib/components/UIShell";
 
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
-
-import MediaQuery, { useMediaQuery } from "react-responsive";
 
 import OverflowMenuVertical20 from '@carbon/icons-react/lib/overflow-menu--vertical/20';
 

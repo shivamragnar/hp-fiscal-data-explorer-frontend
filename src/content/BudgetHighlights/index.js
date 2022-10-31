@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 
 //carbon components
-import { Content } from 'carbon-components-react/lib/components/UIShell';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
-import { Button } from 'carbon-components-react';
 
 //custom components
 import FTable from '../../components/dataviz/FTable';

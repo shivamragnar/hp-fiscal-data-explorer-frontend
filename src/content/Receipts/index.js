@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import axios from 'axios';
 import FPageMeta from '../../components/organisms/FPageMeta';
 //redux
 import { connect } from 'react-redux';
@@ -12,9 +11,6 @@ import {
 	getReceiptsFiltersData,
 	updateReceiptsOnFilterChange,
 	updateReceiptsOnDateRangeChange } from '../../actions/receipts_filters';
-
-//carbon components
-import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
 import FLoading from '../../components/atoms/FLoading';
@@ -34,7 +30,7 @@ import FLegendBar from '../../components/atoms/FLegendBar';
 import FNoDataFound from '../../components/organisms/FNoDataFound';
 
 //import helpers
-import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
+import { clearAllSelectedOptions } from '../../utils/functions';
 
 // data_ref
 import Tooltips from "../../utils/tooltips"

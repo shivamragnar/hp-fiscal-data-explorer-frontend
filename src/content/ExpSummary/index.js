@@ -1,20 +1,13 @@
-import React, { Component, useState, useEffect, Fragment } from "react";
-import axios from 'axios';
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 //actions
 import { getExpSummaryData } from '../../actions/exp_summary';
 
-//carbon components
-import { Content } from 'carbon-components-react/lib/components/UIShell';
-import { ContentSwitcher, Switch } from 'carbon-components-react';
-import { Button } from 'carbon-components-react';
-
 //custom components
 import FLoading from '../../components/atoms/FLoading';
 import FTable from '../../components/dataviz/FTable';
-import FSlope from '../../components/dataviz/FSlope';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
 // Custom Content Swticher
@@ -26,7 +19,6 @@ import FPageTitle from '../../components/organisms/FPageTitle';
 import FLegendBar from '../../components/atoms/FLegendBar';
 import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FTimeSeries from '../../components/dataviz/FTimeSeriesSummary';
-import FDropdown from '../../components/molecules/FDropdown';
 import MultiSelect from "../../components/molecules/FMultiSelect"
 import RadioTabs from "../../components/molecules/FRadioTabs"
 

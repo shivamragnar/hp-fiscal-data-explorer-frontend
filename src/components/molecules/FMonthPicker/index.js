@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import Picker from 'react-month-picker'
 
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';

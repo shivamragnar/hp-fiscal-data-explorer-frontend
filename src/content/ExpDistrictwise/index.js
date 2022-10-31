@@ -1,11 +1,7 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 //redux
 import { connect } from "react-redux";
-
-//carbon components
-import { ContentSwitcher, Switch } from "carbon-components-react";
-import { MultiSelect } from "carbon-components-react";
 
 //custom components
 import FLoading from "../../components/atoms/FLoading";

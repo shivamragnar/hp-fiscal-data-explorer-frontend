@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 //redux
 import { connect } from 'react-redux';
 
-//carbon components
-import { ContentSwitcher, Switch } from 'carbon-components-react';
-import { MultiSelect } from 'carbon-components-react';
-
 //custom components
 import FLoading from '../../components/atoms/FLoading';
 import FPageTitle from '../../components/organisms/FPageTitle';
@@ -22,11 +18,8 @@ import FBarChart from '../../components/dataviz/FBarChart';
 import FTimeSeries from '../../components/dataviz/FTimeSeriesReciepts';
 import FTable from '../../components/dataviz/FTable';
 
-import FRadioGroup from '../../components/molecules/FRadioGroup';
-
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 
-import FTooltipDistrictsAndSchemes from '../../components/atoms/FTooltipDistrictsAndSchemes';
 import FTooltipReceipts from '../../components/atoms/FTooltipReceipts';
 import FLegendBar from '../../components/atoms/FLegendBar';
 

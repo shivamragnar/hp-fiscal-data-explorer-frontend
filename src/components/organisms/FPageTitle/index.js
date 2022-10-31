@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import MediaQuery from "react-responsive";
 
 import ChevronDown from '@carbon/icons-react/lib/chevron--down/16';
 import ChevronUp from '@carbon/icons-react/lib/chevron--up/16';

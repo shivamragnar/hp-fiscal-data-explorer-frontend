@@ -1,7 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 //redux
 import { connect } from 'react-redux';
@@ -17,14 +15,10 @@ import {
 import { ContentSwitcher, Switch } from 'carbon-components-react';
 
 //custom components
-import FButton from '../../components/atoms/FButton';
 import FLoading from '../../components/atoms/FLoading';
 import FSASRChart from '../../components/dataviz/FSASRChart';
-import FTimeSeries from '../../components/dataviz/FTimeSeries';
 import FTable from '../../components/dataviz/FTable';
-import FDropdown from '../../components/molecules/FDropdown';
 import FMonthPicker from '../../components/molecules/FMonthPicker';
-import FRadioGroup from '../../components/molecules/FRadioGroup';
 import FPageTitle from '../../components/organisms/FPageTitle';
 import FFilterColumn2 from '../../components/organisms/FFilterColumn2';
 import FLegendBar from '../../components/atoms/FLegendBar';
@@ -32,7 +26,7 @@ import FLegendBar from '../../components/atoms/FLegendBar';
 import FPageMeta from '../../components/organisms/FPageMeta';
 
 //import helpers
-import { convertDataToJson, clearAllSelectedOptions } from '../../utils/functions';
+import { clearAllSelectedOptions } from '../../utils/functions';
 
 // data_ref
 import howToUseContent from '../../data/howToUseContent.json';

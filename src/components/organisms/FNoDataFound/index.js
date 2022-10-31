@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import errorScreen1 from '../../../imgs/error_screen_1.svg'
 
 const FNoDataFound = () => {

@@ -1,6 +1,5 @@
-import React, {useState, useEffect, Fragment} from "react";
-import {Tabs, Tab } from 'carbon-components-react';
-import {Link, useHistory} from "react-router-dom";
+import React, {useState, Fragment} from "react";
+import {useHistory} from "react-router-dom";
 import FButton from '../../atoms/FButton';
 import DidYouKnow from '../DidYouKnow';
 
